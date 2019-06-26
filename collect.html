@@ -4,16 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <link rel="stylesheet" type="text/css" href="css/collect.css" />
   <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="css/ElectricData.css" />
+  <link rel="stylesheet" type="text/css" href="css/collect.css" />
   <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
   <script src="lib/jquery-1.11.1.min.js"></script>
   <script src="lib/bootstrap.min.js"></script>
   <script src="lib/rolldate.min.js"></script>
   <script src="lib/bootstrap-treeview.js"></script>
   <script src="lib/bootstrap-table.min.js"></script>
-  <script src="lib/echarts.min.js"></script>
   <script src="js/tools.js"></script>
   <script src="js/collect.js"></script>
 </head>
@@ -30,28 +28,36 @@
       <button type="button" class="cancel">取消</button>
       <button type="button" class="search" id="confirm">查询</button>
     </div>
-
-    <div class="list" id="sideClick">
-      <p><span>监测点：</span>10kV变压器</p>
+    <span class="list" id="sideClick">
+      <p><span>监测点：</span><span id="meter"></span></p>
       <img src="image/right.png" />
+  </div>
+  <hr>
+  <div class="form-group function-group">
+    <label for="dtp_input2" class="col-md-2 control-label">开始日期：</label>
+    <div class="input-group date form_date_start col-md-5" data-date="" data-link-field="dtp_input2">
+      <input readonly type="text" id="dateStart" class="startDate" size="16">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
-    <div class="form-group">
-      <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
-        <label class="col-md-2 control-label">日期：</label>
-        <input readonly type="text" id="date" class="form-control" size="16">
-      </div>
+  </div>
+  <hr>
+  <div class="form-group function-group">
+    <label for="dtp_input2" class="col-md-2 control-label">结束日期：</label>
+    <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
+      <input readonly type="text" id="dateEnd" class="endDate" size="16">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
-    <hr>
-    <button type="button" class="search" id="search">查询</button>
-    <ul class="collectlist center">
-      <li>
+  </div>
+  <hr>
+  <button type="button" class="search" id="search">查询</button>
+  <ul class="collectlist center" id="listUl">
+    <!-- <li>
         <p>一层北</p>
         <p>[起始数值:174793.3 截止数值:11455 ] [差值:11455]</p>
-      </li>
-    </ul>
+      </li> -->
+  </ul>
 
   </div>
-  <script src="lib/jquery-1.11.1.min.js"></script>
 </body>
 
 </html>

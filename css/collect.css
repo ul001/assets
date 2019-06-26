@@ -1,94 +1,223 @@
-.listView{
-    background: white;
-    border-radius: 0.5rem;
-    border: 0.05rem solid #B4B4B5;
-    padding: 0.3rem;
-    margin: 0.3rem 0 0.3rem 0;
+.listView {
+	background: white;
+	border-radius: 0.5rem;
+	border: 0.05rem solid #B4B4B5;
+	padding: 0.3rem;
+	margin: 0.3rem 0 0.3rem 0;
 }
-.container{
-    background: #EDEDEC;
-    height: 100%;
-    padding-right:0;
-    padding-left:0;
-}
-body{
+
+.container {
+	background: #EDEDEC;
 	height: 100%;
-	font-size:0.8rem;
-	background:#EDEDEC;
+	padding-right: 0;
+	padding-left: 0;
 }
-.list{
-    border-bottom:1px dashed #C8C9CA;
+
+body {
+	height: 100%;
+	font-size: 0.8rem;
 }
-.date{
-    border-bottom:1px dashed #C8C9CA;
+
+.tree {
+	display: none;
+	width: 90%;
+	height: 100%;
+	background: #fff;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
-.data{
+
+.category ul {
+	padding-left: 0;
+}
+
+.category ul li {
+	height: 3rem;
+	line-height: 2.5rem;
+	padding-top: 5px;
+	list-style: none;
+	border-bottom: 1px solid #eee;
+}
+
+.category input {
+	float: right;
+	width: 18px;
+	height: 18px;
+}
+
+.category span {
+	height: 3rem;
+	line-height: 3rem;
+}
+
+.category label {
+	width: 90%;
+	font-size: 15px;
+}
+
+.modal-dialog {
+	width: 70%;
+	margin: 15%;
+}
+
+.treeSearch {
+	padding: 1rem;
+}
+
+.data {
 	line-height: 40px;
-	margin:0.3rem 0 0.3rem 0;
+	margin: 0.3rem 0 0.3rem 0;
 }
-.data img{
-	float:right;
+
+.data img {
+	float: right;
 	vertical-align: -20px;
 	cursor: pointer;
 }
-.container{height:100%;}
 
-.list{
-	padding:0 0.5rem 0 0.5rem;
-	height:2.5rem;
+.container {
+	height: 100%;
+}
+
+.list {
+	padding: 0 0.5rem 0 0.5rem;
+	height: 2.5rem;
 	line-height: 2.5rem;
 }
-.list p{
-	float:left;
+
+.list p {
+	float: left;
 	margin-bottom: 0;
 }
-.list img{
-	float:right;
-	margin-right:0.5rem;
-	margin-top:0.8rem;
+
+.list img {
+	float: right;
+	margin-right: 0.5rem;
+	margin-top: 0.8rem;
 }
-.container hr{
-	clear:both;
-	margin:0;
-	border:0.03rem dashed #C8C9CA;
+
+.container hr {
+	clear: both;
+	margin: 0;
+	border: 0.03rem dashed #C8C9CA;
 }
-.elec-btn{
-	padding:0.3rem 0.2rem 0.3rem 0.2rem;
+
+.elec-btn {
+	padding: 0.3rem 0.2rem 0.3rem 0.2rem;
 }
-.elec-btn button{
-	height:2rem;
+
+.elec-btn button {
+	height: 2rem;
 	line-height: 1rem;
-	width:25%;
+	width: 25%;
+	margin: 0 5px;
 	border-radius: 0.3rem;
-	background:#F7F7F7;
-	border:1px solid #888888;
+	background: #F7F7F7;
+	border: 1px solid #888888;
 }
-.elec-btn .select,.search{
-	background:#02AC94;
-	border:1px solid #02AC94;
-	color:#fff;
+
+.elec-btn .select,
+.search {
+	background: #02AC94;
+	border: 1px solid #02AC94;
+	color: #fff;
 }
-.date{
-  padding:0.5rem 0.2rem 0.6rem 0.2rem;
-  display:block;
-  height:2.5rem;
-  }
-.search{
-	width:95%;
-	height:2rem;
-	margin:0 auto;
+
+.date {
+	margin: 0.6rem 0.2rem 0.6rem 0.2rem;
+}
+
+.search {
+	width: 95%;
+	height: 2rem;
+	margin: 0 auto;
 	display: block;
 	border-radius: 0.3rem;
-	margin-top:0.5rem;
-	margin-bottom:0.5rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
 }
-.collectlist{
-	width:95%;
-	padding:0.5rem;
-	background:#fff;
-	list-style: none;
-	border:1px solid #C8C9CA;
+
+.container .diagram {
+	width: 95%;
+	height: 20rem;
+	margin-bottom: 0.5rem;
+}
+
+.dataTable {
+	width: 95%;
+	border: 1px solid #C8C9CA;
+	background: #fff;
+}
+
+.dataTable thead {
+	background: #42B685;
+	color: #fff;
+}
+
+.dataTable tbody tr:nth-child(2) {
+	background: rgb(236, 248, 243);
+	border-top: 1px solid #C8C9CA;
+	border-bottom: 1px solid #C8C9CA;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.tree .search,
+.tree .cancel {
+	position: fixed;
+	bottom: 0;
+	line-height: 3rem;
+	height: 3rem;
+	width: 42.5%;
+	border-radius: 0;
+	border: none;
+	margin-bottom: 0;
+}
+
+.tree .cancel {
+	left: 15%;
+	background: #EDEDEC;
+}
+
+.tree .search {
+	right: 0;
+	background: #02AC94;
+	color: #fff;
+}
+
+.treeSearch input {
 	border-radius: 0.5rem;
+	border: 1px solid #ddd;
+	height: 2.3rem;
+	width: 70%;
+	background: url(../image/searchsmall.png) no-repeat 4px 5px;
+	padding-left: 25px;
+	position: relative;
 }
-.collectlist p{margin-bottom:0.2rem;}
-.center{margin:0 auto;}
+
+.treeSearch button {
+	width: 25%;
+	height: 2.3rem;
+	background: #02AC94;
+	color: #fff;
+	border-radius: 0.5rem;
+	border: 1px solid #02AC94;
+}
+
+.clear {
+	position: absolute;
+	right: 33%;
+	top: 19px;
+
+}
+
+.list-group-item {
+	border: none;
+}
+
+.modal-dialog {
+	margin-top: 20%;
+}
