@@ -49,5 +49,18 @@ var tool = {
 		return result;
 	},
 
-
+	getDataByAjax:function(url,params,successCallback){
+	    var token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE1NzU4NjIsInVzZXJuYW1lIjoiYWRtaW4ifQ.xQSrEuWSsvzBUQpsrHVDXW4qAvKYvRu85wJNlHH9_AA";  
+	    $.ajax({
+	        type:'GET',
+	        url:url,
+	        data:params,
+	        beforeSend:function(request){
+	            request.setRequestHeader("Authorization",token)
+	        },
+	        success:function(result){
+	            successCallback(result.data);
+	        }
+	    })
+	}
 }
