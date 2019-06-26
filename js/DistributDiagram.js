@@ -1,7 +1,7 @@
 $(function(){
 	var url = "http://116.236.149.162:8090/SubstationWEBV2/Subimg/getAppSubimgInfo";
 	var params = {
-		fSubid:"10100001",
+		fSubid:"10100002",
 	}
 	tool.getDataByAjax(url,params,function(data){
 		showSVG(data.xmlContent);
@@ -13,6 +13,7 @@ $(function(){
 		$(".diagram").html("");
 		$(".diagram").append(path);
 		$('g[name="off"]').hide();
+		$(".diagram").overscroll();
 	}
 
 	function showList(data){
@@ -24,6 +25,19 @@ $(function(){
 			});
 		}
 	}
+
+   $("#subList").change(function (event) {
+	    var fCustomname = $("#subList").val();
+	  	var url = "http://116.236.149.162:8090/SubstationWEBV2/Subimg/getAppSubimgInfo";
+		var params = {
+			fSubid:"10100002",
+			fCustomname:fCustomname,
+		}
+		tool.getDataByAjax(url,params,function(data){
+			showSVG(data.xmlContent);
+			showDataOnSVG(data.SvgInfo);
+		})
+    });
 
 	function showDataOnSVG(data){
         var map = new Map();
