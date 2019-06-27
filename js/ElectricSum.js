@@ -14,11 +14,9 @@ $(function () {
     }
 
     $(document).on('click', '.elec-btn .btn', function () {
-        if ($(this).hasClass('select')) {
-            $(this).removeClass('select');
-        } else {
-            $(this).addClass('select');
-        }
+        var obj = $(this);
+        $(this).addClass('select').siblings("button").removeClass('select');
+
     });
 
     $("#sideClick").click(function () {
@@ -45,8 +43,16 @@ $(function () {
         if (EnergyKind == "fFr") {
             selectParam = ""
         }
+        var time;
+        if (selectParam == "today") {
+            time = $("#date").val();
+        } else if (selectParam == "month") {
+            time = $("#date").val().substring(0, 10);
+        } else if (selectParam == "year") {
+            time = $("#date").val().substring(0, 4);
+        }
         var fCircuitid = currentSelectVode.merterId;
-        var time = $("#date").val();
+
         var url = "http://116.236.149.162:8090/SubstationWEBV2/main/app/powerMonitoring/ElectricReport";
         var params = {
             fSubid: "10100001",
@@ -62,7 +68,7 @@ $(function () {
 
 
     function getData(url, params, successCallback) {
-        var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE1NzU4NjIsInVzZXJuYW1lIjoiYWRtaW4ifQ.xQSrEuWSsvzBUQpsrHVDXW4qAvKYvRu85wJNlHH9_AA";
+        var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE4MTI5MzEsInVzZXJuYW1lIjoiYWRtaW4ifQ.cuKoTES-GcXasOHnZM3mn_zBnAz7boVJApY7bctubTA";
         $.ajax({
             type: 'GET',
             url: url,

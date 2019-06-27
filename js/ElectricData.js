@@ -62,7 +62,7 @@ $(function () {
 
 
   function getData(url, params, successCallback) {
-    var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE1NzU4NjIsInVzZXJuYW1lIjoiYWRtaW4ifQ.xQSrEuWSsvzBUQpsrHVDXW4qAvKYvRu85wJNlHH9_AA";
+    var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE4MTI5MzEsInVzZXJuYW1lIjoiYWRtaW4ifQ.cuKoTES-GcXasOHnZM3mn_zBnAz7boVJApY7bctubTA";
     $.ajax({
       type: 'GET',
       url: url,
