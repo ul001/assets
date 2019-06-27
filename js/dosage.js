@@ -198,7 +198,7 @@ $(function () {
                 },
                 textAlign: 'center',
                 right: '-1%',
-                bottom: 70
+                bottom: 10
             }],
             tooltip: {
                 trigger: 'axis',

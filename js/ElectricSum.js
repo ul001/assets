@@ -47,7 +47,7 @@ $(function () {
         if (selectParam == "today") {
             time = $("#date").val();
         } else if (selectParam == "month") {
-            time = $("#date").val().substring(0, 10);
+            time = $("#date").val().substring(0, 7);
         } else if (selectParam == "year") {
             time = $("#date").val().substring(0, 4);
         }
@@ -224,7 +224,11 @@ $(function () {
             var minTime;
             // var type = data[0].fParamcode.substring(1);
             // name.push(type);
+
             $.each(data, function (index, el) {
+                if (el.fCollecttime == "undefined" || el.fCollecttime == null || el.fCollecttime == "") {
+                    return true;
+                }
                 time.push(el.fCollecttime.substring(11, 16));
                 value.push(el.fIa);
                 if (el.fIa > max) {
@@ -239,7 +243,7 @@ $(function () {
             });
             var avg = (sum / data.length).toFixed(2);
             var tableData = [{
-                "type": type,
+                // "type": type,
                 "max": max,
                 "maxTime": maxTime,
                 "min": min,
