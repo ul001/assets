@@ -102,7 +102,7 @@ $(function(){
         url:url,
         data:params,
         beforeSend:function(request){
-            request.setRequestHeader("Authorization",token)
+            request.setRequestHeader("Authorization",tokenFromAPP)
         },
         success:function(result){
             successCallback(result.data);
