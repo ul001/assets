@@ -1,4 +1,3 @@
-//var token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjEzMDkyOTksInVzZXJuYW1lIjoiYWRtaW4ifQ.NdCW0XPF6eFa1Cqqdn1GDXw8oztNZIdBvnvUIbyICSc";
 $(function(){
     //iOS安卓基础传参
         var u = navigator.userAgent,
@@ -141,7 +140,7 @@ $(function(){
                 url:baseUrlFromAPP+"/main/selectMaxMD",
                 data:data,
                 beforeSend:function(request){
-                    request.setRequestHeader("Authorization",token)
+                    request.setRequestHeader("Authorization",tokenFromAPP)
                 },
                 success:function(result){
                 if(result.data[0]!=null){
