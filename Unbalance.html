@@ -2,52 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="css/Unbalance.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/Unbalance.css"/>
 </head>
 <body>
 <div class="container">
-    <div class="list">
-      <p><span>监测点：</span>电容柜</p>
-      <img src="image/right.png"/>
+    <div class="row tree">
+        <div class="treeSearch">
+            <img class="clear" src="image/clear.png"/>
+            <input type="text" id="CircuitidsInput"/>
+            <button type="button" id="CircuitidsList">搜索</button>
+        </div>
+        <div id="treeview" class="col-sm-4"></div>
+        <button type="button" class="cancel">取消</button>
+        <button type="button" class="search" id="confirm">查询</button>
     </div>
-    <div class="selectTime">
-      <p class="date">日期：<span>2019-06-13</span></p>
-      <div class="time">
-        <img src="image/left.png"/> 上一日&nbsp;&nbsp;下一日 <img src="image/right-green.png"/>
-      </div>
+    <div class="list" id="sideClick">
+        <p><span>监测点：</span><span id="meter">10kV变压器</span></p>
+        <img src="image/right.png"/>
     </div>
-    <div class="Unbalance-btn">
-      <button type="button" class="balance-btn">电流三相不平衡度</button>
-      <button type="button" class="balance-btn select">电压三相不平衡度</button>
+    <div class="form-group selectTime">
+        <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
+            <label class="col-md-2 control-label">日期：</label>
+            <input readonly type="text" id="date">
+            <div class="time">
+                <span id="datePre"><img src="image/left.png"/> 上一日</span>&nbsp;&nbsp;
+                <span id="dateNext">下一日 <img src="image/right-green.png"/></span>
+            </div>
+        </div>
     </div>
-    <button type="button" class="search">查询</button>
-    <div class="diagram center">
+    <div class="elec-btn" id="EnergyContain">
+        <button type="button" class="btn select" value="IUnB">电流三相不平衡度</button>
+        <button type="button" class="btn" value="UUnB">电压三相不平衡度</button>
+    </div>
+    <button type="button" class="search" id="search">查询</button>
+    <div class="diagram center" id="chartContain"></div>
 
-    </div>
-    <table class="dataTable center">
-      <thead>
-        <tr>
-          <th>类型</th>
-          <th>最大</th>
-          <th>发生时间</th>
-          <th>最小</th>
-          <th>发生时间</th>
-          <th>平均</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Thd</td>
-          <td>Pa</td>
-          <td>Pa</td>
-          <td>Pa</td>
-          <td>Pa</td>
-          <td>Pa</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="dataTable center" id="tableContain"></div>
 </div>
 <script src="lib/jquery-1.11.1.min.js"></script>
+<script src="lib/bootstrap.min.js"></script>
+<script src="lib/bootstrap-treeview.js"></script>
+<script src="lib/bootstrap-table.min.js"></script>
+<script src="lib/echarts.min.js"></script>
+<script src="lib/rolldate.min.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/Unbalance.js"></script>
 </body>
 </html>

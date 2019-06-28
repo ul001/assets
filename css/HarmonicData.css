@@ -1,10 +1,3 @@
-.listView{
-    background: white;
-    border-radius: 0.5rem;
-    border: 0.05rem solid #B4B4B5;
-    padding: 0.3rem;
-    margin: 0.3rem 0 0.3rem 0;
-}
 .container{
     background: #EDEDEC;
     height: 100%;
@@ -13,18 +6,67 @@
 }
 body{
 	height: 100%;
-	font-size:0.8rem;
-	background:#EDEDEC;
+    font-size:1.5rem;
+    background:#EDEDEC;
 }
-.selectTime,.list{
+#table{font-size:1rem;}
+.selectTime,.list,.Unbalance-btn,#EnergyContain{
     border-bottom:1px dashed #C8C9CA;
 }
-.selectTime{clear:both;height:2.5rem;}
+.date label{
+  padding-left:0;
+  font-weight:normal;
+  padding-right:0.5rem;
+  }
+  #date{
+    width:calc(100% - 205px);
+    height:2.5rem;
+    border-radius:5px;
+    border:1px solid #888888;
+    padding-left:0.5rem;
+    }
 .time{
-	float:right;  
-	padding:0.5rem 0.3rem 0 0;
+    float:right;
+    padding:0.5rem 0.3rem 0 0;
+    margin-right:3px;
+ }
+ .selectTime{margin-bottom:0;}
+ #EnergyKind,#EnergyType{
+    background:transparent;
+    border:none;
+    -webkit-appearance:none;
+    width:calc(100% - 50px);
+    background:url('../image/right.png') no-repeat right 5px center;
+ }
+ #sideClick,#electric,#select{
+     height:3.5rem;
+     padding-top:0.5rem;
+     }
+.category ul{padding-left:0;}
+.category ul li{
+	height: 3rem;
+	line-height: 2.5rem;
+	padding-top:5px;
+	list-style: none;
+	border-bottom: 1px solid #eee;
 }
-.time img{vertical-align: -4px;}
+.category input{
+	float:right;
+	width:18px;
+	height: 18px;
+}
+.category span{
+	height: 3rem;
+	line-height: 3rem;
+}
+.category label{
+	width: 90%;
+	font-size: 15px;
+}
+.modal-dialog {
+    width: 70%;
+    margin: 15%;
+}
 .data{
 	line-height: 40px;
 	margin:0.3rem 0 0.3rem 0;
@@ -40,7 +82,6 @@ body{
 	padding:0 0.5rem 0 0.5rem;
 	height:2.5rem;
 	line-height: 2.5rem;
-	clear:both;
 }
 .list p{
 	float:left;
@@ -56,29 +97,40 @@ body{
 	margin:0;
 	border:0.03rem dashed #C8C9CA;
 }
-.date{
-	margin:0.6rem 0.2rem 0.6rem 0.2rem;
-	display:block;
-	float:left;
+.elec-btn{
+	padding:0.3rem 0.2rem 0.3rem 0.2rem;
 }
+.elec-btn button{
+	height:2rem;
+	line-height: 1rem;
+	width:25%;
+	margin: 0 5px;
+	border-radius: 0.3rem;
+	background:#F7F7F7;
+	border:1px solid #888888;
+}
+.elec-btn .select,.search{
+	background:#02AC94;
+	border:1px solid #02AC94;
+	color:#fff;
+}
+.date{
+   margin:0.6rem 0.2rem 0.6rem 0.2rem;
+   width:100%;
+   }
 .search{
 	width:95%;
-	height:2rem;
+	height:2.5rem;
 	margin:0 auto;
 	display: block;
 	border-radius: 0.3rem;
 	margin-top:0.5rem;
 	margin-bottom:0.5rem;
 }
-.search{
-	background:#02AC94;
-	border:1px solid #02AC94;
-	color:#fff;
-}
 .container .diagram{
 	width:95%;
-	height:10rem;
-	margin-top:0.5rem;
+	height:20rem;
+	margin-bottom:0.5rem;
 }
 .dataTable{
 	width:95%;
@@ -95,3 +147,69 @@ body{
 	border-bottom:1px solid #C8C9CA;
 }
 .center{margin:0 auto;}
+.tree{
+	display: none;
+	width: 90%;
+	height: 100%;
+	background: #fff;
+	position: fixed;
+	top:0;
+	right:0;
+	z-index: 10;
+}
+#treeview{
+    overflow:auto;
+    height:84%
+}
+.treeSearch{
+	padding:1rem;
+}
+.tree .search,.tree .cancel{
+    height:4rem;
+	line-height:3rem;
+	width:44%;
+	border-radius: 0;
+	border:none;
+	margin-bottom:0;
+	position:fixed;
+	bottom:0;
+}
+.tree .cancel{
+	background:#d4d4d0;
+}
+.tree .search{
+	right:0;
+	background:#02AC94;
+	color:#fff;
+}
+.treeSearch input{
+	border-radius: 0.5rem;
+	border:1px solid #ddd;
+	height: 2.3rem;
+	width:70%;
+	background: url(../image/searchsmall.png) no-repeat 4px 5px;
+	padding-left:25px;
+	position: relative;
+}
+.treeSearch button{
+	width:25%;
+	height: 2.3rem;
+	background: #02AC94;
+	color:#fff;
+	border-radius: 0.5rem;
+	border:1px solid #02AC94;
+}
+.clear{
+	position: absolute;
+	right:33%;
+	top:1.4rem;
+    z-index: 9;
+}
+.list-group-item{
+	border:none;
+}
+.modal-dialog{margin-top:20%;}
+
+#datePre,#dateNext{
+    cursor:pointer;
+}

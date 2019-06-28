@@ -66,27 +66,46 @@ $(function(){
        $(".category").show();
     });
 
+    loadEnergyType();
+    function loadEnergyType(){
+        $("#EnergyType").html("<option value='fThd' selected>总谐波</option>");
+        for(i=2;i<=31;i++){
+            $("#EnergyType").append("<option value='fHr"+(i<10?("0"+i):i)+"'>"+i+"次谐波含量</option>")
+        }
+    };
+
+    $("#datePre").click(function(){
+        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+        var preDate = new Date(selectDate.getTime()-24*60*60*1000);
+        $("#date").val(preDate.getFullYear()+"-"+((preDate.getMonth())<9?("0"+(preDate.getMonth()+1)):(preDate.getMonth()+1))+"-"+(preDate.getDate()<10?("0"+preDate.getDate()):(preDate.getDate())));
+    });
+
+    $("#dateNext").click(function(){
+        var d = new Date();
+        var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
+        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+        if(selectDate<nowDate){
+        var nextDate = new Date(selectDate.getTime()+24*60*60*1000);
+            $("#date").val(nextDate.getFullYear()+"-"+((nextDate.getMonth())<9?("0"+(nextDate.getMonth()+1)):(nextDate.getMonth()+1))+"-"+(nextDate.getDate()<10?("0"+nextDate.getDate()):(nextDate.getDate())));
+        }else{
+            return;
+        }
+    });
+
     $(document).on('click','#search',function () {
-      var EnergyKind = $("#EnergyKind").attr('value');
-      var selectParam=[];
-      if(EnergyKind!="fFr"){
-        var select = $(".btn.select");
-        $.each(select,function(index,val){
-          selectParam.push($(val).attr("value"))
-        })
-      }
       var fCircuitid = currentSelectVode.merterId;
       var time = $("#date").val();
-      var url = "http://116.236.149.162:8090/SubstationWEBV2/main/app/powerMonitoring/ElectricData";
+      var url = "http://116.236.149.162:8090/SubstationWEBV2/main/app/powerQuality/Harmonic";
       var params = {
             fSubid:"10100001",
             fCircuitid:fCircuitid,
             time:time,
-            fPhase:selectParam.join("-"),
-            EnergyKind:EnergyKind,
+            EnergyKindPhase:$("#EnergyKind").val(),
+            fThdType:$("#EnergyType").val()
       }
+      console.log(params);
       getData(url,params,function(data){
-        showCharts(data.CircuitValueByDate);
+        showCharts(data.HarmonicDate.CircuitHarmonicValueByDate);
       });
     })
 
@@ -123,54 +142,6 @@ $(function(){
       currentSelectVode.merterName = node.text;
     })
 	}
-
-  $(document).on("change","#energySelect",function(){
-    generateType($("#energySelect").val());
-    $("#EnergyKind").attr("value",$("#energySelect").val());
-  })
- 
-  function generateType(type){
-    var List = [
-      {
-        "id":"P","name":"有功功率",
-        "phase":[{"id":"fPa","name":"A相"},{"id":"fPb","name":"B相"},{"id":"fPc","name":"C相"}]
-      },
-      {
-        "id":"I","name":"电流",
-        "phase":[{"id":"fIa","name":"A相"},{"id":"fIb","name":"B相"},{"id":"fIc","name":"C相"}]
-      },
-      {
-        "id":"U","name":"相电压",
-        "phase":[{"id":"fUa","name":"A相"},{"id":"fUb","name":"B相"},{"id":"fUc","name":"C相"}]
-      },
-      {
-        "id":"UL","name":"线电压",
-        "phase":[{"id":"fUab","name":"Uab"},{"id":"fUbc","name":"Ubc"},{"id":"fUca","name":"Uca"}]
-      },
-      {
-        "id":"fFr","name":"频率",
-      },
-      {
-        "id":"Q","name":"无功功率",
-        "phase":[{"id":"fQa","name":"A相"},{"id":"fQb","name":"B相"},{"id":"fQc","name":"C相"}]
-      },
-      {
-        "id":"S","name":"视在功率",
-        "phase":[{"id":"fSa","name":"A相"},{"id":"fSb","name":"B相"},{"id":"fSc","name":"C相"}]
-      },
-    ]
-    var arr = $.grep(List,function(obj){
-      return obj.id == type;
-    })
-    $("#EnergyContain").html("");
-    if(arr[0].hasOwnProperty('phase')){
-      $.each(arr[0].phase,function(index,val){
-        var string = '<button type="button" class="btn" value="'+val.id+'">'+val.name+'</button>';
-        $("#EnergyContain").append(string);
-      })
-      $("#EnergyContain button:first").addClass('select');
-    }
-  }
 
   function showCharts(data){
     var time = [];
@@ -272,7 +243,7 @@ $(function(){
     })
   }
 
-  
+
   var time = tool.initDate("YMD",new Date());
   $("#date").val(time);
 
@@ -281,14 +252,14 @@ $(function(){
         format: 'YYYY-MM-DD',
         beginYear: 2000,
         endYear: 2100,
-        value:time,
-         confirm: function(date) {
+        value:$("#date").val(),
+        confirm: function(date) {
              var d = new Date(),
              d1 = new Date(date.replace(/\-/g, "\/")),
              d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
              if (d1 > d2) {
                  return false;
              };
-         }
+        }
     });
 });

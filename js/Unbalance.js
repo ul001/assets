@@ -67,7 +67,7 @@ $(function(){
     });
 
     $(document).on('click','#search',function () {
-      var EnergyKind = $("#EnergyKind").attr('value');
+      var EnergyKind = "UnB";
       var selectParam=[];
       if(EnergyKind!="fFr"){
         var select = $(".btn.select");
@@ -124,40 +124,21 @@ $(function(){
     })
 	}
 
-  $(document).on("change","#energySelect",function(){
-    generateType($("#energySelect").val());
-    $("#EnergyKind").attr("value",$("#energySelect").val());
-  })
- 
+/*  $(document).on("click",".category li",function(){
+    var type = $(this).children('label').attr("value");
+    var text = $(this).children('label').text();
+    generateType(type);
+    $("#EnergyKind").attr("value",type);
+    $("#param").html(text);
+    $("#myModal").modal("hide");
+  })*/
+
   function generateType(type){
     var List = [
       {
-        "id":"P","name":"有功功率",
-        "phase":[{"id":"fPa","name":"A相"},{"id":"fPb","name":"B相"},{"id":"fPc","name":"C相"}]
-      },
-      {
-        "id":"I","name":"电流",
-        "phase":[{"id":"fIa","name":"A相"},{"id":"fIb","name":"B相"},{"id":"fIc","name":"C相"}]
-      },
-      {
-        "id":"U","name":"相电压",
-        "phase":[{"id":"fUa","name":"A相"},{"id":"fUb","name":"B相"},{"id":"fUc","name":"C相"}]
-      },
-      {
-        "id":"UL","name":"线电压",
-        "phase":[{"id":"fUab","name":"Uab"},{"id":"fUbc","name":"Ubc"},{"id":"fUca","name":"Uca"}]
-      },
-      {
-        "id":"fFr","name":"频率",
-      },
-      {
-        "id":"Q","name":"无功功率",
-        "phase":[{"id":"fQa","name":"A相"},{"id":"fQb","name":"B相"},{"id":"fQc","name":"C相"}]
-      },
-      {
-        "id":"S","name":"视在功率",
-        "phase":[{"id":"fSa","name":"A相"},{"id":"fSb","name":"B相"},{"id":"fSc","name":"C相"}]
-      },
+        "id":"UnB","name":"三相不平衡度",
+        "phase":[{"id":"IUnB","name":"电流三相不平衡度"},{"id":"UUnB","name":"电压三相不平衡度"}]
+      }
     ]
     var arr = $.grep(List,function(obj){
       return obj.id == type;
@@ -272,7 +253,25 @@ $(function(){
     })
   }
 
-  
+    $("#datePre").click(function(){
+            var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+            var preDate = new Date(selectDate.getTime()-24*60*60*1000);
+            $("#date").val(preDate.getFullYear()+"-"+((preDate.getMonth())<9?("0"+(preDate.getMonth()+1)):(preDate.getMonth()+1))+"-"+(preDate.getDate()<10?("0"+preDate.getDate()):(preDate.getDate())));
+        });
+
+        $("#dateNext").click(function(){
+            var d = new Date();
+            var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
+            var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+            if(selectDate<nowDate){
+            var nextDate = new Date(selectDate.getTime()+24*60*60*1000);
+                $("#date").val(nextDate.getFullYear()+"-"+((nextDate.getMonth())<9?("0"+(nextDate.getMonth()+1)):(nextDate.getMonth()+1))+"-"+(nextDate.getDate()<10?("0"+nextDate.getDate()):(nextDate.getDate())));
+            }else{
+                return;
+            }
+        });
+
+
   var time = tool.initDate("YMD",new Date());
   $("#date").val(time);
 
@@ -281,7 +280,7 @@ $(function(){
         format: 'YYYY-MM-DD',
         beginYear: 2000,
         endYear: 2100,
-        value:time,
+        value:$("#date").val(),
          confirm: function(date) {
              var d = new Date(),
              d1 = new Date(date.replace(/\-/g, "\/")),

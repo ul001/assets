@@ -124,40 +124,21 @@ $(function(){
     })
 	}
 
-  $(document).on("change","#energySelect",function(){
-    generateType($("#energySelect").val());
-    $("#EnergyKind").attr("value",$("#energySelect").val());
-  })
- 
+/*  $(document).on("click",".category li",function(){
+    var type = $(this).children('label').attr("value");
+    var text = $(this).children('label').text();
+    generateType(type);
+    $("#EnergyKind").attr("value",type);
+    $("#param").html(text);
+    $("#myModal").modal("hide");
+  })*/
+
   function generateType(type){
     var List = [
       {
-        "id":"P","name":"有功功率",
-        "phase":[{"id":"fPa","name":"A相"},{"id":"fPb","name":"B相"},{"id":"fPc","name":"C相"}]
-      },
-      {
-        "id":"I","name":"电流",
-        "phase":[{"id":"fIa","name":"A相"},{"id":"fIb","name":"B相"},{"id":"fIc","name":"C相"}]
-      },
-      {
-        "id":"U","name":"相电压",
-        "phase":[{"id":"fUa","name":"A相"},{"id":"fUb","name":"B相"},{"id":"fUc","name":"C相"}]
-      },
-      {
-        "id":"UL","name":"线电压",
-        "phase":[{"id":"fUab","name":"Uab"},{"id":"fUbc","name":"Ubc"},{"id":"fUca","name":"Uca"}]
-      },
-      {
-        "id":"fFr","name":"频率",
-      },
-      {
-        "id":"Q","name":"无功功率",
-        "phase":[{"id":"fQa","name":"A相"},{"id":"fQb","name":"B相"},{"id":"fQc","name":"C相"}]
-      },
-      {
-        "id":"S","name":"视在功率",
-        "phase":[{"id":"fSa","name":"A相"},{"id":"fSb","name":"B相"},{"id":"fSc","name":"C相"}]
-      },
+        "id":"PF","name":"功率因数",
+        "phase":[{"id":"fPf","name":"总"},{"id":"fPfa","name":"A相"},{"id":"fPfb","name":"B相"},{"id":"fPfc","name":"C相"}]
+      }
     ]
     var arr = $.grep(List,function(obj){
       return obj.id == type;
@@ -272,7 +253,7 @@ $(function(){
     })
   }
 
-  
+
   var time = tool.initDate("YMD",new Date());
   $("#date").val(time);
 

@@ -2,26 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <title></title>
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css"/>
     <link rel="stylesheet" type="text/css" href="css/max.css"/>
 </head>
 <body>
 <div class="container">
+    <div class="row tree">
+        <div class="treeSearch">
+            <img class="clear" src="image/clear.png"/>
+            <input type="text" id="CircuitidsInput"/>
+            <button type="button" id="CircuitidsList">搜索</button>
+        </div>
+        <div id="treeview" class="col-sm-4"></div>
+        <div id="footer">
+            <button type="button" class="cancel">取消</button>
+            <button type="button" class="search" id="confirm">查询</button>
+        </div>
+    </div>
     <div class="max">
-      <p>当月最大需量</p>
-      <h1><span id="maxVal">102.4</span><span>KW</span></h1>
-      <p id="timeP">2019-06-12 21:33:00</p>
+        <p>当月最大需量</p>
+        <h1><span id="maxVal">102.8</span><span>KW</span></h1>
+        <p id="timeP">2019-06-12 21:33:00</p>
+        <p id="noData"></p>
     </div>
-    <div class="list">
-      <p><span>监测点：</span><select id="selectCir" style="border:none;background:none"><option>10kV变压器</option></select><img src="image/right.png"/></p>
+    <div class="list" id="sideClick">
+        <p><span>监测点：</span><span id="meter"></span><img src="image/right.png"/></p>
     </div>
-    <div class="list">
-      <p><span>发生时间：</span><input readonly type="text" id="dateSelect" style="border:none;background:none"></p>
+    <div class="list" id="timeClick">
+        <p><span>发生时间：</span><input readonly type="text" id="dateSelect"></p>
     </div>
 </div>
 <script src="lib/jquery-1.11.1.min.js"></script>
-<!-- 包括所有已编译的插件 -->
-<script src="js/ajaxUtil.js"></script>
+<script src="lib/bootstrap.min.js"></script>
+<script src="lib/bootstrap-treeview.js"></script>
 <script src="lib/rolldate.min.js"></script>
 <script src="js/max.js"></script>
 </body>

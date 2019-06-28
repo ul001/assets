@@ -4,10 +4,16 @@
     padding-right:0;
     padding-left:0;
 }
-body{height: 100%;background:#EDEDEC;}
+body{
+height: 100%;background:#EDEDEC;
+font-size:1.5rem;
+}
 .list{
     border-bottom:1px dashed #C8C9CA;
 }
+.list-group-item {
+    border: none;
+    }
 .max{
 	background:#000;
 	width:inherit;
@@ -19,9 +25,9 @@ body{height: 100%;background:#EDEDEC;}
 	background:linear-gradient(rgb(255,140,15),rgb(255,177,18)); 
 }
 .list{
-	padding:0 0.2rem 0.2rem 0.2rem;
-	height:3rem;
-	line-height: 3rem;
+	padding: 0 0.5rem 0 0.5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
 }
 #maxVal{
 	font-size:3.5rem;
@@ -30,12 +36,16 @@ body{height: 100%;background:#EDEDEC;}
 	font-size:1rem;
 	margin-left:0.5rem;
 }
-.list p{
-/*	display:block;
-	float:left;*/
+/*.list p{
+*//*	display:block;
+	float:left;*//*
 	height:3rem;
 	line-height: 3rem;
-	margin-bottom: 0;
+	margin-bottom:0;
+}*/
+#sideClick,#timeClick{
+    height: 3.5rem;
+    padding-top: 0.5rem;
 }
 .list img{
 	float:right;
@@ -46,4 +56,68 @@ body{height: 100%;background:#EDEDEC;}
 	clear:both;
 /*	margin:0 -1rem 0 -1rem;*/
 	border:0.03rem dashed #C8C9CA;
+}
+#dateSelect{
+    height:2.5rem;
+    border-radius:5px;
+    border:1px solid #888888;
+    padding-left:0.5rem;
+}
+.tree{
+	display: none;
+	width: 90%;
+	height: 100%;
+	background: #fff;
+	position: fixed;
+	top:0;
+	right:0;
+	z-index: 10;
+}
+#treeview{
+    overflow:auto;
+    height:84%
+}
+.treeSearch{
+	padding:1rem;
+}
+.tree .search,.tree .cancel{
+    height:4rem;
+	line-height:3rem;
+	width:44%;
+	border-radius: 0;
+	border:none;
+	margin-bottom:0;
+	position:fixed;
+	bottom:0;
+}
+.tree .cancel{
+	background:#d4d4d0;
+}
+.tree .search{
+	right:0;
+	background:#02AC94;
+	color:#fff;
+}
+.treeSearch input{
+	border-radius: 0.5rem;
+	border:1px solid #ddd;
+	height: 2.3rem;
+	width:70%;
+	background: url(../image/searchsmall.png) no-repeat 4px 5px;
+	padding-left:25px;
+	position: relative;
+}
+.treeSearch button{
+	width:25%;
+	height: 2.3rem;
+	background: #02AC94;
+	color:#fff;
+	border-radius: 0.5rem;
+	border:1px solid #02AC94;
+}
+.clear{
+	position: absolute;
+	right:33%;
+	top:1.4rem;
+    z-index: 9;
 }

@@ -122,7 +122,7 @@ $(function(){
             listDom.innerHTML='';
         }
         $(data.list).each(function () {
-            var str = this.f_StartTime +"<br>"+"[设备编号："+this.f_DeviceCode+"&nbsp;&nbsp;&nbsp;设备名称："+this.f_DeviceName+"]"
+            var str = this.f_StartTime +"<br>"+"[设备编号："+this.f_DeviceCode+"&nbsp;&nbsp;&nbsp;设备名称："+(this.f_DeviceName==null?"未知设备":this.f_DeviceName)+"]"
             var liDom=document.createElement("li");
             liDom.innerHTML=str;
             listDom.appendChild(liDom);//加在列表的后面,上拉加载
@@ -149,7 +149,7 @@ $(function(){
             endDate:endDate,
             fMetername:fMetername,
             fParamname:fParamname,
-            fAlarmtype:1,
+            fAlarmtype:2,
             pageNo:pageNum,
             pageSize:pageSize
         }

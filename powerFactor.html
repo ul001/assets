@@ -3,18 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css"/>
     <link rel="stylesheet" type="text/css" href="css/ElectricData.css" />
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
-    <script src="lib/jquery-1.11.1.min.js"></script>
-    <script src="lib/bootstrap.min.js"></script>
-    <script src="lib/rolldate.min.js"></script>
-    <script src="lib/bootstrap-treeview.js"></script>
-    <script src="lib/bootstrap-table.min.js"></script>
-    <script src="lib/echarts.min.js"></script>
-    <script src="js/tools.js"></script>
-    <script src="js/ElectricData.js"></script>
 </head>
 <body>
 <div class="container">
@@ -65,36 +56,33 @@
         <p><span>监测点：</span><span id="meter">10kV变压器</span></p>
         <img src="image/right.png"/>
     </div>
-    <!--<div class="list" id="electric" data-toggle="modal" data-target="#myModal">
-        <p><span value="P" id="EnergyKind">电力类别：</span><span id="param">电流</span></p>
-        <img id="kindClick" src="image/right.png"/>
-    </div>-->
     <div class="list" id="electric" data-toggle="modal" data-target="#myModal">
-        <span value="P" id="EnergyKind">电力类别：</span>
-        <select id="energySelect">
-            <option value="P">有功功率</option>
-            <option value="I">电流</option>
-            <option value="U">相电压</option>
-            <option value="UL">线电压</option>
-            <option value="fFr">频率</option>
-            <option value="Q">无功功率</option>
-            <option value="S">视在功率</option>
-        </select>
+        <p><span value="PF" id="EnergyKind">电力类别：</span><span id="param">功率因数</span></p>
+        <!--<img id="kindClick" src="image/right.png"/>-->
     </div>
     <div class="elec-btn" id="EnergyContain">
-        <button type="button" class="btn select" value="fPa">A相</button>
-        <button type="button" class="btn" value="fPb">B相</button>
-        <button type="button" class="btn" value="fPc">C相</button>
+        <button type="button" class="btn select" value="fPf">总</button>
+        <button type="button" class="btn" value="fPfa">A相</button>
+        <button type="button" class="btn" value="fPfb">B相</button>
+        <button type="button" class="btn" value="fPfc">C相</button>
     </div>
     <div class="form-group selectTime">
         <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
             <label>日期：</label>
-            <input readonly type="text" id="date">
+            <input readonly type="text" id="date" size="16">
         </div>
     </div>
     <button type="button" class="search" id="search">查询</button>
     <div class="diagram center" id="chartContain"></div>
     <div class="dataTable center" id="tableContain"></div>
 </div>
+<script src="lib/jquery-1.11.1.min.js"></script>
+<script src="lib/bootstrap.min.js"></script>
+<script src="lib/rolldate.min.js"></script>
+<script src="lib/bootstrap-treeview.js"></script>
+<script src="lib/bootstrap-table.min.js"></script>
+<script src="lib/echarts.min.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/powerFactor.js"></script>
 </body>
 </html>

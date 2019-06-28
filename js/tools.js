@@ -1,66 +1,53 @@
 var tool = {
-	initDate: function (type, date) {
+	initDate:function(type,date){
 		var year = date.getFullYear();
-		var month = date.getMonth() + 1;
-		if (month < 10) {
-			month = "0" + month;
+        var month = date.getMonth()+1;
+        if(month<10){
+		    month = "0"+month;
 		}
 		var today = date.getDate();
-		if (today < 10) {
-			today = "0" + today;
+		if(today<10){
+		    today = "0"+today;
 		}
 
 		var lastDay;
-		if (month == 0) {
-			year = year - 1;
-			var day = new Date(year, 12, 0);
-			lastDay = day.getDate();
-		} else {
-			var day = new Date(year, month, 0);
-			lastDay = day.getDate(); //获取某月最后一天
-		}
+		if(month==0){
+            year = year-1;
+            var day = new Date(year,12,0);
+            lastDay = day.getDate();
+        }else {
+            var day = new Date(year,month,0);
+            lastDay = day.getDate();//获取某月最后一天
+        }
 
-		var result = "";
+		var result="";
 
-		switch (type) {
+		switch(type){
 			//年、月
 			case "YM":
-				result = year + "-" + month;
+				result = year+"-"+month;
 				break;
-				//年、月、日
+			//年、月、日
 			case "YMD":
-				result = year + "-" + month + "-" + today;
+				result = year+"-"+month+"-"+today;
 				break;
-				//年、月、日
+			//年、月、日
 			case "yesteray":
-				var yesteray = today - 1;
-				result = year + "-" + month + "-" + yesteray;
+				var yesteray = today-1;
+				result = year+"-"+month+"-"+yesteray;
 				break;
-				//第一天
+			//第一天
 			case "first":
-				result = year + "-" + month + "-" + "01";
+				result = year+"-"+month+"-"+"01";
 				break;
-				//最后一天
+			//最后一天
 			case "last":
-				result = year + "-" + month + "-" + lastDay;
+				result = year+"-"+month+"-"+lastDay;
 				break;
 		}
 
 		return result;
 	},
 
-	getDataByAjax: function (url, params, successCallback) {
-		var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE4MTI5MzEsInVzZXJuYW1lIjoiYWRtaW4ifQ.cuKoTES-GcXasOHnZM3mn_zBnAz7boVJApY7bctubTA";
-		$.ajax({
-			type: 'GET',
-			url: url,
-			data: params,
-			beforeSend: function (request) {
-				request.setRequestHeader("Authorization", token)
-			},
-			success: function (result) {
-				successCallback(result.data);
-			}
-		})
-	}
+
 }

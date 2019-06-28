@@ -2,56 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="css/HarmonicData.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/HarmonicData.css"/>
 </head>
 <body>
 <div class="container">
-    <div class="list">
-      <p><span>监测点：</span>10kV变压器</p>
-      <img src="image/right.png"/>
+    <div class="row tree">
+        <div class="treeSearch">
+            <img class="clear" src="image/clear.png"/>
+            <input type="text" id="CircuitidsInput"/>
+            <button type="button" id="CircuitidsList">搜索</button>
+        </div>
+        <div id="treeview" class="col-sm-4"></div>
+        <button type="button" class="cancel">取消</button>
+        <button type="button" class="search" id="confirm">查询</button>
     </div>
-    <div class="selectTime">
-      <p class="date">日期：<span>2019-06-13</span></p>
-      <div class="time">
-        <img src="image/left.png"/> 上一日&nbsp;&nbsp;下一日 <img src="image/right-green.png"/>
-      </div>
+    <div class="list" id="sideClick">
+        <p><span>监测点：</span><span id="meter">10kV变压器</span></p>
+        <img src="image/right.png"/>
     </div>
-    <div class="list">
-      <p><span>类别：</span>A相电流谐波</p>
-      <img src="image/right.png"/>
+    <div class="form-group selectTime">
+        <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
+            <label class="col-md-2 control-label">日期：</label>
+            <input readonly type="text" id="date" size="16">
+            <div class="time">
+                <span id="datePre"><img src="image/left.png"/> 上一日</span>&nbsp;&nbsp;
+                <span id="dateNext">下一日 <img src="image/right-green.png"/></span>
+            </div>
+        </div>
     </div>
-    <div class="list">
-      <p><span>谐波：</span>总谐波</p>
-      <img src="image/right.png"/>
+    <div class="list" id="electric" data-toggle="modal" data-target="#myModal">
+        <!--<p><span value="P" id="EnergyKind">类别：</span><span id="param">A相电流谐波</span></p>-->
+        <span>类别：</span>
+        <select id="EnergyKind">
+            <option value="Ia" selected>A相电流谐波</option>
+            <option value="Ib">B相电流谐波</option>
+            <option value="Ic">C相电流谐波</option>
+            <option value="Ua">A相电压谐波</option>
+            <option value="Ub">B相电压谐波</option>
+            <option value="Uc">C相电压谐波</option>
+        </select>
     </div>
-    <button type="button" class="search">查询</button>
-    <div class="diagram center">
-
+    <div class="list" id="select" data-toggle="modal" data-target="#myModal">
+        <span>选择：</span>
+        <select id="EnergyType">
+            <!--<option value="Ia" selected>总谐波</option>-->
+        </select>
     </div>
-    <table class="dataTable center">
-      <thead>
-        <tr>
-          <th>类型</th>
-          <th>最大</th>
-          <th>发生时间</th>
-          <th>最小</th>
-          <th>发生时间</th>
-          <th>平均</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Thd</td>
-          <td>Pa</td>
-          <td>Pa</td>
-          <td>Pa</td>
-          <td>Pa</td>
-          <td>Pa</td>
-        </tr>
-      </tbody>
-    </table>
+    <button type="button" class="search" id="search">查询</button>
+    <div class="diagram center" id="chartContain"></div>
+    <div class="dataTable center" id="tableContain"></div>
 </div>
 <script src="lib/jquery-1.11.1.min.js"></script>
+<script src="lib/bootstrap.min.js"></script>
+<script src="lib/bootstrap-treeview.js"></script>
+<script src="lib/bootstrap-table.min.js"></script>
+<script src="lib/echarts.min.js"></script>
+<script src="lib/rolldate.min.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/HarmonicData.js"></script>
 </body>
 </html>

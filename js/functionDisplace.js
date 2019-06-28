@@ -5,11 +5,11 @@ $(function () {
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    //判断数组中是否包含某字符串  
+    //判断数组中是否包含某字符串
     var baserUrlFromAPP;
     var tokenFromAPP;
     var subidFromAPP;
-    if (isIOS) { //ios系统的处理  
+    if (isIOS) { //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
         var storage = localStorage.getItem("accessToken");
         // storage = storage ? JSON.parse(storage):[];
@@ -18,7 +18,9 @@ $(function () {
         tokenFromAPP = storage.token;
         subidFromAPP = storage.fsubID;
     } else {
-
+        baserUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
     }
 
     //创建MeScroll对象
