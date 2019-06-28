@@ -19,44 +19,42 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row tree">
-            <div class="treeSearch">
-                <img class="clear" src="image/clear.png" />
-                <input type="text" />
-                <button type="button">搜索</button>
-            </div>
-            <div id="treeview" class="col-sm-4"></div>
-            <button type="button" class="cancel">取消</button>
-            <button type="button" class="search" id="confirm">查询</button>
+<div class="container">
+    <div class="row tree">
+        <div class="treeSearch">
+            <img class="clear" src="image/clear.png" />
+            <input type="text" />
+            <button type="button">搜索</button>
         </div>
-        <div class="list" id="sideClick">
-            <p><span>监测点：</span><span id="meter">10kV变压器</span></p>
-            <img src="image/right.png" />
-        </div>
-        <hr>
-        <div class="elec-btn" id="EnergyContain">
-            <button type="button" class="btn select" id="today" value="today">日报</button>
-            <button type="button" class="btn " id="month" value="month">月报</button>
-            <button type="button" class="btn " id="year" value="year">年报</button>
-        </div>
-        <hr>
-        <div class="form-group">
-            <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
-                <label class="col-md-2 control-label">日期：</label>
-                <input readonly type="text" id="date" class="form-control" size="16">
-            </div>
-        </div>
-        <!-- <div class="selectTime">
-            <p class="date">日期：<span>2019-06-13</span></p>
-            <div class="time">
-                <img src="image/left.png" /> 上一日&nbsp;&nbsp;下一日 <img src="image/right-green.png" />
-            </div>
-        </div> -->
-        <hr>
-        <button type="button" class="search" id="search">查询</button>
-        <div class="diagram center" id="chartContain"></div>
+        <div id="treeview" class="col-sm-4"></div>
+        <button type="button" class="cancel">取消</button>
+        <button type="button" class="search" id="confirm">查询</button>
     </div>
+    <div class="list" id="sideClick">
+        <p><span>监测点：</span><span id="meter">10kV变压器</span></p>
+        <img src="image/right.png" />
+    </div>
+    <div class="elec-btn" id="EnergyContain">
+        <button type="button" class="btn select" id="today" value="today">日报</button>
+        <button type="button" class="btn " id="month" value="month">月报</button>
+        <button type="button" class="btn " id="year" value="year">年报</button>
+    </div>
+    <div class="form-group sumDate">
+        <div class="input-group date form_date_end " data-date="" data-link-field="dtp_input2">
+            <label class="col-md-2 control-label">日期：</label>
+            <input readonly type="text" id="date" class="form-control" size="16">
+        </div>
+    </div>
+    <!-- <div class="selectTime">
+        <p class="date">日期：<span>2019-06-13</span></p>
+        <div class="time">
+            <img src="image/left.png" /> 上一日&nbsp;&nbsp;下一日 <img src="image/right-green.png" />
+        </div>
+    </div> -->
+    <hr>
+    <button type="button" class="search" id="search">查询</button>
+    <div class="diagram center" id="chartContain"></div>
+</div>
 </body>
 
 </html>

@@ -1,30 +1,42 @@
 .container{
-    background: #EDEDEC;
-    height: 100%;
-    padding-right:0;
-    padding-left:0;
+	background: #EDEDEC;
+	height: 100%;
+	padding-right:0;
+	padding-left:0;
 }
 .form_date_end label{
-   font-weight:normal;
+	font-weight:normal;
 }
 .form_date_end input{
-   border-radius:5px;
-   border:1px solid #888888;
-   padding-left:0.5rem;
+	border-radius:5px;
+	border:1px solid #888888;
+	padding-left:0.5rem;
+}
+.form-group .sumDate,.sumDate .date{
+	width:100%;
+}
+.sumDate{margin-bottom:0;}
+.sumDate label{
+	padding:0.3rem 0 0 0;
+	float:left;
+}
+.sumDate #date{
+	float:left;
+	width:50%;
 }
 body{
 	height: 100%;
-    font-size:1.5rem;
-    background:#EDEDEC;
+	font-size:1.5rem;
+	background:#EDEDEC;
 }
 #table{font-size:1rem;}
-.selectTime,.list,.Unbalance-btn,#EnergyContain{
-    border-bottom:1px dashed #C8C9CA;
+.selectTime,.list,#EnergyContain,.sumDate{
+	border-bottom:1px dashed #C8C9CA;
 }
- #sideClick,#electric,#select{
-     height:3.5rem;
-     padding-top:0.5rem;
-     }
+#sideClick,#electric,#select{
+	height:3.5rem;
+	padding-top:0.5rem;
+}
 .selectTime{margin-bottom:0;}
 .category ul{padding-left:0;}
 .category ul li{
@@ -48,8 +60,8 @@ body{
 	font-size: 15px;
 }
 .modal-dialog {
-    width: 70%;
-    margin: 15%;
+	width: 70%;
+	margin: 15%;
 }
 .data{
 	line-height: 40px;
@@ -94,8 +106,8 @@ body{
 	border:1px solid #888888;
 }
 #EnergyContain{
-    height:4rem;
-    padding-top:0.7rem;
+	height:4rem;
+	padding-top:0.7rem;
 }
 .elec-btn .select,.search{
 	background:#02AC94;
@@ -113,9 +125,10 @@ body{
 	margin-bottom:0.5rem;
 }
 .container .diagram{
-	width:95%;
+	width:100%;
 	height:20rem;
 	margin-bottom:0.5rem;
+	background: #fff;
 }
 .dataTable{
 	width:95%;
@@ -134,9 +147,9 @@ body{
 .center{margin:0 auto;}
 #date{
 	height:2.5rem;
-    border-radius:5px;
-    border:1px solid #888888;
-    padding-left:0.5rem;
+	border-radius:5px;
+	border:1px solid #888888;
+	padding-left:0.5rem;
 }
 .tree{
 	display: none;
@@ -149,14 +162,14 @@ body{
 	z-index: 10;
 }
 #treeview{
-    overflow:auto;
-    height:84%
+	overflow:auto;
+	height:84%
 }
 .treeSearch{
 	padding:1rem;
 }
 .tree .search,.tree .cancel{
-    height:4rem;
+	height:4rem;
 	line-height:3rem;
 	width:44%;
 	border-radius: 0;
@@ -194,7 +207,7 @@ body{
 	position: absolute;
 	right:33%;
 	top:1.4rem;
-    z-index: 9;
+	z-index: 9;
 }
 .list-group-item{
 	border:none;
@@ -202,9 +215,9 @@ body{
 .modal-dialog{margin-top:20%;}
 
 #energySelect{
-     background:transparent;
-     border:none;
-     -webkit-appearance:none;
-     width:calc(100% - 80px);
-     background:url('../image/right.png') no-repeat right 5px center;
-  }
+	background:transparent;
+	border:none;
+	-webkit-appearance:none;
+	width:calc(100% - 80px);
+	background:url('../image/right.png') no-repeat right 5px center;
+}
