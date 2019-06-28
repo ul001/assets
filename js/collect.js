@@ -47,7 +47,7 @@ $(function () {
 
     initFirstNode(); //初始化第一个回路
     function initFirstNode() {
-        var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+        var url = baseUrlFromAPP + "/main/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
         }
@@ -101,12 +101,12 @@ $(function () {
         endDate = $("#dateEnd").val();
         var fCircuitid = currentSelectVode.merterId;
         // var time = $("#date").val();
-        var url = baseUrlFromAPP+"/main/app/powerAnalysis/ConsumeEnergyReport";
+        var url = baseUrlFromAPP + "/main/app/powerAnalysis/ConsumeEnergyReport";
         var params = {
             fSubid: subidFromAPP,
             fCircuitids: fCircuitid,
-            startTime: startDate + "  00:00:00",
-            endTime: endDate + "  23:59:59"
+            startTime: startDate + " 00:00:00",
+            endTime: endDate + " 24:00:00"
             // time: time,
             // fPhase: selectParam,
             // EnergyKind: EnergyKind,

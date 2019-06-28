@@ -1,4 +1,4 @@
-$(function(){
+$(function () {
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -22,64 +22,64 @@ $(function(){
         subidFromAPP = android.getfSubid();
     }
 
-	var url = baseUrlFromAPP+"/Subimg/getAppSubimgInfo";
-	var params = {
-		fSubid:subidFromAPP,
-	}
-	tool.getDataByAjax(url,params,function(data){
-		showSVG(data.xmlContent);
-		showList(data.list);
-		showDataOnSVG(data.SvgInfo);
-	})
+    var url = baseUrlFromAPP + "/Subimg/getAppSubimgInfo";
+    var params = {
+        fSubid: subidFromAPP,
+    }
+    getDataByAjax(url, params, function (data) {
+        showSVG(data.xmlContent);
+        showList(data.list);
+        showDataOnSVG(data.SvgInfo);
+    })
 
-	function showSVG(path){
-		$(".diagram").html("");
-		$(".diagram").append(path);
-		$('g[name="off"]').hide();
-		$(".diagram").overscroll();
-	}
+    function showSVG(path) {
+        $(".diagram").html("");
+        $(".diagram").append(path);
+        $('g[name="off"]').hide();
+        $(".diagram").overscroll();
+    }
 
-	function showList(data){
-		$("#subList").html("")
-		if(data.length>0){
-			$.each(data,function(index, el) {
-				var string = "<option>"+el.fCustomname+"</option>";
-				$("#subList").append(string);
-			});
-		}
-	}
+    function showList(data) {
+        $("#subList").html("")
+        if (data.length > 0) {
+            $.each(data, function (index, el) {
+                var string = "<option>" + el.fCustomname + "</option>";
+                $("#subList").append(string);
+            });
+        }
+    }
 
     function getDataByAjax(url, params, successCallback) {
-    		$.ajax({
-    			type: 'GET',
-    			url: url,
-    			data: params,
-    			beforeSend: function (request) {
-    				request.setRequestHeader("Authorization", tokenFromAPP)
-    			},
-    			success: function (result) {
-    				successCallback(result.data);
-    			}
-    		})
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: params,
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", tokenFromAPP)
+            },
+            success: function (result) {
+                successCallback(result.data);
+            }
+        })
     };
 
-   $("#subList").change(function (event) {
-	    var fCustomname = $("#subList").val();
-	  	var url = baseUrlFromAPP+"/Subimg/getAppSubimgInfo";
-		var params = {
-			fSubid:subidFromAPP,
-			fCustomname:fCustomname,
-		}
-		getDataByAjax(url,params,function(data){
-			showSVG(data.xmlContent);
-			showDataOnSVG(data.SvgInfo);
-		})
+    $("#subList").change(function (event) {
+        var fCustomname = $("#subList").val();
+        var url = baseUrlFromAPP + "/Subimg/getAppSubimgInfo";
+        var params = {
+            fSubid: subidFromAPP,
+            fCustomname: fCustomname,
+        }
+        getDataByAjax(url, params, function (data) {
+            showSVG(data.xmlContent);
+            showDataOnSVG(data.SvgInfo);
+        })
     });
 
-	function showDataOnSVG(data){
+    function showDataOnSVG(data) {
         var map = new Map();
         var group;
-        if(data.length>0){
+        if (data.length > 0) {
             $.each(data, function (key, val) {
                 group = $("#" + val.fCircuitid);
                 for (i = 0; i < val.meterParamValues.length; i++) {
@@ -99,7 +99,7 @@ $(function(){
                             break;
                         default:
                     }
-                } 
+                }
 
                 $.each(group.children('g text'), function (index, element) {
                     try {
@@ -117,5 +117,5 @@ $(function(){
                 });
             });
         }
-	}
+    }
 })
