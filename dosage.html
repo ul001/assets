@@ -11,7 +11,13 @@
 <body>
   <div class="container">
     <div class="selectTime">
-      <p class="date">日期：<span>2019-06-13</span></p>
+      <div class="form-group">
+        <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
+          <label class="col-md-2 control-label">日期：</label>
+          <input readonly type="text" id="date" class="form-control" size="16">
+        </div>
+      </div>
+      <!-- <span class="date">日期：<span>2019-06-13</span></p> -->
       <select class="classify" id="selectType">
         <!--按电量-->
         <option value="sum" class="i18n" name="Electricity">按电量</option>

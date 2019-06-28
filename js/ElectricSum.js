@@ -44,25 +44,30 @@ $(function () {
             selectParam = ""
         }
         var time;
+        var typeDA;
         if (selectParam == "today") {
             time = $("#date").val();
+            typeDA = "D";
         } else if (selectParam == "month") {
             time = $("#date").val().substring(0, 7);
+            typeDA = "M";
         } else if (selectParam == "year") {
             time = $("#date").val().substring(0, 4);
+            typeDA = "Y";
         }
         var fCircuitid = currentSelectVode.merterId;
 
-        var url = "http://116.236.149.162:8090/SubstationWEBV2/main/app/powerMonitoring/ElectricReport";
+        var url = "http://116.236.149.162:8090/SubstationWEBV2/main/app/powerAnalysis/EnergyReport";
         var params = {
             fSubid: "10100001",
-            fCircuitid: fCircuitid,
+            fCircuitids: fCircuitid,
             time: time,
+            DA: typeDA
             // fPhase: selectParam,
             // EnergyKind: EnergyKind,
         }
         getData(url, params, function (data) {
-            showCharts(data.circuitUIPQPfEpis);
+            showCharts(data.EnergyReport);
         });
     })
 
@@ -225,21 +230,29 @@ $(function () {
             // var type = data[0].fParamcode.substring(1);
             // name.push(type);
 
+            var selectParam = $(".btn.select").attr('value');
+
             $.each(data, function (index, el) {
-                if (el.fCollecttime == "undefined" || el.fCollecttime == null || el.fCollecttime == "") {
+                if (el.fTime == "undefined" || el.fTime == null || el.fTime == "") {
                     return true;
                 }
-                time.push(el.fCollecttime.substring(11, 16));
-                value.push(el.fIa);
-                if (el.fIa > max) {
-                    max = el.fIa;
-                    maxTime = el.fCollecttime.substring(0, 16)
+                if (selectParam == "today") {
+                    time.push(el.fTime.substring(11, 16));
+                } else if (selectParam == "month") {
+                    time.push(el.fTime.substring(6, 10));
+                } else if (selectParam == "year") {
+                    time.push(el.fTime.substring(2, 7));
                 }
-                if (el.fIa < min) {
-                    min = el.fIa;
-                    minTime = el.fCollecttime.substring(0, 16)
+                value.push(el.fValue);
+                if (el.fValue > max) {
+                    max = el.fValue;
+                    maxTime = el.fTime.substring(0, 16)
                 }
-                sum += el.fIa;
+                if (el.fValue < min) {
+                    min = el.fValue;
+                    minTime = el.fTime.substring(0, 16)
+                }
+                sum += el.fValue;
             });
             var avg = (sum / data.length).toFixed(2);
             var tableData = [{
