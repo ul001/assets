@@ -210,13 +210,13 @@ $(function () {
             },
             legend: {
                 data: ['尖', '峰', '平', '谷'],
-                bottom: 0
+                bottom: 50
             },
             grid: {
                 top: '51%',
                 left: '13%',
                 right: '5%',
-                bottom: '10%'
+                bottom: '20%'
             },
             xAxis: {
                 type: 'category',
@@ -226,6 +226,21 @@ $(function () {
                 name: y,
                 type: 'value'
             },
+            toolbox: {
+                left: 'right',
+                top: '45%',
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    restore: {},
+                }
+            },
+            dataZoom: [{
+                startValue: time[0]
+            }, {
+                type: 'inside'
+            }],
             series: [{
                     name: '尖',
                     type: 'bar',
