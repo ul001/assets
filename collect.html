@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
   <title></title>
   <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/collect.css" />
@@ -28,13 +28,13 @@
       <button type="button" class="cancel">取消</button>
       <button type="button" class="search" id="confirm">查询</button>
     </div>
-    <span class="list" id="sideClick">
+    <div class="list" id="sideClick">
       <p><span>监测点：</span><span id="meter"></span></p>
       <img src="image/right.png" />
-  </div>
+    </div>
   <hr>
   <div class="form-group function-group">
-    <label for="dtp_input2" class="col-md-2 control-label">开始日期：</label>
+    <label class="col-md-2 control-label">开始日期：</label>
     <div class="input-group date form_date_start col-md-5" data-date="" data-link-field="dtp_input2">
       <input readonly type="text" id="dateStart" class="startDate" size="16">
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -42,7 +42,7 @@
   </div>
   <hr>
   <div class="form-group function-group">
-    <label for="dtp_input2" class="col-md-2 control-label">结束日期：</label>
+    <label class="col-md-2 control-label">结束日期：</label>
     <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
       <input readonly type="text" id="dateEnd" class="endDate" size="16">
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
