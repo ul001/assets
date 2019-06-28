@@ -15,37 +15,50 @@
 
 body {
 	height: 100%;
-    font-size:1.5rem;
-    background:#EDEDEC;
+	font-size: 1.5rem;
+	background: #EDEDEC;
 }
-#sideClick{
-     height:3.5rem;
-     padding-top:0.5rem;
-     }
-.function-group{
-	height:4rem;
-	padding-top:0.5rem;
+
+#sideClick {
+	height: 3.5rem;
+	padding-top: 0.5rem;
 }
-#sideClick,.list,.function-group{
-    border-bottom:1px dashed #C8C9CA;
+
+.function-group {
+	height: 4rem;
+	padding-top: 0.5rem;
 }
-.input-group-addon{
+
+#sideClick,
+.list,
+.function-group {
+	border-bottom: 1px dashed #C8C9CA;
+}
+
+.input-group-addon {
 	display: none;
 }
-.form_date_start,#dateStart,.form_date_end,#dateEnd{
-	width: 9rem;
+
+.form_date_start,
+#dateStart,
+.form_date_end,
+#dateEnd {
+	width: 12rem;
 	background: transparent;
-	border:none;
-	float:left;
+	border: none;
+	float: left;
 }
-.function-group label{
+
+.function-group label {
 	font-weight: normal;
-	padding:0.6rem 0;
-	float:left;
+	padding: 0.6rem 0;
+	float: left;
 }
-.function-group .to{
-	margin-right:10px;
+
+.function-group .to {
+	margin-right: 10px;
 }
+
 .tree {
 	display: none;
 	width: 90%;
@@ -54,12 +67,14 @@ body {
 	position: absolute;
 	top: 0;
 	right: 0;
-	z-index:99;
+	z-index: 99;
 }
-#treeview{
-	height:80%;
-	overflow:scroll;
+
+#treeview {
+	height: 80%;
+	overflow: scroll;
 }
+
 .category ul {
 	padding-left: 0;
 }
@@ -211,7 +226,7 @@ body {
 
 .tree .cancel {
 	left: 15%;
-	background:#EDEDEC;
+	background: #EDEDEC;
 }
 
 .tree .search {
@@ -252,12 +267,16 @@ body {
 .modal-dialog {
 	margin-top: 20%;
 }
-.collectlist{
-	width:95%;
-	padding:0.5rem;
-	background:#fff;
+
+.collectlist {
+	width: 95%;
+	padding: 0.5rem;
+	background: #fff;
 	list-style: none;
-	border:1px solid #C8C9CA;
+	border: 1px solid #C8C9CA;
 	border-radius: 0.5rem;
 }
-.collectlist p{margin-bottom:0.2rem;}
+
+.collectlist p {
+	margin-bottom: 0.2rem;
+}
