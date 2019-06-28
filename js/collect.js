@@ -1,4 +1,27 @@
 $(function () {
+    //iOS安卓基础传参
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
+
     var currentSelectVode = {}; //选中节点
     //页面初始化加载当日数据
     var startDate = tool.initDate("YMD", new Date());;
@@ -24,9 +47,9 @@ $(function () {
 
     initFirstNode(); //初始化第一个回路
     function initFirstNode() {
-        var url = "http://116.236.149.162:8090/SubstationWEBV2/main/getfCircuitidsList";
+        var url = baseUrlFromAPP+"/main/getfCircuitidsList";
         var params = {
-            fSubid: "10100001",
+            fSubid: subidFromAPP,
         }
         getData(url, params, function (data) {
             setListData(data);
@@ -78,12 +101,12 @@ $(function () {
         endDate = $("#dateEnd").val();
         var fCircuitid = currentSelectVode.merterId;
         // var time = $("#date").val();
-        var url = "http://116.236.149.162:8090/SubstationWEBV2/main/app/powerAnalysis/ConsumeEnergyReport";
+        var url = baseUrlFromAPP+"/main/app/powerAnalysis/ConsumeEnergyReport";
         var params = {
-            fSubid: "10100001",
+            fSubid: subidFromAPP,
             fCircuitids: fCircuitid,
             startTime: startDate + "  00:00:00",
-            endTime: endDate + "  24:00:00"
+            endTime: endDate + "  23:59:59"
             // time: time,
             // fPhase: selectParam,
             // EnergyKind: EnergyKind,
@@ -112,7 +135,7 @@ $(function () {
 
     function getData(url, params, successCallback) {
         try {
-            var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE4MTI5MzEsInVzZXJuYW1lIjoiYWRtaW4ifQ.cuKoTES-GcXasOHnZM3mn_zBnAz7boVJApY7bctubTA";
+            var token = tokenFromAPP;
             $.ajax({
                 type: 'GET',
                 url: url,
