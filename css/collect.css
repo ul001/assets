@@ -33,7 +33,7 @@ body {
 	display: none;
 }
 .form_date_start,#dateStart,.form_date_end,#dateEnd{
-	width: 8rem;
+	width: 9rem;
 	background: transparent;
 	border:none;
 	float:left;
@@ -243,7 +243,6 @@ body {
 	position: absolute;
 	right: 33%;
 	top: 19px;
-
 }
 
 .list-group-item {
