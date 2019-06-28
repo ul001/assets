@@ -26,6 +26,8 @@ $(function () {
     initNetData(); //初始化
 
     function initNetData() {
+        var showMon = tool.initDate("YM", new Date());
+        $("#showTime").html(showMon);
         networkData('sum');
     }
 
@@ -197,8 +199,8 @@ $(function () {
                     fontWeight: 'small'
                 },
                 textAlign: 'center',
-                right: '-1%',
-                bottom: 70
+                right: '-10%',
+                top: 10
             }],
             tooltip: {
                 trigger: 'axis',
@@ -211,8 +213,10 @@ $(function () {
                 bottom: 0
             },
             grid: {
-                top: '55%',
-                left: '10%'
+                top: '51%',
+                left: '13%',
+                right: '5%',
+                bottom: '10%'
             },
             xAxis: {
                 type: 'category',

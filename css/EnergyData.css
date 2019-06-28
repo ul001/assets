@@ -1,101 +1,130 @@
-.listView{
-    background: white;
-    border-radius: 0.5rem;
-    border: 0.05rem solid #B4B4B5;
-    padding: 0.3rem;
-    margin: 0.3rem 0 0.3rem 0;
+.listView {
+	background: white;
+	border-radius: 0.5rem;
+	border: 0.05rem solid #B4B4B5;
+	padding: 0.3rem;
+	margin: 0.3rem 0 0.3rem 0;
 }
-.container{
-    background: #EDEDEC;
-    height: 100%;
-    padding-right:0;
-    padding-left:0;
-}
-body{
+
+.container {
+	background: #EDEDEC;
 	height: 100%;
-	font-size:0.8rem;
-	background:#EDEDEC;
+	padding-right: 0;
+	padding-left: 0;
 }
-.time{
-	float:right;  
-	padding:0.5rem 0.3rem 0 0;
+
+body {
+	height: 100%;
+	font-size: 0.8rem;
+	background: #EDEDEC;
 }
-.time img{vertical-align: -4px;}
-.data{
+
+.time {
+	float: right;
+	padding: 0.5rem 0.3rem 0 0;
+}
+
+.time img {
+	vertical-align: -4px;
+}
+
+.data {
 	line-height: 40px;
-	margin:0.3rem 0 0.3rem 0;
+	margin: 0.3rem 0 0.3rem 0;
 }
-.data img{
-	float:right;
+
+.data img {
+	float: right;
 	vertical-align: -20px;
 	cursor: pointer;
 }
-.container{height:100%;}
 
-.list{
-	padding:0 0.5rem 0 0.5rem;
-	height:2.5rem;
+.container {
+	height: 100%;
+}
+
+.list {
+	padding: 0 0.5rem 0 0.5rem;
+	height: 2.5rem;
 	line-height: 2.5rem;
 }
-.list p{
-	float:left;
+
+.list p {
+	float: left;
 	margin-bottom: 0;
 }
-.list img{
-	float:right;
-	margin-right:0.5rem;
-	margin-top:0.8rem;
+
+.list img {
+	float: right;
+	margin-right: 0.5rem;
+	margin-top: 0.8rem;
 }
-.elec-btn,.selectTime,.list{
-    border-bottom:1px dashed #C8C9CA;
+
+.elec-btn,
+.selectTime,
+.list {
+	border-bottom: 1px dashed #C8C9CA;
 }
-.elec-btn{
-	padding:0.3rem 0.2rem 0.4rem 0.2rem;
+
+.elec-btn {
+	padding: 0.3rem 0.2rem 0.4rem 0.2rem;
 }
-.elec-btn button{
-	height:2rem;
+
+.elec-btn button {
+	height: 2rem;
 	line-height: 1rem;
-	width:25%;
+	width: 25%;
 	border-radius: 0.3rem;
-	background:#F7F7F7;
-	border:1px solid #888888;
+	background: #F7F7F7;
+	border: 1px solid #888888;
 }
-.elec-btn .select,.search{
-	background:#02AC94;
-	border:1px solid #02AC94;
-	color:#fff;
+
+.elec-btn .select,
+.search {
+	background: #02AC94;
+	border: 1px solid #02AC94;
+	color: #fff;
 }
-.date{
-	margin:0.6rem 0.2rem 0.6rem 0.2rem;
-	display:block;
-	float:left;
+
+.date {
+	margin: 0.6rem 0.2rem 0.6rem 0.2rem;
+	display: block;
+	float: left;
 }
-.search{
-	width:95%;
-	height:2rem;
-	margin:0 auto;
+
+.search {
+	width: 95%;
+	height: 2rem;
+	margin: 0 auto;
 	display: block;
 	border-radius: 0.3rem;
-	margin-top:0.5rem;
-	margin-bottom:0.5rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
 }
-.container .diagram{
-	width:95%;
-	height:10rem;
-	margin-top:0.5rem;
+
+.container .diagram {
+	width: 95%;
+	height: 20rem;
+	margin-top: 1rem;
 }
-.dataTable{
-	width:95%;
-	border:1px solid #C8C9CA;
-	background:#fff;
+
+.dataTable {
+	width: 95%;
+	border: 1px solid #C8C9CA;
+	background: #fff;
 }
-.dataTable thead{
-	background:#42B685;
-	color:#fff;
+
+.dataTable thead {
+	background: #42B685;
+	color: #fff;
 }
-.dataTable tbody tr:nth-child(2){
-	background:rgb(236,248,243);
-	border-top:1px solid #C8C9CA;
-	border-bottom:1px solid #C8C9CA;
+
+.dataTable tbody tr:nth-child(2) {
+	background: rgb(236, 248, 243);
+	border-top: 1px solid #C8C9CA;
+	border-bottom: 1px solid #C8C9CA;
 }
-.center{margin:0 auto;}
+
+.center {
+	margin: 0 auto;
+}

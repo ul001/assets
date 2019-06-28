@@ -227,8 +227,8 @@ $(function () {
             var min = data[0].fIa;
             var maxTime;
             var minTime;
-            // var type = data[0].fParamcode.substring(1);
-            // name.push(type);
+            var circuitname = data[0].fCircuitname;
+            name.push(circuitname);
 
             var selectParam = $(".btn.select").attr('value');
 
@@ -275,10 +275,10 @@ $(function () {
                 data: name,
             },
             grid: { // 控制图的大小，调整下面这些值就可以，
-                top: '8%',
+                top: '18%',
                 left: '8%',
                 right: '3%',
-                bottom: '12%',
+                bottom: '28%',
             },
             xAxis: {
                 type: 'category',
@@ -288,6 +288,20 @@ $(function () {
                 type: 'value',
                 scale: true, //y轴自适应
             },
+            toolbox: {
+                left: 'right',
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    restore: {},
+                }
+            },
+            dataZoom: [{
+                startValue: time[0]
+            }, {
+                type: 'inside'
+            }],
             calculable: true,
             series: [{
                 name: name,
