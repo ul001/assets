@@ -1,12 +1,11 @@
 $(function(){
-
-//iOS安卓基础传参
+    //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baserUrlFromAPP;
+    var baseUrlFromAPP;
     var tokenFromAPP;
     var subidFromAPP;
     if (isIOS) { //ios系统的处理
@@ -14,15 +13,14 @@ $(function(){
         var storage = localStorage.getItem("accessToken");
         // storage = storage ? JSON.parse(storage):[];
         storage = JSON.parse(storage);
-        baserUrlFromAPP = storage.baseurl;
+        baseUrlFromAPP = storage.baseurl;
         tokenFromAPP = storage.token;
         subidFromAPP = storage.fsubID;
     } else {
-        baserUrlFromAPP = android.getBaseUrl();
+        baseUrlFromAPP = android.getBaseUrl();
         tokenFromAPP = android.getToken();
         subidFromAPP = android.getfSubid();
     }
-
 
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
@@ -162,7 +160,7 @@ $(function(){
         try{
             $.ajax({
                 type:'GET',
-                url:baserUrlFromAPP+"/main/app/eventLog/OverLimitEvent",
+                url:baseUrlFromAPP+"/main/app/eventLog/OverLimitEvent",
                 data:params,
                 beforeSend:function(request){
                     request.setRequestHeader("Authorization",tokenFromAPP)

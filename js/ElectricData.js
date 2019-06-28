@@ -1,13 +1,36 @@
 $(function () {
+    //iOS安卓基础传参
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
+
   var currentSelectVode = {}; //选中节点
 
   initFirstNode(); //初始化第一个回路
   var isClick = 0;
 
   function initFirstNode() {
-    var url = "http://116.236.149.162:8090/SubstationWEBV2/main/getfCircuitidsList";
+    var url = baseUrlFromAPP+"/main/getfCircuitidsList";
     var params = {
-      fSubid: "10100001",
+      fSubid: subidFromAPP,
     }
     getData(url, params, function (data) {
       setListData(data);
@@ -17,9 +40,9 @@ $(function () {
 
   $("#CircuitidsList").click(function () {
     var search = $("#CircuitidsInput").val();
-    var url = "http://116.236.149.162:8090/SubstationWEBV2/main/getfCircuitidsList";
+    var url = baseUrlFromAPP+"/main/getfCircuitidsList";
     var params = {
-      fSubid: "10100001",
+      fSubid: subidFromAPP,
       search: search,
     }
     getData(url, params, function (data) {
@@ -31,9 +54,9 @@ $(function () {
   $(document).on('click', '.clear', function () {
     $("#CircuitidsInput").val("");
     if (isClick == 1) {
-      var url = "http://116.236.149.162:8090/SubstationWEBV2/main/getfCircuitidsList";
+      var url = baseUrlFromAPP+"/main/getfCircuitidsList";
       var params = {
-        fSubid: "10100001",
+        fSubid: subidFromAPP,
       }
       getData(url, params, function (data) {
         setListData(data);
@@ -78,7 +101,7 @@ $(function () {
     }
     var fCircuitid = currentSelectVode.merterId;
     var time = $("#date").val();
-    var url = "http://116.236.149.162:8090/SubstationWEBV2/main/app/powerMonitoring/ElectricData";
+    var url = baseUrlFromAPP+"/main/app/powerMonitoring/ElectricData";
     var params = {
       fSubid: "10100001",
       fCircuitid: fCircuitid,
@@ -93,7 +116,7 @@ $(function () {
 
 
   function getData(url, params, successCallback) {
-    var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE4OTgwMDcsInVzZXJuYW1lIjoiYWRtaW4ifQ.Iylar5Wf4KzXEekRWZT2ZdkkwePbUmugVu1VY3Nm-jE";
+    var token = tokenFromAPP;
     $.ajax({
       type: 'GET',
       url: url,
