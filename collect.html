@@ -32,23 +32,18 @@
       <p><span>监测点：</span><span id="meter"></span></p>
       <img src="image/right.png" />
     </div>
-  <hr>
   <div class="form-group function-group">
-    <label class="col-md-2 control-label">开始日期：</label>
-    <div class="input-group date form_date_start col-md-5" data-date="" data-link-field="dtp_input2">
+    <label for="dtp_input2" class="col-md-2 control-label">日期：</label>
+    <div class="input-group date form_date_start" data-date="" data-link-field="dtp_input2">
       <input readonly type="text" id="dateStart" class="startDate" size="16">
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
-  </div>
-  <hr>
-  <div class="form-group function-group">
-    <label class="col-md-2 control-label">结束日期：</label>
-    <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
+    <label class="to">至</label>
+    <div class="input-group date form_date_end" data-date="" data-link-field="dtp_input2">
       <input readonly type="text" id="dateEnd" class="endDate" size="16">
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
   </div>
-  <hr>
   <button type="button" class="search" id="search">查询</button>
   <ul class="collectlist center" id="listUl">
     <!-- <li>
