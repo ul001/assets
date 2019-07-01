@@ -37,3 +37,6 @@ body{height: 100%;background:#EDEDEC;}
 	display: block;
 	margin-bottom:0.5rem;
 }
+.diagram{
+    overflow:auto;
+}
