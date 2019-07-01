@@ -59,22 +59,6 @@ body {
 	margin-right: 10px;
 }
 
-.tree {
-	display: none;
-	width: 90%;
-	height: 100%;
-	background: #fff;
-	position: absolute;
-	top: 0;
-	right: 0;
-	z-index: 99;
-}
-
-#treeview {
-	height: 80%;
-	overflow: scroll;
-}
-
 .category ul {
 	padding-left: 0;
 }
@@ -106,10 +90,6 @@ body {
 .modal-dialog {
 	width: 70%;
 	margin: 15%;
-}
-
-.treeSearch {
-	padding: 1rem;
 }
 
 .data {
@@ -212,52 +192,63 @@ body {
 	margin: 0 auto;
 }
 
-.tree .search,
-.tree .cancel {
+.tree{
+	display: none;
+	width: 90%;
+	height: 100%;
+	background: #fff;
 	position: fixed;
-	bottom: 0;
-	line-height: 3rem;
-	height: 3rem;
-	width: 42.5%;
+	top:0;
+	right:0;
+	z-index: 10;
+}
+#treeview{
+    overflow:auto;
+    height:84%
+}
+.treeSearch{
+	padding:1rem;
+}
+.tree .search,.tree .cancel{
+    height:4rem;
+	line-height:3rem;
+	width:44%;
 	border-radius: 0;
-	border: none;
-	margin-bottom: 0;
+	border:none;
+	margin-bottom:0;
+	position:fixed;
+	bottom:0;
 }
-
-.tree .cancel {
-	left: 15%;
-	background: #EDEDEC;
+.tree .cancel{
+	background:#d4d4d0;
 }
-
-.tree .search {
-	right: 0;
-	background: #02AC94;
-	color: #fff;
+.tree .search{
+	right:0;
+	background:#02AC94;
+	color:#fff;
 }
-
-.treeSearch input {
+.treeSearch input{
 	border-radius: 0.5rem;
-	border: 1px solid #ddd;
+	border:1px solid #ddd;
 	height: 2.3rem;
-	width: 70%;
+	width:70%;
 	background: url(../image/searchsmall.png) no-repeat 4px 5px;
-	padding-left: 25px;
+	padding-left:25px;
 	position: relative;
 }
-
-.treeSearch button {
-	width: 25%;
+.treeSearch button{
+	width:25%;
 	height: 2.3rem;
 	background: #02AC94;
-	color: #fff;
+	color:#fff;
 	border-radius: 0.5rem;
-	border: 1px solid #02AC94;
+	border:1px solid #02AC94;
 }
-
-.clear {
+.clear{
 	position: absolute;
-	right: 33%;
-	top: 19px;
+	right:33%;
+	top:1.4rem;
+    z-index: 9;
 }
 
 .list-group-item {
