@@ -36,7 +36,7 @@ $(function () {
         $(".diagram").html("");
         $(".diagram").append(path);
         $('g[name="off"]').hide();
-        $(".diagram").overscroll();
+//        $(".diagram").overscroll();
     }
 
     function showList(data) {
