@@ -26,7 +26,7 @@ $(function () {
 
     initFirstNode(); //初始化第一个回路
     function initFirstNode() {
-        var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+        var url = baseUrlFromAPP + "/main/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
         }
@@ -36,9 +36,44 @@ $(function () {
         });
     }
 
+    //配置时间
+    var showtimeForElectSum = tool.initDate("YMD", new Date());
+
     $(document).on('click', '.elec-btn .btn', function () {
         var obj = $(this);
         $(this).addClass('select').siblings("button").removeClass('select');
+        var selectParam = $(this).attr('value');
+        if (selectParam == "today") {
+            showtimeForElectSum = tool.initDate("YMD", new Date());
+            $("#date").val(showtimeForElectSum);
+            new Rolldate({
+                el: '#date',
+                format: showtimeForElectSum.format,
+                beginYear: 2000,
+                endYear: 2100,
+                value: showtimeForElectSum,
+            });
+        } else if (selectParam == "month") {
+            showtimeForElectSum = tool.initDate("YM", new Date());
+            $("#date").val(showtimeForElectSum);
+            new Rolldate({
+                el: '#date',
+                format: "YYYY-MM",
+                beginYear: 2000,
+                endYear: 2100,
+                value: showtimeForElectSum,
+            });
+        } else if (selectParam == "year") {
+            showtimeForElectSum = tool.initDate("Y", new Date());
+            $("#date").val(showtimeForElectSum);
+            new Rolldate({
+                el: '#date',
+                format: "YYYY",
+                beginYear: 2000,
+                endYear: 2100,
+                value: showtimeForElectSum,
+            });
+        }
 
     });
 
@@ -80,7 +115,7 @@ $(function () {
         }
         var fCircuitid = currentSelectVode.merterId;
 
-        var url = baseUrlFromAPP+"/main/app/powerAnalysis/EnergyReport";
+        var url = baseUrlFromAPP + "/main/app/powerAnalysis/EnergyReport";
         var params = {
             fSubid: subidFromAPP,
             fCircuitids: fCircuitid,
@@ -244,27 +279,36 @@ $(function () {
         var time = [];
         var value = [];
         var name = [];
+        var tableData = [];
+        var showName;
         if (data.length > 0) {
             var sum = 0;
             var max = data[0].fIa;
             var min = data[0].fIa;
             var maxTime;
             var minTime;
+            var datatime;
             var circuitname = data[0].fCircuitname;
             name.push(circuitname);
 
             var selectParam = $(".btn.select").attr('value');
-
+            var tableData;
             $.each(data, function (index, el) {
                 if (el.fTime == "undefined" || el.fTime == null || el.fTime == "") {
                     return true;
                 }
                 if (selectParam == "today") {
+                    datatime = el.fTime.substring(11, 16);
                     time.push(el.fTime.substring(11, 16));
+                    showName = "日报";
                 } else if (selectParam == "month") {
+                    datatime = el.fTime.substring(6, 10);
                     time.push(el.fTime.substring(6, 10));
+                    showName = "月报";
                 } else if (selectParam == "year") {
+                    datatime = el.fTime.substring(2, 7);
                     time.push(el.fTime.substring(2, 7));
+                    showName = "年报";
                 }
                 value.push(el.fValue);
                 if (el.fValue > max) {
@@ -276,16 +320,14 @@ $(function () {
                     minTime = el.fTime.substring(0, 16)
                 }
                 sum += el.fValue;
+                var dic = {
+                    "showData": showName,
+                    "value": el.fValue,
+                    "time": datatime
+                };
+                tableData.push(dic);
             });
             var avg = (sum / data.length).toFixed(2);
-            var tableData = [{
-                // "type": type,
-                "max": max,
-                "maxTime": maxTime,
-                "min": min,
-                "minTime": minTime,
-                "avg": avg
-            }];
             showTable(tableData);
         }
 
@@ -340,35 +382,15 @@ $(function () {
 
     function showTable(data) {
         var columns = [{
-                field: "type",
-                title: "类型",
+                field: "time",
+                title: data[0].showData,
                 align: "center"
             },
             {
-                field: "max",
-                title: "最大值",
+                field: "value",
+                title: "电量(单位：kW.h)",
                 align: "center"
-            },
-            {
-                field: "maxTime",
-                title: "发生时间",
-                align: "center"
-            },
-            {
-                field: "min",
-                title: "最小值",
-                align: "center"
-            },
-            {
-                field: "minTime",
-                title: "发生时间",
-                align: "center"
-            },
-            {
-                field: "avg",
-                title: "平均值",
-                align: "center"
-            },
+            }
         ]
         $("#tableContain").html("");
         $("#tableContain").html("<table id='table'></table>");
@@ -379,23 +401,15 @@ $(function () {
     }
 
 
-    var time = tool.initDate("YMD", new Date());
-    $("#date").val(time);
+    // var time = tool.initDate("YMD", new Date());
+    // $("#date").val(time);
 
     new Rolldate({
         el: '#date',
-        format: 'YYYY-MM-DD',
+        format: showtimeForElectSum.format,
         beginYear: 2000,
         endYear: 2100,
-        value: time,
-        // confirm: function(date) {
-        //     var d = new Date(),
-        //     d1 = new Date(date.replace(/\-/g, "\/")),
-        //     d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-        //     d3 = new Date($("#date").val().replace(/\-/g, "\/"));
-        //     if (d1 > d2||d1<d3) {
-        //         return false;
-        //     };
-        // }
+        value: showtimeForElectSum,
     });
+
 });

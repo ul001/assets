@@ -25,7 +25,12 @@ var tool = {
 		var result = "";
 
 		switch (type) {
-			//年、月
+			//年
+			case "Y":
+				// result = year + "-" + month;
+				result = getToday.format("yyyy");
+				break;
+				//年、月
 			case "YM":
 				// result = year + "-" + month;
 				result = getToday.format("yyyy-MM");
