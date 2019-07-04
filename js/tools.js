@@ -44,6 +44,11 @@ var tool = {
 			case "yesteray":
 				getToday.setDate(getToday.getDate() - 1);
 				result = getToday.format("yyyy-MM-dd");
+				var strTime = str.substring(result.length - 2);
+				if (strTime.search("-") != -1) {
+					var strGetd = str.substring(result.length - 1);
+					result = getToday.format("yyyy-MM") + "-0" + strGetd;
+				}
 				break;
 				//第一天
 			case "first":
