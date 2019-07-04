@@ -23,19 +23,31 @@ body{height: 100%;background:#EDEDEC;}
 }
 .container{height:100%;padding-top:0.5rem;}
 .diagram{
-	background:#000;
-	width:inherit;
-	height:calc(100% - 3rem);
-	position:absolute;
+    background: #000;
+    width: inherit;
+    height: calc(100% - 3rem);
+    position: absolute;
+    top: 3rem;
+    left: 0;
 }
 .container select{
-	width:95%;
+	width:50%;
 	border-radius: 0.3rem;
 	border:0.04rem solid #888888;
-	margin:0 auto;
 	height:2rem;
 	display: block;
 	margin-bottom:0.5rem;
+	float: left;
+}
+.container button{
+	width:20%;
+	border-radius: 0.3rem;
+	border:0.04rem solid #888888;
+	height:2rem;
+	display: inline-block;
+	margin-bottom:0.5rem;
+	margin-right: 15px;
+	float: right;
 }
 .diagram{
     overflow:auto;

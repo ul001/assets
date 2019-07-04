@@ -118,4 +118,25 @@ $(function () {
             });
         }
     }
+      //放大缩小
+    $("#BigDom").on('click', function () {
+        adjustSVG($('svg'), 1);
+    });
+    $("#SimDom").on('click', function () {
+        adjustSVG($('svg'), -1);
+    });
+    function adjustSVG($svg, type) {
+        var width = $svg.width();
+        var height = $svg.height();
+        switch (type) {
+            case 1:
+                $svg.width(width * 1.1);
+                $svg.height(height * 1.1);
+                break;
+            case -1:
+                $svg.width(width / 1.1);
+                $svg.height(height / 1.1);
+                break;
+        }
+    }
 })
