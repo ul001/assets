@@ -24,8 +24,9 @@ $(function () {
 
     var currentSelectVode = {}; //选中节点
     //页面初始化加载当日数据
-    var startDate = tool.initDate("YMDhm", new Date());;
-    var endDate = tool.initDate("YMDhm", new Date());;
+    var startDate = tool.initDate("YMDh", new Date()) + ":00";
+    var endDate = tool.initDate("YMDh", new Date()) + ":00";
+
     $(".startDate").val(startDate);
     $(".endDate").val(endDate);
 
@@ -90,8 +91,12 @@ $(function () {
         //     selectParam = ""
         // }
         //开始时间不能大于截止时间
+        var nowDate = tool.initDate("YMDhm", new Date());
         if (startDate > endDate) {
-            $("#startDate").html("请选择正确的查询时间！");
+            alert("开始时间不能大于结束时间，请选择正确的查询时间！");
+            return;
+        } else if (endDate > nowDate) {
+            alert("结束时间不能大于当前时间，请选择正确的查询时间！");
             return;
         } else {
             $("#startDate").html(startDate);
