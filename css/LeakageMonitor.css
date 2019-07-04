@@ -1,0 +1,21 @@
+.container{
+	background: #EDEDEC;
+	height: 100%;
+	padding-right:0;
+	padding-left:0;
+}
+section{
+	width:30%;
+	float:left;
+}
+.title,.data{
+	float:left;
+}
+button{
+	width:80%;
+}
+.chart{
+	width:100%;
+	height:300px;
+	border:1px solid red;
+}
