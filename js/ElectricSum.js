@@ -46,35 +46,38 @@ $(function () {
         if (selectParam == "today") {
             showtimeForElectSum = tool.initDate("YMD", new Date());
             $("#date").val(showtimeForElectSum);
-            new Rolldate({
-                el: '#date',
-                format: showtimeForElectSum.format,
-                beginYear: 2000,
-                endYear: 2100,
-                value: showtimeForElectSum,
-            });
+            roll.config.format = "YYYY-MM-DD";
+            // new Rolldate({
+            //     el: '#date',
+            //     format: showtimeForElectSum.format,
+            //     beginYear: 2000,
+            //     endYear: 2100,
+            //     value: showtimeForElectSum,
+            // });
         } else if (selectParam == "month") {
             showtimeForElectSum = tool.initDate("YM", new Date());
             $("#date").val(showtimeForElectSum);
-            new Rolldate({
-                el: '#date',
-                format: "YYYY-MM",
-                beginYear: 2000,
-                endYear: 2100,
-                value: showtimeForElectSum,
-            });
+            roll.config.format = "YYYY-MM";
+            // new Rolldate({
+            //     el: '#date',
+            //     format: "YYYY-MM",
+            //     beginYear: 2000,
+            //     endYear: 2100,
+            //     value: showtimeForElectSum,
+            // });
         } else if (selectParam == "year") {
             showtimeForElectSum = tool.initDate("Y", new Date());
             $("#date").val(showtimeForElectSum);
-            new Rolldate({
-                el: '#date',
-                format: "YYYY",
-                beginYear: 2000,
-                endYear: 2100,
-                value: showtimeForElectSum,
-            });
+            roll.config.format = "YYYY";
+            // new Rolldate({
+            //     el: '#date',
+            //     format: "YYYY",
+            //     beginYear: 2000,
+            //     endYear: 2100,
+            //     value: showtimeForElectSum,
+            // });
         }
-
+        roll.value = showtimeForElectSum;
     });
 
     $("#sideClick").click(function () {
@@ -404,7 +407,7 @@ $(function () {
     // var time = tool.initDate("YMD", new Date());
     // $("#date").val(time);
 
-    new Rolldate({
+    var roll = new Rolldate({
         el: '#date',
         format: showtimeForElectSum.format,
         beginYear: 2000,
