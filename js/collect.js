@@ -24,8 +24,8 @@ $(function () {
 
     var currentSelectVode = {}; //选中节点
     //页面初始化加载当日数据
-    var startDate = tool.initDate("YMD", new Date());;
-    var endDate = tool.initDate("YMD", new Date());;
+    var startDate = tool.initDate("YMDhm", new Date());;
+    var endDate = tool.initDate("YMDhm", new Date());;
     $(".startDate").val(startDate);
     $(".endDate").val(endDate);
 
@@ -422,10 +422,11 @@ $(function () {
 
     new Rolldate({
         el: '#dateStart',
-        format: 'YYYY-MM-DD',
+        format: 'YYYY-MM-DD hh:mm',
         beginYear: 2000,
         endYear: 2100,
         value: startDate,
+        minStep: 5,
         confirm: function (date) {
             var d = new Date(),
                 d1 = new Date(date.replace(/\-/g, "\/")),
@@ -439,10 +440,11 @@ $(function () {
 
     new Rolldate({
         el: '#dateEnd',
-        format: 'YYYY-MM-DD',
+        format: 'YYYY-MM-DD hh:mm',
         beginYear: 2000,
         endYear: 2100,
         value: endDate,
+        minStep: 5,
         confirm: function (date) {
             var d = new Date(),
                 d1 = new Date(date.replace(/\-/g, "\/")),

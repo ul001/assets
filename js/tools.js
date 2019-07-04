@@ -53,6 +53,16 @@ var tool = {
 			case "last":
 				result = year + "-" + month + "-" + lastDay;
 				break;
+			case "YMDh":
+				// result = year + "-" + month + "-" + today;
+				result = getToday.format("yyyy-MM-dd hh");
+				break;
+				//年、月、日、时
+			case "YMDhm":
+				// result = year + "-" + month + "-" + today;
+				result = getToday.format("yyyy-MM-dd hh:mm");
+				break;
+				//年、月、日、时、分
 		}
 
 		return result;
