@@ -105,8 +105,8 @@ $(function () {
         var params = {
             fSubid: subidFromAPP,
             fCircuitids: fCircuitid,
-            startTime: startDate + " 00:00:00",
-            endTime: endDate + " 24:00:00"
+            startTime: startDate + ":00",
+            endTime: endDate + ":00"
             // time: time,
             // fPhase: selectParam,
             // EnergyKind: EnergyKind,
@@ -427,15 +427,15 @@ $(function () {
         endYear: 2100,
         value: startDate,
         minStep: 5,
-        confirm: function (date) {
-            var d = new Date(),
-                d1 = new Date(date.replace(/\-/g, "\/")),
-                d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-            d3 = new Date($("#dateEnd").val().replace(/\-/g, "\/"));
-            if (d1 > d2 || d3 < d1) {
-                return false;
-            };
-        }
+        // confirm: function (date) {
+        //     var d = new Date(),
+        //         d1 = new Date(date.replace(/\-/g, "\/")),
+        //         d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+        //     d3 = new Date($("#dateEnd").val().replace(/\-/g, "\/"));
+        //     if (d1 > d2 || d3 < d1) {
+        //         return false;
+        //     };
+        // }
     });
 
     new Rolldate({
@@ -445,15 +445,15 @@ $(function () {
         endYear: 2100,
         value: endDate,
         minStep: 5,
-        confirm: function (date) {
-            var d = new Date(),
-                d1 = new Date(date.replace(/\-/g, "\/")),
-                d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-            d3 = new Date($("#dateStart").val().replace(/\-/g, "\/"));
-            if (d1 > d2 || d1 < d3) {
-                return false;
-            };
-        }
+        // confirm: function (date) {
+        //     var d = new Date(),
+        //         d1 = new Date(date.replace(/\-/g, "\/")),
+        //         d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+        //     d3 = new Date($("#dateStart").val().replace(/\-/g, "\/"));
+        //     if (d1 > d2 || d1 < d3) {
+        //         return false;
+        //     };
+        // }
     });
 
 });
