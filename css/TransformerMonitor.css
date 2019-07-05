@@ -1,0 +1,27 @@
+.container{
+	background: #EDEDEC;
+	padding-right:0;
+	padding-left:0;
+}
+.chart{
+	width:100%;
+	height:300px;
+	border:1px solid red;
+}
+.transform{clear:both;}
+.transform li{
+	display:block;
+	float:left;
+}
+.monitor{
+	width:50%;
+	float:left;
+}
+.monitor ul li{
+	clear:both;
+}
+.btn li{
+	display:block;
+	float:left;
+	padding:1rem;
+}

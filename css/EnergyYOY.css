@@ -1,0 +1,10 @@
+.container{
+	background: #EDEDEC;
+	padding-right:0;
+	padding-left:0;
+}
+.chart{
+	width:100%;
+	height:500px;
+	border:1px solid red;
+}

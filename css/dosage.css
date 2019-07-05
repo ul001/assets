@@ -77,7 +77,7 @@ html {
 #dateStart,
 .form_date_end,
 #dateEnd {
-	width: 6rem;
+	width: 4rem;
 	background: transparent;
 	border: none;
 	float: left;

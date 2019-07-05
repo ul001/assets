@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/TransformerMonitor.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/rolldate.min.js"></script>
+    <script src="lib/bootstrap-treeview.js"></script>
+    <script src="lib/bootstrap-table.min.js"></script>
+    <script src="lib/echarts.min.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="js/ElectricSum.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <ul class="transform">
+        <li>
+            <img src="image/transform-orange.png"/>
+            <p>10KV变压器</p>
+        </li>
+        <li>
+            <img src="image/transform-grey.png"/>
+            <p>10KV变压器2</p>
+        </li>
+    </ul>
+    <section class="transform">
+        <h3>变压器状态</h3>
+        <div class="monitor">
+           <p>负荷</p>
+            <ul>
+                <li>额定容量：500kVA</li>
+                <li>视在功率：135.58kVA</li>
+                <li>负荷率：27.12%</li>
+            </ul>
+        </div>
+        <div class="monitor">
+            <p>功率</p>
+            <ul>
+                <li>有功功率：119.26kW</li>
+                <li>无功功率：64.65kVar</li>
+                <li>功率因数：0.87</li>
+                <li>最大需量：164.00kW</li>
+                <li>2019-7-01   09:03</li>
+            </ul>
+        </div>
+        <div class="monitor">
+            <p>负荷</p>
+            <ul>
+                <li>额定容量：500kVA</li>
+                <li>视在功率：135.58kVA</li>
+                <li>负荷率：27.12%</li>
+            </ul>
+        </div>
+        <div class="monitor">
+            <p>电流</p>
+            <ul>
+                <li>A相电流：202.00A</li>
+                <li>B相电流：197.80A</li>
+                <li>C相电流：186.20A</li>
+            </ul>
+        </div>
+        <div class="monitor">
+            <p>电压</p>
+            <ul>
+                <li>Uab线电压：405.00V</li>
+                <li>Ubc线电压：406.70V</li>
+                <li>Uca线电压：406.50V</li>
+            </ul>
+        </div>
+        <div class="monitor">
+            <p>温度</p>
+            <ul>
+                <li>A相绕组温度：54.20℃</li>
+                <li>B相绕组温度：55.50℃</li>
+                <li>C相绕组温度：53.10℃</li>
+            </ul>
+        </div>
+    </section>
+    <div class="date">
+        <span>上一日</span>
+        <span>2019-07-02</span>
+        <span>下一日</span>
+    </div>
+    <ul class="btn">
+        <li>视在</li>
+        <li>有功</li>
+        <li>无功</li>
+        <li>绕组温度</li>
+    </ul>
+    <div class="chart">
+
+    </div>
+</div>
+</body>
+
+</html>
