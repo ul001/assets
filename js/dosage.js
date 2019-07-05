@@ -24,6 +24,13 @@ $(function () {
 
     initNetData(); //初始化
 
+    //页面初始化加载当日数据
+    var startDate = tool.initDate("YMD", new Date());
+    var endDate = tool.initDate("YMD", new Date());
+
+    $(".startDate").val(startDate);
+    $(".endDate").val(endDate);
+
     function initNetData() {
         var showMon = tool.initDate("YM", new Date());
         $("#showTime").html(showMon);
@@ -39,6 +46,21 @@ $(function () {
 
     //网络请求 type：sum电量 price电费
     function networkData(type) {
+        //开始时间不能大于截止时间
+        var nowDate = tool.initDate("YMDhm", new Date());
+        if (startDate > endDate) {
+            alert("开始时间不能大于结束时间，请选择正确的查询时间！");
+            return;
+        } else if (endDate > nowDate) {
+            alert("结束时间不能大于当前时间，请选择正确的查询时间！");
+            return;
+        } else {
+            $("#startDate").html(startDate);
+            $("#endDate").html(endDate);
+        }
+        startDate = $("#dateStart").val();
+        endDate = $("#dateEnd").val();
+
         var url = baseUrlFromAPP + "/main/getMothJFPG";
         var params = {
             fSubid: subidFromAPP,
@@ -329,4 +351,40 @@ $(function () {
         bar.setOption(option);
 
     }
+
+    //初始化时间插件
+
+    new Rolldate({
+        el: '#dateStart',
+        format: 'YYYY-MM-DD',
+        beginYear: 2000,
+        endYear: 2100,
+        value: startDate,
+        // confirm: function (date) {
+        //     var d = new Date(),
+        //         d1 = new Date(date.replace(/\-/g, "\/")),
+        //         d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+        //     d3 = new Date($("#dateEnd").val().replace(/\-/g, "\/"));
+        //     if (d1 > d2 || d3 < d1) {
+        //         return false;
+        //     };
+        // }
+    });
+
+    new Rolldate({
+        el: '#dateEnd',
+        format: 'YYYY-MM-DD',
+        beginYear: 2000,
+        endYear: 2100,
+        value: endDate,
+        // confirm: function (date) {
+        //     var d = new Date(),
+        //         d1 = new Date(date.replace(/\-/g, "\/")),
+        //         d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+        //     d3 = new Date($("#dateStart").val().replace(/\-/g, "\/"));
+        //     if (d1 > d2 || d1 < d3) {
+        //         return false;
+        //     };
+        // }
+    });
 });
