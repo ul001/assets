@@ -23,6 +23,13 @@ $(function(){
         subidFromAPP = android.getfSubid();
     }
 
+    $("#meterId").on("focus",function(){
+            var _this = this;
+            setTimeout(function(){
+                _this.scrollIntoViewIfNeeded();
+            },200);
+        });
+
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
         down: {
@@ -139,16 +146,14 @@ $(function(){
             $("#startDate").html(startDate);
             $("#endDate").html(endDate);
         }
-        var fAlarmtype = $("#alermType").val();//类型
-        var fMetername = $("#meterName").val();//仪表名称
-        var fParamname = $("#paramName").val();//参数名称
+//        var fAlarmtype = $("#alermType").val();//类型
+        var fDeviceCode = $("#meterId").val();//设备编号
 
         var params={
             fSubid:subidFromAPP,
             startDate:startDate,
             endDate:endDate,
-            fMetername:fMetername,
-            fParamname:fParamname,
+            fDevicecode:fDeviceCode,
             fAlarmtype:1,
             pageNo:pageNum,
             pageSize:pageSize
@@ -227,6 +232,7 @@ $(function(){
             if (d1 > d2||d3<d1) {
                 return false;
             };
+            $(".btn").removeClass("select");
         }
     });
 
@@ -244,6 +250,7 @@ $(function(){
                 if (d1 > d2||d1<d3) {
                     return false;
                 };
+                $(".btn").removeClass("select");
             }
         });
 

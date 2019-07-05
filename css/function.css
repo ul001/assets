@@ -50,6 +50,13 @@
 	z-index: 999;
 }
 
+@media (max-height: 20rem) {
+    .selectcontain .search,
+    .selectcontain .cancel{
+        display:none;
+    }
+}
+
 .selectcontain button {
 	width: 48%;
 	float: left;
