@@ -15,24 +15,42 @@
     <script src="lib/bootstrap-table.min.js"></script>
     <script src="lib/echarts.min.js"></script>
     <script src="js/tools.js"></script>
-    <script src="js/ElectricSum.js"></script>
+    <script src="js/cableTemperature-modal.js"></script>
+    <script type="text/javascript">
+        // H5 plus事件处理
+        function plusReady() {
+            // 获取所有Webview窗口
+            var wvs = plus.webview.all();
+            for (var i = 0; i < wvs.length; i++) {
+                console.log('webview' + i + ': ' + wvs[i].getURL());
+            }
+        }
+
+        if (window.plus) {
+            plusReady();
+        } else {
+            document.addEventListener('plusready', plusReady, false);
+        }
+    </script>
 </head>
 
 <body>
-<div class="container">
-    <header>
-        <span>上一日</span>
-        <span>2019-07-03</span>
-        <span>下一日</span>
-    </header>
-    <button type="button">图表</button>
-    <button type="button">数据</button>
-    <div class="chart">
+    <div class="container">
+        <header>
+            <span>上一日</span>
+            <span>2019-07-03</span>
+            <span>下一日</span>
+        </header>
+        <button type="button" id="btnClick">图表</button>
+        <button type="button">数据</button>
+        <div class="chart">
 
+        </div>
     </div>
+    <script type="text/javascript">
 
-    </section>
-</div>
+    </script>
+
 </body>
 
 </html>
