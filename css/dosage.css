@@ -72,3 +72,34 @@ html {
 	height: 2.5rem;
 	padding-left: 0.3rem;
 }
+
+.form_date_start,
+#dateStart,
+.form_date_end,
+#dateEnd {
+	width: 6rem;
+	background: transparent;
+	border: none;
+	float: left;
+}
+
+/* .function-group {
+	height: 4rem;
+	padding-top: 0.5rem;
+}
+
+#sideClick,
+.list,
+.function-group {
+	border-bottom: 1px dashed #C8C9CA;
+}
+
+.function-group label {
+	font-weight: normal;
+	padding: 0.6rem 0;
+	float: left;
+}
+
+.function-group .to {
+	margin-right: 10px;
+} */
