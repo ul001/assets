@@ -20,14 +20,15 @@ $(function () {
         baseUrlFromAPP = android.getBaseUrl();
         tokenFromAPP = android.getToken();
         subidFromAPP = android.getfSubid();
+        $("#meterName,#paramName").on("focus", function () {
+            var _this = this;
+            setTimeout(function () {
+                _this.scrollIntoViewIfNeeded();
+            }, 200);
+        });
     }
 
-    $("#meterName,#paramName").on("focus",function(){
-        var _this = this;
-        setTimeout(function(){
-            _this.scrollIntoViewIfNeeded();
-        },200);
-    });
+
 
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
