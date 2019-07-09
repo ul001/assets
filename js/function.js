@@ -140,8 +140,8 @@ $(function () {
 
         var params = {
             fSubid: subidFromAPP,
-            startDate: startDate,
-            endDate: endDate,
+            startDate: startDate+" 00:00:00",
+            endDate: endDate+" 23:59:59",
             fMetername: fMetername,
             fParamname: fParamname,
             pageNo: pageNum,

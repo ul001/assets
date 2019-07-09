@@ -103,7 +103,7 @@ $(function () {
     var time = $("#date").val();
     var url = baseUrlFromAPP + "/main/app/powerMonitoring/ElectricData";
     var params = {
-      fSubid: "10100001",
+      fSubid: subidFromAPP,
       fCircuitid: fCircuitid,
       time: time,
       fPhase: selectParam.join("-"),
@@ -112,7 +112,7 @@ $(function () {
     getData(url, params, function (data) {
       showCharts(data.CircuitValueByDate);
     });
-  })
+  });
 
 
   function getData(url, params, successCallback) {
@@ -254,7 +254,7 @@ $(function () {
       })
       $("#EnergyContain button:first").addClass('select');
     }
-  }
+  };
 
   function showCharts(data) {
     var time = [];
@@ -320,7 +320,7 @@ $(function () {
     }
 
     showLine(name, time, value);
-    showTable(tableData)
+    showTable(tableData);
   }
 
   function showLine(name, time, value) {
@@ -376,45 +376,72 @@ $(function () {
   }
 
   function showTable(data) {
-    var columns = [{
+    var columns = [[{
         field: "name",
         title: "类型",
-        align: "center"
+        align: "center",
+        valign:"middle",
+        align:"center",
+        colspan: 1,
+        rowspan: 2
       },
       {
-        field: "max",
+        field: "maxVT",
         title: "最大值",
-        align: "center"
+        valign:"middle",
+        align:"center",
+        colspan: 2,
+        rowspan: 1
       },
       {
-        field: "maxTime",
-        title: "发生时间",
-        align: "center"
-      },
-      {
-        field: "min",
+        field: "minVT",
         title: "最小值",
-        align: "center"
-      },
-      {
-        field: "minTime",
-        title: "发生时间",
-        align: "center"
+        valign:"middle",
+        align:"center",
+        colspan: 2,
+        rowspan: 1
       },
       {
         field: "avg",
         title: "平均值",
-        align: "center"
+        valign:"middle",
+        align:"center",
+        colspan: 1,
+        rowspan: 2
+      }
+    ],
+    [
+      {
+        field: "max",
+        title: "值",
+        valign:"middle",
+        align:"center"
       },
-    ]
+      {
+        field: "maxTime",
+        title: "时间",
+        valign:"middle",
+        align:"center"
+      },
+      {
+        field: "min",
+        title: "值",
+        valign:"middle",
+        align:"center"
+      },
+      {
+        field: "minTime",
+        title: "时间",
+        align: "center"
+      }
+    ]];
     $("#tableContain").html("");
     $("#tableContain").html("<table id='table'></table>");
     $("#table").bootstrapTable({
       columns: columns,
       data: data,
     })
-  }
-
+  };
 
   var time = tool.initDate("YMD", new Date());
   $("#date").val(time);

@@ -308,37 +308,65 @@ $(function () {
   }
 
   function showTable(data) {
-    var columns = [{
+    var columns = [[{
         field: "name",
         title: "类型",
-        align: "center"
+        align: "center",
+        valign:"middle",
+        align:"center",
+        colspan: 1,
+        rowspan: 2
       },
       {
-        field: "max",
+        field: "maxVT",
         title: "最大值",
-        align: "center"
+        valign:"middle",
+        align:"center",
+        colspan: 2,
+        rowspan: 1
       },
       {
-        field: "maxTime",
-        title: "发生时间",
-        align: "center"
-      },
-      {
-        field: "min",
+        field: "minVT",
         title: "最小值",
-        align: "center"
-      },
-      {
-        field: "minTime",
-        title: "发生时间",
-        align: "center"
+        valign:"middle",
+        align:"center",
+        colspan: 2,
+        rowspan: 1
       },
       {
         field: "avg",
         title: "平均值",
-        align: "center"
+        valign:"middle",
+        align:"center",
+        colspan: 1,
+        rowspan: 2
+      }
+    ],
+    [
+      {
+        field: "max",
+        title: "值",
+        valign:"middle",
+        align:"center"
       },
-    ]
+      {
+        field: "maxTime",
+        title: "时间",
+        valign:"middle",
+        align:"center"
+      },
+      {
+        field: "min",
+        title: "值",
+        valign:"middle",
+        align:"center"
+      },
+      {
+        field: "minTime",
+        title: "时间",
+        align: "center"
+      }
+    ]];
     $("#tableContain").html("");
     $("#tableContain").html("<table id='table'></table>");
     $("#table").bootstrapTable({

@@ -1,20 +1,177 @@
 .container{
 	background: #EDEDEC;
-	padding-right:0;
-	padding-left:0;
+    height: 100%;
+    padding-right:0;
+    padding-left:0;
 }
-section{
-	width:30%;
+.form_date_end label{
+	font-weight:normal;
 }
-.title,.data{
-	float:left;
+.form_date_end input{
+	border-radius:5px;
+	border:1px solid #888888;
+	padding-left:0.5rem;
+}
+.form_date_end a{
+    color:black;
+    text-decoration:none;
+}
+body{
+	height: 100%;
+	font-size:1.5rem;
+	background:#EDEDEC;
 }
 button{
 	width:80%;
 }
-.date{clear:both;}
-.chart{
-	width:100%;
-	height:500px;
-	border:1px solid red;
+#sideClick, #electric, #select {
+    height: 3.5rem;
+    padding-top: 0.5rem;
+}
+.list{
+	padding:0 0.5rem 0 0.5rem;
+	height:2.5rem;
+	line-height: 2.5rem;
+}
+.list p{
+	float:left;
+	margin-bottom: 0;
+}
+.list img{
+	float:right;
+	margin-right:0.5rem;
+	margin-top:0.8rem;
+}
+#date{
+  width:calc(100% - 205px);
+  height:2.5rem;
+  border-radius:5px;
+  border:1px solid #888888;
+  padding-left:0.5rem;
+}
+.elec-btn,
+.selectTime,
+.list {
+	border-bottom: 1px dashed #C8C9CA;
+}
+
+.elec-btn {
+	padding: 0.3rem 0.2rem 0.4rem 0.2rem;
+}
+
+.elec-btn button {
+	height: 2rem;
+	line-height: 1rem;
+	width: 25%;
+	border-radius: 0.3rem;
+	background: #F7F7F7;
+	border: 1px solid #888888;
+}
+
+.elec-btn .select{
+	background: #02AC94;
+	border: 1px solid #02AC94;
+	color: #fff;
+}
+.search{
+	width:95%;
+	height:2rem;
+	margin:0 auto;
+	display: block;
+	border-radius: 0.3rem;
+	margin-top:0.5rem;
+	margin-bottom:0.5rem;
+	background:#02AC94;
+    border:1px solid #02AC94;
+    color:#fff;
+}
+.tree{
+	display: none;
+	width: 90%;
+	height: 100%;
+	background: #fff;
+	position: fixed;
+	top:0;
+	right:0;
+	z-index: 10;
+}
+#treeview{
+	overflow:auto;
+	height:84%
+}
+.treeSearch{
+	padding:1rem;
+}
+.tree .search,.tree .cancel{
+	height:4rem;
+	line-height:3rem;
+	width:44%;
+	border-radius: 0;
+	border:none;
+	margin-bottom:0;
+	position:fixed;
+	bottom:0;
+}
+.tree .cancel{
+	background:#d4d4d0;
+}
+.tree .search{
+	right:0;
+	background:#02AC94;
+	color:#fff;
+}
+.treeSearch input{
+	border-radius: 0.5rem;
+	border:1px solid #ddd;
+	height: 2.3rem;
+	width:70%;
+	background: url(../image/searchsmall.png) no-repeat 4px 5px;
+	padding-left:25px;
+	position: relative;
+}
+.treeSearch button{
+	width:25%;
+	height: 2.3rem;
+	background: #02AC94;
+	color:#fff;
+	border-radius: 0.5rem;
+	border:1px solid #02AC94;
+}
+.clear{
+	position: absolute;
+	right:33%;
+	top:1.4rem;
+	z-index: 9;
+}
+.list-group-item{
+	border:none;
+}
+
+#energySelect{
+	background:transparent;
+	border:none;
+	-webkit-appearance:none;
+	width:calc(100% - 80px);
+	background:url('../image/right.png') no-repeat right 5px center;
+}
+.dataTable{
+	width:95%;
+	border:1px solid #C8C9CA;
+	background:#fff;
+}
+.dataTable thead{
+	background:#42B685;
+	color:#fff;
+}
+.dataTable tbody tr:nth-child(2){
+	background:rgb(236,248,243);
+	border-top:1px solid #C8C9CA;
+	border-bottom:1px solid #C8C9CA;
+}
+.center{margin:0 auto;}
+#datePre,#dateNext{
+    cursor:pointer;
+}
+#selectTime img{
+    vertical-align: -4px;
 }
