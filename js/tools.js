@@ -74,7 +74,7 @@ var tool = {
 	},
 
 	getDataByAjax: function (url, params, successCallback) {
-		var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE4MTI5MzEsInVzZXJuYW1lIjoiYWRtaW4ifQ.cuKoTES-GcXasOHnZM3mn_zBnAz7boVJApY7bctubTA";
+		var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjI4NTU3NDEsInVzZXJuYW1lIjoiYWRtaW4ifQ.1MG4QT3CLuKYdsuRP9Fq99jWpwh9l-goNw7YxvA7oLA";
 		$.ajax({
 			type: 'GET',
 			url: url,

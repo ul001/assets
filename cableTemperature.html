@@ -2,56 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta charset="UTF-8">
     <title></title>
 
     <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/cableTemperature.css" />
-    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="lib/mescroll.css">
+    <script src="lib/mescroll.js" type="text/javascript" charset="utf-8"></script>
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
-    <script src="lib/rolldate.min.js"></script>
-    <script src="lib/bootstrap-treeview.js"></script>
-    <script src="lib/bootstrap-table.min.js"></script>
-    <script src="lib/echarts.min.js"></script>
     <script src="js/tools.js"></script>
     <script src="js/cableTemperature.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <section>
-            <h3>二层北</h3>
-            <div class="pic"></div>
-            <div class="temperature">
-                <p>A：℃</p>
-                <p>B：℃</p>
-                <p>C：℃</p>
-            </div>
-            <button type="button" id="sideClick">查询</button>
-        </section>
-        <section>
-            <h3>二层北</h3>
-            <div class="pic"></div>
-            <div class="temperature">
-                <p>A：℃</p>
-                <p>B：℃</p>
-                <p>C：℃</p>
-            </div>
-            <button type="button">查询</button>
-        </section>
-        <section>
-            <h3>二层北</h3>
-            <div class="pic"></div>
-            <div class="temperature">
-                <p>A：℃</p>
-                <p>B：℃</p>
-                <p>C：℃</p>
-            </div>
-            <button type="button">查询</button>
-        </section>
-    </div>
+<div id="mescroll">
+<div class="container" id="container"></div>
+</div>
 </body>
 
 </html>

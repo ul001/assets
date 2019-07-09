@@ -4,17 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-
-    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/cableTemperature.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="lib/rolldate.min.js"></script>
-    <script src="lib/bootstrap-treeview.js"></script>
     <script src="lib/bootstrap-table.min.js"></script>
     <script src="lib/echarts.min.js"></script>
     <script src="js/tools.js"></script>
+    <script src="js/cableTemperature-modal.js"></script>
     <script src="js/cableTemperature-modal.js"></script>
     <script type="text/javascript">
         // H5 plus事件处理
@@ -35,22 +33,17 @@
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <span>上一日</span>
-            <span>2019-07-03</span>
-            <span>下一日</span>
-        </header>
-        <button type="button" id="btnClick">图表</button>
-        <button type="button">数据</button>
-        <div class="chart">
-
-        </div>
-    </div>
-    <script type="text/javascript">
-
-    </script>
-
+<div class="container">
+    <header>
+        <span id="lastDay">上一日</span>
+        <span>2019-07-03</span>
+        <span id="nextDay">下一日</span>
+    </header>
+    <button type="button" id="showChart">图表</button>
+    <button type="button" id="showTable">数据</button>
+    <button id="return">返回</button>
+    <div class="chart" id="contain"></div>
+</div>
 </body>
 
 </html>
