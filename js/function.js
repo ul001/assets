@@ -189,9 +189,12 @@ $(function () {
     //侧边栏
     $("#select").click(function () {
         $(".selectcontain").show();
+        // jsToOcFunction1();
     });
+
     $(".cancel").click(function () {
         $(".selectcontain").hide();
+        // jsToOcFunction2();
     });
 
     $(document).on('click', '.cancel', function () {
@@ -260,4 +263,11 @@ $(function () {
         }
     });
 
+    function jsToOcFunction1() {
+        window.webkit.messageHandlers.jsToOcNoPrams.postMessage({});
+    }
+
+    function jsToOcFunction2() {
+        window.webkit.messageHandlers.jsToOcWithPrams.postMessage({});
+    }
 });

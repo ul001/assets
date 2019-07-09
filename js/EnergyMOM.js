@@ -127,10 +127,10 @@ $(function () {
         }
         var fCircuitid = currentSelectVode.merterId;
 
-        var url = baseUrlFromAPP + "/main/app/powerAnalysis/EnergyReport";
+        var url = baseUrlFromAPP + "main/energyReportMOM";
         var params = {
             fSubid: subidFromAPP,
-            fCircuitids: fCircuitid,
+            fCircuitid: fCircuitid,
             time: time,
             DA: typeDA
             // fPhase: selectParam,

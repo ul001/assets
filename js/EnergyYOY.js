@@ -35,7 +35,8 @@ $(function () {
         }
         getData(url, params, function (data) {
             setListData(data);
-            $("#search").click();
+            getURLData();
+            // $("#search").click();
         });
     }
 
@@ -100,6 +101,7 @@ $(function () {
     $("#confirm").click(function () {
         $(".tree").hide();
         $("#meter").html(currentSelectVode.merterName);
+        getURLData();
     });
 
     $("#electric").click(function () {
@@ -107,39 +109,40 @@ $(function () {
     });
 
 
-    $(document).on('click', '#search', function () {
-        var EnergyKind = $("#EnergyKind").attr('value');
-        var selectParam = $(".btn.select").attr('value');
-        if (EnergyKind == "fFr") {
-            selectParam = ""
-        }
-        var time;
-        var typeDA;
-        if (selectParam == "today") {
-            time = $("#date").val();
-            typeDA = "D";
-        } else if (selectParam == "month") {
-            time = $("#date").val().substring(0, 7);
-            typeDA = "M";
-        } else if (selectParam == "year") {
-            time = $("#date").val().substring(0, 4);
-            typeDA = "Y";
-        }
+    // $(document).on('click', '#search', function () {
+    //     var EnergyKind = $("#EnergyKind").attr('value');
+    //     var selectParam = $(".btn.select").attr('value');
+    //     if (EnergyKind == "fFr") {
+    //         selectParam = ""
+    //     }
+    // var time;
+    // var typeDA;
+    // if (selectParam == "today") {
+    //     time = $("#date").val();
+    //     typeDA = "D";
+    // } else if (selectParam == "month") {
+    //     time = $("#date").val().substring(0, 7);
+    //     typeDA = "M";
+    // } else if (selectParam == "year") {
+    //     time = $("#date").val().substring(0, 4);
+    //     typeDA = "Y";
+    // }
+    // 
+    function getURLData() {
         var fCircuitid = currentSelectVode.merterId;
-
-        var url = baseUrlFromAPP + "/main/app/powerAnalysis/EnergyReport";
+        var url = baseUrlFromAPP + "main/powerAnalysis/getMoM";
         var params = {
             fSubid: subidFromAPP,
-            fCircuitids: fCircuitid,
-            time: time,
-            DA: typeDA
+            fCircuitid: fCircuitid,
+            // time: time,
+            // DA: typeDA
             // fPhase: selectParam,
             // EnergyKind: EnergyKind,
         }
         getData(url, params, function (data) {
             showCharts(data.EnergyReport);
         });
-    })
+    };
 
 
     function getData(url, params, successCallback) {
