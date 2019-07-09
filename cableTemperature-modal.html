@@ -13,6 +13,23 @@
     <script src="lib/echarts.min.js"></script>
     <script src="js/tools.js"></script>
     <script src="js/cableTemperature-modal.js"></script>
+    <script src="js/cableTemperature-modal.js"></script>
+    <script type="text/javascript">
+        // H5 plus事件处理
+        function plusReady() {
+            // 获取所有Webview窗口
+            var wvs = plus.webview.all();
+            for (var i = 0; i < wvs.length; i++) {
+                console.log('webview' + i + ': ' + wvs[i].getURL());
+            }
+        }
+
+        if (window.plus) {
+            plusReady();
+        } else {
+            document.addEventListener('plusready', plusReady, false);
+        }
+    </script>
 </head>
 
 <body>
