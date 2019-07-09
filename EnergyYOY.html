@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/EnergyYOY.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/ElectricData.css" />
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="lib/rolldate.min.js"></script>
@@ -14,15 +15,31 @@
     <script src="lib/bootstrap-table.min.js"></script>
     <script src="lib/echarts.min.js"></script>
     <script src="js/tools.js"></script>
-    <script src="js/ElectricSum.js"></script>
+    <script src="js/EnergyYOY.js"></script>
 </head>
-<body>
-<div class="container">
-    <p>监测点：主进线柜</p>
-    <div class="chart">
 
+<body>
+    <div class="container">
+        <div class="row tree">
+            <div class="treeSearch">
+                <img class="clear" src="image/clear.png" />
+                <input type="text" id="CircuitidsInput" />
+                <button type="button" id="CircuitidsList">搜索</button>
+            </div>
+            <div id="treeview" class="col-sm-4"></div>
+            <button type="button" class="cancel">取消</button>
+            <button type="button" class="search" id="confirm">查询</button>
+        </div>
+        <div class="list" id="sideClick">
+            <p><span>监测点：</span><span id="meter">主进线柜</span></p>
+            <img src="image/right.png" />
+        </div>
+
+        <hr>
+        <!-- <button type="button" class="search" id="search">查询</button> -->
+        <div class="diagram center" id="chartContain"></div>
+        <div class="dataTable center" id="tableContain"></div>
     </div>
-</div>
 </body>
 
 </html>

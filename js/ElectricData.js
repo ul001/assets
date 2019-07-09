@@ -1,26 +1,26 @@
 $(function () {
-    //iOS安卓基础传参
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
-    if (isIOS) { //ios系统的处理
-        window.webkit.messageHandlers.iOS.postMessage(null);
-        var storage = localStorage.getItem("accessToken");
-        // storage = storage ? JSON.parse(storage):[];
-        storage = JSON.parse(storage);
-        baseUrlFromAPP = storage.baseurl;
-        tokenFromAPP = storage.token;
-        subidFromAPP = storage.fsubID;
-    } else {
-        baseUrlFromAPP = android.getBaseUrl();
-        tokenFromAPP = android.getToken();
-        subidFromAPP = android.getfSubid();
-    }
+  //iOS安卓基础传参
+  var u = navigator.userAgent,
+    app = navigator.appVersion;
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+  var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+  //判断数组中是否包含某字符串
+  var baseUrlFromAPP;
+  var tokenFromAPP;
+  var subidFromAPP;
+  if (isIOS) { //ios系统的处理
+    window.webkit.messageHandlers.iOS.postMessage(null);
+    var storage = localStorage.getItem("accessToken");
+    // storage = storage ? JSON.parse(storage):[];
+    storage = JSON.parse(storage);
+    baseUrlFromAPP = storage.baseurl;
+    tokenFromAPP = storage.token;
+    subidFromAPP = storage.fsubID;
+  } else {
+    baseUrlFromAPP = android.getBaseUrl();
+    tokenFromAPP = android.getToken();
+    subidFromAPP = android.getfSubid();
+  }
 
   var currentSelectVode = {}; //选中节点
 
@@ -28,7 +28,7 @@ $(function () {
   var isClick = 0;
 
   function initFirstNode() {
-    var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+    var url = baseUrlFromAPP + "/main/getfCircuitidsList";
     var params = {
       fSubid: subidFromAPP,
     }
@@ -40,7 +40,7 @@ $(function () {
 
   $("#CircuitidsList").click(function () {
     var search = $("#CircuitidsInput").val();
-    var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+    var url = baseUrlFromAPP + "/main/getfCircuitidsList";
     var params = {
       fSubid: subidFromAPP,
       search: search,
@@ -54,7 +54,7 @@ $(function () {
   $(document).on('click', '.clear', function () {
     $("#CircuitidsInput").val("");
     if (isClick == 1) {
-      var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+      var url = baseUrlFromAPP + "/main/getfCircuitidsList";
       var params = {
         fSubid: subidFromAPP,
       }
@@ -101,7 +101,7 @@ $(function () {
     }
     var fCircuitid = currentSelectVode.merterId;
     var time = $("#date").val();
-    var url = baseUrlFromAPP+"/main/app/powerMonitoring/ElectricData";
+    var url = baseUrlFromAPP + "/main/app/powerMonitoring/ElectricData";
     var params = {
       fSubid: "10100001",
       fCircuitid: fCircuitid,
