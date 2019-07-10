@@ -356,33 +356,33 @@ $(function () {
             },
             grid: { // 控制图的大小，调整下面这些值就可以，
                 top: '18%',
-                left: '8%',
-                right: '3%',
-                bottom: '28%',
-            },
-            xAxis: {
-                type: 'category',
-                data: time,
-                // scale: true, //y轴自适应
+                left: '10%',
+                right: '5%',
+                bottom: '20%',
             },
             yAxis: {
+                type: 'category',
+                data: time
+                // scale: true, //y轴自适应
+            },
+            xAxis: {
                 type: 'value',
-                boundaryGap: [0, 0.01]
+                // boundaryGap: [0, 0.01]
             },
-            toolbox: {
-                left: 'right',
-                feature: {
-                    dataZoom: {
-                        yAxisIndex: 'none'
-                    },
-                    restore: {},
-                }
-            },
-            dataZoom: [{
-                startValue: time[0]
-            }, {
-                type: 'inside'
-            }],
+            // toolbox: {
+            //     left: 'right',
+            //     feature: {
+            //         dataZoom: {
+            //             yAxisIndex: 'none'
+            //         },
+            //         restore: {},
+            //     }
+            // },
+            // dataZoom: [{
+            //     startValue: time[0]
+            // }, {
+            //     type: 'inside'
+            // }],
             calculable: true,
             series: [{
                 name: name,
