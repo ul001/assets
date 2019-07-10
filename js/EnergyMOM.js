@@ -73,19 +73,19 @@ $(function () {
         var obj = $(this);
         $(this).addClass('select').siblings("button").removeClass('select');
         var selectParam = $(this).attr('value');
-        if (selectParam == "today") {
-            showtimeForElectSum = tool.initDate("YMD", new Date());
-            $("#date").val(showtimeForElectSum);
-            roll.config.format = "YYYY-MM-DD";
-        } else if (selectParam == "month") {
-            showtimeForElectSum = tool.initDate("YM", new Date());
-            $("#date").val(showtimeForElectSum);
-            roll.config.format = "YYYY-MM";
-        } else if (selectParam == "year") {
-            showtimeForElectSum = tool.initDate("Y", new Date());
-            $("#date").val(showtimeForElectSum);
-            roll.config.format = "YYYY";
-        }
+        // if (selectParam == "today") {
+        showtimeForElectSum = tool.initDate("YMD", new Date());
+        $("#date").val(showtimeForElectSum);
+        roll.config.format = "YYYY-MM-DD";
+        // } else if (selectParam == "month") {
+        //     showtimeForElectSum = tool.initDate("YM", new Date());
+        //     $("#date").val(showtimeForElectSum);
+        //     roll.config.format = "YYYY-MM";
+        // } else if (selectParam == "year") {
+        //     showtimeForElectSum = tool.initDate("Y", new Date());
+        //     $("#date").val(showtimeForElectSum);
+        //     roll.config.format = "YYYY";
+        // }
         roll.value = showtimeForElectSum;
     });
 
@@ -118,12 +118,14 @@ $(function () {
         if (selectParam == "today") {
             time = $("#date").val();
             typeDA = "D";
+        } else if (selectParam == "week") {
+            time = $("#date").val();
+            // time = $("#date").val().substring(0, 7);
+            typeDA = "W";
         } else if (selectParam == "month") {
-            time = $("#date").val().substring(0, 7);
+            time = $("#date").val();
+            // time = $("#date").val().substring(0, 4);
             typeDA = "M";
-        } else if (selectParam == "year") {
-            time = $("#date").val().substring(0, 4);
-            typeDA = "Y";
         }
         var fCircuitid = currentSelectVode.merterId;
 
@@ -307,54 +309,41 @@ $(function () {
             name.push(circuitname);
 
             var selectParam = $(".btn.select").attr('value');
-            var tableData;
+            var todayStr;
+            var yesterdayStr;
 
             $.each(data, function (index, el) {
                 if (selectParam == "today") {
                     time.push("昨日");
                     time.push("当日");
-                    // datatime = el.fTime.substring(11, 16);
-                    // time.push(el.fTime.substring(11, 16));
-                    // showName = "日环比";
+                    todayStr = "当日用电：";
+                    yesterdayStr = "昨日用电：";
+
                 } else if (selectParam == "month") {
                     time.push("上月");
                     time.push("当月");
-                    // datatime = el.fTime.substring(6, 10);
-                    // time.push(el.fTime.substring(6, 10));
-                    // showName = "月环比";
-                } else if (selectParam == "year") {
-                    time.push("去年");
-                    time.push("今年");
-                    // datatime = el.fTime.substring(2, 7);
-                    // time.push(el.fTime.substring(2, 7));
-                    // showName = "年环比";
+                    todayStr = "当月用电：";
+                    yesterdayStr = "上月用电：";
+
+                } else if (selectParam == "week") {
+                    time.push("上周");
+                    time.push("本周");
+                    todayStr = "本周用电：";
+                    yesterdayStr = "上周用电：";
+
                 }
                 value.push(el.fBeforevalue);
                 value.push(el.fDvalue);
                 addvalue = el.fMomvalue;
-                chainRatio = (el.fDvalue - el.fBeforevalue) / el.fBeforevalue;
-                // if (el.fValue > max) {
-                //     max = el.fValue;
-                //     maxTime = el.fTime.substring(0, 16)
-                // }
-                // if (el.fValue < min) {
-                //     min = el.fValue;
-                //     minTime = el.fTime.substring(0, 16)
-                // }
-                // sum += el.fValue;
-                // var dic1 = {
-                //     "showData": showName,
-                //     "value": el.fValue,
-                //     "time": datatime
-                // };
-                // var dic2 = {
+                chainRatio = (el.fDvalue - el.fBeforevalue) / el.fBeforevalue * 100;
 
-                // };
-                // tableData.push(dic1);
-                // tableData.push(dic2);
+                $("#todayElectconSump").html((todayStr + el.fDvalue + "kW.h"));
+                $("#yesterdayElectconSump").html((yesterdayStr + el.fBeforevalue + "kW.h"));
+                $("#addValue").html(addvalue);
+                $("#chainRatio").html((chainRatio.toFixed(2) + "%"));
+
             });
-            // var avg = (sum / data.length).toFixed(2);
-            // showTable(tableData);
+
         }
 
         var line = echarts.init(document.getElementById('chartContain'));
@@ -374,10 +363,11 @@ $(function () {
             xAxis: {
                 type: 'category',
                 data: time,
+                // scale: true, //y轴自适应
             },
             yAxis: {
                 type: 'value',
-                scale: true, //y轴自适应
+                boundaryGap: [0, 0.01]
             },
             toolbox: {
                 left: 'right',
@@ -401,9 +391,8 @@ $(function () {
             }]
         };
         line.setOption(option);
-        // $(window).bind("resize",function(event) {
-        //   line.resize();
-        // });
+
+
     }
 
     function showTable(data) {

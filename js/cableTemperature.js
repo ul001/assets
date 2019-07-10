@@ -26,10 +26,10 @@ $(function () {
 
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
-        down: {
-            auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
-            callback: downCallback //下拉刷新的回调
-        },
+        // down: {
+        //     auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+        //     callback: downCallback //下拉刷新的回调
+        // },
         up: {
             auto: true, //是否在初始化时以上拉加载的方式自动加载第一页数据; 默认false
             callback: upCallback, //上拉回调,此处可简写; 相当于 callback: function (page) { upCallback(page); }
@@ -40,19 +40,19 @@ $(function () {
         }
     });
     /*下拉刷新的回调 */
-    function downCallback() {
-        mescroll.resetUpScroll();
-        //联网加载数据
-        getListDataFromNet(1, 20, function (data) {
-            //联网成功的回调,隐藏下拉刷新的状态
-            mescroll.endSuccess();
-            //设置列表数据
-            creatList(data.list);
-        }, function () {
-            //联网失败的回调,隐藏下拉刷新的状态
-            mescroll.endErr();
-        });
-    }
+    // function downCallback() {
+    //     mescroll.resetUpScroll();
+    //     //联网加载数据
+    //     getListDataFromNet(1, 20, function (data) {
+    //         //联网成功的回调,隐藏下拉刷新的状态
+    //         mescroll.endSuccess();
+    //         //设置列表数据
+    //         creatList(data.list);
+    //     }, function () {
+    //         //联网失败的回调,隐藏下拉刷新的状态
+    //         mescroll.endErr();
+    //     });
+    // }
 
     /*上拉加载的回调 page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
     function upCallback(page) {
@@ -68,17 +68,17 @@ $(function () {
     }
 
 
-    function getListDataFromNet(num,page,successCallback,errorCallback){
+    function getListDataFromNet(num, page, successCallback, errorCallback) {
         var url = "http://116.236.149.162:8090/SubstationWEBV2/main/getTempABCResult";
         var params = {
             fSubid: "10100001",
-            pageNo:num,
-            pageSize:page
+            pageNo: num,
+            pageSize: page
         };
         var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjI4NTU3NDEsInVzZXJuYW1lIjoiYWRtaW4ifQ.1MG4QT3CLuKYdsuRP9Fq99jWpwh9l-goNw7YxvA7oLA";
         $.ajax({
             type: 'GET',
-            url:url,
+            url: url,
             data: params,
             beforeSend: function (request) {
                 request.setRequestHeader("Authorization", token)
@@ -86,7 +86,7 @@ $(function () {
             success: function (result) {
                 successCallback && successCallback(result.data);
             },
-            error:function () {
+            error: function () {
                 errorCallback && errorCallback();
             }
         })
@@ -128,7 +128,7 @@ $(function () {
 
         $(".tempBtn").click(function () {
             var F_MeterCode = $(this).attr("value");
-            location.href="cableTemperature-modal.html?F_MeterCode="+F_MeterCode;
+            location.href = "cableTemperature-modal.html?F_MeterCode=" + F_MeterCode;
         })
     }
 });

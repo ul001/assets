@@ -37,8 +37,8 @@
         </div>
         <div class="elec-btn" id="EnergyContain">
             <button type="button" class="btn select" id="today" value="today">按日</button>
+            <button type="button" class="btn " id="week" value="week">按周</button>
             <button type="button" class="btn " id="month" value="month">按月</button>
-            <button type="button" class="btn " id="year" value="year">按年</button>
         </div>
         <div class="form-group sumDate">
             <div class="input-group date form_date_end " data-date="" data-link-field="dtp_input2">
@@ -46,14 +46,13 @@
                 <input readonly type="text" id="date" class="form-control" size="16">
             </div>
         </div>
-
-        <hr>
+        <!-- <hr> -->
         <button type="button" class="search" id="search">查询</button>
         <div class="diagram center" id="chartContain"></div>
-        <p>当日用电：1634KW.h</p>
-        <p>上日用电：1956kW.h</p>
-        <p>增加值:-322</p>
-        <p>环比：-16.45%</p>
+        <p><span id="todayElectconSump">当日用电：1634KW.h</span></p>
+        <p><span id="yesterdayElectconSump">上日用电：1956kW.h</span></p>
+        <p>增加值：<span id="addValue">-322</span></p>
+        <p>环比：<span id="chainRatio">-16.45%</span></p>
     </div>
 
 </body>
