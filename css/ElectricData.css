@@ -127,7 +127,7 @@ body{
 	background:#42B685;
 	color:#fff;
 }
-.dataTable tbody tr:nth-child(2){
+.dataTable tbody tr:nth-child(even){
 	background:rgb(236,248,243);
 	border-top:1px solid #C8C9CA;
 	border-bottom:1px solid #C8C9CA;

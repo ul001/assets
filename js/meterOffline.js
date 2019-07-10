@@ -130,7 +130,7 @@ $(function () {
             listDom.innerHTML = '';
         }
         $(data.list).each(function () {
-            var str = this.f_StartTime + "<br>" + "[设备编号：" + this.f_DeviceCode + "&nbsp;&nbsp;&nbsp;设备名称：" + this.f_DeviceName + "]"
+            var str = this.f_StartTime.split(".")[0] + "<br>" + "[设备编号：" + this.f_DeviceCode + "&nbsp;&nbsp;&nbsp;设备名称：" + this.f_DeviceName + "]"
             var liDom = document.createElement("li");
             liDom.innerHTML = str;
             listDom.appendChild(liDom); //加在列表的后面,上拉加载
@@ -152,9 +152,9 @@ $(function () {
 
         var params = {
             fSubid: subidFromAPP,
-            startDate: startDate,
-            endDate: endDate,
-            fDevicecode: fDeviceCode,
+            startDate: startDate+" 00:00:00",
+            endDate: endDate+" 23:59:59",
+//            fDevicecode: fDeviceCode,
             fAlarmtype: 1,
             pageNo: pageNum,
             pageSize: pageSize
