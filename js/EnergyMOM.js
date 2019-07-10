@@ -137,7 +137,7 @@ $(function () {
             // EnergyKind: EnergyKind,
         }
         getData(url, params, function (data) {
-            showCharts(data.EnergyReport);
+            showCharts(data.EnergyReportDate);
         });
     })
 
@@ -292,6 +292,9 @@ $(function () {
         var value = [];
         var name = [];
         var tableData = [];
+
+        var addvalue;
+        var chainRatio;
         var showName;
         if (data.length > 0) {
             var sum = 0;
@@ -305,42 +308,56 @@ $(function () {
 
             var selectParam = $(".btn.select").attr('value');
             var tableData;
+
             $.each(data, function (index, el) {
                 if (el.fTime == "undefined" || el.fTime == null || el.fTime == "") {
                     return true;
                 }
                 if (selectParam == "today") {
-                    datatime = el.fTime.substring(11, 16);
-                    time.push(el.fTime.substring(11, 16));
-                    showName = "日报";
+                    time.push("昨日");
+                    time.push("当日");
+                    // datatime = el.fTime.substring(11, 16);
+                    // time.push(el.fTime.substring(11, 16));
+                    // showName = "日环比";
                 } else if (selectParam == "month") {
-                    datatime = el.fTime.substring(6, 10);
-                    time.push(el.fTime.substring(6, 10));
-                    showName = "月报";
+                    time.push("上月");
+                    time.push("当月");
+                    // datatime = el.fTime.substring(6, 10);
+                    // time.push(el.fTime.substring(6, 10));
+                    // showName = "月环比";
                 } else if (selectParam == "year") {
-                    datatime = el.fTime.substring(2, 7);
-                    time.push(el.fTime.substring(2, 7));
-                    showName = "年报";
+                    time.push("去年");
+                    time.push("今年");
+                    // datatime = el.fTime.substring(2, 7);
+                    // time.push(el.fTime.substring(2, 7));
+                    // showName = "年环比";
                 }
-                value.push(el.fValue);
-                if (el.fValue > max) {
-                    max = el.fValue;
-                    maxTime = el.fTime.substring(0, 16)
-                }
-                if (el.fValue < min) {
-                    min = el.fValue;
-                    minTime = el.fTime.substring(0, 16)
-                }
-                sum += el.fValue;
-                var dic = {
-                    "showData": showName,
-                    "value": el.fValue,
-                    "time": datatime
-                };
-                tableData.push(dic);
+                value.push(el.fBeforevalue);
+                value.push(el.fDvalue);
+                addvalue = el.fMomvalue;
+                chainRatio = (el.fDvalue - el.fBeforevalue) / el.fBeforevalue;
+                // if (el.fValue > max) {
+                //     max = el.fValue;
+                //     maxTime = el.fTime.substring(0, 16)
+                // }
+                // if (el.fValue < min) {
+                //     min = el.fValue;
+                //     minTime = el.fTime.substring(0, 16)
+                // }
+                // sum += el.fValue;
+                // var dic1 = {
+                //     "showData": showName,
+                //     "value": el.fValue,
+                //     "time": datatime
+                // };
+                // var dic2 = {
+
+                // };
+                // tableData.push(dic1);
+                // tableData.push(dic2);
             });
-            var avg = (sum / data.length).toFixed(2);
-            showTable(tableData);
+            // var avg = (sum / data.length).toFixed(2);
+            // showTable(tableData);
         }
 
         var line = echarts.init(document.getElementById('chartContain'));

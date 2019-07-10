@@ -92,6 +92,8 @@ $(function () {
         // }
         //开始时间不能大于截止时间
         var nowDate = tool.initDate("YMDhm", new Date());
+        startDate = $("#dateStart").val();
+        endDate = $("#dateEnd").val();
         if (startDate > endDate) {
             alert("开始时间不能大于结束时间，请选择正确的查询时间！");
             return;
@@ -102,8 +104,6 @@ $(function () {
             $("#startDate").html(startDate);
             $("#endDate").html(endDate);
         }
-        startDate = $("#dateStart").val();
-        endDate = $("#dateEnd").val();
         var fCircuitid = currentSelectVode.merterId;
         // var time = $("#date").val();
         var url = baseUrlFromAPP + "/main/app/powerAnalysis/ConsumeEnergyReport";
