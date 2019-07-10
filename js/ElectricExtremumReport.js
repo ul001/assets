@@ -388,14 +388,15 @@ $(function () {
        });
      }else if(type="month"){
        $("#datePre").click(function () {
-           var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+           var selectDate = new Date(($("#date").val()+"-01").replace(/\-/g, "\/"));
            var preDate = new Date(selectDate.setMonth(selectDate.getMonth()-1));
            $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)));
        });
        $("#dateNext").click(function () {
            var d = new Date();
            var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1));
-           var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+           var selectDate = new Date(($("#date").val()+"-01").replace(/\-/g, "\/"));
+           alert(selectDate+"\n"+nowDate);
            if (selectDate < nowDate) {
               var nextDate = new Date(selectDate.setMonth(selectDate.getMonth()+1));
               $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)));
