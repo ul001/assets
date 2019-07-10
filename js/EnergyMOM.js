@@ -127,10 +127,10 @@ $(function () {
         }
         var fCircuitid = currentSelectVode.merterId;
 
-        var url = baseUrlFromAPP + "main/energyReportMOM";
+        var url = baseUrlFromAPP + "/main/energyReportMOM";
         var params = {
             fSubid: subidFromAPP,
-            fCircuitid: fCircuitid,
+            fCircuitids: fCircuitid,
             time: time,
             DA: typeDA
             // fPhase: selectParam,
@@ -310,9 +310,6 @@ $(function () {
             var tableData;
 
             $.each(data, function (index, el) {
-                if (el.fTime == "undefined" || el.fTime == null || el.fTime == "") {
-                    return true;
-                }
                 if (selectParam == "today") {
                     time.push("昨日");
                     time.push("当日");
