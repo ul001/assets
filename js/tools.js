@@ -20,7 +20,6 @@ var tool = {
 			lastDay = day.getDate(); //获取某月最后一天
 		}
 
-
 		var getToday = new Date();
 		var result = "";
 
@@ -72,21 +71,12 @@ var tool = {
 
 		return result;
 	},
-
-	getDataByAjax: function (url, params, successCallback) {
-		var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjI4NTU3NDEsInVzZXJuYW1lIjoiYWRtaW4ifQ.1MG4QT3CLuKYdsuRP9Fq99jWpwh9l-goNw7YxvA7oLA";
-		$.ajax({
-			type: 'GET',
-			url: url,
-			data: params,
-			beforeSend: function (request) {
-				request.setRequestHeader("Authorization", token)
-			},
-			success: function (result) {
-				successCallback(result.data);
-			}
-		})
-	},
+	getUrlParam:function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  // 匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; // 返回参数值
+    }
 }
 
 /**
@@ -98,7 +88,7 @@ var tool = {
  *(new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
  *2017-06-27 变 20170627 “2017-06-27”.replace(/-/g, "")
  */
-Date.prototype.format = function (fmt) {
+    Date.prototype.format = function (fmt) {
 	var o = {
 		"M+": this.getMonth() + 1, //月份
 		"d+": this.getDate(), //日

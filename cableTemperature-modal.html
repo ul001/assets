@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="css/cableTemperature.css" />
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/cableTemperature.css" />
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="lib/rolldate.min.js"></script>
@@ -13,35 +13,19 @@
     <script src="lib/echarts.min.js"></script>
     <script src="js/tools.js"></script>
     <script src="js/cableTemperature-modal.js"></script>
-    <script src="js/cableTemperature-modal.js"></script>
-    <script type="text/javascript">
-        // H5 plus事件处理
-        function plusReady() {
-            // 获取所有Webview窗口
-            var wvs = plus.webview.all();
-            for (var i = 0; i < wvs.length; i++) {
-                console.log('webview' + i + ': ' + wvs[i].getURL());
-            }
-        }
-
-        if (window.plus) {
-            plusReady();
-        } else {
-            document.addEventListener('plusready', plusReady, false);
-        }
-    </script>
+    <script src="js/ajaxUtil.js"></script>
 </head>
 
 <body>
 <div class="container">
     <header>
-        <span id="lastDay">上一日</span>
-        <span>2019-07-03</span>
-        <span id="nextDay">下一日</span>
+        <span id="datePre"><img src="image/left.png"/>上一日</span>
+        <input readonly type="text" id="date">
+        <span id="dateNext">下一日<img src="image/right-green.png"/></span>
     </header>
     <button type="button" id="showChart">图表</button>
     <button type="button" id="showTable">数据</button>
-    <button id="return">返回</button>
+    <button id="return" onclick="window.history.back()">返回</button>
     <div class="chart" id="contain"></div>
 </div>
 </body>

@@ -1,39 +1,30 @@
 $(function () {
     //iOS安卓基础传参
-    // var u = navigator.userAgent,
-    //     app = navigator.appVersion;
-    // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    // //判断数组中是否包含某字符串
-    // var baseUrlFromAPP;
-    // var tokenFromAPP;
-    // var subidFromAPP;
-    // if (isIOS) { //ios系统的处理
-    //     window.webkit.messageHandlers.iOS.postMessage(null);
-    //     var storage = localStorage.getItem("accessToken");
-    //     // storage = storage ? JSON.parse(storage):[];
-    //     storage = JSON.parse(storage);
-    //     baseUrlFromAPP = storage.baseurl;
-    //     tokenFromAPP = storage.token;
-    //     subidFromAPP = storage.fsubID;
-    // } else {
-    //     baseUrlFromAPP = android.getBaseUrl();
-    //     tokenFromAPP = android.getToken();
-    //     subidFromAPP = android.getfSubid();
-    // }
-
-
-
-
+     var u = navigator.userAgent,
+         app = navigator.appVersion;
+     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+     //判断数组中是否包含某字符串
+     var baseUrlFromAPP;
+     var tokenFromAPP;
+     var subidFromAPP;
+     if (isIOS) { //ios系统的处理
+         window.webkit.messageHandlers.iOS.postMessage(null);
+         var storage = localStorage.getItem("accessToken");
+         // storage = storage ? JSON.parse(storage):[];
+         storage = JSON.parse(storage);
+         baseUrlFromAPP = storage.baseurl;
+         tokenFromAPP = storage.token;
+         subidFromAPP = storage.fsubID;
+     } else {
+         baseUrlFromAPP = android.getBaseUrl();
+         tokenFromAPP = android.getToken();
+         subidFromAPP = android.getfSubid();
+     }
+    var choise = 1;
     var info;
-    var params = {
-        fSubid:10100001,
-        pageNo:1,
-        pageSize:"",
-        startDate:"2019-07-09 00:00:00",
-        endDate:"2019-07-09 23:59:59"
-    };
-    var url = location.search;
+    var f_MeterCode = tool.getUrlParam("F_MeterCode");
+/*    var url = location.search;
     if (url.indexOf("?") != -1) {
         var string = url.substring(1);
         var array = string.split("&");
@@ -41,12 +32,33 @@ $(function () {
             var row = val.split("=");
             params[row[0]] = row[1];
         });
+    }*/
+    function setData(){
+        var params = {
+            fSubid:subidFromAPP,
+            pageNo:1,
+            pageSize:1000,
+            F_MeterCode:f_MeterCode,
+            startDate:$("#date").val()+" 00:00:00",
+            endDate:$("#date").val()+" 23:59:59"
+        };
+		$.ajax({
+			type: 'GET',
+			url: baseUrlFromAPP+"/main/getTempABCResultHistoryList",
+			data: params,
+			beforeSend: function (request) {
+				request.setRequestHeader("Authorization", tokenFromAPP)
+			},
+			success: function (result) {
+                info = result.data;
+                if(choise==1){
+                    showChart(info.list);
+                }else{
+                    showTable(info.list);
+                }
+			}
+		})
     }
-
-    tool.getDataByAjax("http://116.236.149.162:8090/SubstationWEBV2/main/getTempABCResultHistoryList", params, function (data) {
-        info = data;
-        showChart(data.list);
-    });
 
     function showChart(data) {
         var time=[];
@@ -149,16 +161,55 @@ $(function () {
     }
 
     $("#showTable").click(function () {
+        choise=2;
         showTable(info.list);
     });
 
     $("#showChart").click(function () {
+        choise=1;
         showChart(info.list);
     });
 
-    $("#return").click(function () {
-        location.href = "cableTemperature.html";
-    })
+  var time = tool.initDate("YMD", new Date());
+  $("#date").val(time);
 
+  new Rolldate({
+    el: '#date',
+    format: 'YYYY-MM-DD',
+    beginYear: 2000,
+    endYear: 2100,
+    value: $("#date").val(),
+    confirm: function (date) {
+        var d = new Date();
+        d1 = new Date(date.replace(/\-/g, "\/"));
+        d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+        if (d1 > d2) {
+            return false;
+        };
+        $("#date").val(date);
+        setData();
+    }
+  });
 
+  $("#datePre").click(function () {
+    var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+    var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
+    $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
+    setData();
+  });
+
+  $("#dateNext").click(function () {
+    var d = new Date();
+    var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
+    var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+    if (selectDate < nowDate) {
+      var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
+      $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)) + "-" + (nextDate.getDate() < 10 ? ("0" + nextDate.getDate()) : (nextDate.getDate())));
+    } else {
+      return;
+    }
+    setData();
+  });
+
+  setData();
 });

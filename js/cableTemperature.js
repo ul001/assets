@@ -1,28 +1,26 @@
 $(function () {
     //iOS安卓基础传参
-    // var u = navigator.userAgent,
-    //     app = navigator.appVersion;
-    // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    // //判断数组中是否包含某字符串
-    // var baseUrlFromAPP;
-    // var tokenFromAPP;
-    // var subidFromAPP;
-    // if (isIOS) { //ios系统的处理
-    //     window.webkit.messageHandlers.iOS.postMessage(null);
-    //     var storage = localStorage.getItem("accessToken");
-    //     // storage = storage ? JSON.parse(storage):[];
-    //     storage = JSON.parse(storage);
-    //     baseUrlFromAPP = storage.baseurl;
-    //     tokenFromAPP = storage.token;
-    //     subidFromAPP = storage.fsubID;
-    // } else {
-    //     baseUrlFromAPP = android.getBaseUrl();
-    //     tokenFromAPP = android.getToken();
-    //     subidFromAPP = android.getfSubid();
-    // }
-
-
+     var u = navigator.userAgent,
+         app = navigator.appVersion;
+     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+     //判断数组中是否包含某字符串
+     var baseUrlFromAPP;
+     var tokenFromAPP;
+     var subidFromAPP;
+     if (isIOS) { //ios系统的处理
+         window.webkit.messageHandlers.iOS.postMessage(null);
+         var storage = localStorage.getItem("accessToken");
+         // storage = storage ? JSON.parse(storage):[];
+         storage = JSON.parse(storage);
+         baseUrlFromAPP = storage.baseurl;
+         tokenFromAPP = storage.token;
+         subidFromAPP = storage.fsubID;
+     } else {
+         baseUrlFromAPP = android.getBaseUrl();
+         tokenFromAPP = android.getToken();
+         subidFromAPP = android.getfSubid();
+     }
 
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
@@ -68,25 +66,24 @@ $(function () {
     }
 
 
-    function getListDataFromNet(num, page, successCallback, errorCallback) {
-        var url = "http://116.236.149.162:8090/SubstationWEBV2/main/getTempABCResult";
+    function getListDataFromNet(num,page,successCallback,errorCallback){
+        var url = baseUrlFromAPP+"/main/getTempABCResult";
         var params = {
-            fSubid: "10100001",
-            pageNo: num,
-            pageSize: page
+            fSubid: subidFromAPP,
+            pageNo:num,
+            pageSize:page
         };
-        var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjI4NTU3NDEsInVzZXJuYW1lIjoiYWRtaW4ifQ.1MG4QT3CLuKYdsuRP9Fq99jWpwh9l-goNw7YxvA7oLA";
         $.ajax({
             type: 'GET',
-            url: url,
+            url:url,
             data: params,
             beforeSend: function (request) {
-                request.setRequestHeader("Authorization", token)
+                request.setRequestHeader("Authorization", tokenFromAPP)
             },
             success: function (result) {
                 successCallback && successCallback(result.data);
             },
-            error: function () {
+            error:function () {
                 errorCallback && errorCallback();
             }
         })
@@ -128,7 +125,7 @@ $(function () {
 
         $(".tempBtn").click(function () {
             var F_MeterCode = $(this).attr("value");
-            location.href = "cableTemperature-modal.html?F_MeterCode=" + F_MeterCode;
+            location.href="cableTemperature-modal.html?F_MeterCode="+F_MeterCode;
         })
     }
 });
