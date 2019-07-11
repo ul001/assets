@@ -29,49 +29,56 @@ $(function () {
     function setData(){
         var params = {
             fSubid:subidFromAPP,
-            pageNo:1,
-            pageSize:1000,
-            F_MeterCode:f_MeterCode,
-            startDate:$("#date").val()+" 00:00:00",
-            endDate:$("#date").val()+" 23:59:59"
+            fMetercode:f_MeterCode,
+            time:$("#date").val()
         };
 		$.ajax({
 			type: 'GET',
-			url: baseUrlFromAPP+"/main/getTempABCResultHistoryList",
+			url: baseUrlFromAPP+"/main/energySecurity/leakageCurrentAndTemp",
 			data: params,
 			beforeSend: function (request) {
 				request.setRequestHeader("Authorization", tokenFromAPP)
 			},
 			success: function (result) {
-                info = result.data;
-                if(choise==1){
-                    showChart(info.list);
-                }else{
-                    showTable(info.list);
-                }
+			if(result.data.leakageCurrentAndTempValues.length>0){
+                info = result.data.leakageCurrentAndTempValues[0];
+            }
+            if(choise==1){
+                showChart(info);
+            }else{
+                showTable(info);
+            }
 			}
-		})
+		});
     }
 
     function showChart(data) {
-        var time=[];
+        var time = [];
+        var leakageIs = [];
+        var time2=[];
         var tempA=[];
         var tempB=[];
         var tempC=[];
-        if(data.length>0){
-            $.each(data,function (index,val) {
-                time.push(val.f_CollectTime.substring(11,16));
-                tempA.push(val.f_TempA);
-                tempB.push(val.f_TempB);
-                tempC.push(val.f_TempC);
-            })
+        if(data!=null){
+            var IValues = data.origCurrentValues;
+            var EValues = data.origEnvironmentValues;
+            $.each(IValues,function (index,val) {
+                            time.push(val.fCollecttime.substring(11,16));
+                            leakageIs.push(val.fIl);
+            });
+            $.each(EValues,function (index,val) {
+                time2.push(val.fCollecttime.substring(11,16));
+                tempA.push(val.fTempa);
+                tempB.push(val.fTempb);
+                tempC.push(val.fTempc);
+            });
         }
         var option = {
             tooltip : {
                 trigger : 'axis'
             },
             legend : {
-                data : ['温度A','温度B','温度C']
+                data : ['漏电流']
             },
             grid:{
                 left:'5%',
@@ -105,6 +112,50 @@ $(function () {
                 scale:true,
             } ],
             series : [ {
+                name : '漏电流',
+                type : 'line',
+                data : leakageIs
+            }]
+        };
+        var option2 = {
+            tooltip : {
+                trigger : 'axis'
+            },
+            legend : {
+                data : ['温度A','温度B','温度C']
+            },
+            grid:{
+                left:'5%',
+                right:'3%',
+                top:'5%',
+                bottom:'8%'
+            },
+            toolbox : {
+                show : true,
+                feature : {
+                    saveAsImage:{
+                        type:'png',
+                        show:true,
+                        title:'保存为图片'
+                    },
+                    magicType : {
+                        show : true,
+                        type : [ 'line', 'bar' ]
+                    },
+                    restore : {
+                        show : true
+                    }
+                }
+            },
+            calculable : true,
+            xAxis : [ {
+                data :time2
+            }],
+            yAxis : [ {
+                type:'value',
+                scale:true,
+            } ],
+            series : [ {
                 name : '温度A',
                 type : 'line',
                 data : tempA
@@ -116,51 +167,70 @@ $(function () {
                 name : '温度C',
                 type : 'line',
                 data : tempC
-            } ]
+            }]
         };
-        $("#contain").html("");
-        $("#contain").removeAttr('_echarts_instance_');
-        myChart = echarts.init($("#contain").get(0),'macarons');
+        $("#contain").html("<div id='IChart'></div><div id='EChart'></div>");
+        $("#IChart").removeAttr('_echarts_instance_');
+        $("#EChart").removeAttr('_echarts_instance_');
+        myChart = echarts.init($("#IChart").get(0),'macarons');
         myChart.setOption(option);
+        myChart2 = echarts.init($("#EChart").get(0),'macarons');
+        myChart2.setOption(option2);
     }
 
     function showTable(data){
-        var tableData=[];
-        if(data.length>0){
-            $.each(data,function (index,val) {
-                var row ={};
-                row.time = val.f_CollectTime.substring(11,16);
-                row.tempA = val.f_TempA;
-                row.tempB = val.f_TempB;
-                row.tempC = val.f_TempC;
-                tableData.push(row);
-            })
+        var tableData = [];
+        var time = [];
+        var leakageI = [];
+        var tempA=[];
+        var tempB=[];
+        var tempC=[];
+        if(data!=null){
+            $.each(data.origCurrentValues,function (index,val) {
+                time.push(val.fCollecttime.substring(11,16));
+                leakageI.push(val.fIl);
+            });
+            $.each(data.origEnvironmentValues,function (index,val) {
+                tempA.push(val.fTempa);
+                tempB.push(val.fTempb);
+                tempC.push(val.fTempc);
+            });
+
+            for ( var i = 0; i <time.length; i++){
+                tableData.push({
+                    time:time[i],
+                    leakageI:leakageI[i],
+                    tempA:tempA[i],
+                    tempB:tempB[i],
+                    tempC:tempC[i]
+                });
+            }
         }
         var columns = [
-            [{field : 'time', title : '采集时间', valign:'middle', align : 'center', rowspan : 2},
-                {title : '温度(℃)', valign : "middle", align : 'center', colspan : 3}],
+            [{field : 'time', title : '采集时间', valign:'middle', align : 'center',colspan:1,rowspan : 2},
+            {field : 'leakageI', title : '漏电流(mA)', valign:'middle', align : 'center',colspan:1, rowspan : 2},
+                {title : '线缆温度(℃)', valign : "middle", align : 'center', colspan : 3,rowspan:1}],
             [{field : 'tempA', title : 'A', valign : "middle", align : 'center'},
                 {field : 'tempB', title : 'B', valign : "middle", align : 'center'},
                 {field : 'tempC', title : 'C', valign : "middle", align : 'center'}]
         ];
         $("#contain").html("");
         $("#contain").html("<table id='table'></table>");
-        var height = $("#contain").height();
         $("#table").bootstrapTable({
             columns: columns,
             data: tableData,
-            height:height
-        })
+            height:500
+        });
     }
 
     $("#showTable").click(function () {
         choise=2;
-        showTable(info.list);
+        showTable(info);
     });
 
     $("#showChart").click(function () {
         choise=1;
-        showChart(info.list);
+        showChart(info);
     });
 
   var time = tool.initDate("YMD", new Date());
