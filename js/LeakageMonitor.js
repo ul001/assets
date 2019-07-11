@@ -1,8 +1,5 @@
 $(function () {
-     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjI5MzI2MjgsInVzZXJuYW1lIjoiYWRtaW4ifQ.z_qC9y1tXY9qF4QpNX90cpQTmn4LesiuirQUv6gKHl4";
-     var subidFromAPP=10100001;
-/*    //iOS安卓基础传参
+    //iOS安卓基础传参
      var u = navigator.userAgent,
          app = navigator.appVersion;
      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
@@ -23,7 +20,7 @@ $(function () {
          baseUrlFromAPP = android.getBaseUrl();
          tokenFromAPP = android.getToken();
          subidFromAPP = android.getfSubid();
-     }*/
+     }
 
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
@@ -48,7 +45,7 @@ $(function () {
             //联网成功的回调,隐藏下拉刷新的状态
             mescroll.endSuccess();
             //设置列表数据
-            creatList(data.list);
+            creatList(data.leakageCurrentValues);
         }, function () {
             //联网失败的回调,隐藏下拉刷新的状态
             mescroll.endErr();
