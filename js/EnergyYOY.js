@@ -130,7 +130,7 @@ $(function () {
     // 
     function getURLData() {
         var fCircuitid = currentSelectVode.merterId;
-        var url = baseUrlFromAPP + "main/powerAnalysis/getMoM";
+        var url = baseUrlFromAPP + "/main/powerAnalysis/getMoM";
         var params = {
             fSubid: subidFromAPP,
             fCircuitid: fCircuitid,
@@ -140,7 +140,7 @@ $(function () {
             // EnergyKind: EnergyKind,
         }
         getData(url, params, function (data) {
-            showCharts(data.EnergyReport);
+            showCharts(data.monthValueListUpToNow);
         });
     };
 
@@ -291,8 +291,10 @@ $(function () {
     }
 
     function showCharts(data) {
-        var time = [];
-        var value = [];
+        var nowtime = [];
+        var nowvalue = [];
+        var pertime = [];
+        var pervalue = [];
         var name = [];
         var tableData = [];
         var showName;
@@ -309,50 +311,42 @@ $(function () {
             var selectParam = $(".btn.select").attr('value');
             var tableData;
             $.each(data, function (index, el) {
-                if (el.fTime == "undefined" || el.fTime == null || el.fTime == "") {
-                    return true;
-                }
-                if (selectParam == "today") {
-                    datatime = el.fTime.substring(11, 16);
-                    time.push(el.fTime.substring(11, 16));
-                    showName = "日报";
-                } else if (selectParam == "month") {
-                    datatime = el.fTime.substring(6, 10);
-                    time.push(el.fTime.substring(6, 10));
-                    showName = "月报";
-                } else if (selectParam == "year") {
-                    datatime = el.fTime.substring(2, 7);
-                    time.push(el.fTime.substring(2, 7));
-                    showName = "年报";
-                }
-                value.push(el.fValue);
-                if (el.fValue > max) {
-                    max = el.fValue;
-                    maxTime = el.fTime.substring(0, 16)
-                }
-                if (el.fValue < min) {
-                    min = el.fValue;
-                    minTime = el.fTime.substring(0, 16)
-                }
-                sum += el.fValue;
-                var dic = {
-                    "showData": showName,
-                    "value": el.fValue,
-                    "time": datatime
-                };
-                tableData.push(dic);
+                nowtime.push(el.fDate);
+                nowvalue.push(el.fDayvalue);
+                var predate = new Date(el.fDate); //根据字符串获得日期
+                var prestr = predate.getFullYear() - 1;
+                pertime.push(prestr);
+                pervalue.push(el.pervalue);
+
+                // if (el.fValue > max) {
+                //     max = el.fValue;
+                //     maxTime = el.fTime.substring(0, 16)
+                // }
+                // if (el.fValue < min) {
+                //     min = el.fValue;
+                //     minTime = el.fTime.substring(0, 16)
+                // }
+                // sum += el.fValue;
+                // var dic = {
+                //     "showData": showName,
+                //     "value": el.fValue,
+                //     "time": datatime
+                // };
+                // tableData.push(dic);
             });
-            var avg = (sum / data.length).toFixed(2);
-            showTable(tableData);
+            // var avg = (sum / data.length).toFixed(2);
+            // showTable(tableData);
         }
 
         var line = echarts.init(document.getElementById('chartContain'));
+        var timearr = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+
         var option = {
             tooltip: {
                 trigger: 'axis'
             },
             legend: {
-                data: name,
+                data: ['本期', '同期']
             },
             grid: { // 控制图的大小，调整下面这些值就可以，
                 top: '18%',
@@ -362,7 +356,7 @@ $(function () {
             },
             xAxis: {
                 type: 'category',
-                data: time,
+                data: timearr
             },
             yAxis: {
                 type: 'value',
@@ -378,14 +372,18 @@ $(function () {
                 }
             },
             dataZoom: [{
-                startValue: time[0]
+                startValue: timearr[0]
             }, {
                 type: 'inside'
             }],
             calculable: true,
             series: [{
-                name: name,
-                data: value,
+                name: '本期',
+                data: nowvalue,
+                type: 'bar'
+            }, {
+                name: '同期',
+                data: pervalue,
                 type: 'bar'
             }]
         };
