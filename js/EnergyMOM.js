@@ -294,7 +294,8 @@ $(function () {
         var value = [];
         var name = [];
         var tableData = [];
-
+        var befValue = [];
+        var nowValue = [];
         var addvalue;
         var chainRatio;
         var showName;
@@ -334,6 +335,8 @@ $(function () {
                 }
                 value.push(el.fBeforevalue);
                 value.push(el.fDvalue);
+                befValue.push(el.fBeforevalue);
+                nowValue.push(el.fDvalue);
                 addvalue = el.fMomvalue;
                 chainRatio = (el.fDvalue - el.fBeforevalue) / el.fBeforevalue * 100;
 
@@ -352,30 +355,32 @@ $(function () {
                 trigger: 'axis'
             },
             legend: {
-                data: name,
+                data: time,
             },
             grid: { // 控制图的大小，调整下面这些值就可以，
                 top: '18%',
-                left: '10%',
+                left: '13%',
                 right: '5%',
                 bottom: '20%',
             },
             yAxis: {
                 type: 'category',
-                data: time,
+                data: name,
                 axisLine: {
                     show: false
                 },
                 axisLabel: {
-                    show: false
+                    interval: 'auto',
+                    rotate: 90
+                    // show: false
                 },
                 axisTick: {
                     show: false
                 },
                 splitLine: {
                     show: false
-                }
-                // scale: true, //y轴自适应
+                },
+                scale: true, //y轴自适应
             },
             xAxis: {
                 type: 'value',
@@ -402,18 +407,33 @@ $(function () {
             // }],
             calculable: true,
             series: [{
-                name: name,
-                data: value,
+                name: time[0],
+                data: befValue,
                 type: 'bar',
                 itemStyle: {
                     normal: {
                         color: 'orange',
-                        borderRadius: 5,
-                        label: {
-                            show: true,
-                            position: 'left',
-                            formatter: '{b}'
-                        }
+                        // borderRadius: 5,
+                        // label: {
+                        //     show: true,
+                        //     position: 'left',
+                        //     formatter: '{b}'
+                        // }
+                    }
+                },
+            }, {
+                name: time[1],
+                data: nowValue,
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: 'green',
+                        // borderRadius: 5,
+                        // label: {
+                        //     show: true,
+                        //     position: 'left',
+                        //     formatter: '{b}'
+                        // }
                     }
                 },
             }]
