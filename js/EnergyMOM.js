@@ -362,11 +362,28 @@ $(function () {
             },
             yAxis: {
                 type: 'category',
-                data: time
+                data: time,
+                axisLine: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
                 // scale: true, //y轴自适应
             },
             xAxis: {
                 type: 'value',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                }
                 // boundaryGap: [0, 0.01]
             },
             // toolbox: {
@@ -387,7 +404,18 @@ $(function () {
             series: [{
                 name: name,
                 data: value,
-                type: 'bar'
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: 'orange',
+                        borderRadius: 5,
+                        label: {
+                            show: true,
+                            position: 'left',
+                            formatter: '{b}'
+                        }
+                    }
+                },
             }]
         };
         line.setOption(option);
