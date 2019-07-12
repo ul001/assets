@@ -3,17 +3,27 @@ body{
 }
 .chart{
 	width:100%;
-	height:600px;
-	overflow:hidden;
+	height:450px;
+	overflow:auto;
 	border:1px solid red;
+	background:#fff;
 }
 #IChart,#EChart{
     width:100%;
     height:280px;
 }
-#table{
-	overflow:auto;
-}
 #datePre,#dateNext{
     cursor:pointer;
+}
+#table{
+    overflow:auto;
+}
+#contain thead{
+    background:#42B685;
+    color:#fff;
+}
+#contain tbody tr:nth-child(even){
+	background:#CDCDCE;
+	border-top:1px solid #C8C9CA;
+	border-bottom:1px solid #C8C9CA;
 }
