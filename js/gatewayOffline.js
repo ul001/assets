@@ -155,7 +155,7 @@ $(function () {
             fSubid: subidFromAPP,
             startDate: startDate+" 00:00:00",
             endDate: endDate+" 23:59:59",
-//            fDevicecode: fDeviceCode,
+            fDevicecode: fDeviceCode,
             fAlarmtype: 2,
             pageNo: pageNum,
             pageSize: pageSize
