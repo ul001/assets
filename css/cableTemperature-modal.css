@@ -1,12 +1,11 @@
 body{
 	background: #EDEDEC;
 }
-section{
-	width:30%;
-	float:left;
-}
 .chart{
 	width:100%;
 	height:300px;
 	border:1px solid red;
+}
+#datePre,#dateNext{
+    cursor:pointer;
 }

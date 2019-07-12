@@ -1,0 +1,19 @@
+body{
+	background: #EDEDEC;
+}
+.chart{
+	width:100%;
+	height:600px;
+	overflow:hidden;
+	border:1px solid red;
+}
+#IChart,#EChart{
+    width:100%;
+    height:280px;
+}
+#table{
+	overflow:auto;
+}
+#datePre,#dateNext{
+    cursor:pointer;
+}

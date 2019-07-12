@@ -166,6 +166,8 @@ $(function () {
   var time = tool.initDate("YMD", new Date());
   $("#date").val(time);
 
+  setData();
+
   new Rolldate({
     el: '#date',
     format: 'YYYY-MM-DD',
@@ -203,6 +205,4 @@ $(function () {
     }
     setData();
   });
-
-  setData();
 });
