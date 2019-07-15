@@ -364,48 +364,7 @@ $(function () {
     })
   };
 
-  var selectReport = $(".elec-btn .select").attr('value');
-  initQuick(selectReport);
 
-  function initQuick(type) {
-    $("#datePre").unbind("click");
-    $("#dateNext").unbind("click");
-    if (type == "day") {
-      $("#datePre").click(function () {
-        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
-        var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
-        $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
-      });
-      $("#dateNext").click(function () {
-        var d = new Date();
-        var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
-        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
-        if (selectDate < nowDate) {
-          var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
-          $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)) + "-" + (nextDate.getDate() < 10 ? ("0" + nextDate.getDate()) : (nextDate.getDate())));
-        } else {
-          return;
-        }
-      });
-    } else if (type = "month") {
-      $("#datePre").click(function () {
-        var selectDate = new Date(($("#date").val() + "-01").replace(/\-/g, "\/"));
-        var preDate = new Date(selectDate.setMonth(selectDate.getMonth() - 1));
-        $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)));
-      });
-      $("#dateNext").click(function () {
-        var d = new Date();
-        var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + '01');
-        var selectDate = new Date(($("#date").val() + "-01").replace(/\-/g, "\/"));
-        if (selectDate < nowDate) {
-          var nextDate = new Date(selectDate.setMonth(selectDate.getMonth() + 1));
-          $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)));
-        } else {
-          return;
-        }
-      });
-    }
-  }
   var time = tool.initDate("YMD", new Date());
   $(document).on('click', '.elec-btn .btn', function () {
     var obj = $(this);
@@ -443,4 +402,46 @@ $(function () {
             };
           }*/
   });
+  var selectReport = $(".elec-btn .select").attr('value');
+  initQuick(selectReport);
+
+  function initQuick(type) {
+    $("#datePre").unbind("click");
+    $("#dateNext").unbind("click");
+    if (type == "day") {
+      $("#datePre").click(function () {
+        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+        var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
+        $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
+      });
+      $("#dateNext").click(function () {
+        var d = new Date();
+        var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
+        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+        if (selectDate < nowDate) {
+          var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
+          $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)) + "-" + (nextDate.getDate() < 10 ? ("0" + nextDate.getDate()) : (nextDate.getDate())));
+        } else {
+          return;
+        }
+      });
+    } else if (type == "month") {
+      $("#datePre").click(function () {
+        var selectDate = new Date(($("#date").val() + "-01").replace(/\-/g, "\/"));
+        var preDate = new Date(selectDate.setMonth(selectDate.getMonth() - 1));
+        $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)));
+      });
+      $("#dateNext").click(function () {
+        var d = new Date();
+        var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + '01');
+        var selectDate = new Date(($("#date").val() + "-01").replace(/\-/g, "\/"));
+        if (selectDate < nowDate) {
+          var nextDate = new Date(selectDate.setMonth(selectDate.getMonth() + 1));
+          $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)));
+        } else {
+          return;
+        }
+      });
+    }
+  }
 });

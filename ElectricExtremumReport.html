@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <title></title>
     <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/ElectricExtremumReport.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/ElectricExtremumReport.css" />
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="lib/rolldate.min.js"></script>
@@ -17,47 +17,48 @@
     <script src="js/tools.js"></script>
     <script src="js/ElectricExtremumReport.js"></script>
 </head>
+
 <body>
-<div class="container">
-    <div class="row tree">
-        <div class="treeSearch">
-            <img class="clear" src="image/clear.png"/>
-            <input type="text" id="CircuitidsInput"/>
-            <button type="button" id="CircuitidsList">搜索</button>
+    <div class="container">
+        <div class="row tree">
+            <div class="treeSearch">
+                <img class="clear" src="image/clear.png" />
+                <input type="text" id="CircuitidsInput" />
+                <button type="button" id="CircuitidsList">搜索</button>
+            </div>
+            <div id="treeview" class="col-sm-4"></div>
+            <button type="button" class="cancel">取消</button>
+            <button type="button" class="search" id="confirm">查询</button>
         </div>
-        <div id="treeview" class="col-sm-4"></div>
-        <button type="button" class="cancel">取消</button>
-        <button type="button" class="search" id="confirm">查询</button>
+        <div class="list" id="sideClick">
+            <p><span>监测点：</span><span id="meter">10kV变压器</span></p>
+            <img src="image/right.png" />
+        </div>
+        <div class="list" id="electric" data-toggle="modal" data-target="#myModal">
+            <span id="EnergyKind">电力类别：</span>
+            <select id="energySelect">
+                <option value="P">功率</option>
+                <option value="I">电流</option>
+                <option value="Voltage">相电压</option>
+                <option value="Voltage2">线电压</option>
+                <option value="UnBalance">不平衡度</option>
+                <option value="UHR">电压谐波</option>
+                <option value="IHR">电流谐波</option>
+            </select>
+        </div>
+        <div class="elec-btn" id="EnergyContain">
+            <button type="button" class="btn select" id="day" value="day">日报</button>
+            <button type="button" class="btn " id="month" value="month">月报</button>
+        </div>
+        <div class="form-group form_date_end selectTime">
+            <span id="datePre"><img src="image/left.png" /><a id="preVal">上一日</a></span>&nbsp;&nbsp;
+            <label>日期：</label>
+            <input readonly type="text" id="date">
+            <span id="dateNext"><a id="nextVal">下一日</a><img src="image/right-green.png" /></span>
+        </div>
+        <button type="button" class="search" id="search">查询</button>
+        <div class="dataTable center" id="tableContain"></div>
     </div>
-    <div class="list" id="sideClick">
-        <p><span>监测点：</span><span id="meter">10kV变压器</span></p>
-        <img src="image/right.png"/>
-    </div>
-    <div class="list" id="electric" data-toggle="modal" data-target="#myModal">
-        <span id="EnergyKind">电力类别：</span>
-        <select id="energySelect">
-            <option value="P">功率</option>
-            <option value="I">电流</option>
-            <option value="Voltage">相电压</option>
-            <option value="Voltage2">线电压</option>
-            <option value="UnBalance">不平衡度</option>
-            <option value="UHR">电压谐波</option>
-            <option value="IHR">电流谐波</option>
-        </select>
-    </div>
-    <div class="elec-btn" id="EnergyContain">
-        <button type="button" class="btn select" id="day" value="day">日报</button>
-        <button type="button" class="btn " id="month" value="month">月报</button>
-    </div>
-    <div class="form-group form_date_end selectTime">
-        <span id="datePre"><img src="image/left.png"/><a id="preVal">上一日</a></span>&nbsp;&nbsp;
-        <label>日期：</label>
-        <input readonly type="text" id="date">
-        <span id="dateNext"><a id="nextVal">下一日</a><img src="image/right-green.png"/></span>
-    </div>
-    <button type="button" class="search" id="search">查询</button>
-    <div class="dataTable center" id="tableContain"></div>
-</div>
 </body>
 
 </html>

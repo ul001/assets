@@ -35,7 +35,8 @@ $(function () {
         }
         getData(url, params, function (data) {
             setListData(data);
-            $("#search").click();
+            searchGetData();
+            // $("#search").click();
         });
     }
 
@@ -86,8 +87,77 @@ $(function () {
             $("#date").val(showtimeForElectSum);
             roll.config.format = "YYYY";
         }
+        initQuick(selectParam);
         roll.value = showtimeForElectSum;
+        searchGetData();
+        // $("#search").click();
     });
+    //配置时间
+    var selectReport = $(".elec-btn .select").attr('value');
+    initQuick(selectReport);
+
+    function initQuick(type) {
+        $("#datePre").unbind("click");
+        $("#dateNext").unbind("click");
+        if (type == "today") {
+            $("#datePre").click(function () {
+                var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+                var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
+                $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
+                searchGetData();
+            });
+            $("#dateNext").click(function () {
+                var d = new Date();
+                var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
+                var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+                if (selectDate < nowDate) {
+                    var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
+                    $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)) + "-" + (nextDate.getDate() < 10 ? ("0" + nextDate.getDate()) : (nextDate.getDate())));
+                    searchGetData();
+                } else {
+                    return;
+                }
+            });
+        } else if (type == "month") {
+            $("#datePre").click(function () {
+                var selectDate = new Date(($("#date").val() + "-01").replace(/\-/g, "\/"));
+                var preDate = new Date(selectDate.setMonth(selectDate.getMonth() - 1));
+                $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)));
+                searchGetData();
+            });
+            $("#dateNext").click(function () {
+                var d = new Date();
+                var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + '01');
+                var selectDate = new Date(($("#date").val() + "-01").replace(/\-/g, "\/"));
+                if (selectDate < nowDate) {
+                    var nextDate = new Date(selectDate.setMonth(selectDate.getMonth() + 1));
+                    $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)));
+                    searchGetData();
+                } else {
+                    return;
+                }
+            });
+        } else if (type == "year") {
+            $("#datePre").click(function () {
+                var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+                var preDate = new Date(selectDate.setFullYear(selectDate.getFullYear() - 1));
+                $("#date").val(preDate.getFullYear());
+                searchGetData();
+            });
+            $("#dateNext").click(function () {
+                var d = new Date();
+                var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() - 1) + '/' + d.getDate());
+                var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+                if (selectDate < nowDate) {
+                    var nextDate = new Date(selectDate.setFullYear(selectDate.getFullYear() + 1));
+                    $("#date").val(nextDate.getFullYear());
+                    searchGetData();
+                } else {
+                    return;
+                }
+            });
+        }
+    }
 
     $("#sideClick").click(function () {
         $(".tree").show();
@@ -107,7 +177,40 @@ $(function () {
     });
 
 
-    $(document).on('click', '#search', function () {
+    // $(document).on('click', '#search', function () {
+    //     var EnergyKind = $("#EnergyKind").attr('value');
+    //     var selectParam = $(".btn.select").attr('value');
+    //     if (EnergyKind == "fFr") {
+    //         selectParam = ""
+    //     }
+    //     var time;
+    //     var typeDA;
+    //     if (selectParam == "today") {
+    //         time = $("#date").val();
+    //         typeDA = "D";
+    //     } else if (selectParam == "month") {
+    //         time = $("#date").val().substring(0, 7);
+    //         typeDA = "M";
+    //     } else if (selectParam == "year") {
+    //         time = $("#date").val().substring(0, 4);
+    //         typeDA = "Y";
+    //     }
+    //     var fCircuitid = currentSelectVode.merterId;
+
+    //     var url = baseUrlFromAPP + "/main/app/powerAnalysis/EnergyReport";
+    //     var params = {
+    //         fSubid: subidFromAPP,
+    //         fCircuitids: fCircuitid,
+    //         time: time,
+    //         DA: typeDA
+    //         // fPhase: selectParam,
+    //         // EnergyKind: EnergyKind,
+    //     }
+    //     getData(url, params, function (data) {
+    //         showCharts(data.EnergyReport);
+    //     });
+    // })
+    function searchGetData() {
         var EnergyKind = $("#EnergyKind").attr('value');
         var selectParam = $(".btn.select").attr('value');
         if (EnergyKind == "fFr") {
@@ -139,8 +242,7 @@ $(function () {
         getData(url, params, function (data) {
             showCharts(data.EnergyReport);
         });
-    })
-
+    };
 
     function getData(url, params, successCallback) {
         var token = tokenFromAPP;
