@@ -9,27 +9,23 @@
     <link rel="stylesheet" type="text/css" href="css/TempHumidityData.css" />
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/echarts.min.js"></script>
     <script src="lib/rolldate.min.js"></script>
     <script src="lib/bootstrap-table.min.js"></script>
-    <script src="lib/echarts.min.js"></script>
     <script src="js/tools.js"></script>
     <script src="js/TempHumidityData.js"></script>
 </head>
 <body>
 <div class="container">
-    <section>
-        <h3>二层北</h3>
-        <div class="pic"></div>
-        <p>温度：30.2℃</p>
-        <p>湿度：57%</p>
-    </section>
+    <div id="cardList"></div>
     <div class="date">
-        <span>上一日</span>
-        <span>2019-07-02</span>
-        <span>下一日</span>
+        <span id="datePre">上一日</span>
+        <input readonly type="text" id="date">
+        <span id="dateNext">下一日</span>
     </div>
     <div class="chart">
-
+        <div id="tempChart"></div>
+        <div id="humiChart"></div>
     </div>
 </div>
 </body>
