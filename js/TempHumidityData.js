@@ -106,7 +106,7 @@ $(function () {
                 text: '温度'
             },
             grid:{
-                left:'8%',
+                left:'10%',
                 right:'3%',
                 top:'15%',
                 bottom:'20%'
@@ -148,7 +148,18 @@ $(function () {
             series: [{
                 name: '温度',
                 type: 'line',
-                data: chartData.temps
+                data: chartData.temps,
+                markLine : {
+        　　　　　　 data : [
+        　　　　　　　　{type : 'average', name: '平均值'}
+        　　　　　　 ]
+                },
+                markPoint:{
+                    data:[
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                }
             }]
         };
         var option2={
@@ -157,7 +168,7 @@ $(function () {
                 text: '湿度'
             },
             grid:{
-                left:'6%',
+                left:'10%',
                 right:'3%',
                 top:'15%',
                 bottom:'20%'
@@ -198,7 +209,18 @@ $(function () {
             series: [{
                 name: '湿度',
                 type: 'line',
-                data: chartData.humis
+                data: chartData.humis,
+                markLine : {
+        　　　　　　 data : [
+        　　　　　　　　{type : 'average', name: '平均值'}
+        　　　　　　 ]
+                },
+                markPoint:{
+                    data:[
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                }
             }]
         };
         var myChart = echarts.init($("#tempChart").get(0));

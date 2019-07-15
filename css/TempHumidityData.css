@@ -14,8 +14,8 @@ body{
 	margin-right:5px;
 }
 .date{
-    padding-top:20px;
-    padding-bottom:20px;
+    padding-top:10px;
+    padding-bottom:10px;
     clear:both;
 }
 .chart{
@@ -24,7 +24,7 @@ body{
 	background:#FFFFFF;
 	border:1px solid red;
 }
-.chart div{
+.chart #tempChart,#humiChart{
     width:100%;
     height:300px;
 }
