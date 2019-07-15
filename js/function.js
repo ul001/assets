@@ -1,6 +1,9 @@
 $(function () {
+    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjMyMDkwMDksInVzZXJuYW1lIjoiYWRtaW4ifQ.D0vpMFoRFyGiWAJEMmoCPi9aALenyEcJbFJKH-PnMm8";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
-    var u = navigator.userAgent,
+    /*var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
@@ -26,7 +29,7 @@ $(function () {
                     _this.scrollIntoViewIfNeeded();
                 },200);
         });
-    }
+    }*/
 
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {

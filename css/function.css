@@ -1,3 +1,49 @@
+/*新增*/
+#mescroll{
+	padding:0 0.6rem;
+}
+.container{
+	padding:1rem 0.5rem 1rem 0.5rem;
+	background:#fff;
+	border-radius:0.5rem;
+	clear:both;
+	overflow:hidden;
+}
+.container h1{
+	font-size:1rem;
+	margin-bottom:1rem;
+}
+.container h1::before{
+	content:url(../image/jiancedian.png);
+	vertical-align:-0.2rem;
+	margin-right:0.5rem;
+}
+.container h1 span{
+	display:block;
+	float:right;
+	font-weight:normal;
+}
+.container h2{
+	font-size:1rem;
+}
+.list,.container h1 span{
+	font-size:0.5rem;
+	color:rgb(145,139,138);
+	margin:0.5rem 0 0.5rem 0;
+}
+.type{
+	width:25%;
+	text-align:center;
+	float:left;
+}
+.type img{
+	width:50%;
+}
+.type p{
+	margin-bottom:0;
+}
+
+/*新增*/
 .listView {
 	background: white;
 	border-radius: 0.5rem;
@@ -33,7 +79,6 @@
 	float: right;
 	vertical-align: -20px;
 	cursor: pointer;
-	margin-right: 0.5rem;
 }
 
 /*.container{height:100%;}*/
