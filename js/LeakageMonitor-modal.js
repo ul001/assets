@@ -1,26 +1,29 @@
 $(function () {
+     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+     var subidFromAPP=10100001;
     //iOS安卓基础传参
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
-    if (isIOS) { //ios系统的处理
-        window.webkit.messageHandlers.iOS.postMessage(null);
-        var storage = localStorage.getItem("accessToken");
-        // storage = storage ? JSON.parse(storage):[];
-        storage = JSON.parse(storage);
-        baseUrlFromAPP = storage.baseurl;
-        tokenFromAPP = storage.token;
-        subidFromAPP = storage.fsubID;
-    } else {
-        baseUrlFromAPP = android.getBaseUrl();
-        tokenFromAPP = android.getToken();
-        subidFromAPP = android.getfSubid();
-    }
+//    var u = navigator.userAgent,
+//        app = navigator.appVersion;
+//    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+//    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+//    //判断数组中是否包含某字符串
+//    var baseUrlFromAPP;
+//    var tokenFromAPP;
+//    var subidFromAPP;
+//    if (isIOS) { //ios系统的处理
+//        window.webkit.messageHandlers.iOS.postMessage(null);
+//        var storage = localStorage.getItem("accessToken");
+//        // storage = storage ? JSON.parse(storage):[];
+//        storage = JSON.parse(storage);
+//        baseUrlFromAPP = storage.baseurl;
+//        tokenFromAPP = storage.token;
+//        subidFromAPP = storage.fsubID;
+//    } else {
+//        baseUrlFromAPP = android.getBaseUrl();
+//        tokenFromAPP = android.getToken();
+//        subidFromAPP = android.getfSubid();
+//    }
 
     var choise = 1;
     var info = null;
@@ -80,28 +83,29 @@ $(function () {
             legend: {
                 data: ['漏电流']
             },
-            grid: {
-                left: '15%',
-                right: '3%',
-                top: '15%',
-                bottom: '8%'
-            },
-            toolbox: {
-                show: true,
-                feature: {
-                    saveAsImage: {
-                        type: 'png',
-                        show: true,
-                        title: '保存为图片'
-                    },
-                    magicType: {
-                        show: true,
-                        type: ['line', 'bar']
-                    },
-                    restore: {
-                        show: true
+            toolbox:{
+                show:true,
+                orient:'horizontal',
+                top:-6,
+                feature:{
+                    dataView: {readOnly: true},
+                    dataZoom: {
+                        yAxisIndex: 'none'
                     }
                 }
+            },
+            dataZoom: [{   // 这个dataZoom组件，默认控制x轴。
+                type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                start: 0,      // 左边在 10% 的位置。
+                end: 100,         // 右边在 60% 的位置。
+                height:25,
+                bottom:8
+            }],
+            grid:{
+                left:'13%',
+                right:'11%',
+                top:'20%',
+                bottom:'28%'
             },
             calculable: true,
             xAxis: [{
@@ -124,28 +128,29 @@ $(function () {
             legend: {
                 data: ['温度A', '温度B', '温度C']
             },
-            grid: {
-                left: '5%',
-                right: '3%',
-                top: '5%',
-                bottom: '8%'
-            },
-            toolbox: {
-                show: true,
-                feature: {
-                    saveAsImage: {
-                        type: 'png',
-                        show: true,
-                        title: '保存为图片'
-                    },
-                    magicType: {
-                        show: true,
-                        type: ['line', 'bar']
-                    },
-                    restore: {
-                        show: true
+            toolbox:{
+                show:true,
+                orient:'horizontal',
+                top:-6,
+                feature:{
+                    dataView: {readOnly: true},
+                    dataZoom: {
+                        yAxisIndex: 'none'
                     }
                 }
+            },
+            dataZoom: [{   // 这个dataZoom组件，默认控制x轴。
+                type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                start: 0,      // 左边在 10% 的位置。
+                end: 100,         // 右边在 60% 的位置。
+                height:25,
+                bottom:8
+            }],
+            grid:{
+                left:'13%',
+                right:'11%',
+                top:'20%',
+                bottom:'28%'
             },
             calculable: true,
             xAxis: [{
@@ -169,7 +174,10 @@ $(function () {
                 data: tempC
             }]
         };
-        $("#contain").html("<div id='IChart'></div><div id='EChart'></div>");
+        $(".chart").html('<div class="mainBox"><div id="tempTitle">漏电流(mA)</div>'+
+                          '<div id="IChart"></div></div>'+
+                          '<div class="mainBox"><div id="humiTitle">温度(°C)</div>'+
+                          '<div id="EChart"></div></div>');
         $("#IChart").removeAttr('_echarts_instance_');
         $("#EChart").removeAttr('_echarts_instance_');
         myChart = echarts.init($("#IChart").get(0), 'macarons');
@@ -251,12 +259,12 @@ $(function () {
                 }
             ]
         ];
-        $("#contain").html("");
-        $("#contain").html("<table id='table'></table>");
+        $(".chart").html("");
+        $(".chart").html("<table id='table'></table>");
         $("#table").bootstrapTable({
             columns: columns,
             data: tableData,
-            height: 500
+            height: 300
         });
     }
 

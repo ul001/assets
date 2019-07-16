@@ -9,14 +9,15 @@ body{
     cursor:pointer;
 }
 #table{
-    overflow:auto;
+    background-color:#FFFFFF;
+    overflow:hidden;
 }
-.mainBox thead{
+.chart thead{
     background:#42B685;
     color:#fff;
 }
-.mainBox tbody tr:nth-child(even){
-	background:#CDCDCE;
+.chart tbody tr:nth-child(even){
+	background:rgb(236,248,243);
 	border-top:1px solid #C8C9CA;
 	border-bottom:1px solid #C8C9CA;
 }
@@ -32,7 +33,7 @@ body{
 }
 .chart #tempChart{
     width:100%;
-    height:200px;
+    height:300px;
     background:#FFFFFF;
 }
 .mainBox{

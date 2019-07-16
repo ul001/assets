@@ -1,29 +1,41 @@
 body{
 	background: #EDEDEC;
 }
-.chart{
-	width:100%;
-	height:450px;
-	overflow:auto;
-	border:1px solid red;
-	background:#fff;
-}
-#IChart,#EChart{
-    width:100%;
-    height:280px;
-}
 #datePre,#dateNext{
     cursor:pointer;
 }
 #table{
+    background-color:#FFFFFF;
     overflow:auto;
 }
-#contain thead{
+.chart thead{
     background:#42B685;
     color:#fff;
 }
-#contain tbody tr:nth-child(even){
-	background:#CDCDCE;
+.chart tbody tr:nth-child(even){
+	background:rgb(236,248,243);
 	border-top:1px solid #C8C9CA;
 	border-bottom:1px solid #C8C9CA;
+}
+#tempTitle,#humiTitle{
+    background-color: #42B685;
+    color: #FFF;
+    line-height:30px;
+    padding-left:10px;
+}
+.chart{
+    margin:0 auto;
+	padding:10px 0 10px 0;
+}
+.chart #IChart,#EChart{
+    width:100%;
+    height:200px;
+    background:#FFFFFF;
+}
+.mainBox{
+    background: #FFF;
+    border: 1px solid #b4b4b5;
+    overflow: hidden;
+    height: 100%;
+    margin-bottom:10px;
 }

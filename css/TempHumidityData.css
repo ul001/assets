@@ -29,7 +29,8 @@ body{
 }
 .chart{
     margin:0 auto;
-	padding-top:6px;
+	width:100%;
+	padding:10px;
 }
 .chart #tempChart,#humiChart{
     width:100%;

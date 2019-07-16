@@ -74,17 +74,14 @@ $(function () {
                         trigger: 'axis'
                     },
                     legend: {
-                        // left: 'left',
-//                        x: '{10}',
-//                        y: '{10}',
-                        // bottom: 'bottom',
+                        top:6,
                         data: ['温度A', '温度B', '温度C']
                     },
                     grid: {
                         left:'13%',
                         right:'11%',
-                        top:'20%',
-                        bottom:'28%'
+                        top:'15%',
+                        bottom:'20%'
                     },
                     toolbox:{
                         show:true,
@@ -102,7 +99,7 @@ $(function () {
                         start: 0,      // 左边在 10% 的位置。
                         end: 100,         // 右边在 60% 的位置。
                         height:25,
-                        bottom:8
+                        bottom:10
                     }],
                     calculable: true,
                     xAxis: [{
@@ -126,7 +123,7 @@ $(function () {
                         data: tempC
                     }]
                 };
-                $("#tempChart").html("");
+                $(".chart").html('<div class="mainBox"><div id="tempTitle">线缆温度</div><div id="tempChart"></div></div>');
                 $("#tempChart").removeAttr('_echarts_instance_');
                 myChart = echarts.init($("#tempChart").get(0), 'macarons');
                 myChart.setOption(option);
@@ -179,13 +176,11 @@ $(function () {
                         }
                     ]
                 ];
-                $(".mainBox").html("");
-                $(".mainBox").html("<table id='table'></table>");
-                var height = $(".mainBox").height();
+                $(".chart").html("<table id='table'></table>");
                 $("#table").bootstrapTable({
                     columns: columns,
                     data: tableData,
-                    height: height
+                    height: 250
                 })
             }
 
