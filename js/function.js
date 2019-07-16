@@ -1,9 +1,9 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjMyMDkwMDksInVzZXJuYW1lIjoiYWRtaW4ifQ.D0vpMFoRFyGiWAJEMmoCPi9aALenyEcJbFJKH-PnMm8";
-    var subidFromAPP=10100001;
+//    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+//    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+//    var subidFromAPP=10100001;
     //iOS安卓基础传参
-    /*var u = navigator.userAgent,
+    var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
@@ -29,7 +29,7 @@ $(function () {
                     _this.scrollIntoViewIfNeeded();
                 },200);
         });
-    }*/
+    }
 
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
@@ -119,8 +119,47 @@ $(function () {
             listDom.innerHTML = '';
         }
         $(data.list).each(function () {
-            var str = this.fStarttime + "<br>" + "[类型：" + this.fAlarmtype + " 仪表名称：" + this.fMetername +
-                " 参数名称：" + this.fParamname + "][报警值：" + this.fValue + " 限定值：" + this.fLimitvalue + "]"
+            var fValue = parseFloat(this.fValue);
+            var fValueStr = ""+fValue;
+            var fLimitStr = "";
+            if(this.fLimitvalue.indexOf("-")!=-1){
+                var valueStr = this.fLimitvalue.split("-");
+                var minValue = parseFloat(valueStr[0]);
+                var maxValue = parseFloat(valueStr[1]);
+                if(fValue<minValue||fValue>maxValue){
+                    fValueStr = "<a style='color:#DC143C'>"+fValue+"</a>";
+                }
+                fLimitStr=minValue+"-"+maxValue;
+            }else{
+                var limitValue = parseFloat(this.fLimitvalue);
+                if(fValue!=limitValue){
+                    fValueStr = "<a style='color:#DC143C'>"+fValue+"</a>";
+                }
+                fLimitStr = ""+limitValue;
+            }
+            var str = "<div class=\"container\">\n" +
+      "                <h1>"+this.fMetername+"<span>"+this.fStarttime+"</span></h1>\n" +
+      "                <div class=\"type\">\n" +
+      "                    <img src=\"image/ycyx1.png\"/>\n" +
+      "                    <p class=\"list\">类型</p>\n" +
+      "                    <p>"+this.fAlarmtype+"</p>\n" +
+      "                </div>\n" +
+      "                <div class=\"type\">\n" +
+      "                    <img src=\"image/ycyx2.png\"/>\n" +
+      "                    <p class=\"list\">参数名称</p>\n" +
+      "                    <p>"+this.fParamname+"</p>\n" +
+      "                </div>\n" +
+      "                <div class=\"type\">\n" +
+      "                    <img src=\"image/ycyx3.png\"/>\n" +
+      "                    <p class=\"list\">报警值</p>\n" +
+      "                    <p>"+fValueStr+"</p>\n" +
+      "                </div>\n" +
+      "                <div class=\"type\">\n" +
+      "                    <img src=\"image/ycyx4.png\"/>\n" +
+      "                    <p class=\"list\">限定值</p>\n" +
+      "                    <p>"+fLimitStr+"</p>\n" +
+      "                </div>\n" +
+      "            </div>";
             var liDom = document.createElement("li");
             liDom.innerHTML = str;
             listDom.appendChild(liDom); //加在列表的后面,上拉加载
