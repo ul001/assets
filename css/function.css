@@ -11,14 +11,14 @@ body,button,input{
 	padding:0 0.6rem;
 }
 .container{
-	padding:1rem 0.5rem 1rem 0.5rem;
+	padding:0.3rem 0.5rem 0.3rem 0.5rem;
 	background:#fff;
 	border-radius:0.5rem;
 	clear:both;
 	overflow:hidden;
 }
 .container h1{
-	font-size:1rem;
+	font-size:0.85rem;
 	margin-bottom:1rem;
 }
 .container h1::before{
@@ -35,7 +35,7 @@ body,button,input{
 	font-size:1rem;
 }
 .list,.container h1 span{
-	font-size:0.5rem;
+	font-size:0.8rem;
 	color:rgb(145,139,138);
 	margin:0.5rem 0 0.5rem 0;
 }
@@ -64,13 +64,13 @@ body,button,input{
 }
 
 .list-unstyled li {
-	width: 95%;
+	width: 100%;
 	padding: 0.5rem;
 	background: #fff;
 	list-style: none;
 	border: 1px solid #C8C9CA;
 	border-radius: 0.5rem;
-	margin: 0 0 0.5rem 0.5rem;
+	margin: 0 0 0.5rem 0rem;
 }
 
 .mescroll {
@@ -132,7 +132,7 @@ body,button,input{
 #lastMon{
     background-image:url(../image/sy-h.png);
 }
-#yesterday,#thisMon,#lastMon{
+#yesterday,#thisMon,#lastMon,#today{
 	font-size:0.9rem;
     background-repeat:no-repeat;
     background-position: 1.5rem 0.5rem;
@@ -165,7 +165,18 @@ body,button,input{
 	color: #fff;
     padding-left:3rem;
 }
-
+#today[class*="select"]{
+	background-image:url(../image/dr-b.png);
+}
+#yesterday[class*="select"]{
+	background-image:url(../image/sr-b.png);
+}
+#thisMon[class*="select"]{
+	background-image:url(../image/dy-b.png);
+}
+#lastMon[class*="select"]{
+	background-image:url(../image/sy-b.png);
+}
 .selectcontain p {
 	clear: both;
 	line-height: 2rem;
