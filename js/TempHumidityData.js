@@ -1,29 +1,29 @@
 $(function () {
-     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
-     var subidFromAPP=10100001;
+//     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+//     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+//     var subidFromAPP=10100001;
     //iOS安卓基础传参
-//     var u = navigator.userAgent,
-//         app = navigator.appVersion;
-//     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-//     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-//     //判断数组中是否包含某字符串
-//     var baseUrlFromAPP;
-//     var tokenFromAPP;
-//     var subidFromAPP;
-//     if (isIOS) { //ios系统的处理
-//         window.webkit.messageHandlers.iOS.postMessage(null);
-//         var storage = localStorage.getItem("accessToken");
-//         // storage = storage ? JSON.parse(storage):[];
-//         storage = JSON.parse(storage);
-//         baseUrlFromAPP = storage.baseurl;
-//         tokenFromAPP = storage.token;
-//         subidFromAPP = storage.fsubID;
-//     } else {
-//         baseUrlFromAPP = android.getBaseUrl();
-//         tokenFromAPP = android.getToken();
-//         subidFromAPP = android.getfSubid();
-//     }
+     var u = navigator.userAgent,
+         app = navigator.appVersion;
+     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+     //判断数组中是否包含某字符串
+     var baseUrlFromAPP;
+     var tokenFromAPP;
+     var subidFromAPP;
+     if (isIOS) { //ios系统的处理
+         window.webkit.messageHandlers.iOS.postMessage(null);
+         var storage = localStorage.getItem("accessToken");
+         // storage = storage ? JSON.parse(storage):[];
+         storage = JSON.parse(storage);
+         baseUrlFromAPP = storage.baseurl;
+         tokenFromAPP = storage.token;
+         subidFromAPP = storage.fsubID;
+     } else {
+         baseUrlFromAPP = android.getBaseUrl();
+         tokenFromAPP = android.getToken();
+         subidFromAPP = android.getfSubid();
+     }
 
       function getData(url,params,successCallback) {
         $.ajax({
@@ -116,22 +116,22 @@ $(function () {
                 }
             },
             dataZoom: [{   // 这个dataZoom组件，默认控制x轴。
-            type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-            start: 0,      // 左边在 10% 的位置。
-            end: 100,         // 右边在 60% 的位置。
-            height:20,
-            bottom:6
+                type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                start: 0,      // 左边在 10% 的位置。
+                end: 100,         // 右边在 60% 的位置。
+                height:25,
+                bottom:8
             }],
             grid:{
                 left:'13%',
                 right:'11%',
                 top:'20%',
-                bottom:'24%'
+                bottom:'28%'
             },
             xAxis:{
                 type:'category',
                 boundaryGap:false,
-                data:time
+                data:time,
             },
             yAxis:{
                 type:'value',
@@ -140,11 +140,11 @@ $(function () {
                     formatter:'{value}'+unit
                 }
             },
-            series:[
-                {
+            series:[{
                     name:name,
                     type:'line',
                     data:value,
+                    color:["#2EC6C9"],
                     markPoint:{
                         symbol:'circle',
                         symbolSize:10,
@@ -171,8 +171,7 @@ $(function () {
                     markLine:{
                         data:[{name:'平均值',type:'average'}]
                     }
-                }
-            ]
+                }]
         };
         return option;
     }

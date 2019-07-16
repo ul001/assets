@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/cableTemperature-modal.css" />
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/cableTemperature-modal.css"/>
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/bootstrap-table.min.js"></script>
     <script src="lib/echarts.min.js"></script>
@@ -18,14 +19,22 @@
 <body>
 <div class="container">
     <header>
-        <span id="datePre"><img src="image/left.png"/>上一日</span>
-        <input readonly type="text" id="date">
-        <span id="dateNext">下一日<img src="image/right-green.png"/></span>
+        <a id="titleP"></a>
+        <button id="return" onclick="window.history.back()">返回</button>
+        <div>
+            <span id="datePre"><img src="image/left.png"/>上一日</span>
+            <input readonly type="text" id="date">
+            <span id="dateNext">下一日<img src="image/right-green.png"/></span>
+        </div>
     </header>
     <button type="button" id="showChart">图表</button>
     <button type="button" id="showTable">数据</button>
-    <button id="return" onclick="window.history.back()">返回</button>
-    <div class="chart" id="contain"></div>
+    <div class="chart">
+        <div class="mainBox">
+            <div id="tempTitle">线缆温度</div>
+            <div id="tempChart"></div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

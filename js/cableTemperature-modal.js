@@ -1,31 +1,33 @@
 $(function () {
+     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+     var subidFromAPP=10100001;
             //iOS安卓基础传参
-            var u = navigator.userAgent,
-                app = navigator.appVersion;
-            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-            //判断数组中是否包含某字符串
-            var baseUrlFromAPP;
-            var tokenFromAPP;
-            var subidFromAPP;
-            if (isIOS) { //ios系统的处理
-                window.webkit.messageHandlers.iOS.postMessage(null);
-                var storage = localStorage.getItem("accessToken");
-                // storage = storage ? JSON.parse(storage):[];
-                storage = JSON.parse(storage);
-                baseUrlFromAPP = storage.baseurl;
-                tokenFromAPP = storage.token;
-                subidFromAPP = storage.fsubID;
-            } else {
-                baseUrlFromAPP = android.getBaseUrl();
-                tokenFromAPP = android.getToken();
-                subidFromAPP = android.getfSubid();
-            }
+//            var u = navigator.userAgent,
+//                app = navigator.appVersion;
+//            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+//            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+//            //判断数组中是否包含某字符串
+//            var baseUrlFromAPP;
+//            var tokenFromAPP;
+//            var subidFromAPP;
+//            if (isIOS) { //ios系统的处理
+//                window.webkit.messageHandlers.iOS.postMessage(null);
+//                var storage = localStorage.getItem("accessToken");
+//                // storage = storage ? JSON.parse(storage):[];
+//                storage = JSON.parse(storage);
+//                baseUrlFromAPP = storage.baseurl;
+//                tokenFromAPP = storage.token;
+//                subidFromAPP = storage.fsubID;
+//            } else {
+//                baseUrlFromAPP = android.getBaseUrl();
+//                tokenFromAPP = android.getToken();
+//                subidFromAPP = android.getfSubid();
+//            }
 
             var choise = 1;
             var info = null;
             var f_MeterCode = tool.getUrlParam("F_MeterCode");
-
             function setData() {
                 var params = {
                     fSubid: subidFromAPP,
@@ -44,6 +46,7 @@ $(function () {
                     },
                     success: function (result) {
                         info = result.data;
+                        $("#titleP").text(info.list[0].f_MeterName);
                         if (choise == 1) {
                             showChart(info.list);
                         } else {
@@ -72,43 +75,35 @@ $(function () {
                     },
                     legend: {
                         // left: 'left',
-                        x: '{10}',
-                        y: '{10}',
+//                        x: '{10}',
+//                        y: '{10}',
                         // bottom: 'bottom',
                         data: ['温度A', '温度B', '温度C']
                     },
                     grid: {
-                        left: '13%',
-                        right: '3%',
-                        top: '15%',
-                        bottom: '25%'
+                        left:'13%',
+                        right:'11%',
+                        top:'20%',
+                        bottom:'28%'
                     },
-                    toolbox: {
-                        left: "right",
-                        show: true,
-                        feature: {
+                    toolbox:{
+                        show:true,
+                        orient:'horizontal',
+                        top:-6,
+                        feature:{
+                            dataView: {readOnly: true},
                             dataZoom: {
-                                yAxisIndex: "none"
-                            },
-                            restore: {}
+                                yAxisIndex: 'none'
+                            }
                         }
-                        // feature: {
-                        //     magicType: {
-                        //         show: true,
-                        //         type: ['line', 'bar']
-                        //     },
-                        //     restore: {
-                        //         show: true
-                        //     }
-                        // }
                     },
-                    dataZoom: [{
-                            startValue: time[0]
-                        },
-                        {
-                            type: "inside"
-                        }
-                    ],
+                    dataZoom: [{   // 这个dataZoom组件，默认控制x轴。
+                        type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                        start: 0,      // 左边在 10% 的位置。
+                        end: 100,         // 右边在 60% 的位置。
+                        height:25,
+                        bottom:8
+                    }],
                     calculable: true,
                     xAxis: [{
                         data: time
@@ -131,9 +126,9 @@ $(function () {
                         data: tempC
                     }]
                 };
-                $("#contain").html("");
-                $("#contain").removeAttr('_echarts_instance_');
-                myChart = echarts.init($("#contain").get(0), 'macarons');
+                $("#tempChart").html("");
+                $("#tempChart").removeAttr('_echarts_instance_');
+                myChart = echarts.init($("#tempChart").get(0), 'macarons');
                 myChart.setOption(option);
             }
 
@@ -184,9 +179,9 @@ $(function () {
                         }
                     ]
                 ];
-                $("#contain").html("");
-                $("#contain").html("<table id='table'></table>");
-                var height = $("#contain").height();
+                $(".mainBox").html("");
+                $(".mainBox").html("<table id='table'></table>");
+                var height = $(".mainBox").height();
                 $("#table").bootstrapTable({
                     columns: columns,
                     data: tableData,
@@ -207,64 +202,44 @@ $(function () {
             var time = tool.initDate("YMD", new Date());
             $("#date").val(time);
 
+            new Rolldate({
+                el: '#date',
+                format: 'YYYY-MM-DD',
+                beginYear: 2000,
+                endYear: 2100,
+                value: $("#date").val(),
+                confirm: function (date) {
+                    var d = new Date();
+                    d1 = new Date(date.replace(/\-/g, "\/"));
+                    d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+                    if (d1 > d2) {
+                        return false;
+                    };
+                    $("#date").val(date);
+                    setData();
+                }
+            });
+
+            $("#datePre").click(function () {
+                var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+                var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
+                $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
+                setData();
+            });
+
+            $("#dateNext").click(function () {
+                var d = new Date();
+                var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
+                var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+                if (selectDate < nowDate) {
+                    var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
+                    $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)) + "-" + (nextDate.getDate() < 10 ? ("0" + nextDate.getDate()) : (nextDate.getDate())));
+                } else {
+                    return;
+                }
+                setData();
+            });
 
             setData();
 
-            new Rolldate({
-                    el: '#date',
-                    format: 'YYYY-MM-DD',
-                    beginYear: 2000,
-                    endYear: 2100,
-                    value: $("#date").val(),
-                    confirm: function (date) {
-                        var d = new Date();
-                        d1 = new Date(date.replace(/\-/g, "\/"));
-                        d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-                        if (d1 > d2) {
-                            return false;
-                        };
-                        $("#date").val(date);
-
-                        new Rolldate({
-                            el: '#date',
-                            format: 'YYYY-MM-DD',
-                            beginYear: 2000,
-                            endYear: 2100,
-                            value: $("#date").val(),
-                            confirm: function (date) {
-                                var d = new Date();
-                                d1 = new Date(date.replace(/\-/g, "\/"));
-                                d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-                                if (d1 > d2) {
-                                    return false;
-                                };
-                                $("#date").val(date);
-                                setData();
-                            }
-                        });
-
-                        $("#datePre").click(function () {
-                            var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
-                            var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
-                            $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
-                            setData();
-                        });
-
-                        $("#dateNext").click(function () {
-                            var d = new Date();
-                            var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
-                            var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
-                            if (selectDate < nowDate) {
-                                var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
-                                $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)) + "-" + (nextDate.getDate() < 10 ? ("0" + nextDate.getDate()) : (nextDate.getDate())));
-                            } else {
-                                return;
-                            }
-                            setData();
-                        });
-
-                        setData();
-
-                    });
-
-            });
+});
