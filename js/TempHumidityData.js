@@ -1,9 +1,9 @@
 $(function () {
-     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjMyMDkwMDksInVzZXJuYW1lIjoiYWRtaW4ifQ.D0vpMFoRFyGiWAJEMmoCPi9aALenyEcJbFJKH-PnMm8";
-     var subidFromAPP=10100001;
+//     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+//     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+//     var subidFromAPP=10100001;
     //iOS安卓基础传参
-     /*var u = navigator.userAgent,
+     var u = navigator.userAgent,
          app = navigator.appVersion;
      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
      var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
@@ -23,7 +23,7 @@ $(function () {
          baseUrlFromAPP = android.getBaseUrl();
          tokenFromAPP = android.getToken();
          subidFromAPP = android.getfSubid();
-     }*/
+     }
 
       function getData(url,params,successCallback) {
         $.ajax({
@@ -40,14 +40,9 @@ $(function () {
         });
       }
 
-      getListData();
       var time = tool.initDate("YMD", new Date());
       $("#date").val(time);
-
-      $(".sectionCard").on("click",function(){
-        $(this).addClass("sectionSelect").siblings().removeClass("sectionSelect");
-        getChartData();
-      });
+      getListData();
 
       function getListData(){
         var url = baseUrlFromAPP+"/main/app/getTempHumi";
@@ -66,6 +61,11 @@ $(function () {
                                             '<p>湿度：'+parseFloat(this.humi).toFixed(1)+this.humiUnit+'</p></section>');
                     });
                     $("#cardList section:first").addClass("sectionSelect");
+                    $(".sectionCard").on("click",function(){
+                      $(this).addClass("sectionSelect").siblings().removeClass("sectionSelect");
+                      $("#date").val(time);
+                      getChartData();
+                    });
                     getChartData();
                 }
             }
