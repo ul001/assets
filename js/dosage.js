@@ -22,14 +22,15 @@ $(function () {
         subidFromAPP = android.getfSubid();
     }
 
-    initNetData(); //初始化
-
     //页面初始化加载当日数据
-    var startDate = tool.initDate("YMD", new Date());
+
+    var startDate = tool.initDate("first", new Date());
     var endDate = tool.initDate("YMD", new Date());
 
     $(".startDate").val(startDate);
     $(".endDate").val(endDate);
+
+    initNetData(); //初始化
 
     function initNetData() {
         var showMon = tool.initDate("YM", new Date());
@@ -46,6 +47,8 @@ $(function () {
 
     //网络请求 type：sum电量 price电费
     function networkData(type) {
+        // $(".startDate").val(startDate);
+        // $(".endDate").val(endDate);
         //开始时间不能大于截止时间
         var nowDate = tool.initDate("YMDhm", new Date());
         if (startDate > endDate) {
@@ -64,6 +67,8 @@ $(function () {
         var url = baseUrlFromAPP + "/main/getMothJFPG";
         var params = {
             fSubid: subidFromAPP,
+            startTime: startDate,
+            endTime: endDate
         }
         getData(url, params, function (data) {
             showChartBar(data, type);
@@ -113,14 +118,25 @@ $(function () {
         if (startMon < 10) {
             startMon = '0' + startMon;
         }
-        for (var i = 1; i <= days; i++) {
-            if (i < 10) {
-                var day = '0' + i;
-            } else {
-                var day = i;
-            }
-            var t = startMon + "-" + day;
-            time.push(t);
+        // for (var i = 1; i <= days; i++) {
+        //     if (i < 10) {
+        //         var day = '0' + i;
+        //     } else {
+        //         var day = i;
+        //     }
+        //     var t = startMon + "-" + day;
+        //     time.push(t);
+        //     jian.push(null);
+        //     feng.push(null);
+        //     ping.push(null);
+        //     gu.push(null);
+        //     jPrice.push(null);
+        //     fPrice.push(null);
+        //     pPrice.push(null);
+        //     gPrice.push(null);
+        // }
+        $(data).each(function () {
+            time.push(this.f_Date.substring(5));
             jian.push(null);
             feng.push(null);
             ping.push(null);
@@ -129,7 +145,7 @@ $(function () {
             fPrice.push(null);
             pPrice.push(null);
             gPrice.push(null);
-        }
+        });
         $.each(data, function (key, val) {
             var t = val.f_Date.substring(5);
             for (var j = 0; j < time.length; j++) {
@@ -360,15 +376,15 @@ $(function () {
         beginYear: 2000,
         endYear: 2100,
         value: startDate,
-        // confirm: function (date) {
-        //     var d = new Date(),
-        //         d1 = new Date(date.replace(/\-/g, "\/")),
-        //         d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-        //     d3 = new Date($("#dateEnd").val().replace(/\-/g, "\/"));
-        //     if (d1 > d2 || d3 < d1) {
-        //         return false;
-        //     };
-        // }
+        confirm: function (date) {
+            var showMon = tool.initDate("YM", new Date());
+            $("#showTime").html(showMon);
+            $(".startDate").val(date);
+            var select = $("#selectType").get(0);
+            var type = select.options[select.selectedIndex].value; //获取被选中option的value
+            networkData(type);
+
+        }
     });
 
     new Rolldate({
@@ -377,14 +393,13 @@ $(function () {
         beginYear: 2000,
         endYear: 2100,
         value: endDate,
-        // confirm: function (date) {
-        //     var d = new Date(),
-        //         d1 = new Date(date.replace(/\-/g, "\/")),
-        //         d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-        //     d3 = new Date($("#dateStart").val().replace(/\-/g, "\/"));
-        //     if (d1 > d2 || d1 < d3) {
-        //         return false;
-        //     };
-        // }
+        confirm: function (date) {
+            var showMon = tool.initDate("YM", new Date());
+            $("#showTime").html(showMon);
+            $(".endDate").val(date);
+            var select = $("#selectType").get(0);
+            var type = select.options[select.selectedIndex].value; //获取被选中option的value
+            networkData(type);
+        }
     });
 });

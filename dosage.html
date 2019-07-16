@@ -27,13 +27,14 @@
           <input readonly type="text" id="dateEnd" class="endDate" size="16">
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
+
+        <select class="classify" id="selectType">
+          <!--按电量-->
+          <option value="sum" class="i18n" name="Electricity">按电量</option>
+          <!-- 按电费 -->
+          <option value="price" class="i18n" name="Price">按电费</option>
+        </select>
       </div>
-      <select class="classify" id="selectType">
-        <!--按电量-->
-        <option value="sum" class="i18n" name="Electricity">按电量</option>
-        <!-- 按电费 -->
-        <option value="price" class="i18n" name="Price">按电费</option>
-      </select>
     </div>
     <div class="diagram center classdata" id="chartDosage">
 

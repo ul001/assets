@@ -1,12 +1,14 @@
-body{
+body {
 	background: #EDEDEC;
 }
-section{
-	width:30%;
-	float:left;
+
+section {
+	width: 30%;
+	float: left;
 }
-.chart{
-	width:100%;
-	height:300px;
-	border:1px solid red;
+
+.chart {
+	width: 100%;
+	height: 300px;
+	border: 1px solid red;
 }
