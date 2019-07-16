@@ -22,51 +22,49 @@
     </div>
 
     <div class="selectcontain" style="display:none;">
-        <div class="functionDate">
-            <button id="today" type="button" class="btn select">当日</button>
-            <button id="yesterday" type="button" class="btn">昨日</button>
-            <button id="thisMon" type="button" class="btn">当月</button>
-            <button id="lastMon" type="button" class="btn">上月</button>
-        </div>
-        <hr>
-        <div class="form-group function-group">
-            <label for="dtp_input2" class="col-md-2 control-label">开始日期：</label>
-            <div class="input-group date form_date_start col-md-5" data-date="" data-link-field="dtp_input2">
-                <input readonly type="text" id="dateStart" class="startDate" size="16">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        <div class="selectcontain-main" >
+            <div class="functionDate">
+                <button id="today" type="button" class="btn select">当日</button>
+                <button id="yesterday" type="button" class="btn">昨日</button>
+                <button id="thisMon" type="button" class="btn">当月</button>
+                <button id="lastMon" type="button" class="btn">上月</button>
             </div>
-            <input type="hidden" id="dtp_input2" value=""><br>
-        </div>
-        <div class="form-group function-group">
-            <label for="dtp_input2" class="col-md-2 control-label">结束日期：</label>
-            <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
-                <input readonly type="text" id="dateEnd" class="endDate" size="16">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            <div class="form-group function-group">
+                <label for="dtp_input2" class="col-md-2 control-label"><img src="image/date.png"/>日期</label>
+                <div class="input-group date form_date_start col-md-5" data-date="" data-link-field="dtp_input2">
+                    <input readonly type="text" id="dateStart" class="startDate" size="16">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input2" value="">
+                <label for="dtp_input2" class="col-md-2 to">至</label>
+                <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
+                    <input readonly type="text" id="dateEnd" class="endDate" size="16">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input3" value="">
             </div>
-            <input type="hidden" id="dtp_input3" value=""><br>
+<!--            <div class="sRow">
+                <span><img src="image/type.png"/>类型</span>
+                <select id="alermType">
+                    <option value="全部">全部</option>
+                    <option value="高限报警">高限报警</option>
+                    <option value="高高限报警">高高限报警</option>
+                    <option value="低限报警">低限报警</option>
+                    <option value="低低限报警">低低限报警</option>
+                    <option value="报警恢复">报警恢复</option>
+                </select>
+            </div>-->
+            <div class="sRow">
+                <span><img src="image/yibiao.png"/>仪表名称</span>
+                <input type="text" id="meterName" placeholder="请输入仪表名称"/>
+            </div>
+            <div class="sRow">
+                <span><img src="image/cansu.png"/>参数名称</span>
+                <input type="text" id="paramName" placeholder="请输入参数名称" />
+            </div>
+            <button type="button" class="cancel">取消</button>
+            <button type="button" class="search">查询</button>
         </div>
-        <hr>
-        <!-- <div class="sRow">
-        <span>类型：</span>
-        <select id="alermType">
-            <option value="全部">全部</option>
-            <option value="高限报警">高限报警</option>
-            <option value="高高限报警">高高限报警</option>
-            <option value="低限报警">低限报警</option>
-            <option value="低低限报警">低低限报警</option>
-            <option value="报警恢复">报警恢复</option>
-        </select>
-    </div> -->
-        <div class="sRow">
-            <span>仪表名称：</span>
-            <input type="text" id="meterName" />
-        </div>
-        <div class="sRow">
-            <span>参数名称：</span>
-            <input type="text" id="paramName" />
-        </div>
-        <button type="button" class="cancel">取消</button>
-        <button type="button" class="search">查询</button>
     </div>
     <script src="lib/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="lib/mescroll.js" type="text/javascript" charset="utf-8"></script>
