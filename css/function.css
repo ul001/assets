@@ -1,4 +1,12 @@
 /*新增*/
+body,button,input{
+	font-size:0.9rem;
+}
+.grey{
+	background:rgba(0,0,0,0.5);
+	width:100%;
+	height:100%;
+}
 #mescroll{
 	padding:0 0.6rem;
 }
@@ -42,7 +50,10 @@
 .type p{
 	margin-bottom:0;
 }
-
+#dateStart,#dateEnd{
+	background:url(../image/down.png) no-repeat 4.8rem 0.9rem;
+	background-size:10px;
+}
 /*新增*/
 .listView {
 	background: white;
@@ -83,34 +94,58 @@
 
 /*.container{height:100%;}*/
 .selectcontain {
-	width: 85%;
+	width:100%;
 	height: 100%;
-	background: #fff;
+	background: rgba(0,0,0,0.5);
 	position: absolute;
 	right: 0;
 	top: 0;
-	padding: 2rem 1rem 0 1rem;
 	overflow: hidden;
 	clear: both;
 	z-index: 999;
 }
-
+.selectcontain-main{
+	width:87%;
+	height:100%;
+	background:#fff;
+	position:absolute;
+	right:0;
+	top:0;
+	padding: 2rem 1rem 0 1rem;
+}
 @media (max-height: 20rem) {
     .selectcontain .search,
     .selectcontain .cancel{
         display:none;
     }
 }
-
+#today{
+	font-size:0.9rem;
+    background-image:url(../image/dr-h.png);
+}
+#yesterday{
+    background-image:url(../image/sr-h.png);
+}
+#thisMon{
+    background-image:url(../image/dy-h.png);
+}
+#lastMon{
+    background-image:url(../image/sy-h.png);
+}
+#yesterday,#thisMon,#lastMon{
+	font-size:0.9rem;
+    background-repeat:no-repeat;
+    background-position: 1.5rem 0.5rem;
+    background-size:12%;
+}
 .selectcontain button {
 	width: 48%;
 	float: left;
 	margin-bottom: 0.5rem;
-	background: #fff;
-	border: 1px solid #888888;
-	border-radius: 5px;
+	background-color:rgb(244,241,241);
+	border-radius: 1.5rem;
+    padding-left:3rem;
 }
-
 .selectcontain button:first-child {
 	margin-right: 0.5rem;
 }
@@ -120,9 +155,15 @@
 }
 
 .selectcontain .select {
-	background: #02AC94;
+	font-size:0.9rem;
+    background-image:url(../image/dr-b.png);
+    background-repeat:no-repeat;
+    background-position:1.5rem 0.5rem;
+    background-size:12%;
+	background-color: #02AC94;
 	border: 1px solid #02AC94;
 	color: #fff;
+    padding-left:3rem;
 }
 
 .selectcontain p {
@@ -138,33 +179,37 @@
 }
 
 .selectcontain span {
-	width: 35%;
+	width: 5.5rem;
 	display: block;
 	float: left;
-	text-align: right;
+	text-align: left;
+	color:#565A68;
 }
-
+#meterName::-webkit-input-placeholder,#paramName::-webkit-input-placeholder{
+	color:#999DA6;
+}
 .selectcontain input,
 .selectcontain select {
-	width: 65%;
 	height: 2rem;
-	border-radius: 0.3rem;
-	border: 0.04rem solid #888888;
+	width:inherit;
+	border:none;
 }
-
+.selectcontain .cancel,.selectcontain .search{
+	padding-left:0;
+}
 .selectcontain .search,
 .selectcontain .cancel {
 	position: fixed;
 	bottom: 0;
 	line-height: 3rem;
-	width: 42.5%;
+	width: 43.5%;
 	border-radius: 0;
 	border: none;
 	margin-bottom: 0;
 }
 
 .selectcontain .cancel {
-	left: 15%;
+	left: 13%;
 	background: #d4d4d0;
 }
 
@@ -180,29 +225,59 @@
 
 #dateStart,
 #dateEnd {
-	width: 100%;
+	border:none;
+	color:#000;
 }
 
 .function-group label {
-	width: 35%;
-	text-align: right;
+	width: 5.5rem;
+	text-align: left;
 	float: left;
 	display: block;
 	padding: 0;
-	padding-top: 4px;
+	padding-top: 6px;
+	color:#565A68;
 }
-
+.function-group .to{
+	width:1rem;
+}
+.control-label img,.sRow span img{
+    width:20%;
+    vertical-align:-0.1rem;
+    margin-right:0.4rem;
+}
+.functionDate{
+	width:85%;
+    clear:both;
+	overflow:hidden;
+	margin:0 auto;
+	margin-bottom:1rem;
+}
 .functionDate .btn:hover {
 	color: #fff;
 }
-
+.function-group,.sRow{
+	clear:both;
+	overflow:hidden;
+	height:3rem;
+	border-bottom:1px solid #E3E4E8;
+}
+#alermType,#meterName,#paramName{
+	width:calc(100% - 5.5rem);
+}
+#alermType{
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	background:url(../image/right.png) no-repeat right center;
+	background-size:4%;
+}
 .function-group .input-group {
-	width: 65%;
+	width:5.8rem;
 	float: left;
 	padding-left: 0;
 	padding-right: 0;
 }
-
 .sRow {
 	margin-bottom: 1rem;
 }
