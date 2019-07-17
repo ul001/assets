@@ -40,6 +40,7 @@ $(function () {
             clearEmptyId: "container" //相当于同时设置了clearId和empty.warpId; 简化写法;默认null
         }
     });
+
     /*下拉刷新的回调 */
     function downCallback() {
         mescroll.resetUpScroll();
@@ -67,7 +68,6 @@ $(function () {
             mescroll.endErr();
         });
     }
-
 
     function getListDataFromNet(num,page,successCallback,errorCallback){
         var url = baseUrlFromAPP+"/main/energySecurity/leakageMonitor";
@@ -125,7 +125,7 @@ $(function () {
                     '<p>B:<span>' + tempB + '</span>℃</p>' +
                     '<p>C:<span>' + tempC + '</span>℃</p>' +
                     '</div>' +
-                    '<button class="search tempBtn" type="button" value="' + val.fMetercode + '">查 询</button>' +
+                    '<button class="search tempBtn" type="button" name="'+val.fMeterName+'" value="' + val.fMetercode + '">查 询</button>' +
                     '</div>' +
                     '</section>';
                 $("#container").append(string);
@@ -134,6 +134,8 @@ $(function () {
 
         $(".tempBtn").click(function () {
             var F_MeterCode = $(this).attr("value");
+            var F_MeterName = $(this).attr("name");
+            localStorage.setItem("fMeterName",F_MeterName);
             location.href="LeakageMonitor-modal.html?F_MeterCode="+F_MeterCode;
         })
     }
