@@ -21,11 +21,11 @@ $(function () {
         baseUrlFromAPP = android.getBaseUrl();
         tokenFromAPP = android.getToken();
         subidFromAPP = android.getfSubid();
-        $("#meterName,#paramName").on("focus",function(){
-                    var _this = this;
-                    setTimeout(function(){
-                        _this.scrollIntoViewIfNeeded();
-                    },200);
+        $("#meterName,#paramName").on("focus", function () {
+            var _this = this;
+            setTimeout(function () {
+                _this.scrollIntoViewIfNeeded();
+            }, 200);
         });
     }
 
@@ -128,11 +128,55 @@ $(function () {
             listDom.innerHTML = '';
         }
         $(data.list).each(function () {
-            var str = this.fStarttime + "<br>" + "[仪表编号：" + this.fMetercode + " 仪表名称：" + this.fMetername +
-                " 参数名称：" + this.fParamname + "][类型：" + this.valueType + "]"
+            //  var fValue = parseFloat(this.fValue);
+            //  var fValueStr = "" + fValue;
+            //  var fLimitStr = "";
+            //  if (this.fLimitvalue.indexOf("-") != -1) {
+            //      var valueStr = this.fLimitvalue.split("-");
+            //      var minValue = parseFloat(valueStr[0]);
+            //      var maxValue = parseFloat(valueStr[1]);
+            //      if (fValue < minValue || fValue > maxValue) {
+            //          fValueStr = "<a style='color:#DC143C'>" + fValue + "</a>";
+            //      }
+            //      fLimitStr = minValue + "-" + maxValue;
+            //  } else {
+            //      var limitValue = parseFloat(this.fLimitvalue);
+            //      if (fValue != limitValue) {
+            //          fValueStr = "<a style='color:#DC143C'>" + fValue + "</a>";
+            //      }
+            //      fLimitStr = "" + limitValue;
+            //  }
+            var str = "<div class=\"container\">\n" +
+                "                <h1>" + this.fMetername + "<span>" + this.fStarttime + "</span></h1>\n" +
+                "                <div class=\"type\">\n" +
+                "                    <img src=\"image/ycyx1.png\"/>\n" +
+                "                    <p class=\"list\">仪表编号</p>\n" +
+                "                    <p>" + this.fMetercode + "</p>\n" +
+                "                </div>\n" +
+                "                <div class=\"type\">\n" +
+                "                    <img src=\"image/ycyx2.png\"/>\n" +
+                "                    <p class=\"list\">仪表名称</p>\n" +
+                "                    <p>" + this.fMetername + "</p>\n" +
+                "                </div>\n" +
+                "                <div class=\"type\">\n" +
+                "                    <img src=\"image/ycyx3.png\"/>\n" +
+                "                    <p class=\"list\">参数名称</p>\n" +
+                "                    <p>" + this.fParamname + "</p>\n" +
+                "                </div>\n" +
+                "                <div class=\"type\">\n" +
+                "                    <img src=\"image/ycyx4.png\"/>\n" +
+                "                    <p class=\"list\">类型</p>\n" +
+                "                    <p>" + this.valueType + "</p>\n" +
+                "                </div>\n" +
+                "            </div>";
             var liDom = document.createElement("li");
             liDom.innerHTML = str;
             listDom.appendChild(liDom); //加在列表的后面,上拉加载
+            // var str = this.fStarttime + "<br>" + "[仪表编号：" + this.fMetercode + " 仪表名称：" + this.fMetername +
+            //     " 参数名称：" + this.fParamname + "][类型：" + this.valueType + "]"
+            // var liDom = document.createElement("li");
+            // liDom.innerHTML = str;
+            // listDom.appendChild(liDom); //加在列表的后面,上拉加载
         });
     }
 
@@ -152,8 +196,8 @@ $(function () {
 
         var params = {
             fSubid: subidFromAPP,
-            startDate: startDate+" 00:00:00",
-            endDate: endDate+" 23:59:59",
+            startDate: startDate + " 00:00:00",
+            endDate: endDate + " 23:59:59",
             // fMetername: fMetername,
             // fParamname: fParamname,
             pageNo: pageNum,
