@@ -1,34 +1,35 @@
 $(function () {
+    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
-    if (isIOS) { //ios系统的处理
-        window.webkit.messageHandlers.iOS.postMessage(null);
-        var storage = localStorage.getItem("accessToken");
-        // storage = storage ? JSON.parse(storage):[];
-        storage = JSON.parse(storage);
-        baseUrlFromAPP = storage.baseurl;
-        tokenFromAPP = storage.token;
-        subidFromAPP = storage.fsubID;
-    } else {
-        baseUrlFromAPP = android.getBaseUrl();
-        tokenFromAPP = android.getToken();
-        subidFromAPP = android.getfSubid();
-        $("#meterId").on("focus", function () {
-            var _this = this;
-            setTimeout(function () {
-                _this.scrollIntoViewIfNeeded();
-            }, 200);
-        });
-    }
-
-
+//    var u = navigator.userAgent,
+//        app = navigator.appVersion;
+//    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+//    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+//    //判断数组中是否包含某字符串
+//    var baseUrlFromAPP;
+//    var tokenFromAPP;
+//    var subidFromAPP;
+//    if (isIOS) { //ios系统的处理
+//        window.webkit.messageHandlers.iOS.postMessage(null);
+//        var storage = localStorage.getItem("accessToken");
+//        // storage = storage ? JSON.parse(storage):[];
+//        storage = JSON.parse(storage);
+//        baseUrlFromAPP = storage.baseurl;
+//        tokenFromAPP = storage.token;
+//        subidFromAPP = storage.fsubID;
+//    } else {
+//        baseUrlFromAPP = android.getBaseUrl();
+//        tokenFromAPP = android.getToken();
+//        subidFromAPP = android.getfSubid();
+//        $("#meterId").on("focus", function () {
+//            var _this = this;
+//            setTimeout(function () {
+//                _this.scrollIntoViewIfNeeded();
+//            }, 200);
+//        });
+//    }
 
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
@@ -131,7 +132,15 @@ $(function () {
         $(data.list).each(function () {
             var deviceStr = this.f_AlarmDesc;
             var deviceName = deviceStr.substring(deviceStr.indexOf("[")+1,deviceStr.indexOf("]"));
-            var str = this.f_StartTime.split(".")[0] + "<br>" + "[设备编号：" + this.f_DeviceCode + "&nbsp;&nbsp;&nbsp;设备名称：" +deviceName+ "]"
+            var str = "        <div class=\"container\">\n" +
+                      "            <h1>"+deviceName+"</h1>\n" +
+                      "            <div class=\"type\">\n" +
+                      "                <img src=\"image/znwg.png\"/>\n" +
+                      "                <p class=\"list\">设备编号</p>\n" +
+                      "                <p>"+this.f_DeviceCode+"</p>\n" +
+                      "                <p class=\"list\">"+this.f_StartTime.split(".")[0]+"</p>\n" +
+                      "            </div>\n" +
+                      "        </div>";
             var liDom = document.createElement("li");
             liDom.innerHTML = str;
             listDom.appendChild(liDom); //加在列表的后面,上拉加载
