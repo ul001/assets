@@ -128,24 +128,11 @@ $(function () {
             listDom.innerHTML = '';
         }
         $(data.list).each(function () {
-            //  var fValue = parseFloat(this.fValue);
-            //  var fValueStr = "" + fValue;
-            //  var fLimitStr = "";
-            //  if (this.fLimitvalue.indexOf("-") != -1) {
-            //      var valueStr = this.fLimitvalue.split("-");
-            //      var minValue = parseFloat(valueStr[0]);
-            //      var maxValue = parseFloat(valueStr[1]);
-            //      if (fValue < minValue || fValue > maxValue) {
-            //          fValueStr = "<a style='color:#DC143C'>" + fValue + "</a>";
-            //      }
-            //      fLimitStr = minValue + "-" + maxValue;
-            //  } else {
-            //      var limitValue = parseFloat(this.fLimitvalue);
-            //      if (fValue != limitValue) {
-            //          fValueStr = "<a style='color:#DC143C'>" + fValue + "</a>";
-            //      }
-            //      fLimitStr = "" + limitValue;
-            //  }
+
+            var fValueStr = "" + this.valueType;
+            if (this.valueType == '开门') {
+                fValueStr = "<a style='color:#DC143C'>" + this.valueType + "</a>";
+            }
             var str = "<div class=\"container\">\n" +
                 "                <h1>" + this.fMetername + "<span>" + this.fStarttime + "</span></h1>\n" +
                 "                <div class=\"type\">\n" +
@@ -166,7 +153,7 @@ $(function () {
                 "                <div class=\"type\">\n" +
                 "                    <img src=\"image/ycyx4.png\"/>\n" +
                 "                    <p class=\"list\">类型</p>\n" +
-                "                    <p>" + this.valueType + "</p>\n" +
+                "                    <p>" + fValueStr + "</p>\n" +
                 "                </div>\n" +
                 "            </div>";
             var liDom = document.createElement("li");

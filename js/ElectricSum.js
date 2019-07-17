@@ -170,6 +170,7 @@ $(function () {
     $("#confirm").click(function () {
         $(".tree").hide();
         $("#meter").html(currentSelectVode.merterName);
+        searchGetData();
     });
 
     $("#electric").click(function () {
