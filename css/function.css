@@ -2,6 +2,9 @@
 body,button,input{
 	font-size:0.9rem;
 }
+#sideClick p img{
+	float:left;
+}
 .grey{
 	background:rgba(0,0,0,0.5);
 	width:100%;
