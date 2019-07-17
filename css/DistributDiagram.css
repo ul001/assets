@@ -1,17 +1,29 @@
 .listView{
     background: white;
     border-radius: 0.5rem;
-    border: 0.05rem solid #B4B4B5;
+    border:none;
     padding: 0.3rem;
     margin: 0.3rem 0 0.3rem 0;
 }
+#subList{
+	background:url("../image/down-h.png") no-repeat right center;
+	border:none;
+	padding-right:1.5rem;
+	color:#000;
+	appearance:none;
+	-webkit-appearance:none;
+
+}
 .container{
-    background: #EDEDEC;
+    background: #fff;
     height: 100%;
     padding-right:0;
     padding-left:0;
 }
-body{height: 100%;background:#EDEDEC;}
+.container >img{
+	padding-top:5px;
+}
+body{height: 100%;background:#fff;}
 .data{
 	line-height: 40px;
 	margin:0.5rem 0 0.5rem 0;
@@ -21,35 +33,66 @@ body{height: 100%;background:#EDEDEC;}
 	vertical-align: -20px;
 	cursor: pointer;
 }
-.container{height:100%;padding-top:0.5rem;}
+.container{height:100%;padding-top:1rem;}
 .diagram{
 	background:#000;
 	width:inherit;
-	height:calc(100% - 3rem);
+	height:calc(100% - 4rem);
 	position:absolute;
-	top: 3rem;
+	top: 4rem;
     left: 0;
 }
 .container select{
-	width:50%;
-	border-radius: 0.3rem;
-	border:0.04rem solid #888888;
+	width:auto;
+	border-radius: 1.2rem;
 	margin:0 auto;
 	height:2rem;
 	display: block;
 	margin-left:0.5rem;
 	margin-bottom:0.5rem;
 	float:left;
+	padding:0 0.5rem;
 }
+
+#BigDom[class*="select"]{
+	background-image:url("../image/fangda.png");
+}
+#SimDom[class*="select"]{
+	background-image:url("../image/suoxiao.png");
+}
+.container .SimDom{
+	margin-right:5px;
+	vertical-align:-4px;
+	background-image:url("../image/suoxiao-h.png");
+	background-repeat:no-repeat;
+	background-position:0.7rem 0.5rem;
+	background-size:1.2rem;
+}
+.BigDom{
+	background-image:url("../image/fangda-h.png");
+}
+.SimDom,.BigDom{
+	padding-left:2rem;
+}
+body .container .select{
+	background-color:#02AC94;
+	color:#fff;
+	background-repeat:no-repeat;
+	background-position:0.7rem 0.3rem;
+	background-size:1.5rem;
+}
+
 .container button{
-	width:18%;
-	border-radius: 0.3rem;
-	border:0.04rem solid #888888;
+	width:22%;
+	border-radius: 1.2rem;
 	height:2rem;
 	display: inline-block;
 	margin-bottom:0.5rem;
-	margin-right: 15px;
+	margin-right: 5px;
 	float: right;
+	background:rgb(244,242,241);
+	border:none;
+	color:#8a8a8a;
 }
 .diagram{
     overflow:auto;
