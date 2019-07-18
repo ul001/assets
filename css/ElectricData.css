@@ -110,6 +110,10 @@ body{
 	border-bottom:1px solid #C8C9CA;
 }
 .center{margin:0 auto;}
+#chartContain{
+    width:95%;
+    border:1px solid #C8C9CA;
+}
 #date{
 	height:2.5rem;
 	border-radius:5px;

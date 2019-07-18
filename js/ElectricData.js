@@ -1,29 +1,29 @@
 $(function () {
-  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-  var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
-  var subidFromAPP=10100001;
+//  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+//  var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+//  var subidFromAPP=10100001;
   //iOS安卓基础传参
-  // var u = navigator.userAgent,
-  //   app = navigator.appVersion;
-  // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-  // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-  // //判断数组中是否包含某字符串
-  // var baseUrlFromAPP;
-  // var tokenFromAPP;
-  // var subidFromAPP;
-  // if (isIOS) { //ios系统的处理
-  //   window.webkit.messageHandlers.iOS.postMessage(null);
-  //   var storage = localStorage.getItem("accessToken");
-  //   // storage = storage ? JSON.parse(storage):[];
-  //   storage = JSON.parse(storage);
-  //   baseUrlFromAPP = storage.baseurl;
-  //   tokenFromAPP = storage.token;
-  //   subidFromAPP = storage.fsubID;
-  // } else {
-  //   baseUrlFromAPP = android.getBaseUrl();
-  //   tokenFromAPP = android.getToken();
-  //   subidFromAPP = android.getfSubid();
-  // }
+   var u = navigator.userAgent,
+     app = navigator.appVersion;
+   var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+   var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+   //判断数组中是否包含某字符串
+   var baseUrlFromAPP;
+   var tokenFromAPP;
+   var subidFromAPP;
+   if (isIOS) { //ios系统的处理
+     window.webkit.messageHandlers.iOS.postMessage(null);
+     var storage = localStorage.getItem("accessToken");
+     // storage = storage ? JSON.parse(storage):[];
+     storage = JSON.parse(storage);
+     baseUrlFromAPP = storage.baseurl;
+     tokenFromAPP = storage.token;
+     subidFromAPP = storage.fsubID;
+   } else {
+     baseUrlFromAPP = android.getBaseUrl();
+     tokenFromAPP = android.getToken();
+     subidFromAPP = android.getfSubid();
+   }
 
   var currentSelectVode = {}; //选中节点
 
@@ -280,9 +280,9 @@ $(function () {
             sum: 0,
             avg: 0,
             max: [el.fParamvalue],
-            maxTime: [el.fCollecttime.substring(0, 16)],
+            maxTime: [el.fCollecttime.substring(11, 16)],
             min: [el.fParamvalue],
-            minTime: [el.fCollecttime.substring(0, 16)]
+            minTime: [el.fCollecttime.substring(11, 16)]
           });
         }
         if ($.inArray(el.fParamcode.substring(1), name) != -1) {
@@ -296,12 +296,12 @@ $(function () {
 
           if (el.fParamvalue > tableData[$.inArray(el.fParamcode.substring(1), name)].max) {
             tableData[$.inArray(el.fParamcode.substring(1), name)].max = el.fParamvalue;
-            tableData[$.inArray(el.fParamcode.substring(1), name)].maxTime = el.fCollecttime.substring(0, 16);
+            tableData[$.inArray(el.fParamcode.substring(1), name)].maxTime = el.fCollecttime.substring(11, 16);
           }
 
           if (el.fParamvalue < tableData[$.inArray(el.fParamcode.substring(1), name)].min) {
             tableData[$.inArray(el.fParamcode.substring(1), name)].min = el.fParamvalue;
-            tableData[$.inArray(el.fParamcode.substring(1), name)].minTime = el.fCollecttime.substring(0, 16);
+            tableData[$.inArray(el.fParamcode.substring(1), name)].minTime = el.fCollecttime.substring(11, 16);
           }
         } else {
           name.push(el.fParamcode.substring(1));
@@ -314,9 +314,9 @@ $(function () {
             sum: el.fParamvalue,
             avg: el.fParamvalue,
             max: [el.fParamvalue],
-            maxTime: [el.fCollecttime.substring(0, 16)],
+            maxTime: [el.fCollecttime.substring(11, 16)],
             min: [el.fParamvalue],
-            minTime: [el.fCollecttime.substring(0, 16)]
+            minTime: [el.fCollecttime.substring(11, 16)]
           })
         }
       });
@@ -346,8 +346,8 @@ $(function () {
       },
       grid: { // 控制图的大小，调整下面这些值就可以，
         top: '18%',
-        left: '8%',
-        right: '3%',
+        left: '10%',
+        right: '6%',
         bottom: '29%',
       },
       xAxis: {
@@ -364,7 +364,7 @@ $(function () {
           dataZoom: {
             yAxisIndex: 'none'
           },
-          restore: {},
+          dataView: {readOnly: true}
         }
       },
       dataZoom: [{

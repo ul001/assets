@@ -209,9 +209,9 @@ $(function () {
             sum: 0,
             avg: 0,
             max: [el.fParamvalue],
-            maxTime: [el.fCollecttime.substring(0, 16)],
+            maxTime: [el.fCollecttime.substring(11, 16)],
             min: [el.fParamvalue],
-            minTime: [el.fCollecttime.substring(0, 16)]
+            minTime: [el.fCollecttime.substring(11, 16)]
           });
         }
         if ($.inArray(el.fParamcode.substring(1), name) != -1) {
@@ -225,12 +225,12 @@ $(function () {
 
           if (el.fParamvalue > tableData[$.inArray(el.fParamcode.substring(1), name)].max) {
             tableData[$.inArray(el.fParamcode.substring(1), name)].max = el.fParamvalue;
-            tableData[$.inArray(el.fParamcode.substring(1), name)].maxTime = el.fCollecttime.substring(0, 16);
+            tableData[$.inArray(el.fParamcode.substring(1), name)].maxTime = el.fCollecttime.substring(11, 16);
           }
 
           if (el.fParamvalue < tableData[$.inArray(el.fParamcode.substring(1), name)].min) {
             tableData[$.inArray(el.fParamcode.substring(1), name)].min = el.fParamvalue;
-            tableData[$.inArray(el.fParamcode.substring(1), name)].minTime = el.fCollecttime.substring(0, 16);
+            tableData[$.inArray(el.fParamcode.substring(1), name)].minTime = el.fCollecttime.substring(11, 16);
           }
         } else {
           name.push(el.fParamcode.substring(1));
@@ -243,9 +243,9 @@ $(function () {
             sum: el.fParamvalue,
             avg: el.fParamvalue,
             max: [el.fParamvalue],
-            maxTime: [el.fCollecttime.substring(0, 16)],
+            maxTime: [el.fCollecttime.substring(11, 16)],
             min: [el.fParamvalue],
-            minTime: [el.fCollecttime.substring(0, 16)]
+            minTime: [el.fCollecttime.substring(11, 16)]
           })
         }
       });
@@ -275,8 +275,8 @@ $(function () {
       },
       grid: { // 控制图的大小，调整下面这些值就可以，
         top: '18%',
-        left: '10%',
-        right: '3%',
+        left: '12%',
+        right: '6%',
         bottom: '29%',
       },
       xAxis: {
@@ -293,7 +293,7 @@ $(function () {
           dataZoom: {
             yAxisIndex: 'none'
           },
-          restore: {},
+          dataView: {readOnly: true}
         }
       },
       dataZoom: [{
