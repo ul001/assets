@@ -66,11 +66,6 @@ input {
 	margin-bottom: 0;
 }
 
-#dateStart,
-#dateEnd {
-	background: url(../image/down.png) no-repeat 4.8rem 0.9rem;
-	background-size: 10px;
-}
 
 /*新增*/
 .listView {
