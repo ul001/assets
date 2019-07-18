@@ -71,7 +71,7 @@ input {
 
 #dateStart,
 #dateEnd {
-	background: url(../image/down.png) no-repeat 4.8rem 0.9rem;
+	background: url(../image/down.png) no-repeat 5rem 0.9rem;
 	background-size: 10px;
 }
 
@@ -246,6 +246,12 @@ input {
 	height: 2rem;
 	width: inherit;
 	border: none;
+}
+
+#alermType,
+#meterName,
+#paramName {
+	height: 1.9rem;
 }
 
 .selectcontain .cancel,
