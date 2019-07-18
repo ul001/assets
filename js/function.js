@@ -1,35 +1,35 @@
 $(function () {
-//    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
-//    var subidFromAPP=10100001;
+    //    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+    //    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+    //    var subidFromAPP=10100001;
     //iOS安卓基础传参
-     var u = navigator.userAgent,
-         app = navigator.appVersion;
-     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-     //判断数组中是否包含某字符串
-     var baseUrlFromAPP;
-     var tokenFromAPP;
-     var subidFromAPP;
-     if (isIOS) { //ios系统的处理
-         window.webkit.messageHandlers.iOS.postMessage(null);
-         var storage = localStorage.getItem("accessToken");
-         // storage = storage ? JSON.parse(storage):[];
-         storage = JSON.parse(storage);
-         baseUrlFromAPP = storage.baseurl;
-         tokenFromAPP = storage.token;
-         subidFromAPP = storage.fsubID;
-     } else {
-         baseUrlFromAPP = android.getBaseUrl();
-         tokenFromAPP = android.getToken();
-         subidFromAPP = android.getfSubid();
-         $("#meterName,#paramName").on("focus",function(){
-                 var _this = this;
-                 setTimeout(function(){
-                     _this.scrollIntoViewIfNeeded();
-                 },200);
-         });
-     }
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+        $("#meterName,#paramName").on("focus", function () {
+            var _this = this;
+            setTimeout(function () {
+                _this.scrollIntoViewIfNeeded();
+            }, 200);
+        });
+    }
 
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
@@ -120,46 +120,46 @@ $(function () {
         }
         $(data.list).each(function () {
             var fValue = parseFloat(this.fValue);
-            var fValueStr = ""+fValue;
+            var fValueStr = "" + fValue;
             var fLimitStr = "";
-            if(this.fLimitvalue.indexOf("-")!=-1){
+            if (this.fLimitvalue.indexOf("-") != -1) {
                 var valueStr = this.fLimitvalue.split("-");
                 var minValue = parseFloat(valueStr[0]);
                 var maxValue = parseFloat(valueStr[1]);
-                if(fValue<minValue||fValue>maxValue){
-                    fValueStr = "<a style='color:#DC143C'>"+fValue+"</a>";
+                if (fValue < minValue || fValue > maxValue) {
+                    fValueStr = "<a style='color:#DC143C'>" + fValue + "</a>";
                 }
-                fLimitStr=minValue+"-"+maxValue;
-            }else{
+                fLimitStr = minValue + "-" + maxValue;
+            } else {
                 var limitValue = parseFloat(this.fLimitvalue);
-                if(fValue!=limitValue){
-                    fValueStr = "<a style='color:#DC143C'>"+fValue+"</a>";
+                if (fValue != limitValue) {
+                    fValueStr = "<a style='color:#DC143C'>" + fValue + "</a>";
                 }
-                fLimitStr = ""+limitValue;
+                fLimitStr = "" + limitValue;
             }
             var str = "<div class=\"container\">\n" +
-      "                <h1>"+this.fMetername+"<span>"+this.fStarttime+"</span></h1>\n" +
-      "                <div class=\"type\">\n" +
-      "                    <img src=\"image/ycyx1.png\"/>\n" +
-      "                    <p class=\"list\">类型</p>\n" +
-      "                    <p>"+this.fAlarmtype+"</p>\n" +
-      "                </div>\n" +
-      "                <div class=\"type\">\n" +
-      "                    <img src=\"image/ycyx2.png\"/>\n" +
-      "                    <p class=\"list\">参数名称</p>\n" +
-      "                    <p>"+this.fParamname+"</p>\n" +
-      "                </div>\n" +
-      "                <div class=\"type\">\n" +
-      "                    <img src=\"image/ycyx3.png\"/>\n" +
-      "                    <p class=\"list\">报警值</p>\n" +
-      "                    <p>"+fValueStr+"</p>\n" +
-      "                </div>\n" +
-      "                <div class=\"type\">\n" +
-      "                    <img src=\"image/ycyx4.png\"/>\n" +
-      "                    <p class=\"list\">限定值</p>\n" +
-      "                    <p>"+fLimitStr+"</p>\n" +
-      "                </div>\n" +
-      "            </div>";
+                "                <h1>" + this.fMetername + "<span>" + this.fStarttime + "</span></h1>\n" +
+                "                <div class=\"type\">\n" +
+                "                    <img src=\"image/ycyx1.png\"/>\n" +
+                "                    <p class=\"list\">类型</p>\n" +
+                "                    <p>" + this.fAlarmtype + "</p>\n" +
+                "                </div>\n" +
+                "                <div class=\"type\">\n" +
+                "                    <img src=\"image/ycyx2.png\"/>\n" +
+                "                    <p class=\"list\">参数名称</p>\n" +
+                "                    <p>" + this.fParamname + "</p>\n" +
+                "                </div>\n" +
+                "                <div class=\"type\">\n" +
+                "                    <img src=\"image/ycyx3.png\"/>\n" +
+                "                    <p class=\"list\">报警值</p>\n" +
+                "                    <p>" + fValueStr + "</p>\n" +
+                "                </div>\n" +
+                "                <div class=\"type\">\n" +
+                "                    <img src=\"image/ycyx4.png\"/>\n" +
+                "                    <p class=\"list\">限定值</p>\n" +
+                "                    <p>" + fLimitStr + "</p>\n" +
+                "                </div>\n" +
+                "            </div>";
             var liDom = document.createElement("li");
             liDom.innerHTML = str;
             listDom.appendChild(liDom); //加在列表的后面,上拉加载
@@ -182,8 +182,8 @@ $(function () {
 
         var params = {
             fSubid: subidFromAPP,
-            startDate: startDate+" 00:00:00",
-            endDate: endDate+" 23:59:59",
+            startDate: startDate + " 00:00:00",
+            endDate: endDate + " 23:59:59",
             fMetername: fMetername,
             fParamname: fParamname,
             pageNo: pageNum,

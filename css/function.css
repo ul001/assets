@@ -1,62 +1,80 @@
 /*新增*/
-body,button,input{
-	font-size:0.9rem;
+body,
+button,
+input {
+	font-size: 0.9rem;
 }
-#sideClick p img{
-	float:left;
+
+#sideClick p img {
+	float: left;
 }
-.grey{
-	background:rgba(0,0,0,0.5);
-	width:100%;
-	height:100%;
+
+.grey {
+	background: rgba(0, 0, 0, 0.5);
+	width: 100%;
+	height: 100%;
 }
-#mescroll{
-	padding:0 0.6rem;
+
+#mescroll {
+	padding: 0 0.6rem;
 }
-.container{
-	padding:0.3rem 0.5rem 0.3rem 0.5rem;
-	background:#fff;
-	border-radius:0.5rem;
-	clear:both;
-	overflow:hidden;
+
+.container {
+	padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+	background: #fff;
+	border-radius: 0.5rem;
+	clear: both;
+	overflow: hidden;
 }
-.container h1{
-	font-size:0.85rem;
-	margin-bottom:1rem;
+
+.container h1 {
+	font-size: 0.85rem;
+	margin-bottom: 1rem;
 }
-.container h1::before{
-	content:url(../image/jiancedian.png);
-	vertical-align:-0.2rem;
-	margin-right:0.5rem;
+
+.container h1::before {
+	content: url(../image/jiancedian.png);
+	vertical-align: -0.2rem;
+	margin-right: 0.5rem;
 }
-.container h1 span{
-	display:block;
-	float:right;
-	font-weight:normal;
+
+.container h1 span {
+	display: block;
+	float: right;
+	font-weight: normal;
 }
-.container h2{
-	font-size:1rem;
+
+.container h2 {
+	font-size: 1rem;
 }
-.list,.container h1 span{
-	font-size:0.8rem;
-	color:rgb(145,139,138);
-	margin:0.5rem 0 0.5rem 0;
+
+.list,
+.container h1 span {
+	font-size: 0.8rem;
+	color: rgb(145, 139, 138);
+	margin: 0.15rem 0 0.5rem 0;
 }
-.type{
-	width:25%;
-	text-align:center;
-	float:left;
+
+.type {
+	width: 25%;
+	text-align: center;
+	float: left;
 }
-.type img{
-	width:50%;
+
+.type img {
+	width: 50%;
 }
-.type p{
-	margin-bottom:0;
+
+.type p {
+	margin-bottom: 0;
 }
-#dateStart,#dateEnd{
-	background:url(../image/down.png) no-repeat 4.8rem 0.9rem;
-	background-size:10px;
+
+#dateStart,
+#dateEnd {
+	background: url(../image/down.png) no-repeat 4.8rem 0.9rem;
+	background-size: 10px;
 }
+
 /*新增*/
 .listView {
 	background: white;
@@ -97,9 +115,9 @@ body,button,input{
 
 /*.container{height:100%;}*/
 .selectcontain {
-	width:100%;
+	width: 100%;
 	height: 100%;
-	background: rgba(0,0,0,0.5);
+	background: rgba(0, 0, 0, 0.5);
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -107,48 +125,61 @@ body,button,input{
 	clear: both;
 	z-index: 999;
 }
-.selectcontain-main{
-	width:87%;
-	height:100%;
-	background:#fff;
-	position:absolute;
-	right:0;
-	top:0;
+
+.selectcontain-main {
+	width: 87%;
+	height: 100%;
+	background: #fff;
+	position: absolute;
+	right: 0;
+	top: 0;
 	padding: 2rem 0 0 1rem;
 }
+
 @media (max-height: 20rem) {
-    .selectcontain .search,
-    .selectcontain .cancel{
-        display:none;
-    }
+
+	.selectcontain .search,
+	.selectcontain .cancel {
+		display: none;
+	}
 }
-#today{
-	font-size:0.9rem;
-    background-image:url(../image/dr-h.png);
+
+#today {
+	font-size: 0.9rem;
+	background-image: url(../image/dr-h.png);
 }
-#yesterday{
-    background-image:url(../image/sr-h.png);
+
+#yesterday {
+	background-image: url(../image/sr-h.png);
 }
-#thisMon{
-    background-image:url(../image/dy-h.png);
+
+#thisMon {
+	background-image: url(../image/dy-h.png);
 }
-#lastMon{
-    background-image:url(../image/sy-h.png);
+
+#lastMon {
+	background-image: url(../image/sy-h.png);
 }
-#yesterday,#thisMon,#lastMon,#today{
-	font-size:0.9rem;
-    background-repeat:no-repeat;
-    background-position: 1.5rem 0.5rem;
-    background-size:12%;
+
+#yesterday,
+#thisMon,
+#lastMon,
+#today {
+	font-size: 0.9rem;
+	background-repeat: no-repeat;
+	background-position: 1.5rem 0.5rem;
+	background-size: 12%;
 }
+
 .selectcontain button {
 	width: 48%;
 	float: left;
 	margin-bottom: 0.5rem;
-	background-color:rgb(244,241,241);
+	background-color: rgb(244, 241, 241);
 	border-radius: 1.5rem;
-    padding-left:3rem;
+	padding-left: 3rem;
 }
+
 .selectcontain button:first-child {
 	margin-right: 0.5rem;
 }
@@ -158,28 +189,33 @@ body,button,input{
 }
 
 .selectcontain .select {
-	font-size:0.9rem;
-    background-image:url(../image/dr-b.png);
-    background-repeat:no-repeat;
-    background-position:1.5rem 0.5rem;
-    background-size:12%;
+	font-size: 0.9rem;
+	background-image: url(../image/dr-b.png);
+	background-repeat: no-repeat;
+	background-position: 1.5rem 0.5rem;
+	background-size: 12%;
 	background-color: #02AC94;
 	border: 1px solid #02AC94;
 	color: #fff;
-    padding-left:3rem;
+	padding-left: 3rem;
 }
-#today[class*="select"]{
-	background-image:url(../image/dr-b.png);
+
+#today[class*="select"] {
+	background-image: url(../image/dr-b.png);
 }
-#yesterday[class*="select"]{
-	background-image:url(../image/sr-b.png);
+
+#yesterday[class*="select"] {
+	background-image: url(../image/sr-b.png);
 }
-#thisMon[class*="select"]{
-	background-image:url(../image/dy-b.png);
+
+#thisMon[class*="select"] {
+	background-image: url(../image/dy-b.png);
 }
-#lastMon[class*="select"]{
-	background-image:url(../image/sy-b.png);
+
+#lastMon[class*="select"] {
+	background-image: url(../image/sy-b.png);
 }
+
 .selectcontain p {
 	clear: both;
 	line-height: 2rem;
@@ -197,20 +233,26 @@ body,button,input{
 	display: block;
 	float: left;
 	text-align: left;
-	color:#565A68;
+	color: #565A68;
 }
-#meterName::-webkit-input-placeholder,#paramName::-webkit-input-placeholder{
-	color:#999DA6;
+
+#meterName::-webkit-input-placeholder,
+#paramName::-webkit-input-placeholder {
+	color: #999DA6;
 }
+
 .selectcontain input,
 .selectcontain select {
 	height: 2rem;
-	width:inherit;
-	border:none;
+	width: inherit;
+	border: none;
 }
-.selectcontain .cancel,.selectcontain .search{
-	padding-left:0;
+
+.selectcontain .cancel,
+.selectcontain .search {
+	padding-left: 0;
 }
+
 .selectcontain .search,
 .selectcontain .cancel {
 	position: fixed;
@@ -239,8 +281,8 @@ body,button,input{
 
 #dateStart,
 #dateEnd {
-	border:none;
-	color:#000;
+	border: none;
+	color: #000;
 }
 
 .function-group label {
@@ -250,49 +292,62 @@ body,button,input{
 	display: block;
 	padding: 0;
 	padding-top: 6px;
-	color:#565A68;
+	color: #565A68;
 }
-.function-group .to{
-	width:1rem;
+
+.function-group .to {
+	width: 1rem;
 }
-.control-label img,.sRow span img{
-    width:20%;
-    vertical-align:-0.1rem;
-    margin-right:0.4rem;
+
+.control-label img,
+.sRow span img {
+	width: 20%;
+	vertical-align: -0.1rem;
+	margin-right: 0.4rem;
 }
-.functionDate{
-	width:85%;
-    clear:both;
-	overflow:hidden;
-	margin:0 auto;
-	padding-right:1rem;
-	margin-bottom:1rem;
+
+.functionDate {
+	width: 85%;
+	clear: both;
+	overflow: hidden;
+	margin: 0 auto;
+	padding-right: 1rem;
+	margin-bottom: 1rem;
 }
+
 .functionDate .btn:hover {
 	color: #fff;
 }
-.function-group,.sRow{
-	clear:both;
-	overflow:hidden;
-	height:3rem;
-	border-bottom:1px solid #E3E4E8;
+
+.function-group,
+.sRow {
+	clear: both;
+	overflow: hidden;
+	height: 3rem;
+	border-bottom: 1px solid #E3E4E8;
 }
-#alermType,#meterName,#paramName{
-	width:calc(100% - 6.5rem);
+
+#alermType,
+#meterName,
+#paramName {
+	width: calc(100% - 6.5rem);
 }
-#alermType{
-	appearance:none;
-	-moz-appearance:none;
-	-webkit-appearance:none;
-	background:url(../image/right.png) no-repeat right center;
-	background-size:4%;
+
+#alermType {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	background: url(../image/right.png) no-repeat right center;
+	background-size: 4%;
 }
+
 .function-group .input-group {
-	width:5.8rem;
+	width: 5.8rem;
 	float: left;
 	padding-left: 0;
 	padding-right: 0;
 }
+
 .sRow {
 	margin-bottom: 1rem;
 }
