@@ -25,13 +25,6 @@ body{
   font-weight:normal;
   padding-right:0.5rem;
   }
-  #date{
-    width:calc(100% - 205px);
-    height:2.5rem;
-    border-radius:5px;
-    border:1px solid #888888;
-    padding-left:0.5rem;
-    }
 .time{
     float:right;
     padding:0.5rem 0.3rem 0 0;
@@ -42,10 +35,10 @@ body{
     background:transparent;
     border:none;
     -webkit-appearance:none;
-    width:calc(100% - 102px);
+    width:calc(100% - 72px);
     background:url('../image/right.png') no-repeat right 5px center;
  }
- #sideClick,#electric,#select{
+ #sideClick,#electric,#select,.selectTime{
 	 height:6rem;
 	 line-height:5rem;
 	 padding-top:0.5rem;
@@ -122,10 +115,6 @@ body{
 	border:1px solid #02AC94;
 	color:#fff;
 }
-.date{
-   margin:0.6rem 0.2rem 0.6rem 0.2rem;
-   width:100%;
-   }
 .search{
 	width:95%;
 	height:4rem;
@@ -228,5 +217,33 @@ body{
 .modal-dialog{margin-top:20%;}
 
 #datePre,#dateNext{
-    cursor:pointer;
+	padding:0 1rem;
+	cursor:pointer;
+}
+#selectTime img{
+	vertical-align: -4px;
+}
+#dateNext{
+	float:right;
+}
+.date{
+	width:10.5rem;
+	background:url(../image/down.png) no-repeat right center;
+	float:left;
+	margin-left:18%;
+	background-size:1rem;
+}
+#datePre{
+	float:left;
+}
+#date{
+	width:12rem;
+	height:2.5rem;
+	border-radius:5px;
+	padding-right:2rem;
+	text-align:center;
+	padding-left:0.8rem;
+	border:none;
+	background:url(../image/time.png) no-repeat left center;
+	background-size:1.3rem;
 }

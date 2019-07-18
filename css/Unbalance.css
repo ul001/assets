@@ -85,23 +85,19 @@ body{
 .selectTime,.list,.Unbalance-btn,#EnergyContain{
     border-bottom:1px dashed #C8C9CA;
 }
-#EnergyContain{
-  height:4rem;
- }
+
 .selectTime{margin-bottom:0;}
 .elec-btn button{
-	height:2.5rem;
+	height:4rem;
 	line-height: 1rem;
 	float:left;
 	width:45%;
 	margin: 0 5px;
-	border-radius: 0.3rem;
+	border-radius: 4rem;
 	background:#F7F7F7;
-	border:1px solid #888888;
 }
 .elec-btn .select,.search{
 	background:#02AC94;
-	border:1px solid #02AC94;
 	color:#fff;
 }
 .date{
@@ -115,11 +111,12 @@ body{
   border:1px solid #888888;
   padding-left:0.5rem;
   }
-#sideClick{
+#sideClick,.selectTime,#EnergyContain{
 	height:6rem;
 	line-height:5rem;
 	padding-top:0.5rem;
 }
+#EnergyContain{padding-top:1rem;}
 #CircuitidsInput,#CircuitidsList{
     height:2.5rem;
 }
@@ -231,5 +228,33 @@ body{
 .modal-dialog{margin-top:20%;}
 
 #datePre,#dateNext{
-    cursor:pointer;
+	padding:0 1rem;
+	cursor:pointer;
+}
+#selectTime img{
+	vertical-align: -4px;
+}
+#dateNext{
+	float:right;
+}
+.date{
+	width:10.5rem;
+	background:url(../image/down.png) no-repeat right center;
+	float:left;
+	margin-left:18%;
+	background-size:1rem;
+}
+#datePre{
+	float:left;
+}
+#date{
+	width:12rem;
+	height:2.5rem;
+	border-radius:5px;
+	padding-right:2rem;
+	text-align:center;
+	padding-left:0.8rem;
+	border:none;
+	background:url(../image/time.png) no-repeat left center;
+	background-size:1.3rem;
 }
