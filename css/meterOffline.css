@@ -114,9 +114,6 @@ input {
 	position: absolute;
 	right: 0;
 	top: 0;
-	overflow: hidden;
-	clear: both;
-	z-index: 999;
 }
 
 .selectcontain-main {
@@ -127,6 +124,9 @@ input {
 	right: 0;
 	top: 0;
 	padding: 2rem 0 0 1rem;
+    overflow: hidden;
+    clear: both;
+    z-index: 999;
 }
 
 @media (max-height: 20rem) {
