@@ -35,8 +35,16 @@ body{
     background:transparent;
     border:none;
     -webkit-appearance:none;
-    width:calc(100% - 72px);
-    background:url('../image/right.png') no-repeat right 5px center;
+    width:calc(100% - 85px);
+    background:url('../image/right.png') no-repeat right center;
+ }
+ .monitor, #meter{
+	 display:block;
+	 float:left;
+ }
+ #meter{
+	 width:calc(100% - 97px);
+	 background:url('../image/right.png') no-repeat right center;
  }
  #sideClick,#electric,#select,.selectTime{
 	 height:6rem;
@@ -85,6 +93,7 @@ body{
 	line-height: 2.5rem;
 }
 .list p{
+	width:100%;
 	float:left;
 	margin-bottom: 0;
 }
