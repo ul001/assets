@@ -364,7 +364,8 @@ $(function () {
           dataZoom: {
             yAxisIndex: 'none'
           },
-          dataView: {readOnly: true}
+          dataView: {readOnly: true},
+          restore: {}
         }
       },
       dataZoom: [{

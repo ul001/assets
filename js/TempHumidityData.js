@@ -118,7 +118,8 @@ $(function () {
           },
           dataZoom: {
             yAxisIndex: 'none'
-          }
+          },
+          restore: {}
         }
       },
       dataZoom: [{ // 这个dataZoom组件，默认控制x轴。
