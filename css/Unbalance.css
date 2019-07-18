@@ -125,12 +125,21 @@ body{
 }
 .search{
 	width:95%;
-	height:2.5rem;
+	height:4rem;
 	margin:0 auto;
 	display: block;
-	border-radius: 0.3rem;
-	margin-top:0.5rem;
-	margin-bottom:0.5rem;
+	border-radius: 4rem;
+	margin-top:1rem;
+	margin-bottom:1rem;
+}
+.elec-btn .select,.search{
+	background:#02AC94;
+	border:1px solid #02AC94;
+	color:#fff;
+}
+#search img{
+	width:1.5rem;
+	margin-right:0.5rem;
 }
 .container .diagram{
 	width:95%;
