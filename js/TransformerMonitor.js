@@ -40,7 +40,7 @@ $(function () {
             }
         });
     }
-
+    var info;
     var time = tool.initDate("YMD", new Date());
     $("#date").val(time);
     getListData();
@@ -52,9 +52,22 @@ $(function () {
             selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp"
         };
         getData(url, params, function (data) {
+            info = data;
             generateTransStatus(data);
             generateChartLine(data);
 
+        });
+    }
+
+    function getDateCurveData() {
+        var url = baseUrlFromAPP + "/main/getCurveDataOfPowerAndTempABC";
+        // var selectCode = $(".").attr('value');
+        var params = {
+            fTransid: '1010000101',
+            fDate: $("#date").val()
+        };
+        getData(url, params, function (data) {
+            generateChartLine(data);
         });
     }
 
@@ -279,7 +292,7 @@ $(function () {
         var transformerName = "变压器";
         var type = $(".s-select")[0].id;
         if (type == "NowPower") {
-            var titlefS = $("#date").val() + "  " + transformerName + "  " + "视在功率";
+            var titlefS = transformerName + "  " + "视在功率";
             var seriesfS = [{
                     name: '当日',
                     type: 'line',
@@ -458,7 +471,7 @@ $(function () {
                 data: ['当日', '上日'],
                 bottom: '2%'
             };
-            var titlefP = $("#daycalendarBox").val() + "  " + transformerName + "  " + "有功功率";
+            var titlefP = transformerName + "  " + "有功功率";
             var unitfP = 'kW';
             initLine(seriesfP, legendfP, times, titlefP, unitfP);
         }
@@ -550,12 +563,13 @@ $(function () {
                 data: ['当日', '上日'],
                 bottom: '2%'
             };
-            var titlefQ = $("#daycalendarBox").val() + "  " + transformerName + "  " + "无功功率";
+            var titlefQ = transformerName + "  " + "无功功率";
             var unitfQ = 'kVar';
             initLine(seriesfQ, legendfQ, times, titlefQ, unitfQ);
         }
         if (type == "tempLine") {
-            var titleTem = $("#daycalendarBox").val() + "  " + transformerName + "  " + "绕阻温度";
+            var titleTem = transformerName + "  " + "绕阻温度";
+            // var titleTem = $("#daycalendarBox").val() + "  " + transformerName + "  " + "绕阻温度";
             var seriesTem = [{
                     name: '温度A',
                     type: 'line',
@@ -690,8 +704,8 @@ $(function () {
     }
 
     function initLine(series, legend, time, title, unit) {
-        // var line = echarts.init($("#powerChart").get(0), 'macarons');
-        var line = echarts.init($("#powerChart").get(0));
+        var line = echarts.init($("#powerChart").get(0), 'macarons');
+        // var line = echarts.init($("#powerChart").get(0));
         var option = {
             title: {
                 text: title,
@@ -742,6 +756,13 @@ $(function () {
                     formatter: '{value}'
                 }
             },
+            dataZoom: [{ // 这个dataZoom组件，默认控制x轴。
+                type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                start: 0, // 左边在 10% 的位置。
+                end: 100, // 右边在 60% 的位置。
+                height: 25,
+                bottom: 33
+            }],
             series: series
         };
         line.setOption(option);
@@ -758,28 +779,28 @@ $(function () {
         // $(".UPTime").html(time);
     }
 
-    //根据日期获得温度
-    function getChartData() {
-        var chartData = {};
-        var time = [];
-        var temp = [];
-        var humi = [];
-        var selectCode = $(".sectionSelect").attr('value');
-        var url = baseUrlFromAPP + "/main/app/getCurveDataOfPowerAndTempABC";
-        var params = {
-            fTransid: selectCode,
-            fDate: $("#date").val()
-        };
-        getData(url, params, function (data) {
-
-        });
-    }
-
+    //点击有功、无功、视在的按钮
+    $("#havePower").click(function () {
+        $("#havePower").addClass("s-select").siblings('span').removeClass("s-select");
+        generateChartLine(info);
+    });
+    $("#NothingPower").click(function () {
+        $("#NothingPower").addClass("s-select").siblings('span').removeClass("s-select");
+        generateChartLine(info);
+    });
+    $("#NowPower").click(function () {
+        $("#NowPower").addClass("s-select").siblings('span').removeClass("s-select");
+        generateChartLine(info);
+    });
+    $("#tempLine").click(function () {
+        $("#tempLine").addClass("s-select").siblings('span').removeClass("s-select");
+        generateChartLine(info);
+    });
     $("#datePre").click(function () {
         var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
         var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
         $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
-
+        getDateCurveData();
     });
 
     $("#dateNext").click(function () {
@@ -789,7 +810,7 @@ $(function () {
         if (selectDate < nowDate) {
             var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
             $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)) + "-" + (nextDate.getDate() < 10 ? ("0" + nextDate.getDate()) : (nextDate.getDate())));
-
+            getDateCurveData();
         } else {
             return;
         }
@@ -808,7 +829,8 @@ $(function () {
             if (d1 > d2) {
                 return false;
             } else {
-
+                $("#date").val(date);
+                getDateCurveData();
             }
         }
     });
