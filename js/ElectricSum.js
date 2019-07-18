@@ -281,7 +281,7 @@ $(function () {
         })
     }
 
-    $(document).on("click", ".category li", function () {
+    /*$(document).on("click", ".category li", function () {
         var type = $(this).children('label').attr("value");
         var text = $(this).children('label').text();
         generateType(type);
@@ -391,7 +391,7 @@ $(function () {
             })
             $("#EnergyContain button:first").addClass('select');
         }
-    }
+    }*/
 
     function showCharts(data) {
         var time = [];
@@ -454,13 +454,13 @@ $(function () {
             tooltip: {
                 trigger: 'axis'
             },
-            legend: {
+/*            legend: {
                 data: name,
-            },
+            },*/
             grid: { // 控制图的大小，调整下面这些值就可以，
                 top: '18%',
-                left: '8%',
-                right: '3%',
+                left: '10%',
+                right: '6%',
                 bottom: '28%',
             },
             xAxis: {
@@ -477,7 +477,7 @@ $(function () {
                     dataZoom: {
                         yAxisIndex: 'none'
                     },
-                    restore: {},
+                    dataView: {readOnly: true}
                 }
             },
             dataZoom: [{
@@ -524,6 +524,10 @@ $(function () {
         beginYear: 2000,
         endYear: 2100,
         value: showtimeForElectSum,
+        confirm:function(data){
+            $("#date").val(data);
+            searchGetData();
+        }
     });
 
 });

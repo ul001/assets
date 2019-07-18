@@ -26,6 +26,10 @@ body{
 	font-size:1.5rem;
 	background:#EDEDEC;
 }
+#chartContain{
+    width:95%;
+    border:1px solid #C8C9CA;
+}
 #table{font-size:1rem;}
 .selectTime,.list,#EnergyContain,.sumDate{
 	border-bottom:1px dashed #C8C9CA;
