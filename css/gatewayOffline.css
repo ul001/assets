@@ -11,6 +11,7 @@ body,button,input{
 	padding-left:0.6rem;
 }
 .container{
+    border: 1px solid #C8C9CA;
 	padding:0.3rem 0.5rem 0.3rem 0.5rem;
 	background:#fff;
 	border-radius:0.5rem;

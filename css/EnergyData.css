@@ -7,7 +7,7 @@
 }
 
 .container {
-	background: #EDEDEC;
+	background: #fff;
 	height: 100%;
 	padding-right: 0;
 	padding-left: 0;
@@ -17,8 +17,12 @@ body {
 	height: 100%;
 	font-size: 0.8rem;
 	background: #EDEDEC;
+	margin:0;
 }
-
+.list p .jiancedian{
+	float:left;
+	margin-top:1rem;
+}
 .time {
 	float: right;
 	padding: 0.5rem 0.3rem 0 0;
@@ -43,47 +47,64 @@ body {
 	height: 100%;
 }
 
-.list {
+.list,.selectTime{
 	padding: 0 0.5rem 0 0.5rem;
-	height: 2.5rem;
-	line-height: 2.5rem;
+	height: 4rem;
+	line-height: 3rem;
 }
-
+.selectTime{
+	border-bottom:1px solid #F7F7F7;
+}
 .list p {
 	float: left;
 	margin-bottom: 0;
+	margin-top:0.5rem;
 }
 
 .list img {
 	float: right;
 	margin-right: 0.5rem;
-	margin-top: 0.8rem;
+	margin-top: 1.5rem;
 }
 
 .elec-btn,
-.selectTime,
 .list {
-	border-bottom: 1px dashed #C8C9CA;
+	border-bottom: 4px solid #F7F7F7;
 }
 
 .elec-btn {
 	padding: 0.3rem 0.2rem 0.4rem 0.2rem;
 }
-
-.elec-btn button {
-	height: 2rem;
-	line-height: 1rem;
-	width: 25%;
-	border-radius: 0.3rem;
-	background: #F7F7F7;
-	border: 1px solid #888888;
+.elec-btn{
+	width:100%;
+	height:4.5rem;
+	background:url(../image/timeBg.png);
+	background-size:100% 100%;
+	padding-left:1.5rem;
+	box-shadow:0 -15px 15px -10px #BFBFC0 inset;
 }
-
+.elec-btn button {
+	height: 4rem;
+	width: 6.2rem;
+	background-color: #fff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding-top:1.5rem;
+	transform: perspective(25px) rotateX(8deg) rotateY(0deg) translateZ(0);
+	border:none;
+	margin-top:0.35rem;
+	color:#FF6913;
+	box-shadow:0 -12px 15px -10px #BFBFC0 inset;
+}
+.today{
+	background:url(../image/dr-h.png) no-repeat;
+}
 .elec-btn .select,
 .search {
 	background: #02AC94;
 	border: 1px solid #02AC94;
 	color: #fff;
+	z-index:99;
 }
 
 .date {

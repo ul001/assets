@@ -62,7 +62,7 @@
         </div>
     </div>-->
     <div class="list" id="sideClick">
-        <p><span>监测点：</span><span id="meter">10kV变压器</span></p>
+        <p><img class="jiancedian" src="image/jiancedian.png"/><span>监测点：</span><span id="meter">10kV变压器</span></p>
         <img src="image/right.png"/>
     </div>
     <!--<div class="list" id="electric" data-toggle="modal" data-target="#myModal">
@@ -70,6 +70,7 @@
         <img id="kindClick" src="image/right.png"/>
     </div>-->
     <div class="list" id="electric" data-toggle="modal" data-target="#myModal">
+        <img class="type" src="image/type.png"/>
         <span value="P" id="EnergyKind">电力类别：</span>
         <select id="energySelect">
             <option value="P">有功功率</option>
@@ -88,11 +89,12 @@
     </div>
     <div class="form-group selectTime">
         <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
+            <img src="image/date.png"/>
             <label>日期：</label>
             <input readonly type="text" id="date">
         </div>
     </div>
-    <button type="button" class="search" id="search">查询</button>
+    <button type="button" class="search" id="search"><img src="image/search.png"/>查询</button>
     <div class="diagram center" id="chartContain"></div>
     <div class="dataTable center" id="tableContain"></div>
 </div>

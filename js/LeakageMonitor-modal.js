@@ -28,6 +28,8 @@ $(function () {
     var choise = 1;
     var info = null;
     var f_MeterCode = tool.getUrlParam("F_MeterCode");
+    var fMeterName = localStorage.getItem("fMeterName");
+    $("#cirName").text(fMeterName);
 
     function setData() {
         var params = {
@@ -80,9 +82,6 @@ $(function () {
             tooltip: {
                 trigger: 'axis'
             },
-            legend: {
-                data: ['漏电流']
-            },
             toolbox:{
                 show:true,
                 orient:'horizontal',
@@ -126,6 +125,7 @@ $(function () {
                 trigger: 'axis'
             },
             legend: {
+                top:11,
                 data: ['温度A', '温度B', '温度C']
             },
             toolbox:{
