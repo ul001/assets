@@ -31,9 +31,9 @@ body{
     border:1px solid #C8C9CA;
 }
 #table{font-size:1rem;}
-.selectTime,.list,#EnergyContain,.sumDate{
+/*.selectTime,.list,#EnergyContain,.sumDate{
 	border-bottom:1px dashed #C8C9CA;
-}
+}*/
 #sideClick,#electric,#select,.selectTime{
 	height:6rem;
 	line-height:5rem;

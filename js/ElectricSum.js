@@ -1,29 +1,29 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-   var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
-    var subidFromAPP=10100001;
+//    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+//    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+//    var subidFromAPP=10100001;
     //iOS安卓基础传参
-    // var u = navigator.userAgent,
-    //     app = navigator.appVersion;
-    // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    // //判断数组中是否包含某字符串
-    // var baseUrlFromAPP;
-    // var tokenFromAPP;
-    // var subidFromAPP;
-    // if (isIOS) { //ios系统的处理
-    //     window.webkit.messageHandlers.iOS.postMessage(null);
-    //     var storage = localStorage.getItem("accessToken");
-    //     // storage = storage ? JSON.parse(storage):[];
-    //     storage = JSON.parse(storage);
-    //     baseUrlFromAPP = storage.baseurl;
-    //     tokenFromAPP = storage.token;
-    //     subidFromAPP = storage.fsubID;
-    // } else {
-    //     baseUrlFromAPP = android.getBaseUrl();
-    //     tokenFromAPP = android.getToken();
-    //     subidFromAPP = android.getfSubid();
-    // }
+     var u = navigator.userAgent,
+         app = navigator.appVersion;
+     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+     //判断数组中是否包含某字符串
+     var baseUrlFromAPP;
+     var tokenFromAPP;
+     var subidFromAPP;
+     if (isIOS) { //ios系统的处理
+         window.webkit.messageHandlers.iOS.postMessage(null);
+         var storage = localStorage.getItem("accessToken");
+         // storage = storage ? JSON.parse(storage):[];
+         storage = JSON.parse(storage);
+         baseUrlFromAPP = storage.baseurl;
+         tokenFromAPP = storage.token;
+         subidFromAPP = storage.fsubID;
+     } else {
+         baseUrlFromAPP = android.getBaseUrl();
+         tokenFromAPP = android.getToken();
+         subidFromAPP = android.getfSubid();
+     }
 
     var currentSelectVode = {}; //选中节点
 
@@ -149,8 +149,8 @@ $(function () {
             });
             $("#dateNext").click(function () {
                 var d = new Date();
-                var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() - 1) + '/' + d.getDate());
-                var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+                var nowDate = new Date((d.getFullYear()+"-01-01").replace(/\-/g, "\/"));
+                var selectDate = new Date(($("#date").val()+"-01"+"-01").replace(/\-/g, "\/"));
                 if (selectDate < nowDate) {
                     var nextDate = new Date(selectDate.setFullYear(selectDate.getFullYear() + 1));
                     $("#date").val(nextDate.getFullYear());
@@ -244,7 +244,7 @@ $(function () {
             // EnergyKind: EnergyKind,
         }
         getData(url, params, function (data) {
-            showCharts(data.EnergyReport);
+                showCharts(data.EnergyReport);
         });
     };
 
@@ -398,7 +398,6 @@ $(function () {
         var value = [];
         var name = [];
         var tableData = [];
-        var showName;
         if (data.length > 0) {
             var sum = 0;
             var max = data[0].fIa;
@@ -418,15 +417,12 @@ $(function () {
                 if (selectParam == "today") {
                     datatime = el.fTime.substring(11, 16);
                     time.push(el.fTime.substring(11, 16));
-                    showName = "日报";
                 } else if (selectParam == "month") {
                     datatime = el.fTime.substring(6, 10);
                     time.push(el.fTime.substring(6, 10));
-                    showName = "月报";
                 } else if (selectParam == "year") {
                     datatime = el.fTime.substring(2, 7);
                     time.push(el.fTime.substring(2, 7));
-                    showName = "年报";
                 }
                 value.push(el.fValue);
                 if (el.fValue > max) {
@@ -439,16 +435,14 @@ $(function () {
                 }
                 sum += el.fValue;
                 var dic = {
-                    "showData": showName,
                     "value": el.fValue,
                     "time": datatime
                 };
                 tableData.push(dic);
             });
             var avg = (sum / data.length).toFixed(2);
-            showTable(tableData);
         }
-
+        showTable(tableData);
         var line = echarts.init(document.getElementById('chartContain'));
         var option = {
             tooltip: {
@@ -459,7 +453,7 @@ $(function () {
             },*/
             grid: { // 控制图的大小，调整下面这些值就可以，
                 top: '18%',
-                left: '10%',
+                left: '15%',
                 right: '6%',
                 bottom: '28%',
             },
@@ -492,16 +486,25 @@ $(function () {
                 type: 'bar'
             }]
         };
-        line.setOption(option);
+        line.setOption(option,true);
         // $(window).bind("resize",function(event) {
         //   line.resize();
         // });
     }
 
     function showTable(data) {
+        var selectParam = $(".btn.select").attr('value');
+        var showName = "";
+        if(selectParam=="today"){
+            showName = "日报";
+        }else if (selectParam == "month") {
+            showName = "月报";
+        }else if (selectParam == "year") {
+            showName = "年报";
+        }
         var columns = [{
                 field: "time",
-                title: data[0].showData,
+                title: showName,
                 align: "center"
             },
             {
@@ -515,7 +518,7 @@ $(function () {
         $("#table").bootstrapTable({
             columns: columns,
             data: data,
-        })
+        });
     }
 
     var roll = new Rolldate({
