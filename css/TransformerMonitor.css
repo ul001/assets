@@ -1,27 +1,45 @@
-.container{
+.container {
 	background: #EDEDEC;
-	padding-right:0;
-	padding-left:0;
+	padding-right: 0;
+	padding-left: 0;
 }
-.chart{
-	width:100%;
-	height:300px;
-	border:1px solid red;
+
+.chart {
+	width: 100%;
+	height: 300px;
+	border: 1px solid red;
 }
-.transform{clear:both;}
-.transform li{
-	display:block;
-	float:left;
+
+.transform {
+	clear: both;
 }
-.monitor{
-	width:50%;
-	float:left;
+
+.transform li {
+	display: block;
+	float: left;
 }
-.monitor ul li{
-	clear:both;
+
+.monitor {
+	width: 50%;
+	float: left;
 }
-.btn li{
-	display:block;
-	float:left;
-	padding:1rem;
+
+.monitor ul li {
+	clear: both;
+}
+
+.btn li {
+	display: block;
+	float: left;
+	padding: 1rem;
+}
+
+.date {
+	display: block;
+	float: left;
+	padding: 1rem;
+}
+
+.tran-statec {
+	width: 50%
 }
