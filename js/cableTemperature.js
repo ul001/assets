@@ -1,7 +1,7 @@
 $(function () {
-//     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-//     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
-//     var subidFromAPP=10100001;
+    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
      var u = navigator.userAgent,
          app = navigator.appVersion;

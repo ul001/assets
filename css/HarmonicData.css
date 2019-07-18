@@ -1,5 +1,5 @@
 .container{
-    background: #EDEDEC;
+    background: #fff;
     height: 100%;
     padding-right:0;
     padding-left:0;
@@ -12,6 +12,13 @@ body{
 #table{font-size:1rem;}
 .selectTime,.list,.Unbalance-btn,#EnergyContain{
     border-bottom:1px dashed #C8C9CA;
+}
+#sideClick p .jiancedian,.list .type{
+	float:left;
+	margin-top:1.5rem;
+}
+.list .type,.selectTime img{
+	width:1.8rem;
 }
 .date label{
   padding-left:0;
@@ -35,12 +42,13 @@ body{
     background:transparent;
     border:none;
     -webkit-appearance:none;
-    width:calc(100% - 50px);
+    width:calc(100% - 102px);
     background:url('../image/right.png') no-repeat right 5px center;
  }
  #sideClick,#electric,#select{
-     height:3.5rem;
-     padding-top:0.5rem;
+	 height:6rem;
+	 line-height:5rem;
+	 padding-top:0.5rem;
      }
 .category ul{padding-left:0;}
 .category ul li{
@@ -90,7 +98,7 @@ body{
 .list img{
 	float:right;
 	margin-right:0.5rem;
-	margin-top:0.8rem;
+	margin-top:1.8rem;
 }
 .container hr{
 	clear:both;

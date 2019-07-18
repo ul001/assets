@@ -21,7 +21,11 @@
         <button type="button" class="search" id="confirm">查询</button>
     </div>
     <div class="list" id="sideClick">
-        <p><span>监测点：</span><span id="meter">10kV变压器</span></p>
+        <p>
+            <img class="jiancedian" src="image/jiancedian.png"/>
+            <span>监测点：</span>
+            <span id="meter">10kV变压器</span>
+        </p>
         <img src="image/right.png"/>
     </div>
     <div class="form-group selectTime">
@@ -36,6 +40,7 @@
     </div>
     <div class="list" id="electric" data-toggle="modal" data-target="#myModal">
         <!--<p><span value="P" id="EnergyKind">类别：</span><span id="param">A相电流谐波</span></p>-->
+        <img class="type" src="image/type.png"/>
         <span>类别：</span>
         <select id="EnergyKind">
             <option value="Ia" selected>A相电流谐波</option>
@@ -47,6 +52,7 @@
         </select>
     </div>
     <div class="list" id="select" data-toggle="modal" data-target="#myModal">
+        <img class="type" src="image/cansu.png"/>
         <span>选择：</span>
         <select id="EnergyType">
             <!--<option value="Ia" selected>总谐波</option>-->

@@ -1,5 +1,5 @@
 .container{
-    background: #EDEDEC;
+    background: #fff;
     height: 100%;
     padding-right:0;
     padding-left:0;
@@ -10,7 +10,14 @@ body{
 	background:#EDEDEC;
 }
 #table{font-size:1rem;}
+#sideClick p .jiancedian,.list .type{
+	float:left;
+	margin-top:1.5rem;
+}
 .category ul{padding-left:0;}
+.list .type,.selectTime img{
+	width:1.8rem;
+}
 .category ul li{
 	height: 3rem;
 	line-height: 2.5rem;
@@ -58,7 +65,7 @@ body{
 .list img{
 	float:right;
 	margin-right:0.5rem;
-	margin-top:0.8rem;
+	margin-top:1.8rem;
 }
 .container hr{
 	clear:both;
@@ -109,9 +116,10 @@ body{
   padding-left:0.5rem;
   }
 #sideClick{
-    height:3.5rem;
-    padding-top:0.5rem;
-    }
+	height:6rem;
+	line-height:5rem;
+	padding-top:0.5rem;
+}
 #CircuitidsInput,#CircuitidsList{
     height:2.5rem;
 }
