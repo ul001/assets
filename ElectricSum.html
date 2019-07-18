@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <title></title>
     <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/ElectricData.css" />
+    <link rel="stylesheet" type="text/css" href="css/ElectricSum.css" />
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
@@ -31,7 +31,11 @@
             <button type="button" class="search" id="confirm">查询</button>
         </div>
         <div class="list" id="sideClick">
-            <p><span>监测点：</span><span id="meter">主进线柜</span></p>
+            <p>
+                <img class="jiancedian" src="image/jiancedian.png"/>
+                <span>监测点：</span>
+                <span id="meter">主进线柜</span>
+            </p>
             <img src="image/right.png" />
         </div>
         <div class="elec-btn" id="EnergyContain">
@@ -40,10 +44,11 @@
             <button type="button" class="btn " id="year" value="year">年报</button>
         </div>
         <div class="form-group form_date_end selectTime">
-            <span id="datePre"><img src="image/left.png" /><a id="preVal">上一</a></span>&nbsp;&nbsp;
-            <label>日期：</label>
-            <input readonly type="text" id="date">
-            <span id="dateNext"><a id="nextVal">下一</a><img src="image/right-green.png" /></span>
+            <div class="timeBtn">
+              <span id="datePre"><img src="image/left-w.png" /><a id="preVal"></a></span>&nbsp;&nbsp;
+              <input readonly type="text" id="date">
+              <span id="dateNext"><a id="nextVal"></a><img src="image/right-w.png" /></span>
+            </div>
         </div>
         <!-- <div class="form-group sumDate">
             <div class="input-group date form_date_end " data-date="" data-link-field="dtp_input2">

@@ -10,7 +10,16 @@ body {
 	font-size: 0.8rem;
 	background: #FFFFFF;
 }
-
+.dosageSelect{
+	height:4rem;
+    background:red;
+	border-bottom:1px dashed #C8C9CA;
+}
+.dateImg{
+	float:left;
+	width:1.2rem;
+	margin-right:0.5rem;
+}
 .time {
 	float: right;
 	padding: 0.5rem 0.3rem 0 0;
