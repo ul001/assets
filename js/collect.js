@@ -27,7 +27,7 @@ $(function () {
 
     var currentSelectVode = {}; //选中节点
     //页面初始化加载当日数据
-    var startDate = tool.initDate("YMDh", new Date()) + ":00";
+    var startDate = tool.initDate("YMD", new Date()) + " 00:00";
     var endDate = tool.initDate("YMDh", new Date()) + ":00";
 
     $(".startDate").val(startDate);
@@ -132,8 +132,24 @@ $(function () {
         $(data).each(function (index, value) {
             var strName = this.fCircuitname;
             $(data[index].origEnergyValues).each(function () {
-                var str = strName + "<br>" + "[起始数值：" + this.fStartvalue + " 截止数值：" + this.fEndvalue +
-                    " 差值：" + this.fConsumevalue + "]"
+            var str = "<div class=\"contain\">\n" +
+                      "        <h1>"+strName+"</h1>\n" +
+                      "        <div class=\"type\">\n" +
+                      "            <img src=\"image/start.png\"/>\n" +
+                      "            <p class=\"list1\">起始数值</p>\n" +
+                      "            <p>"+this.fStartvalue+"</p>\n" +
+                      "        </div>\n" +
+                      "        <div class=\"type\">\n" +
+                      "            <img src=\"image/stop.png\"/>\n" +
+                      "            <p class=\"list1\">截止数值</p>\n" +
+                      "            <p>"+this.fEndvalue+"</p>\n" +
+                      "        </div>\n" +
+                      "        <div class=\"type\">\n" +
+                      "            <img src=\"image/between.png\"/>\n" +
+                      "            <p class=\"list1\">差值</p>\n" +
+                      "            <p>"+this.fConsumevalue+"</p>\n" +
+                      "        </div>\n" +
+                      "    </div>";
                 var liDom = document.createElement("li");
                 liDom.innerHTML = str;
                 listDom.appendChild(liDom); //加在列表的后面,上拉加载

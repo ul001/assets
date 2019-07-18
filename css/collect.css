@@ -65,16 +65,15 @@ body {
 	padding: 0.2rem 0.5rem;
 	float: left;
 }
-.category ul {
-	padding-left: 0;
-}
-
-.category ul li {
-	height: 3rem;
-	line-height: 2.5rem;
-	padding-top: 5px;
+.list-unstyled li {
+	width: 95%;
+	padding: 0.5rem;
+	background: #fff;
 	list-style: none;
-	border-bottom: 1px solid #eee;
+	border: 1px solid #C8C9CA;
+	border-radius: 0.5rem;
+	margin: 0 auto;
+	margin-bottom:1rem;
 }
 
 .category input {
@@ -300,4 +299,55 @@ body {
 
 .collectlist p {
 	margin-bottom: 0.2rem;
+}
+
+.contain {
+	padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+	background: #fff;
+	border-radius: 0.5rem;
+	clear: both;
+	overflow: hidden;
+}
+
+.contain h1 {
+    margin-top:0;
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.contain h1::before {
+	content: url(../image/jiancedian.png);
+	vertical-align: -0.5rem;
+	margin-right: 0.5rem;
+}
+
+.contain h1 span {
+	display: block;
+	float: right;
+	font-weight: normal;
+}
+
+.contain h2 {
+	font-size: 1rem;
+}
+
+.list1,
+.contain h1 span {
+	font-size: 1rem;
+	color: rgb(145, 139, 138);
+	margin: 0.15rem 0 0.5rem 0;
+}
+
+.type {
+	width: 33%;
+	text-align: center;
+	float: left;
+}
+
+.type img {
+	width: 50%;
+}
+
+.type p {
+	margin-bottom: 0;
 }
