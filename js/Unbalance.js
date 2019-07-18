@@ -264,9 +264,9 @@ $(function () {
       tooltip: {
         trigger: 'axis'
       },
-      legend: {
+/*      legend: {
         data: name,
-      },
+      },*/
       grid: { // 控制图的大小，调整下面这些值就可以，
         top: '18%',
         left: '10%',
