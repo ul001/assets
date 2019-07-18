@@ -116,9 +116,6 @@ input {
 	position: absolute;
 	right: 0;
 	top: 0;
-	overflow: hidden;
-	clear: both;
-	z-index: 999;
 }
 
 .selectcontain-main {
@@ -128,6 +125,9 @@ input {
 	position: absolute;
 	right: 0;
 	top: 0;
+	overflow: hidden;
+	clear: both;
+	z-index: 999;
 	padding: 2rem 0 0 1rem;
 }
 

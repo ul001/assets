@@ -21,7 +21,7 @@ $(function () {
         baseUrlFromAPP = android.getBaseUrl();
         tokenFromAPP = android.getToken();
         subidFromAPP = android.getfSubid();
-        $("#meterName,#paramName").on("focus", function () {
+        $("#meterName,#paramName").on("click", function () {
             var _this = this;
             setTimeout(function () {
                 _this.scrollIntoViewIfNeeded();
