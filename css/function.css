@@ -300,7 +300,12 @@ input {
 	padding-top: 6px;
 	color: #565A68;
 }
-
+.function-group .dateW{
+	width:4rem;
+}
+.function-group .dateW img{
+	width:1rem;
+}
 .function-group .to {
 	width: 1rem;
 }
