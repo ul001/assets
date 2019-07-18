@@ -1,7 +1,7 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
-    var subidFromAPP=10100001;
+    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+    var subidFromAPP = 10100001;
     //iOS安卓基础传参
     // var u = navigator.userAgent,
     //     app = navigator.appVersion;
@@ -42,11 +42,19 @@ $(function () {
     }
 
     //切换按钮
-    $("#selectType").change(function () {
-        var select = $("#selectType").get(0);
-        var type = select.options[select.selectedIndex].value; //获取被选中option的value
-        networkData(type);
-    })
+    // $("#selectType").change(function () {
+    //     var select = $("#selectType").get(0);
+    //     var type = select.options[select.selectedIndex].value; //获取被选中option的value
+    //     networkData(type);
+    // })
+    $(document).on('click', '.ListH .btn', function () {
+        var obj = $(this);
+        $(this).addClass('select').siblings("button").removeClass('select');
+        var selectParam = $(this).val();
+        // var type = selectParam == "按电量" ? "sum" : "price";
+        networkData(selectParam);
+
+    });
 
     //网络请求 type：sum电量 price电费
     function networkData(type) {
@@ -383,9 +391,12 @@ $(function () {
             var showMon = tool.initDate("YM", new Date());
             $("#showTime").html(showMon);
             $(".startDate").val(date);
-            var select = $("#selectType").get(0);
-            var type = select.options[select.selectedIndex].value; //获取被选中option的value
-            networkData(type);
+            // var select = $("#selectType").get(0);
+            // var type = select.options[select.selectedIndex].value; //获取被选中option的value
+            var selectParam = $(".btn.select").val();
+
+            networkData(selectParam);
+
 
         }
     });
@@ -400,9 +411,12 @@ $(function () {
             var showMon = tool.initDate("YM", new Date());
             $("#showTime").html(showMon);
             $(".endDate").val(date);
-            var select = $("#selectType").get(0);
-            var type = select.options[select.selectedIndex].value; //获取被选中option的value
-            networkData(type);
+            // var select = $("#selectType").get(0);
+            // var type = select.options[select.selectedIndex].value; //获取被选中option的value
+            var selectParam = $(".btn.select").val();
+
+            networkData(selectParam);
+
         }
     });
 });

@@ -1,128 +1,154 @@
-.container{
-    background: #fff;
-    height: 100%;
-    padding-right:0;
-    padding-left:0;
+.container {
+	background: #fff;
+	height: 100%;
+	padding-right: 0;
+	padding-left: 0;
 }
-body{
-height: 100%;background:#EDEDEC;
-font-size:1.5rem;
+
+body {
+	height: 100%;
+	background: #EDEDEC;
+	font-size: 1.5rem;
 }
+
 .list-group-item {
-    border: none;
-    }
-.max{
-	background:#000;
-	width:inherit;
-	top::0;
-	padding-top:30%;
-	padding-bottom:30%;
+	border: none;
+}
+
+.max {
+	background: #000;
+	width: inherit;
+	top: :0;
+	padding-top: 30%;
+	padding-bottom: 30%;
 	text-align: center;
-	color:#fff;
-	background:url(../image/max-bg.png) no-repeat,linear-gradient(rgb(24,193,132),rgb(1,105,138));
-	background-size:100%;
-	background-position:center;
+	color: #fff;
+	background: url(../image/max-bg.png) no-repeat, linear-gradient(rgb(24, 193, 132), rgb(1, 105, 138));
+	background-size: 100%;
+	background-position: center;
 }
-#maxVal{
-	font-size:5rem;
-	font-weight:bold;
+
+#maxVal {
+	font-size: 5rem;
+	font-weight: bold;
 }
-.max h1 span{
-	font-size:1rem;
-	margin-left:0.5rem;
+
+.max h1 span {
+	font-size: 1rem;
+	margin-left: 0.5rem;
 }
+
 /*.list p{
-*//*	display:block;
-	float:left;*//*
+*/
+/*	display:block;
+	float:left;*/
+/*
 	height:3rem;
 	line-height: 3rem;
 	margin-bottom:0;
 }*/
-#sideClick,#timeClick{
-    height: 6rem;
-	line-height:5rem;
-    padding-top: 0.5rem;
-	border-bottom:1px solid #F7F7F7;
+#sideClick,
+#timeClick {
+	height: 6rem;
+	line-height: 5rem;
+	padding-top: 0.5rem;
+	border-bottom: 1px solid #F7F7F7;
 }
-#timeClick img{
-	width:1.5rem;
+
+#timeClick img {
+	width: 1.5rem;
 }
-.right{
-	padding:2rem 1rem 0 0;
-	float:right;
+
+.right {
+	padding: 2rem 1rem 0 0;
+	float: right;
 }
-.list img,#timeClick img{
-	margin-right:0.5rem;
-	margin-left:1rem;
-	margin-top:-0.2rem;
+
+.list img,
+#timeClick img {
+	margin-right: 0.5rem;
+	margin-left: 1rem;
+	margin-top: -0.2rem;
 }
-.container hr{
-	clear:both;
-/*	margin:0 -1rem 0 -1rem;*/
-	border:0.03rem dashed #C8C9CA;
+
+.container hr {
+	clear: both;
+	/*	margin:0 -1rem 0 -1rem;*/
+	border: 0.03rem dashed #C8C9CA;
 }
-#dateSelect{
-	width:calc(100% - 11.9rem);
-    height:2.5rem;
-    padding-left:0.5rem;
-	border:none;
-	background:url(../image/right.png) no-repeat right;
+
+#dateSelect {
+	width: calc(100% - 11.9rem);
+	height: 2.5rem;
+	padding-left: 0.5rem;
+	border: none;
+	background: url(../image/right.png) no-repeat right;
 }
-.tree{
+
+.tree {
 	display: none;
 	width: 90%;
 	height: 100%;
 	background: #fff;
 	position: fixed;
-	top:0;
-	right:0;
+	top: 0;
+	right: 0;
 	z-index: 10;
 }
-#treeview{
-    overflow:auto;
-    height:84%
+
+#treeview {
+	overflow: auto;
+	height: 84%
 }
-.treeSearch{
-	padding:1rem;
+
+.treeSearch {
+	padding: 1rem;
 }
-.tree .search,.tree .cancel{
-    height:4rem;
-	line-height:3rem;
-	width:44%;
+
+.tree .search,
+.tree .cancel {
+	height: 4rem;
+	line-height: 3rem;
+	width: 44%;
 	border-radius: 0;
-	border:none;
-	margin-bottom:0;
-	position:fixed;
-	bottom:0;
+	border: none;
+	margin-bottom: 0;
+	position: fixed;
+	bottom: 0;
 }
-.tree .cancel{
-	background:#d4d4d0;
+
+.tree .cancel {
+	background: #d4d4d0;
 }
-.tree .search{
-	right:0;
-	background:#02AC94;
-	color:#fff;
+
+.tree .search {
+	right: 0;
+	background: #02AC94;
+	color: #fff;
 }
-.treeSearch input{
+
+.treeSearch input {
 	border-radius: 0.5rem;
-	border:1px solid #ddd;
+	border: 1px solid #ddd;
 	height: 2.3rem;
-	width:70%;
+	width: 70%;
 	background: url(../image/searchsmall.png) no-repeat 4px 5px;
-	padding-left:25px;
+	padding-left: 25px;
 	position: relative;
 }
-.treeSearch button{
-	width:22%;
+
+.treeSearch button {
+	width: 22%;
 	height: 2.3rem;
 	background: #02AC94;
-	color:#fff;
+	color: #fff;
 	border-radius: 1.2rem;
-	border:1px solid #02AC94;
+	border: 1px solid #02AC94;
 }
-.clear{
+
+.clear {
 	position: absolute;
-	right:33%;
-	top:1.4rem;
-    z-index: 9;
+	right: 33%;
+	top: 1.4rem;
+	z-index: 9;
 }
