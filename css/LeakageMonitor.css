@@ -2,6 +2,37 @@ body{
 	background: #EDEDEC;
 }
 section{
-	width:30%;
+	width:50%;
 	float:left;
 }
+.tempDiv h3{
+	font-size:1rem;
+	text-align:center;
+	padding-top:0.5rem;
+}
+.tempDiv{
+	background:#fff;
+	border:1px solid #C8C9CA;
+	border-radius:0.5rem;
+	margin-right:0.3rem;
+}
+.tempDiv p{
+	display:block;
+	float:left;
+}
+.tempBtn{
+	display:block;
+	width:90%;
+	margin:0 auto;
+	height: 2.5rem;
+	background-color: #02AC94;
+	color:#fff;
+	border-radius: 4rem;
+	border:none;
+	margin-top:0.5rem;
+	margin-bottom:0.5rem;
+}
+.searchBtn{
+	width:1rem;
+}
+.

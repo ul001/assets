@@ -114,7 +114,7 @@ $(function () {
                 string = '<section>' +
                     '<div class="tempDiv">' +
                     '<div class="alarm">'+
-                    '<img src="image/big-greenbell.png"/>'+
+                    '<img src="image/alarm-green.png"/>'+
                     '</div>'+
                     '<h3>' + val.fMeterName + '</h3>' +
                     '<div class="title">'+
@@ -125,7 +125,9 @@ $(function () {
                     '<p>B:<span>' + tempB + '</span>℃</p>' +
                     '<p>C:<span>' + tempC + '</span>℃</p>' +
                     '</div>' +
-                    '<button class="search tempBtn" type="button" name="'+val.fMeterName+'" value="' + val.fMetercode + '">查 询</button>' +
+                    '<button class="search tempBtn" type="button" value="' + val.f_MeterCode + '"> ' +
+                    '<img class="searchBtn" src="image/search.png"/> ' +
+                    '查询</button>' +
                     '</div>' +
                     '</section>';
                 $("#container").append(string);
