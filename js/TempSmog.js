@@ -39,7 +39,7 @@ $(function () {
                     if (result.data.length > 0) {
                         $(".container").empty();
                         $(result.data).each(function () {
-                            $(".container").append('<section><img src="image/big-greenbell.png"/>' +
+                            $(".container").append('<section><img src="image/yw.png"/>' +
                                 '<p>' + this.fMeterName + '</p>' +
                                 '<p>' + (this.fStatus == "有烟" ? "<a class='redColor'>有烟</a>" : this.fStatus) + '</p></section>');
                         });

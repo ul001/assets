@@ -56,7 +56,7 @@ $(function () {
           $(data.TempHumiObList).each(function () {
             $("#cardList").append('<section class="sectionCard" value="' + this.f_MeterCode + '">' +
               '<p>' + this.f_MeterName + '</p>' +
-              '<img src="image/big-greenbell.png"/>' +
+              '<img src="image/wsd.png"/>' +
               '<p>温度：' + parseFloat(this.temp).toFixed(1) + this.tempUnit + '</p>' +
               '<p>湿度：' + parseFloat(this.humi).toFixed(1) + this.humiUnit + '</p></section>');
           });
