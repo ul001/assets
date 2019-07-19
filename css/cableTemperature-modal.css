@@ -1,5 +1,5 @@
 body{
-	background: #EDEDEC;
+	background: #fff;
 }
 .container{
     padding-left:0;
@@ -42,4 +42,75 @@ body{
     overflow: hidden;
     height: 100%;
     margin-bottom:10px;
+}
+/*返回*/
+.address{
+    height:3rem;
+    line-height:3rem;
+    padding-top:0.5rem;
+}
+.address img{
+    width:1.2rem;
+}
+#return{
+    width:35%;
+    height: 2.5rem;
+    color:#fff;
+    border-radius: 4rem;
+    border:none;
+    float:right;
+    background:url(../image/return.png) no-repeat 1.7rem center;
+    background-size:1.2rem;
+    padding-left:2rem;
+    background-color: #02AC94;
+
+}
+/*上一日，下一日*/
+.selectTime {
+    height:6rem;
+    line-height:5rem;
+    padding-top:0.5rem;
+    border-bottom: 1px dashed #C8C9CA;
+}
+#datePre{
+    float:left;
+}
+#datePre,#dateNext{
+    padding:0 0.5rem;
+    cursor:pointer;
+}
+#selectTime img{
+    vertical-align: -4px;
+}
+#dateNext{
+    float:right;
+}
+.date{
+    width:7.5rem;
+    background:url(../image/down.png) no-repeat right center;
+    float:left;
+    margin-left:11%;
+    background-size:1rem;
+}
+#date{
+    width:6rem;
+    height:2.5rem;
+    border-radius:5px;
+    padding-right:2rem;
+    text-align:center;
+    padding-left:0.8rem;
+    border:none;
+    background:url(../image/time.png) no-repeat left center;
+    background-size:1.3rem;
+}
+/*图表、数据按钮*/
+.btn{
+    width:80%;
+    margin:0 auto;
+    background:red;
+}
+.btn button{
+    width:50%;
+    height:3rem;
+    border:none;
 }
