@@ -1,30 +1,30 @@
 $(function () {
-    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM2MjcxNzYsInVzZXJuYW1lIjoiYWRtaW4ifQ.6MQ7AdQdCC1VlppKNa4gdoUOEiJ6W4wWGQDhET27HZs";
-    var subidFromAPP = 10100001;
+//    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM2MjcxNzYsInVzZXJuYW1lIjoiYWRtaW4ifQ.6MQ7AdQdCC1VlppKNa4gdoUOEiJ6W4wWGQDhET27HZs";
+//    var subidFromAPP = 10100001;
     // var trans = new TransformerMonitor();
     //iOS安卓基础传参
-    // var u = navigator.userAgent,
-    //     app = navigator.appVersion;
-    // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    // //判断数组中是否包含某字符串
-    // var baseUrlFromAPP;
-    // var tokenFromAPP;
-    // var subidFromAPP;
-    // if (isIOS) { //ios系统的处理
-    //     window.webkit.messageHandlers.iOS.postMessage(null);
-    //     var storage = localStorage.getItem("accessToken");
-    //     // storage = storage ? JSON.parse(storage):[];
-    //     storage = JSON.parse(storage);
-    //     baseUrlFromAPP = storage.baseurl;
-    //     tokenFromAPP = storage.token;
-    //     subidFromAPP = storage.fsubID;
-    // } else {
-    //     baseUrlFromAPP = android.getBaseUrl();
-    //     tokenFromAPP = android.getToken();
-    //     subidFromAPP = android.getfSubid();
-    // }
+     var u = navigator.userAgent,
+         app = navigator.appVersion;
+     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+     //判断数组中是否包含某字符串
+     var baseUrlFromAPP;
+     var tokenFromAPP;
+     var subidFromAPP;
+     if (isIOS) { //ios系统的处理
+         window.webkit.messageHandlers.iOS.postMessage(null);
+         var storage = localStorage.getItem("accessToken");
+         // storage = storage ? JSON.parse(storage):[];
+         storage = JSON.parse(storage);
+         baseUrlFromAPP = storage.baseurl;
+         tokenFromAPP = storage.token;
+         subidFromAPP = storage.fsubID;
+     } else {
+         baseUrlFromAPP = android.getBaseUrl();
+         tokenFromAPP = android.getToken();
+         subidFromAPP = android.getfSubid();
+     }
 
     function getData(url, params, successCallback) {
         $.ajax({
@@ -40,6 +40,7 @@ $(function () {
             }
         });
     }
+    var selectTrans;
     var info;
     var time = tool.initDate("YMD", new Date());
     $("#date").val(time);
@@ -55,7 +56,6 @@ $(function () {
             info = data;
             generateTransStatus(data);
             generateChartLine(data);
-
         });
     }
 
@@ -63,7 +63,7 @@ $(function () {
         var url = baseUrlFromAPP + "/main/getCurveDataOfPowerAndTempABC";
         // var selectCode = $(".").attr('value');
         var params = {
-            fTransid: '1010000101',
+            fTransid: selectTrans,
             fDate: $("#date").val()
         };
         getData(url, params, function (data) {
@@ -73,15 +73,16 @@ $(function () {
 
     //配置变压器上部数据
     function generateTransStatus(data) {
-
-        if (!data.hasOwnProperty('TransformerStatus'))
-            return;
-
-        showTemperature(data.TransformerStatus);
-        showCurrent(data.TransformerStatus);
-        showPower(data.TransformerStatus);
-        showVoltage(data.TransformerStatus);
-        showTransName();
+        if (data.hasOwnProperty('TransformerStatus')){
+            showTemperature(data.TransformerStatus);
+            showCurrent(data.TransformerStatus);
+            showPower(data.TransformerStatus);
+            showVoltage(data.TransformerStatus);
+        }
+        if(data.hasOwnProperty('TransformerList')){
+            showTransName(data.TransformerList);
+        }
+        selectTrans = data.fTransid;
     }
 
     //显示温度数据
@@ -707,10 +708,10 @@ $(function () {
         var line = echarts.init($("#powerChart").get(0), 'macarons');
         // var line = echarts.init($("#powerChart").get(0));
         var option = {
-            title: {
+/*            title: {
                 text: title,
                 x: 'center'
-            },
+            },*/
             tooltip: {
                 trigger: 'axis'
             },
@@ -720,19 +721,20 @@ $(function () {
                 orient: 'horizontal',
                 top: -6,
                 feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
                     dataView: {
                         readOnly: true
                     },
-                    dataZoom: {
-                        yAxisIndex: 'none'
-                    }
+                    restore: {}
                 }
             },
             grid: {
                 left: '13%',
                 right: '11%',
                 top: '20%',
-                bottom: '28%'
+                bottom: '25%'
             },
             xAxis: {
                 type: 'category',
@@ -761,20 +763,37 @@ $(function () {
                 start: 0, // 左边在 10% 的位置。
                 end: 100, // 右边在 60% 的位置。
                 height: 25,
-                bottom: 33
+                bottom: 38
             }],
             series: series
         };
         line.setOption(option);
     }
 
-    function showTransName() {
-        var transformerName = $(".trans-select").text();
+    function showTransName(transList) {
+        if(transList.length>0){
+            $("#transform").empty();
+            $(transList).each(function(){
+                var str = "";
+                if(selectTrans==this.fTransid){
+                    str="<li value='"+this.fTransid+"'><img src='image/transform-orange.png'/><p>"+this.fTransname+"</p></li>";
+                }else{
+                    str="<li value='"+this.fTransid+"'><img src='image/transform-grey.png'/><p>"+this.fTransname+"</p></li>";
+                }
+                $("#transform").append(str);
+            });
+            $("#transform li").click(function(){
+                $(this).find("img").setAttribute("src","image/transform-orange.png");
+                $(this).siblings.find("img").setAttribute("src","image/transform-grey.png");
+                selectTrans=$(this).attr("value");
+            });
+        }
+/*        var transformerName = $(".trans-select").text();
         if (transformerName == null || transformerName == "") {
             $(".Transformername").html("--");
         } else {
             $(".Transformername").html(transformerName);
-        }
+        }*/
         // var time = Substation.ObjectOperation.dateTimeFormat("DATETIME", new Date());
         // $(".UPTime").html(time);
     }
