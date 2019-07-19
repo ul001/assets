@@ -3,7 +3,7 @@ body{
 }
 section{
     text-align:center;
-	width:31%;
+	width:30%;
 	float:left;
 	background:#FFFFFF;
 	border:1px solid #A9A9A9;
@@ -11,8 +11,20 @@ section{
 	margin:3px;
 }
 section img{
-    padding-top:16px;
+	width:55%;
+	margin-bottom:0.5rem;
+    padding-top:12px;
 }
 .redColor{
     color:red;
+}
+.sectionCard.sectionSelect{
+	color:#000;
+	background-color:#fff;
+}
+section p{
+	margin:0;
+}
+section p:last-child{
+	margin-bottom:0.5rem;
 }

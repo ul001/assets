@@ -4,6 +4,10 @@ body{
 section{
 	width:50%;
 	float:left;
+    padding-top:2rem;
+}
+.container{
+    padding:0.5rem 0 0.5rem 0.5rem;
 }
 .tempDiv h3{
 	font-size:1rem;
@@ -14,7 +18,7 @@ section{
 	background:#fff;
 	border:1px solid #C8C9CA;
 	border-radius:0.5rem;
-	margin-right:0.3rem;
+	margin-right:0.5rem;
 }
 .tempDiv p{
 	display:block;
@@ -35,4 +39,18 @@ section{
 .searchBtn{
 	width:1rem;
 }
-.
+/*报警*/
+.alarm{
+    margin:0 auto;
+    margin-top:-1.5rem;
+    padding:0.5rem 0 0 0.9rem;
+    width:4rem;
+    height:4rem;
+    border-radius:4rem;
+    border:1px solid #C8C9CA;
+    background:#fff;
+}
+/*内容设置*/
+.title p,.data p{
+    font-size:14px;
+}
