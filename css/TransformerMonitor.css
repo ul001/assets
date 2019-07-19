@@ -148,7 +148,23 @@
 	background-repeat:no-repeat;
 	background-position:3rem 0.7rem;
 }
-.select{
+/*.select{*/
+/*	background-color:#02AC94!important;*/
+/*	color:#fff!important;*/
+/*}*/
+#tempLine[class*="select"]{
+	background-color:#02AC94!important;
+	color:#fff!important;
+}
+#NothingPower[class*="select"]{
+	background-color:#02AC94!important;
+	color:#fff!important;
+}
+#havePower[class*="select"]{
+	background-color:#02AC94!important;
+	color:#fff!important;
+}
+#NowPower[class*="select"]{
 	background-color:#02AC94!important;
 	color:#fff!important;
 }
