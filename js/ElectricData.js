@@ -333,6 +333,42 @@ $(function () {
         name: el.name,
         data: el.value,
         type: 'line',
+/*        markPoint: {
+                    symbol: 'circle',
+                    symbolSize: 10,
+                    data: [{
+                        name: '最大值',
+                        type: 'max',
+                        label: {
+                          normal: {
+                            formatter: 'Max:{c}'
+                          }
+                        }
+                      },
+                      {
+                        name: '最小值',
+                        type: 'min',
+                        label: {
+                          normal: {
+                            formatter: 'Min:{c}'
+                          }
+                        }
+                      }
+                    ],
+                    itemStyle: {
+                      normal: {
+                        label: {
+                          position: 'top'
+                        }
+                      }
+                    }
+                  },
+        markLine: {
+            data: [{
+              name: '平均值',
+              type: 'average'
+            }]
+        }*/
       })
     });
     $("#chartContain").removeAttr('_echarts_instance_');
@@ -360,6 +396,7 @@ $(function () {
       },
       toolbox: {
         left: 'right',
+        top:-6,
         feature: {
           dataZoom: {
             yAxisIndex: 'none'

@@ -289,6 +289,7 @@ $(function () {
       },
       toolbox: {
         left: 'right',
+        top:-6,
         feature: {
           dataZoom: {
             yAxisIndex: 'none'

@@ -256,6 +256,42 @@ $(function () {
         name: el.name,
         data: el.value,
         type: 'line',
+        markPoint: {
+                    symbol: 'circle',
+                    symbolSize: 10,
+                    data: [{
+                        name: '最大值',
+                        type: 'max',
+                        label: {
+                          normal: {
+                            formatter: 'Max:{c}'
+                          }
+                        }
+                      },
+                      {
+                        name: '最小值',
+                        type: 'min',
+                        label: {
+                          normal: {
+                            formatter: 'Min:{c}'
+                          }
+                        }
+                      }
+                    ],
+                    itemStyle: {
+                      normal: {
+                        label: {
+                          position: 'top'
+                        }
+                      }
+                    }
+                  },
+        markLine: {
+            data: [{
+              name: '平均值',
+              type: 'average'
+            }]
+        }
       })
     });
     $("#chartContain").removeAttr('_echarts_instance_');
@@ -270,7 +306,7 @@ $(function () {
       grid: { // 控制图的大小，调整下面这些值就可以，
         top: '18%',
         left: '10%',
-        right: '6%',
+        right: '8%',
         bottom: '29%',
       },
       xAxis: {
@@ -283,6 +319,7 @@ $(function () {
       },
       toolbox: {
         left: 'right',
+        top:-6,
         feature: {
           dataZoom: {
             yAxisIndex: 'none'
