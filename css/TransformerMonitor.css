@@ -1,16 +1,8 @@
 .container {
-	background: #EDEDEC;
-	padding-right: 0;
-	padding-left: 0;
+	background: #fff;
+	padding:1rem;
+	overflow:hidden;
 }
-
-.chart {
-	float: left;
-	width: 100%;
-	height: 350px;
-	border: 1px solid red;
-}
-
 .transform {
 	clear: both;
 }
@@ -35,12 +27,133 @@
 	padding: 1rem;
 }
 
-.date {
-	display: block;
-	float: left;
-	padding: 1rem;
-}
 
+
+
+/*变压器*/
+.side-left-tran{
+	padding:0 2rem;
+}
+.side-left-tran,.transform,.tran-stateb{
+	overflow:hidden;
+	clear:both;
+}
+.transform li{
+	text-align:center;
+}
+.side-left-tran img{
+	width:70%;
+	display:block;
+	margin:0 auto;
+	margin-bottom:0.5rem;
+}
+/*变压器状态*/
+.tran-stateb{
+	border:1px solid #C8C9CA;
+	border-radius:0.5rem;
+	margin:0 auto;
+	padding:1rem 0 0 0;
+}
+.title{
+	padding-left:1rem;
+}
+.tran-stateb .titleImg{
+	width:1.5rem;
+}
 .tran-statec {
-	width: 50%
+	width: 46.7%;
+	height:9rem;
+	background:#EEEEEF;
+	float:left;
+	margin-bottom:0.5rem;
+}
+.tran-statec ul li{
+	padding-left:0.5rem;
+}
+.tran-statec >.i18n{
+	background:#E57D22;
+	color:#fff;
+	padding:0.5rem;
+	margin-bottom:0.5rem;
+}
+#power,#current,#temp{
+	margin:0 0 0.5rem 0.5rem;
+}
+#service,#voltage{
+	margin:0 0.5rem 0.5rem 0.5rem;
+}
+#power,#service{
+	height:12rem;
+}
+#temp{
+	width:calc(100% - 1rem);
+}
+/*时间选择*/
+.selectTime{
+	margin-bottom:0;
+	padding-left:0.5rem;
+}
+.timeBtn{
+	width:100%;
+	background:linear-gradient(#56C676,#04BA6B);
+	height:4rem;
+	line-height:4rem;
+	border-radius:4rem;
+	margin:0 auto;
+	margin-top:0.5rem;
+}
+#date{
+	height:4rem;
+	border-radius:5px;
+	padding-left:0.5rem;
+	border:none;
+	width:calc(100% - 11rem);
+	background:transparent;
+	color:#fff;
+	text-align:center;
+	float:left;
+}
+#datePre,#dateNext{
+	display:block;
+	width:5rem;
+	height:4rem;
+	border-right:1px solid #fff;
+	float:left;
+	padding:0 1.3rem;
+}
+#dateNext{
+	float:right;
+	border-right:0;
+	border-left:1px solid #fff;
+}
+.date{
+	margin-top:1rem;
+}
+/*按钮*/
+#tempLine,#NothingPower,#havePower,#NowPower{
+	width:23%;
+	height: 3rem;
+	line-height:2.9rem;
+	text-align:center;
+	background-color: #F4F2F1;
+	color:#000;
+	border-radius: 4rem;
+	border:none;
+	float:left;
+	margin:1rem 0 0 0.4rem;
+	background-size:1rem;
+	background-repeat:no-repeat;
+	background-position:3rem 0.7rem;
+}
+.select{
+	background-color:#02AC94!important;
+	color:#fff!important;
+}
+/*曲线图*/
+.chart {
+	margin:0 auto;
+	border-radius:0.5rem;
+	width: 90%;
+	height: 350px;
+	border:1px solid #C8C9CA;
 }
