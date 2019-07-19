@@ -256,3 +256,10 @@ body{
 	background:url(../image/time.png) no-repeat left center;
 	background-size:1.3rem;
 }
+#tableContain{
+    margin-bottom:1rem;
+}
+#chartContain{
+    width:95%;
+    border:1px solid #C8C9CA;
+}

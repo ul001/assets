@@ -100,10 +100,10 @@ body{
 	background:#02AC94;
 	color:#fff;
 }
-.date{
+/*.date{
   margin:0.6rem 0.2rem 0.6rem 0.2rem;
   width:100%;
-  }
+  }*/
 #date{
   width:calc(100% - 205px);
   height:2.5rem;
@@ -257,4 +257,11 @@ body{
 	border:none;
 	background:url(../image/time.png) no-repeat left center;
 	background-size:1.3rem;
+}
+#tableContain{
+    margin-bottom:1rem;
+}
+#chartContain{
+    width:95%;
+    border:1px solid #C8C9CA;
 }
