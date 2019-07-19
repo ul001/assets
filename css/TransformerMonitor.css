@@ -62,7 +62,7 @@
 }
 .tran-statec {
 	width: 46.7%;
-	height:9rem;
+	height:10rem;
 	background:#EEEEEF;
 	float:left;
 	margin-bottom:0.5rem;
@@ -83,10 +83,13 @@
 	margin:0 0.5rem 0.5rem 0.5rem;
 }
 #power,#service{
-	height:12rem;
+	height:14rem;
 }
 #temp{
 	width:calc(100% - 1rem);
+}
+.MDTime{
+	padding-left:0.5rem;
 }
 /*时间选择*/
 .selectTime{
