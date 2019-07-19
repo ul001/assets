@@ -510,7 +510,7 @@ $(function () {
             },
             {
                 field: "value",
-                title: "电量(单位：kW.h)",
+                title: "电量(单位：kW·h)",
                 align: "center"
             }
         ]

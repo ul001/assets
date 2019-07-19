@@ -27,7 +27,7 @@ body{
 	background:#EDEDEC;
 }
 #table{font-size:1rem;}
-.selectTime,.list,#EnergyContain,.sumDate{
+.sumDate{
 	border-bottom:1px dashed #C8C9CA;
 }
 .sumDate .date img{

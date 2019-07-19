@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <title></title>
     <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="css/EnergyMOM.css" /> -->
     <link rel="stylesheet" type="text/css" href="css/EnergyMOM.css" />
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
     <script src="lib/jquery-1.11.1.min.js"></script>
@@ -41,8 +40,8 @@
         </div>
         <div class="elec-btn" id="EnergyContain">
             <button type="button" class="btn select" id="today" value="today">按日</button>
-            <button type="button" class="btn " id="month" value="month">按周</button>
-            <button type="button" class="btn " id="year" value="year">按月</button>
+            <button type="button" class="btn " id="month" value="week">按周</button>
+            <button type="button" class="btn " id="year" value="month">按月</button>
         </div>
         <div class="form-group sumDate">
             <div class="input-group date form_date_end " data-date="" data-link-field="dtp_input2">
@@ -59,25 +58,25 @@
         <div class="MOMSum">
             <p class="col-xs-6" >
                 <img src="image/MOM1.png"/>
-                <span id=" ">当日用电<br/>
+                <span id="todayElectconSump">当日用电<br/>
                     <span class="Num">1634KW.h</span>
                 </span>
             </p>
             <p class="col-xs-6">
                 <img src="image/MOM2.png"/>
-                <span id=" ">上日用电<br/>
+                <span id="yesterdayElectconSump">上日用电<br/>
                     <span class="Num">1956kW.h</span>
                 </span>
             </p>
             <p class="col-xs-6">
                 <img src="image/MOM3.png"/>
                 <span>增加值<br/></span>
-                <span id=" " class="Num">-322</span>
+                <span id="addValue" class="Num">-322</span>
             </p>
             <p class="col-xs-6">
                 <img src="image/MOM4.png"/>
                 <span>环比<br/></span>
-                <span id=" " class="Num">-16.45%</span>
+                <span id="chainRatio" class="Num">-16.45%</span>
             </p>
         </div>
 <!--        <div class="MOMSum">-->

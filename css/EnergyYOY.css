@@ -1,10 +1,203 @@
 .container{
-	background: #EDEDEC;
+	background: #fff;
 	padding-right:0;
 	padding-left:0;
+	overflow:auto;
 }
-.chart{
+.form_date_end label{
+	font-weight:normal;
+}
+.form_date_end input{
+	border-radius:5px;
+	padding-left:0.5rem;
+}
+#sideClick p .jiancedian,.list .type{
+	float:left;
+	margin-top:1.5rem;
+}
+.list .type,.selectTime img{
+	width:1.8rem;
+}
+.selectTime img{
+	margin-right:0.5rem;
+}
+body{
+	height: 100%;
+	font-size:1.5rem;
+	background:#EDEDEC;
+}
+#table{font-size:1rem;}
+.selectTime,.list,#EnergyContain,.sumDate{
+	border-bottom:1px dashed #C8C9CA;
+}
+#sideClick,#electric,#select,.selectTime{
+	height:6rem;
+	line-height:5rem;
+	padding-top:0.5rem;
+}
+.selectTime{margin-bottom:0;padding-left:0.5rem;}
+.list{
+	padding:0 0.5rem 0 0.5rem;
+	height:2.5rem;
+	line-height: 2.5rem;
+}
+.list p{
+	float:left;
+	margin-bottom: 0;
+}
+.list img{
+	float:right;
+	margin-right:0.5rem;
+	margin-top:1.8rem;
+}
+.container hr{
+	clear:both;
+	margin:0;
+	border:0.03rem dashed #C8C9CA;
+}
+.elec-btn{
+	padding:0.3rem 0.2rem 0.3rem 0.2rem;
+}
+.elec-btn button{
+	height:4rem;
+	line-height: 2rem;
+	width:22%;
+	margin: 0 2px;
+	border-radius: 4rem;
+	background:#F4F2F1;
+}
+#EnergyContain{
+	height:6rem;
+	padding-top:0.8rem;
+	padding-left:2rem;
+}
+.elec-btn .select,.search{
+	background:#02AC94;
+	border:1px solid #02AC94;
+	color:#fff;
+}
+.date{
+	margin:0 0.2rem 0.6rem 0.2rem;
 	width:100%;
-	height:500px;
-	border:1px solid red;
+}
+
+.search{
+	width:95%;
+	height:4rem;
+	margin:0 auto;
+	display: block;
+	border-radius: 4rem;
+	margin-top:1rem;
+	margin-bottom:1rem;
+}
+.container .diagram{
+	width:100%;
+	height:20rem;
+	margin-bottom:0.5rem;
+	background: #fff;
+}
+.dataTable{
+	width:95%;
+	background:#fff;
+	margin-bottom:1rem!important;
+}
+.dataTable thead{
+	background:#42B685;
+	color:#fff;
+}
+.dataTable tbody tr:nth-child(even){
+	background:rgb(236,248,243);
+	border-top:1px solid #C8C9CA;
+	border-bottom:1px solid #C8C9CA;
+}
+.center{margin:0 auto;}
+#chartContain{
+    width:95%;
+    border:1px solid #C8C9CA;
+}
+#date{
+	height:2.5rem;
+	border-radius:5px;
+	padding-left:0.5rem;
+	border:none;
+	width:calc(100% - 80px);
+	background:url("../image/right.png") no-repeat right center;
+}
+.tree{
+	display: none;
+	width: 90%;
+	height: 100%;
+	background: #fff;
+	position: fixed;
+	top:0;
+	right:0;
+	z-index: 10;
+}
+#treeview{
+	overflow:auto;
+	height:84%
+}
+.treeSearch{
+	padding:1rem;
+}
+.tree .search,.tree .cancel{
+	height:6rem;
+	line-height:5rem;
+	width:44%;
+	border-radius: 0;
+	border:none;
+	margin-bottom:0;
+	position:fixed;
+	bottom:0;
+}
+
+.tree .cancel{
+	background:#d4d4d0;
+}
+.tree .search{
+	right:0;
+	background:#02AC94;
+	color:#fff;
+}
+.treeSearch input{
+	border-radius: 4rem;
+	border:1px solid #ddd;
+	height: 4rem;
+	width:70%;
+	background: url(../image/searchsmall.png) no-repeat 4px 5px;
+	padding-left:25px;
+	position: relative;
+}
+.treeSearch button{
+	width:25%;
+	height: 4rem;
+	background: #02AC94;
+	color:#fff;
+	border-radius: 4rem;
+	border:1px solid #02AC94;
+}
+#search img{
+	width:1.5rem;
+	margin-right:0.5rem;
+}
+.clear{
+	position: absolute;
+	right:33%;
+	top:2.4rem;
+	z-index: 9;
+}
+.list-group-item{
+	border:none;
+}
+.modal-dialog{margin-top:20%;}
+
+#energySelect{
+	background:transparent;
+	border:none;
+	-webkit-appearance:none;
+	width:calc(100% - 102px);
+	background:url('../image/right.png') no-repeat right 5px center;
+}
+#chartContain{
+    margin-top:1rem;
 }

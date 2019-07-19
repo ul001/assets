@@ -421,7 +421,7 @@ $(function () {
                 top: "18%",
                 left: "15%",
                 right: "3%",
-                bottom: "28%",
+                bottom: "29%",
                 borderColor: '#eee'
             },
             xAxis: {
@@ -435,11 +435,13 @@ $(function () {
             toolbox: {
                 color: ['#1e90ff', '#1e90ff', '#1e90ff', '#1e90ff'],
                 effectiveColor: '#ff4500',
+                top:-6,
                 left: "right",
                 feature: {
                     dataZoom: {
                         yAxisIndex: "none"
                     },
+                    dataView: {readOnly: true},
                     restore: {}
                 }
             },
@@ -494,12 +496,12 @@ $(function () {
             },
             {
                 field: "monthlycomparison",
-                title: "同比",
+                title: "同比(%)",
                 align: "center"
             },
             {
                 field: "monthlysumcomparison",
-                title: "累计同比",
+                title: "累计同比(%)",
                 align: "center"
             }
         ];
