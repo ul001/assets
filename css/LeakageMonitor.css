@@ -20,10 +20,6 @@ section{
 	border-radius:0.5rem;
 	margin-right:0.5rem;
 }
-.tempDiv p{
-	display:block;
-	float:left;
-}
 .tempBtn{
 	display:block;
 	width:90%;
@@ -43,14 +39,38 @@ section{
 .alarm{
     margin:0 auto;
     margin-top:-1.5rem;
-    padding:0.5rem 0 0 0.9rem;
     width:4rem;
     height:4rem;
     border-radius:4rem;
     border:1px solid #C8C9CA;
     background:#fff;
 }
+.alarm img{
+	width:50%;
+	margin:0 auto;
+	display:block;
+	padding-top:0.5rem;
+
+}
 /*内容设置*/
 .title p,.data p{
     font-size:14px;
+	margin-bottom:0
+}
+.title,.data{
+	float:left;
+}
+.title p{
+    padding-left:1.2rem;
+}
+.title p{
+	background:url(../image/elec-b.png) no-repeat 0.5rem center;
+	background-size:10%;
+}
+.title p:nth-child(2){
+	background:url(../image/temp-b.png) no-repeat 0.5rem center;
+	background-size:10%;
+}
+.data{
+	margin-bottom:0.5rem;
 }

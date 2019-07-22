@@ -18,19 +18,33 @@
 
 <body>
 <div class="container">
-    <div>
-        <a id="cirName"></a>
+    <div class="address">
+        <img src="image/address.png"/>
+        <a id="titleP"></a>
         <button id="return" onclick="window.history.back()">返回</button>
-        <div>
-            <span id="datePre"><img src="image/left.png"/>上一日</span>
+    </div>
+    <div class="form-group form_date_end selectTime">
+        <span id="datePre"><a id="preVal">上一日</a></span>&nbsp;&nbsp;
+        <div class="date">
             <input readonly type="text" id="date">
-            <span id="dateNext">下一日<img src="image/right-green.png"/></span>
+        </div>
+        <span id="dateNext"><a id="nextVal">下一日</a></span>
+    </div>
+    <div class="btn">
+        <button type="button" id="showChart" class="select">图表</button>
+        <button type="button" id="showTable">数据</button>
+    </div>
+    <div class="chart">
+        <div class="mainBox">
+            <div id="elecTitle"><img src="image/elec-sb.png"/>漏电流</div>
+            <div id="elecChart">漏电流曲线</div>
+        </div>
+        <div class="mainBox">
+            <div id="tempTitle"><img src="image/temp-sb.png"/>温度</div>
+            <div id="tempChart">温度曲线</div>
         </div>
     </div>
-    <button type="button" id="showChart">图表</button>
-    <button type="button" id="showTable">数据</button>
-    <div class="chart">
-    </div>
 </div>
+
 </body>
 </html>

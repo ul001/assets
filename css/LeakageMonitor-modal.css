@@ -1,23 +1,27 @@
 body{
-	background: #EDEDEC;
+    background: #fff;
+}
+.container{
+    padding-left:0;
+    padding-right:0;
 }
 #datePre,#dateNext{
     cursor:pointer;
 }
 #table{
     background-color:#FFFFFF;
-    overflow:auto;
+    overflow:hidden;
 }
 .chart thead{
     background:#42B685;
     color:#fff;
 }
 .chart tbody tr:nth-child(even){
-	background:rgb(236,248,243);
-	border-top:1px solid #C8C9CA;
-	border-bottom:1px solid #C8C9CA;
+    background:rgb(236,248,243);
+    border-top:1px solid #C8C9CA;
+    border-bottom:1px solid #C8C9CA;
 }
-#tempTitle,#humiTitle{
+#tempTitle,#elecTitle{
     background-color: #42B685;
     color: #FFF;
     line-height:30px;
@@ -25,11 +29,11 @@ body{
 }
 .chart{
     margin:0 auto;
-	padding:10px 0 10px 0;
+    padding-top:6px;
 }
-.chart #IChart,#EChart{
+.chart #tempChart,.chart #elecChart{
     width:100%;
-    height:200px;
+    height:250px;
     background:#FFFFFF;
 }
 .mainBox{
@@ -38,4 +42,117 @@ body{
     overflow: hidden;
     height: 100%;
     margin-bottom:10px;
+}
+/*返回*/
+.address{
+    height:3rem;
+    line-height:3rem;
+    padding-top:0.5rem;
+}
+.address img{
+    width:1.2rem;
+}
+#return{
+    width:35%;
+    height: 2.5rem;
+    color:#fff;
+    border-radius: 4rem;
+    border:none;
+    float:right;
+    background:url(../image/return.png) no-repeat 1.7rem center;
+    background-size:1.2rem;
+    padding-left:2rem;
+    background-color: #02AC94;
+
+}
+/*上一日，下一日*/
+.selectTime {
+    height:4rem;
+    line-height:3.5rem;
+    padding-top:0.5rem;
+    border-bottom: 1px dashed #C8C9CA;
+    border-top: 1px dashed #C8C9CA;
+}
+#datePre{
+    float:left;
+}
+#datePre,#dateNext{
+    padding:0 0.5rem;
+    cursor:pointer;
+}
+#selectTime img{
+    vertical-align: -4px;
+}
+#dateNext{
+    float:right;
+}
+.date{
+    width:7.5rem;
+    background:url(../image/down.png) no-repeat right center;
+    float:left;
+    margin-left:11%;
+    background-size:1rem;
+}
+#date{
+    width:6rem;
+    height:2.5rem;
+    border-radius:5px;
+    padding-right:2rem;
+    text-align:center;
+    padding-left:0.8rem;
+    border:none;
+    background:url(../image/time.png) no-repeat left center;
+    background-size:1.3rem;
+}
+/*图表、数据按钮*/
+.btn{
+    width:80%;
+    margin:0 auto;
+    clear:both;
+    margin-top:1rem;
+}
+.btn button{
+    width:50%;
+    float:left;
+    height:3rem;
+    border:none;
+    padding-left:1.5rem;
+    background-repeat:no-repeat;
+    background-size:13%;
+    background-position:2rem center;
+}
+#showChart{
+    background-image:url(../image/showChart-h.png);
+
+    border-top-left-radius:2rem;
+    border-bottom-left-radius:2rem;
+}
+#showTable{
+    background-image:url(../image/showData-h.png);
+    border-top-right-radius:2rem;
+    border-bottom-right-radius:2rem;
+}
+.select{
+    background-color:#02AC94;
+    color:#fff;
+}
+#showChart[class*="select"]{
+    background-image:url(../image/showChart-b.png);
+}
+#showTable[class*="select"]{
+    background-image:url(../image/showData-b.png);
+}
+/*曲线图*/
+.chart{
+    margin-top:0.5rem;
+    float:left;
+    width:100%;
+}
+#elecTitle,#tempTitle{
+    padding:0.5rem 0 0.5rem 0.5rem;
+    padding:0.5rem 0 0.5rem 0.5rem;
+}
+#elecTitle img,#tempTitle img{
+    margin-right:0.5rem;
+    vertical-align:-0.2rem;
 }
