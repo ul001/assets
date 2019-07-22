@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -17,105 +18,92 @@
     <script src="js/ElectricData.js"></script>
 
 </head>
+
 <body>
-<div class="container">
-    <div class="row tree">
-        <div class="treeSearch">
-            <img class="clear" src="image/clear.png"/>
-            <input type="text" id="CircuitidsInput"/>
-            <button type="button" id="CircuitidsList">搜索</button>
+    <div class="container">
+        <div class="row tree">
+            <div class="treeSearch">
+                <img class="clear" src="image/clear.png" />
+                <input type="text" id="CircuitidsInput" />
+                <button type="button" id="CircuitidsList">搜索</button>
+            </div>
+            <div id="treeview" class="col-sm-4"></div>
+            <button type="button" class="cancel">取消</button>
+            <button type="button" class="search" id="confirm">查询</button>
         </div>
-        <div id="treeview" class="col-sm-4"></div>
-        <button type="button" class="cancel">取消</button>
-        <button type="button" class="search" id="confirm">查询</button>
-    </div>
-    <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body category">
-                    <form>
-                        <ul>
-                            <li><input type="radio" name="kind" id="radio1">
-                                <label for="radio1" value="P">有功功率</label>
-                            </li>
-                            <li><input type="radio" name="kind" id="radio2">
-                                <label for="radio2" value="I">电流</label>
-                            </li>
-                            <li><input type="radio" name="kind" id="radio3">
-                                <label for="radio3" value="U">相电压</label>
-                            </li>
-                            <li><input type="radio" name="kind" id="radio4">
-                                <label for="radio4" value="UL">线电压</label>
-                            </li>
-                            <li><input type="radio" name="kind" id="radio5">
-                                <label for="radio5" value="fFr">频率</label>
-                            </li>
-                            <li><input type="radio" name="kind" id="radio6">
-                                <label for="radio6" value="Q">无功功率</label>
-                            </li>
-                            <li><input type="radio" name="kind" id="radio7">
-                                <label for="radio7" value="S">视在功率</label>
-                            </li>
-                        </ul>
-                    </form>
+        <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body category">
+                        <form>
+                            <ul>
+                                <li><input type="radio" name="kind" id="radio1">
+                                    <label for="radio1" value="P">有功功率</label>
+                                </li>
+                                <li><input type="radio" name="kind" id="radio2">
+                                    <label for="radio2" value="I">电流</label>
+                                </li>
+                                <li><input type="radio" name="kind" id="radio3">
+                                    <label for="radio3" value="U">相电压</label>
+                                </li>
+                                <li><input type="radio" name="kind" id="radio4">
+                                    <label for="radio4" value="UL">线电压</label>
+                                </li>
+                                <li><input type="radio" name="kind" id="radio5">
+                                    <label for="radio5" value="fFr">频率</label>
+                                </li>
+                                <li><input type="radio" name="kind" id="radio6">
+                                    <label for="radio6" value="Q">无功功率</label>
+                                </li>
+                                <li><input type="radio" name="kind" id="radio7">
+                                    <label for="radio7" value="S">视在功率</label>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>-->
-    <ul class="public">
-        <li><img src="image/jiancedian.png"/>监测点：<span id="meter">10kV变压器</span></li>
-        <li><img src="image/type.png"/>电力类别：<span>有功功率</span></li>
-        <li class="clearbg">
-            <button type="button" class="select">A相</button>
-            <button type="button">B相</button>
-            <button type="button">C相</button>
-        </li>
-        <li><img src="image/date.png"/>日期：<span>2019-07-22</span></li>
-    </ul>
+        </div> -->
+        <ul>
+            <li class="list" id="sideClick">
+                <p>
+                    <img class="jiancedian" src="image/jiancedian.png" />
+                    <span>监测点：</span>
+                    <span id="meter">10kV变压器</span>
+                </p>
 
-<!--    <div class="list" id="sideClick">-->
-<!--        <p>-->
-<!--            <img class="jiancedian" src="image/jiancedian.png"/>-->
-<!--            <span>监测点：</span>-->
-<!--            <span id="meter">10kV变压器</span>-->
-<!--        </p>-->
-<!--    </div>-->
+            </li>
 
-
-
-
-    <!--<div class="list" id="electric" data-toggle="modal" data-target="#myModal">
-        <p><span value="P" id="EnergyKind">电力类别：</span><span id="param">电流</span></p>
-        <img id="kindClick" src="image/right.png"/>
-    </div>-->
-<!--    <div class="list" id="electric" data-toggle="modal" data-target="#myModal">-->
-<!--        <img class="type" src="image/type.png"/>-->
-<!--        <span value="P" id="EnergyKind">电力类别：</span>-->
-<!--        <select id="energySelect">-->
-<!--            <option value="P">有功功率</option>-->
-<!--            <option value="I">电流</option>-->
-<!--            <option value="U">相电压</option>-->
-<!--            <option value="UL">线电压</option>-->
-<!--            <option value="fFr">频率</option>-->
-<!--            <option value="Q">无功功率</option>-->
-<!--            <option value="S">视在功率</option>-->
-<!--        </select>-->
-<!--    </div>-->
-<!--    <div class="elec-btn" id="EnergyContain">-->
-<!--        <button type="button" class="btn select" value="fPa">A相</button>-->
-<!--        <button type="button" class="btn" value="fPb">B相</button>-->
-<!--        <button type="button" class="btn" value="fPc">C相</button>-->
-<!--    </div>-->
-<!--    <div class="form-group selectTime">-->
-<!--        <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">-->
-<!--            <img src="image/date.png"/>-->
-<!--            <label>日期：</label>-->
-<!--            <input readonly type="text" id="date">-->
-<!--        </div>-->
-<!--    </div>-->
-    <button type="button" class="search" id="search"><img src="image/search.png"/>查询</button>
-    <div class="diagram center" id="chartContain"></div>
-    <div class="dataTable center" id="tableContain"></div>
-</div>
+            <li class="list" id="electric" data-toggle="modal" data-target="#myModal">
+                <img class="type" src="image/type.png" />
+                <span value="P" id="EnergyKind">电力类别：</span>
+                <select id="energySelect">
+                    <option value="P">有功功率</option>
+                    <option value="I">电流</option>
+                    <option value="U">相电压</option>
+                    <option value="UL">线电压</option>
+                    <option value="fFr">频率</option>
+                    <option value="Q">无功功率</option>
+                    <option value="S">视在功率</option>
+                </select>
+            </li>
+            <li class="elec-btn" id="EnergyContain">
+                <button type="button" class="btn select" value="fPa">A相</button>
+                <button type="button" class="btn" value="fPb">B相</button>
+                <button type="button" class="btn" value="fPc">C相</button>
+            </li>
+            <li class="form-group selectTime">
+                <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
+                    <img src="image/date.png" />
+                    <label>日期：</label>
+                    <input readonly type="text" id="date">
+                </div>
+            </li>
+        </ul>
+        <button type="button" class="search" id="search"><img src="image/search.png" />查询</button>
+        <div class="diagram center" id="chartContain"></div>
+        <div class="dataTable center" id="tableContain"></div>
+    </div>
 </body>
+
 </html>

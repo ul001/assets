@@ -18,10 +18,13 @@ body {
 	font-size: 1.5rem;
 	background: #EDEDEC;
 }
-#sideClick p .jiancedian,.list .type{
-	float:left;
-	margin-top:1.5rem;
+
+#sideClick p .jiancedian,
+.list .type {
+	float: left;
+	margin-top: 1.5rem;
 }
+
 #sideClick {
 	height: 3.5rem;
 	padding-top: 0.5rem;
@@ -31,19 +34,21 @@ body {
 	height: 4rem;
 	padding-top: 0.5rem;
 }
-.dateImg{
-	float:left;
-	width:1.7rem;
-	margin-left:0.5rem;
-	padding-top:1.5rem;
+
+.dateImg {
+	float: left;
+	width: 1.7rem;
+	margin-left: 0.5rem;
+	padding-top: 1.5rem;
 }
+
 #sideClick,
 .list,
 .function-group {
 	border-bottom: 1px dashed #C8C9CA;
-	height:6rem;
-	line-height:5rem;
-	padding-top:0.5rem;
+	height: 6rem;
+	line-height: 5rem;
+	padding-top: 0.5rem;
 }
 
 .input-group-addon {
@@ -65,6 +70,7 @@ body {
 	padding: 0.2rem 0.5rem;
 	float: left;
 }
+
 .list-unstyled li {
 	width: 95%;
 	padding: 0.5rem;
@@ -73,7 +79,7 @@ body {
 	border: 1px solid #C8C9CA;
 	border-radius: 0.5rem;
 	margin: 0 auto;
-	margin-bottom:1rem;
+	margin-bottom: 1rem;
 }
 
 .category input {
@@ -124,9 +130,9 @@ body {
 }
 
 .list img {
-	float:right;
-	margin-right:0.5rem;
-	margin-top:1.8rem;
+	float: right;
+	margin-right: 0.5rem;
+	margin-top: 1.8rem;
 }
 
 .container hr {
@@ -150,37 +156,44 @@ body {
 }
 
 .elec-btn .select,
-.search{
-	width:95%;
-	height:4rem;
-	margin:0 auto;
+.search {
+	width: 95%;
+	height: 4rem;
+	margin: 0 auto;
 	display: block;
 	border-radius: 4rem;
-	margin-top:1rem;
-	margin-bottom:1rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 }
-#dateStart,#dateEnd{
-	background:url(../image/down.png) no-repeat right 0.8rem;
-	background-size:0.5rem;
+
+#dateStart,
+#dateEnd {
+	background: url(../image/down.png) no-repeat right 0.8rem;
+	background-size: 0.5rem;
 }
+
 .date {
 	margin: 0.6rem 0.2rem 0.6rem 0.2rem;
 }
+
 .form_date_start,
 #dateStart,
 .form_date_end,
 #dateEnd {
 	width: 12rem;
-	height:2.7rem;
+	height: 2.7rem;
 	background: transparent;
 	border: none;
 	float: left;
-	padding-top:0.5rem;
+	padding-top: 0.5rem;
+	line-height: 2.7rem;
 }
-#search img{
-	width:1.5rem;
-	margin-right:0.5rem;
+
+#search img {
+	width: 1.5rem;
+	margin-right: 0.5rem;
 }
+
 .container .diagram {
 	width: 95%;
 	height: 20rem;
@@ -239,11 +252,14 @@ body {
 	position: fixed;
 	bottom: 0;
 }
-.elec-btn .select,.search{
-	background:#02AC94;
-	border:1px solid #02AC94;
-	color:#fff;
+
+.elec-btn .select,
+.search {
+	background: #02AC94;
+	border: 1px solid #02AC94;
+	color: #fff;
 }
+
 .tree .cancel {
 	background: #d4d4d0;
 }
@@ -310,7 +326,7 @@ body {
 }
 
 .contain h1 {
-    margin-top:0;
+	margin-top: 0;
 	font-size: 1.5rem;
 	margin-bottom: 1rem;
 }

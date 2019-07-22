@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <li class="container">
         <div class="row tree">
             <div class="treeSearch">
                 <img class="clear" src="image/clear.png" />
@@ -30,41 +30,43 @@
             <button type="button" class="cancel">取消</button>
             <button type="button" class="search" id="confirm">查询</button>
         </div>
-        <div class="list" id="sideClick">
-            <p>
-                <img class="jiancedian" src="image/jiancedian.png"/>
-                <span>监测点：</span>
-                <span id="meter">10kV变压器</span>
-            </p>
-            <img src="image/right.png" />
-        </div>
-        <div class="list" id="electric" data-toggle="modal" data-target="#myModal">
-            <img class="type" src="image/type.png"/>
-            <span id="EnergyKind">电力类别：</span>
-            <select id="energySelect">
-                <option value="P">功率</option>
-                <option value="I">电流</option>
-                <option value="Voltage">相电压</option>
-                <option value="Voltage2">线电压</option>
-                <option value="UnBalance">不平衡度</option>
-                <option value="UHR">电压谐波</option>
-                <option value="IHR">电流谐波</option>
-            </select>
-        </div>
-        <div class="elec-btn" id="EnergyContain">
-            <button type="button" class="btn select" id="today" value="day">日报</button>
-            <button type="button" class="btn " id="month" value="month">月报</button>
-        </div>
-        <div class="form-group form_date_end selectTime">
-            <span id="datePre"><a id="preVal">上一日</a></span>&nbsp;&nbsp;
-            <div class="date">
-              <input readonly type="text" id="date">
-            </div>
-            <span id="dateNext"><a id="nextVal">下一日</a></span>
-        </div>
-        <button type="button" class="search" id="search"><img src="image/search.png"/>查询</button>
+        <ul>
+            <li class="list" id="sideClick">
+                <p>
+                    <img class="jiancedian" src="image/jiancedian.png" />
+                    <span>监测点：</span>
+                    <span id="meter">10kV变压器</span>
+                </p>
+                <img src="image/right.png" />
+            </li>
+            <li class="list" id="electric" data-toggle="modal" data-target="#myModal">
+                <img class="type" src="image/type.png" />
+                <span id="EnergyKind">电力类别：</span>
+                <select id="energySelect">
+                    <option value="P">功率</option>
+                    <option value="I">电流</option>
+                    <option value="Voltage">相电压</option>
+                    <option value="Voltage2">线电压</option>
+                    <option value="UnBalance">不平衡度</option>
+                    <option value="UHR">电压谐波</option>
+                    <option value="IHR">电流谐波</option>
+                </select>
+            </li>
+            <li class="elec-btn" id="EnergyContain">
+                <button type="button" class="btn select" id="today" value="day">日报</button>
+                <button type="button" class="btn " id="month" value="month">月报</button>
+            </li>
+            <li class="form-group form_date_end selectTime">
+                <span id="datePre"><a id="preVal">上一日</a></span>&nbsp;&nbsp;
+                <div class="date">
+                    <input readonly type="text" id="date">
+                </div>
+                <span id="dateNext"><a id="nextVal">下一日</a></span>
+            </li>
+        </ul>
+        <button type="button" class="search" id="search"><img src="image/search.png" />查询</button>
         <div class="dataTable center" id="tableContain"></div>
-    </div>
+        </div>
 </body>
 
 </html>

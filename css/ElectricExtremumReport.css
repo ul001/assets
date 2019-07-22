@@ -1,57 +1,74 @@
-.container{
+.container {
 	background: #fff;
-    height: 100%;
-    padding-right:0;
-    padding-left:0;
-}
-.form_date_end label{
-	font-weight:normal;
-}
-.form_date_end input{
-	border-radius:5px;
-	padding-left:0.5rem;
-}
-.form_date_end a{
-    color:black;
-    text-decoration:none;
-}
-body{
 	height: 100%;
-	font-size:1.5rem;
-	background:#EDEDEC;
+	padding-right: 0;
+	padding-left: 0;
 }
-button{
-	width:80%;
+
+.form_date_end label {
+	font-weight: normal;
 }
-#sideClick, #electric, #select,.selectTime {
+
+.form_date_end input {
+	border-radius: 5px;
+	padding-left: 0.5rem;
+}
+
+.form_date_end a {
+	color: black;
+	text-decoration: none;
+}
+
+body {
+	height: 100%;
+	font-size: 1.5rem;
+	background: #EDEDEC;
+}
+
+button {
+	width: 80%;
+}
+
+#sideClick,
+#electric,
+#select,
+.selectTime {
 	/*border-bottom: 1px dashed #C8C9CA;*/
-	height:6rem;
-	line-height:5rem;
-	padding-top:0.5rem;
+	height: 6rem;
+	line-height: 5rem;
+	padding-top: 0.5rem;
 }
-.list{
-	padding:0 0.5rem 0 0.5rem;
-	height:2.5rem;
+
+.list {
+	padding: 0 0.5rem 0 0.5rem;
+	height: 2.5rem;
 	line-height: 2.5rem;
 }
-#sideClick p .jiancedian,.list .type{
-	float:left;
-	margin-top:1.5rem;
+
+#sideClick p .jiancedian,
+.list .type {
+	float: left;
+	margin-top: 1.5rem;
 }
-.list .type,.selectTime img{
-	width:1.8rem;
+
+.list .type,
+.selectTime img {
+	width: 1.8rem;
 }
-.list p{
+
+.list p {
 	float: left;
 	margin-bottom: 0;
 }
-.list img{
-	float:right;
-	margin-right:0.5rem;
-	margin-top:1.8rem;
+
+.list img {
+	float: right;
+	margin-right: 0.5rem;
+	margin-top: 1.8rem;
 }
 
-#sideClick,.selectTime {
+#sideClick,
+.selectTime {
 	border-bottom: 1px dashed #C8C9CA;
 }
 
@@ -68,183 +85,218 @@ button{
 	border: 1px solid #888888;
 }
 
-.elec-btn .select{
+.elec-btn .select {
 	background: #02AC94;
 	border: 1px solid #02AC94;
 	color: #fff;
 }
-.search{
-	width:95%;
-	height:4rem;
-	margin:0 auto;
+
+.search {
+	width: 95%;
+	height: 4rem;
+	margin: 0 auto;
 	display: block;
 	border-radius: 4rem;
-	margin-top:1rem;
-	margin-bottom:1rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 }
 
-.elec-btn .select,.search{
-	background:#02AC94;
-	border:1px solid #02AC94;
-	color:#fff;
+.elec-btn .select,
+.search {
+	background: #02AC94;
+	border: 1px solid #02AC94;
+	color: #fff;
 }
-#search img{
-	width:1.5rem;
-	margin-right:0.5rem;
+
+#search img {
+	width: 1.5rem;
+	margin-right: 0.5rem;
 }
-.elec-btn{
-	width:100%;
-	height:4.5rem;
-	background:url(../image/timeBg.png);
-	background-size:100% 100%;
-	padding-left:1.5rem;
-	box-shadow:0 -15px 15px -10px #BFBFC0 inset;
+
+.elec-btn {
+	width: 100%;
+	height: 4.5rem;
+	background: url(../image/timeBg.png);
+	background-size: 100% 100%;
+	padding-left: 1.5rem;
+	box-shadow: 0 -15px 15px -10px #BFBFC0 inset;
 }
+
 .elec-btn button {
 	height: 4rem;
 	width: 6.2rem;
 	background-color: #fff;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	padding-top:1.5rem;
+	padding-top: 1.5rem;
 	transform: perspective(25px) rotateX(8deg) rotateY(0deg) translateZ(0);
-	border:none;
-	margin-top:0.35rem;
-	color:#FF6913;
-	box-shadow:0 -12px 15px -10px #BFBFC0 inset;
+	border: none;
+	margin-top: 0.35rem;
+	color: #FF6913;
+	box-shadow: 0 -12px 15px -10px #BFBFC0 inset;
 }
-#EnergyContain{
-	height:6rem;
-	padding-top:1.2rem;
-	padding-left:2rem;
+
+#EnergyContain {
+	height: 6rem;
+	padding-top: 1.2rem;
+	padding-left: 2rem;
 }
+
 .elec-btn .select,
 .search {
 	background: #02AC94;
 	border: 1px solid #02AC94;
 	color: #fff;
-	z-index:99;
+	z-index: 99;
 }
-.tree{
+
+.tree {
 	display: none;
 	width: 90%;
 	height: 100%;
 	background: #fff;
 	position: fixed;
-	top:0;
-	right:0;
+	top: 0;
+	right: 0;
 	z-index: 10;
 }
-#treeview{
-	overflow:auto;
-	height:84%
+
+#treeview {
+	overflow: auto;
+	height: 84%
 }
-.treeSearch{
-	padding:1rem;
+
+.treeSearch {
+	padding: 1rem;
 }
-.tree .search,.tree .cancel{
-	height:4rem;
-	line-height:3rem;
-	width:44%;
+
+.tree .search,
+.tree .cancel {
+	height: 4rem;
+	line-height: 3rem;
+	width: 44%;
 	border-radius: 0;
-	border:none;
-	margin-bottom:0;
-	position:fixed;
-	bottom:0;
+	border: none;
+	margin-bottom: 0;
+	position: fixed;
+	bottom: 0;
 }
-.tree .cancel{
-	background:#d4d4d0;
+
+.tree .cancel {
+	background: #d4d4d0;
 }
-.tree .search{
-	right:0;
-	background:#02AC94;
-	color:#fff;
+
+.tree .search {
+	right: 0;
+	background: #02AC94;
+	color: #fff;
 }
-.treeSearch input{
+
+.treeSearch input {
 	border-radius: 0.5rem;
-	border:1px solid #ddd;
+	border: 1px solid #ddd;
 	height: 2.3rem;
-	width:70%;
+	width: 70%;
 	background: url(../image/searchsmall.png) no-repeat 4px 5px;
-	padding-left:25px;
+	padding-left: 25px;
 	position: relative;
 }
-.treeSearch button{
-	width:25%;
+
+.treeSearch button {
+	width: 25%;
 	height: 2.3rem;
 	background: #02AC94;
-	color:#fff;
+	color: #fff;
 	border-radius: 0.5rem;
-	border:1px solid #02AC94;
+	border: 1px solid #02AC94;
 }
-.clear{
+
+.clear {
 	position: absolute;
-	right:33%;
-	top:1.4rem;
+	right: 33%;
+	top: 1.4rem;
 	z-index: 9;
 }
-.list-group-item{
-	border:none;
+
+.list-group-item {
+	border: none;
 }
 
-#energySelect{
-	background:transparent;
-	border:none;
-	-webkit-appearance:none;
-	width:calc(100% - 102px);
-	background:url('../image/right.png') no-repeat right 5px center;
-}
-.dataTable{
-	width:95%;
-	border:1px solid #C8C9CA;
-	background:#fff;
-}
-.dataTable thead{
-	background:#42B685;
-	color:#fff;
+#energySelect {
+	background: transparent;
+	border: none;
+	-webkit-appearance: none;
+	width: calc(100% - 102px);
+	background: url('../image/right.png') no-repeat right 5px center;
 }
 
-.dataTable tbody tr:nth-child(even){
-	background:rgb(236,248,243);
-	border-top:1px solid #C8C9CA;
-	border-bottom:1px solid #C8C9CA;
+.dataTable {
+	width: 95%;
+	border: 1px solid #C8C9CA;
+	background: #fff;
 }
-.selectTime img{
-	width:1.5rem;
+
+.dataTable thead {
+	background: #42B685;
+	color: #fff;
 }
-#table{font-size:1.2rem;}
-.center{margin:0 auto;}
-#datePre,#dateNext{
-	padding:0 1rem;
-    cursor:pointer;
+
+.dataTable tbody tr:nth-child(even) {
+	background: rgb(236, 248, 243);
+	border-top: 1px solid #C8C9CA;
+	border-bottom: 1px solid #C8C9CA;
 }
-#selectTime img{
-    vertical-align: -4px;
+
+.selectTime img {
+	width: 1.5rem;
 }
-#dateNext{
-	float:right;
+
+#table {
+	font-size: 1.2rem;
 }
-.date{
-	width:10.5rem;
-	background:url(../image/down.png) no-repeat right center;
-	float:left;
-	margin-left:11%;
-	background-size:1rem;
+
+.center {
+	margin: 0 auto;
 }
-#datePre{
-	float:left;
+
+#datePre,
+#dateNext {
+	padding: 0 1rem;
+	cursor: pointer;
 }
-#date{
-	width:12rem;
-	height:2.5rem;
-	border-radius:5px;
-	padding-right:2rem;
-	text-align:center;
-	padding-left:0.8rem;
-	border:none;
-	background:url(../image/time.png) no-repeat left center;
-	background-size:1.3rem;
+
+#selectTime img {
+	vertical-align: -4px;
 }
-#tableContain{
-    margin-bottom:1rem;
+
+#dateNext {
+	float: right;
+}
+
+.date {
+	width: 10.5rem;
+	background: url(../image/down.png) no-repeat right center;
+	float: left;
+	margin-left: 11%;
+	background-size: 1rem;
+}
+
+#datePre {
+	float: left;
+}
+
+#date {
+	width: 12rem;
+	height: 2.5rem;
+	border-radius: 5px;
+	padding-right: 2rem;
+	text-align: center;
+	padding-left: 0.8rem;
+	border: none;
+	background: url(../image/time.png) no-repeat left center;
+	background-size: 1.3rem;
+}
+
+#tableContain {
+	margin-bottom: 1rem;
 }
