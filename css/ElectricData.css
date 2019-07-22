@@ -55,9 +55,6 @@ body{
 	margin:0;
 	border:0.03rem dashed #C8C9CA;
 }
-.elec-btn{
-	padding:0.3rem 0.2rem 0.3rem 0.2rem;
-}
 .public button{
 	height:4rem;
 	line-height: 2rem;
@@ -69,7 +66,6 @@ body{
 }
 #EnergyContain{
 	height:6rem;
-	padding-top:0.8rem;
 	padding-left:2rem;
 }
 .public .select,.search{
@@ -121,8 +117,6 @@ body{
 	border-radius:5px;
 	padding-left:0.5rem;
 	border:none;
-	width:calc(100% - 82px);
-	background:url("../image/right.png") no-repeat right 5px center;
 }
 .tree{
 	display: none;
@@ -196,26 +190,18 @@ body{
 	background:transparent;
 	border:none;
 	-webkit-appearance:none;
-	width:calc(100% - 109px);
-	background:url('../image/right.png') no-repeat right 5px center;
 }
 /*监测点*/
 #sideClick >p{
 	width:100%;
 }
 #sideClick span{float:left;}
-/*#meter{*/
-/*	display:block;*/
-/*	float:left;*/
-/*	width:calc(100% - 97px);*/
-/*	background:url('../image/right.png') no-repeat right  center;*/
-/*}*/
 /*公共样式*/
 .public li{
-	padding-left:0.5rem;
+	padding-left:1rem;
 	height:6rem;
 	line-height:6rem;
-	background:url('../image/right.png') no-repeat right 0.5rem center;
+	background:url('../image/right.png') no-repeat right 1rem center;
 	border-bottom:1px dashed #C8C9CA;
 }
 .public li img{
