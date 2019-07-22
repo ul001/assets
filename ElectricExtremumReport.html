@@ -30,14 +30,13 @@
             <button type="button" class="cancel">取消</button>
             <button type="button" class="search" id="confirm">查询</button>
         </div>
-        <ul>
+        <ul class="public">
             <li class="list" id="sideClick">
                 <p>
                     <img class="jiancedian" src="image/jiancedian.png" />
                     <span>监测点：</span>
                     <span id="meter">10kV变压器</span>
                 </p>
-                <img src="image/right.png" />
             </li>
             <li class="list" id="electric" data-toggle="modal" data-target="#myModal">
                 <img class="type" src="image/type.png" />
@@ -52,7 +51,7 @@
                     <option value="IHR">电流谐波</option>
                 </select>
             </li>
-            <li class="elec-btn" id="EnergyContain">
+            <li class="elec-btn clearbg" id="EnergyContain">
                 <button type="button" class="btn select" id="today" value="day">日报</button>
                 <button type="button" class="btn " id="month" value="month">月报</button>
             </li>
