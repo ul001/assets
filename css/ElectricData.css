@@ -71,11 +71,11 @@ body {
 	margin-bottom: 0;
 }
 
-.list img {
+/*.list img {
 	float: right;
 	margin-right: 0.5rem;
 	margin-top: 1.8rem;
-}
+}*/
 
 .container hr {
 	clear: both;
@@ -262,8 +262,11 @@ body {
 	padding-left: 1rem;
 	height: 6rem;
 	line-height: 6rem;
-	background: url('../image/right.png') no-repeat right 1rem center;
 	border-bottom: 1px dashed #C8C9CA;
+}
+
+.public .list{
+	background: url('../image/right.png') no-repeat right 1rem center;
 }
 
 .public li img {

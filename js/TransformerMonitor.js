@@ -1,30 +1,30 @@
 $(function () {
-    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQwNjAwMDMsInVzZXJuYW1lIjoiYWRtaW4ifQ.cJLitLISm83qahqsXi9tMUrGbQ1aEiorhKe6k7RgJiE";
-    var subidFromAPP = 10100002;
+//    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQwNjAwMDMsInVzZXJuYW1lIjoiYWRtaW4ifQ.cJLitLISm83qahqsXi9tMUrGbQ1aEiorhKe6k7RgJiE";
+//    var subidFromAPP = 10100002;
     // var trans = new TransformerMonitor();
     //iOS安卓基础传参
-//     var u = navigator.userAgent,
-//         app = navigator.appVersion;
-//     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-//     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-//     //判断数组中是否包含某字符串
-//     var baseUrlFromAPP;
-//     var tokenFromAPP;
-//     var subidFromAPP;
-//     if (isIOS) { //ios系统的处理
-//         window.webkit.messageHandlers.iOS.postMessage(null);
-//         var storage = localStorage.getItem("accessToken");
-//         // storage = storage ? JSON.parse(storage):[];
-//         storage = JSON.parse(storage);
-//         baseUrlFromAPP = storage.baseurl;
-//         tokenFromAPP = storage.token;
-//         subidFromAPP = storage.fsubID;
-//     } else {
-//         baseUrlFromAPP = android.getBaseUrl();
-//         tokenFromAPP = android.getToken();
-//         subidFromAPP = android.getfSubid();
-//     }
+     var u = navigator.userAgent,
+         app = navigator.appVersion;
+     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+     //判断数组中是否包含某字符串
+     var baseUrlFromAPP;
+     var tokenFromAPP;
+     var subidFromAPP;
+     if (isIOS) { //ios系统的处理
+         window.webkit.messageHandlers.iOS.postMessage(null);
+         var storage = localStorage.getItem("accessToken");
+         // storage = storage ? JSON.parse(storage):[];
+         storage = JSON.parse(storage);
+         baseUrlFromAPP = storage.baseurl;
+         tokenFromAPP = storage.token;
+         subidFromAPP = storage.fsubID;
+     } else {
+         baseUrlFromAPP = android.getBaseUrl();
+         tokenFromAPP = android.getToken();
+         subidFromAPP = android.getfSubid();
+     }
 
     function getData(url, params, successCallback) {
         $.ajax({
@@ -55,15 +55,15 @@ $(function () {
 
     function showTransNames(transList) {
         if(transList.length>0){
-            $(".transform").empty();
+            $(".s-ctn").empty();
             $(transList).each(function(){
-                $(".transform").append("<li class='trans' value='"+this.fTransid+"'><img/><p>"+this.fTransname+"</p></li>");
+                $(".s-ctn").append("<div class='trans' value='"+this.fTransid+"'><img/><p>"+this.fTransname+"</p></div>");
             });
-            $(".transform li").click(function(){
+            $(".trans").click(function(){
                 $(this).addClass("select").siblings().removeClass("select");
                 getListData();
             });
-            $(".transform li:first").click();
+            $(".trans:first").click();
         }
     }
 
