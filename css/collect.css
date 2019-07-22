@@ -49,7 +49,7 @@ body {
 	height: 6rem;
 	line-height: 5rem;
 	padding-top: 0.5rem;
-	margin-bottom:0;
+	margin-bottom: 0;
 }
 
 .input-group-addon {
@@ -181,7 +181,7 @@ body {
 #dateStart,
 .form_date_end,
 #dateEnd {
-	width: 12rem;
+	width: 14rem;
 	height: 2.7rem;
 	background: transparent;
 	border: none;
