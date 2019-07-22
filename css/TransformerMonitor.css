@@ -218,3 +218,10 @@
 .trans.select img{
     content: url(../image/transform-orange.png);
 }
+.transform{
+	width:100%;
+	overflow:scroll;
+}
+.transform li{
+	display:inline;
+}

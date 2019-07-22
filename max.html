@@ -21,18 +21,22 @@
             <button type="button" class="search" id="confirm">查询</button>
         </div>
     </div>
-    <div class="max">
+    <div class="maxBG">
+        <div class="max">
             <p>当月最大需量</p>
             <h1><span id="maxVal">102.8</span><span>KW</span></h1>
             <p id="timeP">2019-06-12 21:33:00</p>
             <p id="noData"></p>
+        </div>
     </div>
-    <div class="list" id="sideClick">
-        <p><img src="image/jiancedian.png"/><span>监测点：</span><span id="meter"></span><img class="right" src="image/right.png"/></p>
-    </div>
-    <div class="list" id="timeClick">
-        <p><img src="image/date.png"/><span>发生时间：</span><input readonly type="text" id="dateSelect"></p>
-    </div>
+    <ul class="public">
+        <li class="list" id="sideClick">
+            <p><img src="image/jiancedian.png"/><span>监测点：</span><span id="meter"></span></p>
+        </li>
+        <li class="list" id="timeClick">
+            <p><img src="image/date.png"/><span>发生时间：</span><input readonly type="text" id="dateSelect"></p>
+        </li>
+    </ul>
 </div>
 <script src="lib/jquery-1.11.1.min.js"></script>
 <script src="lib/bootstrap.min.js"></script>
