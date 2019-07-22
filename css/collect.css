@@ -49,6 +49,7 @@ body {
 	height: 6rem;
 	line-height: 5rem;
 	padding-top: 0.5rem;
+	margin-bottom:0;
 }
 
 .input-group-addon {
