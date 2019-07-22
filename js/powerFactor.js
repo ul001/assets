@@ -381,7 +381,7 @@ $(function () {
   var time = tool.initDate("YMD", new Date());
   $("#date").val(time);
 
-  new Rolldate({
+  var roll = new Rolldate({
     el: '#date',
     format: 'YYYY-MM-DD',
     beginYear: 2000,
@@ -396,4 +396,7 @@ $(function () {
       };
     }
   });
+    $(".selectTime").click(function(){
+      roll.show();
+    });
 });

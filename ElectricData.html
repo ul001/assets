@@ -64,17 +64,15 @@
                 </div>
             </div>
         </div> -->
-        <ul>
+        <ul class="public">
             <li class="list" id="sideClick">
                 <p>
-                    <img class="jiancedian" src="image/jiancedian.png" />
+                    <img class="jiancedian" src="image/jiancedian.png"/>
                     <span>监测点：</span>
                     <span id="meter">10kV变压器</span>
                 </p>
-
             </li>
-
-            <li class="list" id="electric" data-toggle="modal" data-target="#myModal">
+            <li class="list" id="electric">
                 <img class="type" src="image/type.png" />
                 <span value="P" id="EnergyKind">电力类别：</span>
                 <select id="energySelect">
@@ -87,15 +85,16 @@
                     <option value="S">视在功率</option>
                 </select>
             </li>
-            <li class="elec-btn" id="EnergyContain">
-                <button type="button" class="btn select" value="fPa">A相</button>
-                <button type="button" class="btn" value="fPb">B相</button>
-                <button type="button" class="btn" value="fPc">C相</button>
+            <li class="elec-btn" class="clearbg" id="EnergyContain">
+                <button type="button" class="btn select" value="fPf">总</button>
+                <button type="button" class="btn" value="fPfa">A相</button>
+                <button type="button" class="btn" value="fPfb">B相</button>
+                <button type="button" class="btn" value="fPfc">C相</button>
             </li>
-            <li class="form-group selectTime">
+            <li class="form-group selectTime list">
                 <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
-                    <img src="image/date.png" />
-                    <label>日期：</label>
+                    <img src="image/date.png"/>
+                    <span>日期：</span>
                     <input readonly type="text" id="date">
                 </div>
             </li>

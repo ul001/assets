@@ -1,7 +1,7 @@
 $(function () {
-  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
- var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQwNjAwMDMsInVzZXJuYW1lIjoiYWRtaW4ifQ.cJLitLISm83qahqsXi9tMUrGbQ1aEiorhKe6k7RgJiE";
- var subidFromAPP=10100001;
+//  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+// var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQwNjAwMDMsInVzZXJuYW1lIjoiYWRtaW4ifQ.cJLitLISm83qahqsXi9tMUrGbQ1aEiorhKe6k7RgJiE";
+// var subidFromAPP=10100001;
   //iOS安卓基础传参
    var u = navigator.userAgent,
      app = navigator.appVersion;
@@ -89,9 +89,6 @@ $(function () {
     $("#meter").html(currentSelectVode.merterName);
   });
 
-  $("#electric").click(function () {
-    $(".category").show();
-  });
 
   $(document).on('click', '#search', function () {
     var EnergyKind = $("#EnergyKind").attr('value');
@@ -150,6 +147,11 @@ $(function () {
       currentSelectVode.merterName = node.text;
     })
   }
+/*
+  $("#electric").click(function(){
+    console.log($("#energySelect"));
+    $("#energySelect").select();
+  });*/
 
   $(document).on("change", "#energySelect", function () {
     generateType($("#energySelect").val());
@@ -487,7 +489,7 @@ $(function () {
   var time = tool.initDate("YMD", new Date());
   $("#date").val(time);
 
-  new Rolldate({
+  var roll = new Rolldate({
     el: '#date',
     format: 'YYYY-MM-DD',
     beginYear: 2000,
@@ -502,4 +504,8 @@ $(function () {
       };
     }
   });
+  $(".selectTime").click(function(){
+    roll.show();
+  });
+
 });

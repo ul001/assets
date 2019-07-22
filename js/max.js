@@ -114,7 +114,7 @@ $(function(){
 
     var date = new Date();
     $("#dateSelect").val(date.getFullYear()+"-"+((date.getMonth()+1)<10?("0"+(date.getMonth()+1)):(date.getMonth()+1)));
-    new Rolldate({
+    var roll = new Rolldate({
 				el: '#dateSelect',
 				format: 'YYYY-MM',
 				beginYear: 2000,
@@ -130,6 +130,9 @@ $(function(){
 					}
                 }
 			});
+    $("#timeClick").click(function(){
+        roll.show();
+    });
 
 	function showData(meterId,date){
             var data={
