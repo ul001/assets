@@ -14,7 +14,6 @@ body {
 .list-group-item {
 	border: none;
 }
-
 .max {
 	background: #000;
 	width: inherit;
@@ -23,11 +22,13 @@ body {
 	padding-bottom: 30%;
 	text-align: center;
 	color: #fff;
-	background: url(../image/max-bg.png) no-repeat, linear-gradient(rgb(24, 193, 132), rgb(1, 105, 138));
+	background: url(../image/max-bg.png) no-repeat;
 	background-size: 85%;
 	background-position: center;
 }
-
+.maxBG{
+	background:linear-gradient(rgb(24, 193, 132), rgb(1, 105, 138));
+}
 #maxVal {
 	font-size: 5rem;
 	font-weight: bold;
