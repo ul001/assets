@@ -51,7 +51,7 @@
 	border:1px solid #C8C9CA;
 	border-radius:0.5rem;
 	margin:0 auto;
-	padding:1rem 0 0 0;
+	padding:0;
 }
 .title{
 	padding-left:1rem;
@@ -74,6 +74,7 @@
 	color:#fff;
 	padding:0.5rem;
 	margin-bottom:0.5rem;
+	margin-top:0;
 }
 #power,#current,#temp{
 	margin:0 0 0.5rem 0.5rem;
@@ -127,6 +128,8 @@
 .selectTime{
 	margin-bottom:0;
 	padding-left:0.5rem;
+	clear:both;
+	float:left;
 }
 .timeBtn{
 	width:100%;
@@ -166,7 +169,7 @@
 }
 /*按钮*/
 #tempLine,#NothingPower,#havePower,#NowPower{
-	width:20%;
+	width:22%;
 	height: 3rem;
 	line-height:2.9rem;
 	text-align:center;
@@ -175,7 +178,7 @@
 	border-radius: 4rem;
 	border:none;
 	float:left;
-	margin:1rem 0 0 0.4rem;
+	margin:1rem 0 0.5rem 0.4rem;
 	background-size:1rem;
 	background-repeat:no-repeat;
 	background-position:3rem 0.7rem;
@@ -218,10 +221,48 @@
 .trans.select img{
     content: url(../image/transform-orange.png);
 }
-.transform{
+
+.side-left{
 	width:100%;
-	overflow:scroll;
+	overflow-x:auto;
+}
+.transform{
+	height:5rem;
+	white-space:nowrap;
+
 }
 .transform li{
-	display:inline;
+	width:100px;
+	height:5rem;
+	display:inline-block;
+	word-wrap:break-word;
+	word-break:break-all;
+}
+/*滚动变压器*/
+.t-ctn {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.t-ctn .s-ctn {
+	height: 100px;
+	white-space: nowrap;
+	font-size: 0;
+}
+
+.t-ctn .s-ctn div {
+	font-size: 14px;
+	box-sizing: border-box;
+	white-space: normal;
+	word-wrap: break-word;
+	word-break: break-all;
+	overflow: hidden;
+	display: inline-block;
+	width: 30%;
+	height: 100%;
+}
+.trans img{
+	width:70%;
+	display:block;
+	margin:0 auto;
 }
