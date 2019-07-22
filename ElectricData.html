@@ -15,6 +15,7 @@
     <script src="lib/echarts.min.js"></script>
     <script src="js/tools.js"></script>
     <script src="js/ElectricData.js"></script>
+
 </head>
 <body>
 <div class="container">
@@ -61,43 +62,57 @@
             </div>
         </div>
     </div>-->
-    <div class="list" id="sideClick">
-        <p>
-            <img class="jiancedian" src="image/jiancedian.png"/>
-            <span>监测点：</span>
-            <span id="meter">10kV变压器</span>
-        </p>
-        <img src="image/right.png"/>
-    </div>
+    <ul class="public">
+        <li><img src="image/jiancedian.png"/>监测点：<span id="meter">10kV变压器</span></li>
+        <li><img src="image/type.png"/>电力类别：<span>有功功率</span></li>
+        <li class="clearbg">
+            <button type="button" class="select">A相</button>
+            <button type="button">B相</button>
+            <button type="button">C相</button>
+        </li>
+        <li><img src="image/date.png"/>日期：<span>2019-07-22</span></li>
+    </ul>
+
+<!--    <div class="list" id="sideClick">-->
+<!--        <p>-->
+<!--            <img class="jiancedian" src="image/jiancedian.png"/>-->
+<!--            <span>监测点：</span>-->
+<!--            <span id="meter">10kV变压器</span>-->
+<!--        </p>-->
+<!--    </div>-->
+
+
+
+
     <!--<div class="list" id="electric" data-toggle="modal" data-target="#myModal">
         <p><span value="P" id="EnergyKind">电力类别：</span><span id="param">电流</span></p>
         <img id="kindClick" src="image/right.png"/>
     </div>-->
-    <div class="list" id="electric" data-toggle="modal" data-target="#myModal">
-        <img class="type" src="image/type.png"/>
-        <span value="P" id="EnergyKind">电力类别：</span>
-        <select id="energySelect">
-            <option value="P">有功功率</option>
-            <option value="I">电流</option>
-            <option value="U">相电压</option>
-            <option value="UL">线电压</option>
-            <option value="fFr">频率</option>
-            <option value="Q">无功功率</option>
-            <option value="S">视在功率</option>
-        </select>
-    </div>
-    <div class="elec-btn" id="EnergyContain">
-        <button type="button" class="btn select" value="fPa">A相</button>
-        <button type="button" class="btn" value="fPb">B相</button>
-        <button type="button" class="btn" value="fPc">C相</button>
-    </div>
-    <div class="form-group selectTime">
-        <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
-            <img src="image/date.png"/>
-            <label>日期：</label>
-            <input readonly type="text" id="date">
-        </div>
-    </div>
+<!--    <div class="list" id="electric" data-toggle="modal" data-target="#myModal">-->
+<!--        <img class="type" src="image/type.png"/>-->
+<!--        <span value="P" id="EnergyKind">电力类别：</span>-->
+<!--        <select id="energySelect">-->
+<!--            <option value="P">有功功率</option>-->
+<!--            <option value="I">电流</option>-->
+<!--            <option value="U">相电压</option>-->
+<!--            <option value="UL">线电压</option>-->
+<!--            <option value="fFr">频率</option>-->
+<!--            <option value="Q">无功功率</option>-->
+<!--            <option value="S">视在功率</option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div class="elec-btn" id="EnergyContain">-->
+<!--        <button type="button" class="btn select" value="fPa">A相</button>-->
+<!--        <button type="button" class="btn" value="fPb">B相</button>-->
+<!--        <button type="button" class="btn" value="fPc">C相</button>-->
+<!--    </div>-->
+<!--    <div class="form-group selectTime">-->
+<!--        <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">-->
+<!--            <img src="image/date.png"/>-->
+<!--            <label>日期：</label>-->
+<!--            <input readonly type="text" id="date">-->
+<!--        </div>-->
+<!--    </div>-->
     <button type="button" class="search" id="search"><img src="image/search.png"/>查询</button>
     <div class="diagram center" id="chartContain"></div>
     <div class="dataTable center" id="tableContain"></div>

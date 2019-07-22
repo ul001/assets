@@ -58,20 +58,21 @@ body{
 .elec-btn{
 	padding:0.3rem 0.2rem 0.3rem 0.2rem;
 }
-.elec-btn button{
+.public button{
 	height:4rem;
 	line-height: 2rem;
 	width:22%;
 	margin: 0 2px;
 	border-radius: 4rem;
 	background:#F4F2F1;
+	border:none;
 }
 #EnergyContain{
 	height:6rem;
 	padding-top:0.8rem;
 	padding-left:2rem;
 }
-.elec-btn .select,.search{
+.public .select,.search{
 	background:#02AC94;
 	border:1px solid #02AC94;
 	color:#fff;
@@ -120,8 +121,8 @@ body{
 	border-radius:5px;
 	padding-left:0.5rem;
 	border:none;
-	width:calc(100% - 80px);
-	background:url("../image/right.png") no-repeat right center;
+	width:calc(100% - 82px);
+	background:url("../image/right.png") no-repeat right 5px center;
 }
 .tree{
 	display: none;
@@ -195,6 +196,33 @@ body{
 	background:transparent;
 	border:none;
 	-webkit-appearance:none;
-	width:calc(100% - 102px);
+	width:calc(100% - 109px);
 	background:url('../image/right.png') no-repeat right 5px center;
+}
+/*监测点*/
+#sideClick >p{
+	width:100%;
+}
+#sideClick span{float:left;}
+/*#meter{*/
+/*	display:block;*/
+/*	float:left;*/
+/*	width:calc(100% - 97px);*/
+/*	background:url('../image/right.png') no-repeat right  center;*/
+/*}*/
+/*公共样式*/
+.public li{
+	padding-left:0.5rem;
+	height:6rem;
+	line-height:6rem;
+	background:url('../image/right.png') no-repeat right 0.5rem center;
+	border-bottom:1px dashed #C8C9CA;
+}
+.public li img{
+	width:1.4rem;
+	vertical-align:-0.1rem;
+	margin-right:0.5rem;
+}
+.public .clearbg{
+	background:none;
 }
