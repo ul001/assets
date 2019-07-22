@@ -1,8 +1,14 @@
 /*新增*/
+.centent {
+	width: 10rem;
+	height: 4rem;
+	font-size: 0.66666667rem;
+	border: 1px solid red;
+}
 body,
 button,
 input {
-	font-size: 0.9rem;
+	font-size: 0.4rem!important;
 }
 
 #sideClick p img {
@@ -16,7 +22,7 @@ input {
 }
 
 #mescroll {
-	padding: 0 0.6rem;
+	padding: 0 0.3rem;
 }
 
 .container {
@@ -90,7 +96,7 @@ input {
 }
 
 .mescroll {
-	position: fixed;
+	/*position: fixed;*/
 	top: 0px;
 	bottom: 0;
 	height: auto;
