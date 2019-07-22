@@ -1,6 +1,5 @@
 .container {
 	background: #fff;
-	padding:1rem;
 	overflow:hidden;
 }
 .transform {
@@ -61,7 +60,7 @@
 	width:1.5rem;
 }
 .tran-statec {
-	width: 46.7%;
+	width: 46%;
 	height:10rem;
 	background:#EEEEEF;
 	float:left;
@@ -92,19 +91,6 @@
 	padding-left:0.5rem;
 }
 /*时间选择*/
-.selectTime{
-	margin-bottom:0;
-	padding-left:0.5rem;
-}
-.timeBtn{
-	width:100%;
-	background:linear-gradient(#56C676,#04BA6B);
-	height:4rem;
-	line-height:4rem;
-	border-radius:4rem;
-	margin:0 auto;
-	margin-top:0.5rem;
-}
 #date{
 	height:4rem;
 	border-radius:5px;
@@ -129,12 +115,58 @@
 	border-right:0;
 	border-left:1px solid #fff;
 }
+.timeBtn{
+	width:80%;
+	background:linear-gradient(#56C676,#04BA6B);
+	height:4rem;
+	line-height:4rem;
+	border-radius:4rem;
+	margin:0 auto;
+	margin-top:0.5rem;
+}
+.selectTime{
+	margin-bottom:0;
+	padding-left:0.5rem;
+}
+.timeBtn{
+	width:100%;
+	background:linear-gradient(#56C676,#04BA6B);
+	height:3rem;
+	line-height:3rem;
+	border-radius:4rem;
+	margin:0 auto;
+	margin-top:0.5rem;
+}
+#date{
+	height:3rem;
+	border-radius:5px;
+	padding-left:0.5rem;
+	border:none;
+	width:calc(100% - 13rem);
+	background:transparent;
+	color:#fff;
+	text-align:center;
+	float:left;
+}
+#datePre,#dateNext{
+	display:block;
+	width:3rem;
+	height:3rem;
+	border-right:1px solid #fff;
+	float:left;
+	padding:0 1.3rem;
+}
+#dateNext{
+	float:right;
+	border-right:0;
+	border-left:1px solid #fff;
+}
 .date{
 	margin-top:1rem;
 }
 /*按钮*/
 #tempLine,#NothingPower,#havePower,#NowPower{
-	width:23%;
+	width:20%;
 	height: 3rem;
 	line-height:2.9rem;
 	text-align:center;
@@ -172,7 +204,17 @@
 .chart {
 	margin:0 auto;
 	border-radius:0.5rem;
-	width: 90%;
-	height: 350px;
+	width: 100%;
+	height: 31rem;
 	border:1px solid #C8C9CA;
+}
+#powerChart{
+    width:100%;
+    height:30rem;
+}
+.trans img{
+    content: url(../image/transform-grey.png);
+}
+.trans.select img{
+    content: url(../image/transform-orange.png);
 }
