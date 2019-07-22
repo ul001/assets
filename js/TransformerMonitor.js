@@ -1,30 +1,30 @@
 $(function () {
-//    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM2MjcxNzYsInVzZXJuYW1lIjoiYWRtaW4ifQ.6MQ7AdQdCC1VlppKNa4gdoUOEiJ6W4wWGQDhET27HZs";
-//    var subidFromAPP = 10100001;
+    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQwNjQzMzEsInVzZXJuYW1lIjoiYWRtaW4ifQ.MZ79VV2SSsWVryQiC8BsGMryqKskCC5DxIt09fm_qAQ";
+    var subidFromAPP = 10100001;
     // var trans = new TransformerMonitor();
     //iOS安卓基础传参
-     var u = navigator.userAgent,
-         app = navigator.appVersion;
-     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-     //判断数组中是否包含某字符串
-     var baseUrlFromAPP;
-     var tokenFromAPP;
-     var subidFromAPP;
-     if (isIOS) { //ios系统的处理
-         window.webkit.messageHandlers.iOS.postMessage(null);
-         var storage = localStorage.getItem("accessToken");
-         // storage = storage ? JSON.parse(storage):[];
-         storage = JSON.parse(storage);
-         baseUrlFromAPP = storage.baseurl;
-         tokenFromAPP = storage.token;
-         subidFromAPP = storage.fsubID;
-     } else {
-         baseUrlFromAPP = android.getBaseUrl();
-         tokenFromAPP = android.getToken();
-         subidFromAPP = android.getfSubid();
-     }
+//     var u = navigator.userAgent,
+//         app = navigator.appVersion;
+//     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+//     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+//     //判断数组中是否包含某字符串
+//     var baseUrlFromAPP;
+//     var tokenFromAPP;
+//     var subidFromAPP;
+//     if (isIOS) { //ios系统的处理
+//         window.webkit.messageHandlers.iOS.postMessage(null);
+//         var storage = localStorage.getItem("accessToken");
+//         // storage = storage ? JSON.parse(storage):[];
+//         storage = JSON.parse(storage);
+//         baseUrlFromAPP = storage.baseurl;
+//         tokenFromAPP = storage.token;
+//         subidFromAPP = storage.fsubID;
+//     } else {
+//         baseUrlFromAPP = android.getBaseUrl();
+//         tokenFromAPP = android.getToken();
+//         subidFromAPP = android.getfSubid();
+//     }
 
     function getData(url, params, successCallback) {
         $.ajax({
@@ -40,38 +40,65 @@ $(function () {
             }
         });
     }
-    var selectTrans;
+
+    getTransList();
+
+    function getTransList(){
+        var url = baseUrlFromAPP+"/main/app/powerMonitoring/transformerList";
+        var params = {fSubid:subidFromAPP};
+        getData(url,params,function(data){
+            if(data.hasOwnProperty("TransformerList")){
+                showTransNames(data.TransformerList);
+            }
+        });
+    }
+
+    function showTransNames(transList) {
+        if(transList.length>0){
+            $(".transform").empty();
+            $(transList).each(function(){
+                $(".transform").append("<li class='trans' value='"+this.fTransid+"'><img/><p>"+this.fTransname+"</p></li>");
+            });
+            $(".transform li").click(function(){
+                $(this).addClass("select").siblings().removeClass("select");
+                getListData();
+            });
+            $(".transform li:first").click();
+        }
+    }
+
     var info;
     var time = tool.initDate("YMD", new Date());
     $("#date").val(time);
-    getListData();
 
     function getListData() {
-        var url = baseUrlFromAPP + "/main/powerMonitoring/TransformerMonitor";
+        var url = baseUrlFromAPP + "/main/app/powerMonitoring/transformerStatus";
+        var selectTrans = $(".trans.select").attr("value");
         var params = {
             fSubid: subidFromAPP,
+            fTransid: selectTrans,
             selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp"
         };
         getData(url, params, function (data) {
-            info = data;
             generateTransStatus(data);
-            generateChartLine(data);
+            getDateCurveData();
         });
     }
 
     function getDateCurveData() {
         var url = baseUrlFromAPP + "/main/getCurveDataOfPowerAndTempABC";
-        // var selectCode = $(".").attr('value');
+        var selectTrans = $(".trans.select").attr("value");
         var params = {
             fTransid: selectTrans,
             fDate: $("#date").val()
         };
         getData(url, params, function (data) {
+            info = data;
             generateChartLine(data);
         });
     }
 
-    //配置变压器上部数据
+    //配置变压器状态
     function generateTransStatus(data) {
         if (data.hasOwnProperty('TransformerStatus')){
             showTemperature(data.TransformerStatus);
@@ -79,10 +106,6 @@ $(function () {
             showPower(data.TransformerStatus);
             showVoltage(data.TransformerStatus);
         }
-        if(data.hasOwnProperty('TransformerList')){
-            showTransName(data.TransformerList);
-        }
-        selectTrans = data.fTransid;
     }
 
     //显示温度数据
@@ -236,28 +259,28 @@ $(function () {
             $.each(data.yesterdayPowerValue, function (key, val) {
                 times.push(val.fCollecttime.substring(11, 16))
             });
-            if (data.PowerValue != null) {
-                $.each(data.PowerValue, function (key, val) {
-                    time.push(val.fCollecttime.substring(11, 16));
-                });
-            }
-            var times = times.length > time.length ? times : time;
+        }
+        if (data.PowerValue != null) {
+            $.each(data.PowerValue, function (key, val) {
+                time.push(val.fCollecttime.substring(11, 16));
+            });
+        }
+        var times = times.length > time.length ? times : time;
 
-            for (var i = 0; i < times.length; i++) {
-                var index = 0;
-                for (var j = 0; j < data.yesterdayPowerValue.length; j++) {
-                    if (data.yesterdayPowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
-                        yesterDayfP.push(data.yesterdayPowerValue[j].fP);
-                        yesterDayfQ.push(data.yesterdayPowerValue[j].fQ);
-                        yesterDayfS.push(data.yesterdayPowerValue[j].fS);
-                        index = 1;
-                    }
+        for (var i = 0; i < times.length; i++) {
+            var index = 0;
+            for (var j = 0; j < data.yesterdayPowerValue.length; j++) {
+                if (data.yesterdayPowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
+                    yesterDayfP.push(data.yesterdayPowerValue[j].fP);
+                    yesterDayfQ.push(data.yesterdayPowerValue[j].fQ);
+                    yesterDayfS.push(data.yesterdayPowerValue[j].fS);
+                    index = 1;
                 }
-                if (index == 0) {
-                    yesterDayfP.push(null);
-                    yesterDayfQ.push(null);
-                    yesterDayfS.push(null);
-                }
+            }
+            if (index == 0) {
+                yesterDayfP.push(null);
+                yesterDayfQ.push(null);
+                yesterDayfS.push(null);
             }
         }
 
@@ -768,34 +791,6 @@ $(function () {
             series: series
         };
         line.setOption(option);
-    }
-
-    function showTransName(transList) {
-        if(transList.length>0){
-            $("#transform").empty();
-            $(transList).each(function(){
-                var str = "";
-                if(selectTrans==this.fTransid){
-                    str="<li value='"+this.fTransid+"'><img src='image/transform-orange.png'/><p>"+this.fTransname+"</p></li>";
-                }else{
-                    str="<li value='"+this.fTransid+"'><img src='image/transform-grey.png'/><p>"+this.fTransname+"</p></li>";
-                }
-                $("#transform").append(str);
-            });
-            $("#transform li").click(function(){
-                $(this).find("img").setAttribute("src","image/transform-orange.png");
-                $(this).siblings.find("img").setAttribute("src","image/transform-grey.png");
-                selectTrans=$(this).attr("value");
-            });
-        }
-/*        var transformerName = $(".trans-select").text();
-        if (transformerName == null || transformerName == "") {
-            $(".Transformername").html("--");
-        } else {
-            $(".Transformername").html(transformerName);
-        }*/
-        // var time = Substation.ObjectOperation.dateTimeFormat("DATETIME", new Date());
-        // $(".UPTime").html(time);
     }
 
     //点击有功、无功、视在的按钮
