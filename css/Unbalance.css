@@ -1,267 +1,349 @@
-.container{
-    background: #fff;
-    height: 100%;
-    padding-right:0;
-    padding-left:0;
-}
-body{
+.container {
+	background: #fff;
 	height: 100%;
-	font-size:1.5rem;
-	background:#EDEDEC;
+	padding-right: 0;
+	padding-left: 0;
 }
-#table{font-size:1rem;}
-#sideClick p .jiancedian,.list .type{
-	float:left;
-	margin-top:1.5rem;
+
+body {
+	height: 100%;
+	font-size: 1.5rem;
+	background: #EDEDEC;
 }
-.category ul{padding-left:0;}
-.list .type,.selectTime img{
-	width:1.8rem;
+
+#table {
+	font-size: 1rem;
 }
-.category ul li{
+
+#sideClick p .jiancedian,
+.list .type {
+	float: left;
+	margin-top: 1.5rem;
+}
+
+.category ul {
+	padding-left: 0;
+}
+
+.list .type,
+.selectTime img {
+	width: 1.8rem;
+}
+
+.category ul li {
 	height: 3rem;
 	line-height: 2.5rem;
-	padding-top:5px;
+	padding-top: 5px;
 	list-style: none;
 	border-bottom: 1px solid #eee;
 }
-.category input{
-	float:right;
-	width:18px;
+
+.category input {
+	float: right;
+	width: 18px;
 	height: 18px;
 }
-.category span{
+
+.category span {
 	height: 3rem;
 	line-height: 3rem;
 }
-.category label{
+
+.category label {
 	width: 90%;
 	font-size: 15px;
 }
+
 .modal-dialog {
-    width: 70%;
-    margin: 15%;
+	width: 70%;
+	margin: 15%;
 }
-.data{
+
+.data {
 	line-height: 40px;
-	margin:0.3rem 0 0.3rem 0;
+	margin: 0.3rem 0 0.3rem 0;
 }
-.data img{
-	float:right;
+
+.data img {
+	float: right;
 	vertical-align: -20px;
 	cursor: pointer;
 }
-.container{height:100%;}
 
-.list{
-	padding:0 0.5rem 0 0.5rem;
-	height:2.5rem;
+.container {
+	height: 100%;
+}
+
+.list {
+	padding: 0 0.5rem 0 0.5rem;
+	height: 2.5rem;
 	line-height: 2.5rem;
 }
-.list p{
-	float:left;
+
+.list p {
+	float: left;
 	margin-bottom: 0;
 }
-.list img{
-	float:right;
-	margin-right:0.5rem;
-	margin-top:1.8rem;
-}
-.container hr{
-	clear:both;
-	margin:0;
-	border:0.03rem dashed #C8C9CA;
-}
-.date label{
-  padding-left:0;
-  font-weight:normal;
-  padding-right:0.5rem;
-  }
-.elec-btn{
-	padding:0.6rem 0.2rem 0.3rem 0.2rem;
-	height:3rem;
-	line-height:3rem;
-}
-.selectTime,.list,.Unbalance-btn,#EnergyContain{
-    border-bottom:1px dashed #C8C9CA;
+
+.list img {
+	float: right;
+	margin-right: 0.5rem;
+	margin-top: 1.8rem;
 }
 
-.selectTime{margin-bottom:0;}
-.elec-btn button{
-	height:4rem;
+.container hr {
+	clear: both;
+	margin: 0;
+	border: 0.03rem dashed #C8C9CA;
+}
+
+.date label {
+	padding-left: 0;
+	font-weight: normal;
+	padding-right: 0.5rem;
+}
+
+.elec-btn {
+	padding: 0.6rem 0.2rem 0.3rem 0.2rem;
+	height: 3rem;
+	line-height: 3rem;
+}
+
+.selectTime,
+.list,
+.Unbalance-btn,
+#EnergyContain {
+	border-bottom: 1px dashed #C8C9CA;
+}
+
+.selectTime {
+	margin-bottom: 0;
+}
+
+.elec-btn button {
+	height: 4rem;
 	line-height: 1rem;
-	float:left;
-	width:45%;
+	float: left;
+	width: 45%;
 	margin: 0 5px;
 	border-radius: 4rem;
-	background:#F7F7F7;
+	background: #F7F7F7;
 }
-.elec-btn .select,.search{
-	background:#02AC94;
-	color:#fff;
+
+.elec-btn .select,
+.search {
+	background: #02AC94;
+	color: #fff;
 }
+
 /*.date{
   margin:0.6rem 0.2rem 0.6rem 0.2rem;
   width:100%;
   }*/
-#date{
-  width:calc(100% - 205px);
-  height:2.5rem;
-  border-radius:5px;
-  border:1px solid #888888;
-  padding-left:0.5rem;
-  }
-#sideClick,.selectTime,#EnergyContain{
-	height:6rem;
-	line-height:5rem;
-	padding-top:0.5rem;
+#date {
+	width: calc(100% - 205px);
+	height: 2.5rem;
+	border-radius: 5px;
+	border: 1px solid #888888;
+	padding-left: 0.5rem;
 }
-#EnergyContain{padding-top:1rem;}
-#CircuitidsInput,#CircuitidsList{
-    height:2.5rem;
+
+#sideClick,
+.selectTime,
+#EnergyContain {
+	height: 6rem;
+	line-height: 5rem;
+	padding-top: 0.5rem;
 }
-.search{
-	width:95%;
-	height:4rem;
-	margin:0 auto;
+
+#EnergyContain {
+	padding-top: 1rem;
+}
+
+#CircuitidsInput,
+#CircuitidsList {
+	height: 2.5rem;
+}
+
+.search {
+	width: 95%;
+	height: 4rem;
+	margin: 0 auto;
 	display: block;
 	border-radius: 4rem;
-	margin-top:1rem;
-	margin-bottom:1rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 }
-.elec-btn .select,.search{
-	background:#02AC94;
-	border:1px solid #02AC94;
-	color:#fff;
+
+.elec-btn .select,
+.search {
+	background: #02AC94;
+	border: 1px solid #02AC94;
+	color: #fff;
 }
-#search img{
-	width:1.5rem;
-	margin-right:0.5rem;
+
+#search img {
+	width: 1.5rem;
+	margin-right: 0.5rem;
 }
-.container .diagram{
-	width:95%;
-	height:20rem;
-	margin-bottom:0.5rem;
+
+.container .diagram {
+	width: 95%;
+	height: 20rem;
+	margin-bottom: 0.5rem;
 }
-.dataTable{
-	width:95%;
-	border:1px solid #C8C9CA;
-	background:#fff;
+
+.dataTable {
+	width: 95%;
+	border: 1px solid #C8C9CA;
+	background: #fff;
 }
-.dataTable thead{
-	background:#42B685;
-	color:#fff;
+
+.dataTable thead {
+	background: #42B685;
+	color: #fff;
 }
-.time{
-	float:right;
-	padding:0.5rem 0.3rem 0 0;
-	margin-right:3px;
+
+.time {
+	float: right;
+	padding: 0.5rem 0.3rem 0 0;
+	margin-right: 3px;
 }
-.time img{vertical-align: -4px;}
-.dataTable tbody tr:nth-child(2){
-	background:rgb(236,248,243);
-	border-top:1px solid #C8C9CA;
-	border-bottom:1px solid #C8C9CA;
+
+.time img {
+	vertical-align: -4px;
 }
-.center{margin:0 auto;}
-.tree{
+
+.dataTable tbody tr:nth-child(2) {
+	background: rgb(236, 248, 243);
+	border-top: 1px solid #C8C9CA;
+	border-bottom: 1px solid #C8C9CA;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.tree {
 	display: none;
 	width: 90%;
 	height: 100%;
 	background: #fff;
 	position: fixed;
-	top:0;
-	right:0;
+	top: 0;
+	right: 0;
 	z-index: 10;
 }
-#treeview{
-    overflow:auto;
-    height:84%
+
+#treeview {
+	overflow: auto;
+	height: 84%
 }
-.treeSearch{
-	padding:1rem;
+
+.treeSearch {
+	padding: 1rem;
 }
-.tree .search,.tree .cancel{
-    height:4rem;
-	line-height:3rem;
-	width:44%;
+
+.tree .search,
+.tree .cancel {
+	height: 4rem;
+	line-height: 3rem;
+	width: 44%;
 	border-radius: 0;
-	border:none;
-	margin-bottom:0;
-	position:fixed;
-	bottom:0;
+	border: none;
+	margin-bottom: 0;
+	position: fixed;
+	bottom: 0;
 }
-.tree .cancel{
-	background:#d4d4d0;
+
+.tree .cancel {
+	background: #d4d4d0;
 }
-.tree .search{
-	right:0;
-	background:#02AC94;
-	color:#fff;
+
+.tree .search {
+	right: 0;
+	background: #02AC94;
+	color: #fff;
 }
-.treeSearch input{
+
+.treeSearch input {
 	border-radius: 0.5rem;
-	border:1px solid #ddd;
+	border: 1px solid #ddd;
 	height: 2.3rem;
-	width:70%;
+	width: 70%;
 	background: url(../image/searchsmall.png) no-repeat 4px 5px;
-	padding-left:25px;
+	padding-left: 25px;
 	position: relative;
 }
-.treeSearch button{
-	width:25%;
+
+.treeSearch button {
+	width: 25%;
 	height: 2.3rem;
 	background: #02AC94;
-	color:#fff;
+	color: #fff;
 	border-radius: 0.5rem;
-	border:1px solid #02AC94;
+	border: 1px solid #02AC94;
 }
-.clear{
-	position: absolute;
-	right:33%;
-	top:1.4rem;
-    z-index: 9;
-}
-.list-group-item{
-	border:none;
-}
-.modal-dialog{margin-top:20%;}
 
-#datePre,#dateNext{
-	padding:0 1rem;
-	cursor:pointer;
+.clear {
+	position: absolute;
+	right: 33%;
+	top: 1.4rem;
+	z-index: 9;
 }
-#selectTime img{
+
+.list-group-item {
+	border: none;
+}
+
+.modal-dialog {
+	margin-top: 20%;
+}
+
+#datePre,
+#dateNext {
+	padding: 0 1rem;
+	cursor: pointer;
+}
+
+#selectTime img {
 	vertical-align: -4px;
 }
-#dateNext{
-	float:right;
+
+#dateNext {
+	float: right;
 }
-.date{
-	width:10.5rem;
-	background:url(../image/down.png) no-repeat right center;
-	float:left;
-	margin-left:18%;
-	background-size:1rem;
+
+.date {
+	width: 10.5rem;
+	background: url(../image/down.png) no-repeat right center;
+	float: left;
+	margin-left: 18%;
+	background-size: 1rem;
 }
-#datePre{
-	float:left;
+
+#datePre {
+	float: left;
 }
-#date{
-	width:12rem;
-	height:2.5rem;
-	border-radius:5px;
-	padding-right:2rem;
-	text-align:center;
-	padding-left:0.8rem;
-	border:none;
-	background:url(../image/time.png) no-repeat left center;
-	background-size:1.3rem;
+
+#date {
+	width: 12rem;
+	height: 2.5rem;
+	border-radius: 5px;
+	padding-right: 2rem;
+	text-align: center;
+	padding-left: 0.8rem;
+	border: none;
+	background: url(../image/time.png) no-repeat left center;
+	background-size: 1.3rem;
+	line-height: 2.5rem;
 }
-#tableContain{
-    margin-bottom:1rem;
+
+#tableContain {
+	margin-bottom: 1rem;
 }
-#chartContain{
-    width:95%;
-    border:1px solid #C8C9CA;
+
+#chartContain {
+	width: 95%;
+	border: 1px solid #C8C9CA;
 }

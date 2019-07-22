@@ -295,6 +295,7 @@ button {
 	border: none;
 	background: url(../image/time.png) no-repeat left center;
 	background-size: 1.3rem;
+	line-height: 2.5rem;
 }
 
 #tableContain {
