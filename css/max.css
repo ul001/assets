@@ -24,7 +24,7 @@ body {
 	text-align: center;
 	color: #fff;
 	background: url(../image/max-bg.png) no-repeat, linear-gradient(rgb(24, 193, 132), rgb(1, 105, 138));
-	background-size: 100%;
+	background-size: 85%;
 	background-position: center;
 }
 
@@ -47,18 +47,6 @@ body {
 	line-height: 3rem;
 	margin-bottom:0;
 }*/
-#sideClick,
-#timeClick {
-	height: 6rem;
-	line-height: 5rem;
-	padding-top: 0.5rem;
-	border-bottom: 1px solid #F7F7F7;
-}
-
-#timeClick img {
-	width: 1.5rem;
-}
-
 .right {
 	padding: 2rem 1rem 0 0;
 	float: right;
@@ -78,11 +66,10 @@ body {
 }
 
 #dateSelect {
-	width: calc(100% - 11.9rem);
 	height: 2.5rem;
 	padding-left: 0.5rem;
 	border: none;
-	background: url(../image/right.png) no-repeat right;
+	background:transparent;
 }
 
 .tree {
@@ -151,4 +138,20 @@ body {
 	right: 33%;
 	top: 1.4rem;
 	z-index: 9;
+}
+/*公共样式*/
+.public li{
+	padding-left:1rem;
+	height:6rem;
+	line-height:6rem;
+	background:url('../image/right.png') no-repeat right 1rem center;
+	border-bottom:1px dashed #C8C9CA;
+}
+.public li img{
+	width:1.4rem;
+	vertical-align:-0.1rem;
+	margin-right:0.5rem;
+}
+.public .clearbg{
+	background:none;
 }
