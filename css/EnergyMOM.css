@@ -197,6 +197,7 @@ body {
 .MOMSum span {
 	padding-left: 39%;
 	color: rgb(145, 139, 138);
+	white-space:nowrap;
 }
 
 .MOMSum .Num {

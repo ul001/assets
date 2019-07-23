@@ -321,20 +321,20 @@ $(function () {
                 if (selectParam == "today") {
                     time.push("昨日");
                     time.push("当日");
-                    todayStr = "当日用电：";
-                    yesterdayStr = "昨日用电：";
+                    todayStr = "当日用电";
+                    yesterdayStr = "昨日用电";
 
                 } else if (selectParam == "month") {
                     time.push("上月");
                     time.push("当月");
-                    todayStr = "当月用电：";
-                    yesterdayStr = "上月用电：";
+                    todayStr = "当月用电";
+                    yesterdayStr = "上月用电";
 
                 } else if (selectParam == "week") {
                     time.push("上周");
                     time.push("本周");
-                    todayStr = "本周用电：";
-                    yesterdayStr = "上周用电：";
+                    todayStr = "本周用电";
+                    yesterdayStr = "上周用电";
                 }
                 value.push(el.fBeforevalue);
                 value.push(el.fNextvalue);
