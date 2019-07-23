@@ -60,7 +60,7 @@
 	width:1.5rem;
 }
 .tran-statec {
-	width: 44%;
+	width: 46%;
 	height:10rem;
 	background:#EEEEEF;
 	float:left;
@@ -208,12 +208,12 @@
 	margin:0 auto;
 	border-radius:0.5rem;
 	width: 100%;
-	height: 31rem;
+	height: 26rem;
 	border:1px solid #C8C9CA;
 }
 #powerChart{
     width:100%;
-    height:30rem;
+    height:25rem;
 }
 .trans img{
     content: url(../image/transform-grey.png);

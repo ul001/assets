@@ -756,7 +756,7 @@ $(function () {
             grid: {
                 left: '13%',
                 right: '11%',
-                top: '20%',
+                top: '16%',
                 bottom: '25%'
             },
             xAxis: {

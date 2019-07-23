@@ -10,10 +10,6 @@ body {
 	background: #EDEDEC;
 }
 
-#table {
-	font-size: 1rem;
-}
-
 .selectTime,
 .list,
 .Unbalance-btn,
@@ -102,7 +98,6 @@ body {
 
 .category label {
 	width: 90%;
-	font-size: 15px;
 }
 
 .modal-dialog {
@@ -333,6 +328,7 @@ body {
 }
 /*左侧弹窗增加透明灰底*/
 .tree {
+    display:none;
 	width: 105%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
