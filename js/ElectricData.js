@@ -380,11 +380,12 @@ $(function () {
         trigger: 'axis'
       },
       legend: {
+        top:12,
         data: name,
       },
       grid: { // 控制图的大小，调整下面这些值就可以，
-        top: '18%',
-        left: '10%',
+        top: '20%',
+        left: '12%',
         right: '6%',
         bottom: '29%',
       },

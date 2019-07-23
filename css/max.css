@@ -164,6 +164,10 @@ body {
 	border-bottom: 1px dashed #C8C9CA;
 }
 
+#timeClick{
+    border:none;
+}
+
 .public li img {
 	width: 1.4rem;
 	vertical-align: -0.1rem;
