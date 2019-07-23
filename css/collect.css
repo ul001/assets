@@ -181,7 +181,7 @@ body {
 #dateStart,
 .form_date_end,
 #dateEnd {
-	width: 12rem;
+	width: 14rem;
 	height: 2.7rem;
 	background: transparent;
 	border: none;
@@ -363,7 +363,7 @@ body {
 
 .type img {
 	width: 50%;
-	margin-bottom:0.5rem;
+	margin-bottom: 0.5rem;
 }
 
 .type p {
