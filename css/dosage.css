@@ -7,7 +7,6 @@
 
 body {
 	height: 100%;
-	font-size: 0.8rem;
     margin:0;
 }
 .dosageSelect,.ListH{
@@ -24,7 +23,7 @@ body {
 }
 
 .ListH button{
-    width:45%;
+    width:44%;
     height: 2.5rem;
     background-color: #F4F2F1;
     color:#000;
@@ -35,7 +34,7 @@ body {
     margin:0.5rem 0.5rem 0 0.5rem;
     background-size:1rem;
     background-repeat:no-repeat;
-    background-position:3rem 0.7rem;
+    background-position:2.5rem 0.7rem;
 }
 .ListH .select{
     background-color:#02AC94;
@@ -43,7 +42,7 @@ body {
     color:#fff;
     background-size:1rem;
     background-repeat:no-repeat;
-    background-position:3rem 0.7rem;
+    background-position:2.5rem 0.7rem;
 }
 .Price[class*="select"]{
     background-image:url(../image/money.png);
