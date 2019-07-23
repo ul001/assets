@@ -3,6 +3,9 @@
 	padding-right:0;
 	padding-left:0;
 }
+button{
+	outline:0!important;
+}
 section{
 	width:30%;
 }

@@ -4,7 +4,9 @@ button,
 input {
 	font-size: 0.9rem;
 }
-
+button{
+	outline:0!important;
+}
 .grey {
 	background: rgba(0, 0, 0, 0.5);
 	width: 100%;

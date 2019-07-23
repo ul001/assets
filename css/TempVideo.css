@@ -8,3 +8,6 @@
 	height:300px;
 	background:#000;
 }
+button{
+	outline:0!important;
+}
