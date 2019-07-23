@@ -4,9 +4,11 @@
 	padding-right: 0;
 	padding-left: 0;
 }
-button{
-	outline:0!important;
+
+button {
+	outline: 0 !important;
 }
+
 body {
 	height: 100%;
 	background: #EDEDEC;
@@ -112,30 +114,31 @@ body {
 }
 
 .treeSearch input {
-    border-radius: 4rem;
-    border: 1px solid #ddd;
-    height: 4rem;
-    width: 70%;
-    background: url(../image/searchsmall.png) no-repeat 4px 5px;
-    padding-left: 25px;
-    position: relative;
+	border-radius: 4rem;
+	border: 1px solid #ddd;
+	height: 4rem;
+	width: 70%;
+	background: url(../image/searchsmall.png) no-repeat 4px 5px;
+	padding-left: 25px;
+	position: relative;
 }
 
 .treeSearch button {
-    width: 25%;
-    height: 4rem;
-    background: #02AC94;
-    color: #fff;
-    border-radius: 4rem;
-    border: 1px solid #02AC94;
+	width: 25%;
+	height: 4rem;
+	background: #02AC94;
+	color: #fff;
+	border-radius: 4rem;
+	border: 1px solid #02AC94;
 }
 
 .clear {
-    position: absolute;
-    right: 33%;
-    top: 2.3rem;
-    z-index: 9;
+	position: absolute;
+	right: 33%;
+	top: 2.3rem;
+	z-index: 9;
 }
+
 /*左侧弹窗增加透明灰底*/
 .tree {
 	display: none;
@@ -146,6 +149,7 @@ body {
 	right: 0;
 	top: 0;
 }
+
 .selectcontain-main {
 	width: 87%;
 	height: 100%;
@@ -157,7 +161,19 @@ body {
 	clear: both;
 	z-index: 999;
 	padding: 0;
+	animation: IDENT linear 0.3s;
 }
+
+@keyframes IDENT {
+	0% {
+		right: -100%;
+	}
+
+	100% {
+		right: 0;
+	}
+}
+
 /*公共样式*/
 .public li {
 	padding-left: 1rem;
@@ -167,8 +183,8 @@ body {
 	border-bottom: 1px dashed #C8C9CA;
 }
 
-#timeClick{
-    border:none;
+#timeClick {
+	border: none;
 }
 
 .public li img {

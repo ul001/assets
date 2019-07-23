@@ -5,9 +5,11 @@
 	padding: 0.3rem;
 	margin: 0.3rem 0 0.3rem 0;
 }
-button{
-	outline:0!important;
+
+button {
+	outline: 0 !important;
 }
+
 .container {
 	background: #fff;
 	height: 100%;
@@ -371,6 +373,7 @@ body {
 .type p {
 	margin-bottom: 0;
 }
+
 /*左侧弹窗增加透明灰底*/
 .tree {
 	width: 105%;
@@ -380,6 +383,7 @@ body {
 	right: 0;
 	top: 0;
 }
+
 .selectcontain-main {
 	width: 87%;
 	height: 100%;
@@ -391,4 +395,15 @@ body {
 	clear: both;
 	z-index: 999;
 	padding: 0;
+	animation: IDENT linear 0.3s;
+}
+
+@keyframes IDENT {
+	0% {
+		right: -100%;
+	}
+
+	100% {
+		right: 0;
+	}
 }

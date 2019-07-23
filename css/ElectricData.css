@@ -4,9 +4,11 @@
 	padding-left: 0;
 	overflow: auto;
 }
-button{
-	outline:0!important;
+
+button {
+	outline: 0 !important;
 }
+
 .form_date_end label {
 	font-weight: normal;
 }
@@ -267,7 +269,7 @@ body {
 	border-bottom: 1px dashed #C8C9CA;
 }
 
-.public .list{
+.public .list {
 	background: url('../image/right.png') no-repeat right 1rem center;
 }
 
@@ -280,6 +282,7 @@ body {
 .public .clearbg {
 	background: none;
 }
+
 /*左侧弹窗增加透明灰底*/
 .tree {
 	width: 105%;
@@ -289,6 +292,7 @@ body {
 	right: 0;
 	top: 0;
 }
+
 .selectcontain-main {
 	width: 87%;
 	height: 100%;
@@ -300,4 +304,15 @@ body {
 	clear: both;
 	z-index: 999;
 	padding: 0;
+	animation: IDENT linear 0.3s;
+}
+
+@keyframes IDENT {
+	0% {
+		right: -100%;
+	}
+
+	100% {
+		right: 0;
+	}
 }

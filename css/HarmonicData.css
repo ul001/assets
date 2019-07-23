@@ -4,17 +4,21 @@
 	padding-right: 0;
 	padding-left: 0;
 }
-button{
-	outline:0!important;
+
+button {
+	outline: 0 !important;
 }
+
 body {
 	height: 100%;
-	font-size:1.5rem;
+	font-size: 1.5rem;
 	background: #EDEDEC;
 }
+
 #table {
 	font-size: 1rem;
 }
+
 .selectTime,
 .list,
 .Unbalance-btn,
@@ -303,9 +307,11 @@ body {
 	background: url(../image/down.png) no-repeat right center;
 	background-size: 1rem;
 }
-.selectTime{
-    text-align:center;
+
+.selectTime {
+	text-align: center;
 }
+
 #datePre {
 	float: left;
 }
@@ -331,17 +337,19 @@ body {
 	width: 95%;
 	border: 1px solid #C8C9CA;
 }
+
 /*左侧弹窗增加透明灰底*/
 .tree {
-    display:none;
+	display: none;
 	width: 105%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
 	position: absolute;
 	right: 0;
 	top: 0;
-	z-index:99;
+	z-index: 99;
 }
+
 .selectcontain-main {
 	width: 87%;
 	height: 100%;
@@ -353,4 +361,15 @@ body {
 	clear: both;
 	z-index: 999;
 	padding: 0;
+	animation: IDENT linear 0.3s;
+}
+
+@keyframes IDENT {
+	0% {
+		right: -100%;
+	}
+
+	100% {
+		right: 0;
+	}
 }

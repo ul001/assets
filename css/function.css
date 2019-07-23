@@ -1,15 +1,17 @@
 body,
 button,
 input {
-	font-size:0.9rem!important;
+	font-size: 0.9rem !important;
 }
 
 #sideClick p img {
 	float: left;
 }
-button{
-	outline:0!important;
+
+button {
+	outline: 0 !important;
 }
+
 .grey {
 	background: rgba(0, 0, 0, 0.5);
 	width: 100%;
@@ -68,7 +70,7 @@ button{
 
 .type p {
 	margin-bottom: 0;
-	white-space:nowrap;
+	white-space: nowrap;
 }
 
 
@@ -118,14 +120,16 @@ button{
 	position: absolute;
 	right: 0;
 	top: 0;
-	animation:IDENT2 linear 0.3s;
+	animation: IDENT2 linear 0.3s;
 }
-@keyframes IDENT2{
-	0%{
-		opacity:0.3;
+
+@keyframes IDENT2 {
+	0% {
+		opacity: 0.3;
 	}
-	100%{
-		opacity:1;
+
+	100% {
+		opacity: 1;
 	}
 }
 
@@ -140,7 +144,7 @@ button{
 	clear: both;
 	z-index: 999;
 	padding: 2rem 0 0 1rem;
-	animation:IDENT linear 0.3s;
+	animation: IDENT linear 0.3s;
 }
 
 @media (max-height: 20rem) {
@@ -150,14 +154,17 @@ button{
 		display: none;
 	}
 }
-@keyframes IDENT{
-	0%{
-		right:-100%;
+
+@keyframes IDENT {
+	0% {
+		right: -100%;
 	}
-	100%{
-		right:0;
+
+	100% {
+		right: 0;
 	}
 }
+
 #today {
 	font-size: 0.9rem;
 	background-image: url(../image/dr-h.png);
@@ -183,7 +190,7 @@ button{
 	background-repeat: no-repeat;
 	background-position: 1.5rem 0.5rem;
 	background-size: 12%;
-	outline:none!important;
+	outline: none !important;
 }
 
 .selectcontain button {
@@ -213,7 +220,7 @@ button{
 	border: 1px solid #02AC94;
 	color: #fff;
 	padding-left: 3rem;
-	outline:0!important;
+	outline: 0 !important;
 }
 
 #today[class*="select"] {
@@ -284,7 +291,7 @@ button{
 	border-radius: 0;
 	border: none;
 	margin-bottom: 0;
-	padding:0;
+	padding: 0;
 }
 
 .selectcontain .cancel {

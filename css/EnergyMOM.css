@@ -4,9 +4,11 @@
 	padding-left: 0;
 	overflow: auto;
 }
-button{
-	outline:0!important;
+
+button {
+	outline: 0 !important;
 }
+
 .form_date_end label {
 	font-weight: normal;
 }
@@ -199,7 +201,7 @@ body {
 .MOMSum span {
 	padding-left: 39%;
 	color: rgb(145, 139, 138);
-	white-space:nowrap;
+	white-space: nowrap;
 }
 
 .MOMSum .Num {
@@ -357,4 +359,15 @@ body {
 	clear: both;
 	z-index: 999;
 	padding: 0;
+	animation: IDENT linear 0.3s;
+}
+
+@keyframes IDENT {
+	0% {
+		right: -100%;
+	}
+
+	100% {
+		right: 0;
+	}
 }

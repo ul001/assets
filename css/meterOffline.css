@@ -4,9 +4,11 @@ button,
 input {
 	font-size: 0.9rem;
 }
-button{
-	outline:0!important;
+
+button {
+	outline: 0 !important;
 }
+
 .grey {
 	background: rgba(0, 0, 0, 0.5);
 	width: 100%;
@@ -126,9 +128,20 @@ button{
 	right: 0;
 	top: 0;
 	padding: 2rem 0 0 1rem;
-    overflow: hidden;
-    clear: both;
-    z-index: 999;
+	overflow: hidden;
+	clear: both;
+	z-index: 999;
+	animation: IDENT linear 0.3s;
+}
+
+@keyframes IDENT {
+	0% {
+		right: -100%;
+	}
+
+	100% {
+		right: 0;
+	}
 }
 
 @media (max-height: 20rem) {
