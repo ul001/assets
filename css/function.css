@@ -1,7 +1,7 @@
 body,
 button,
 input {
-	font-size: 0.9rem !important;
+	font-size:0.9rem!important;
 }
 
 #sideClick p img {
@@ -118,17 +118,17 @@ button{
 	position: absolute;
 	right: 0;
 	top: 0;
-	animation: IDENT linear 0.3s;
+	animation:IDENT2 linear 0.3s;
 }
-
-/* @keyframes IDENT{
+@keyframes IDENT2{
 	0%{
-		right:-100%;
+		opacity:0.3;
 	}
 	100%{
-		right:0;
+		opacity:1;
 	}
-} */
+}
+
 .selectcontain-main {
 	width: 87%;
 	height: 100%;
@@ -140,6 +140,7 @@ button{
 	clear: both;
 	z-index: 999;
 	padding: 2rem 0 0 1rem;
+	animation:IDENT linear 0.3s;
 }
 
 @media (max-height: 20rem) {
@@ -149,7 +150,14 @@ button{
 		display: none;
 	}
 }
-
+@keyframes IDENT{
+	0%{
+		right:-100%;
+	}
+	100%{
+		right:0;
+	}
+}
 #today {
 	font-size: 0.9rem;
 	background-image: url(../image/dr-h.png);
