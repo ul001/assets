@@ -21,14 +21,16 @@
 <body>
     <li class="container">
         <div class="row tree">
-            <div class="treeSearch">
-                <img class="clear" src="image/clear.png" />
-                <input type="text" id="CircuitidsInput" />
-                <button type="button" id="CircuitidsList">搜索</button>
+            <div class="selectcontain-main">
+                <div class="treeSearch">
+                    <img class="clear" src="image/clear.png" />
+                    <input type="text" id="CircuitidsInput" />
+                    <button type="button" id="CircuitidsList">搜索</button>
+                </div>
+                <div id="treeview" class="col-sm-4"></div>
+                <button type="button" class="cancel">取消</button>
+                <button type="button" class="search" id="confirm">查询</button>
             </div>
-            <div id="treeview" class="col-sm-4"></div>
-            <button type="button" class="cancel">取消</button>
-            <button type="button" class="search" id="confirm">查询</button>
         </div>
         <ul class="public">
             <li class="list" id="sideClick">
@@ -55,7 +57,7 @@
                 <button type="button" class="btn select" id="today" value="day">日报</button>
                 <button type="button" class="btn " id="month" value="month">月报</button>
             </li>
-            <li class="form-group form_date_end selectTime">
+            <li class="form-group form_date_end selectTime clearbg">
                 <span id="datePre"><a id="preVal">上一日</a></span>&nbsp;&nbsp;
                 <div class="date">
                     <input readonly type="text" id="date">

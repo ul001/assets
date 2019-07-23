@@ -8,7 +8,7 @@
 body,
 button,
 input {
-	font-size: 1.4rem!important;
+	font-size:0.9rem!important;
 }
 
 #sideClick p img {
@@ -122,8 +122,20 @@ input {
 	position: absolute;
 	right: 0;
 	top: 0;
+	animation:IDENT 3s 2s;
 }
 
+@keyframes IDENT{
+	0%{
+		right:-100%;
+	}
+	40%{
+		right:50%;
+	}
+	100%{
+		right:0;
+	}
+}
 .selectcontain-main {
 	width: 87%;
 	height: 100%;

@@ -110,29 +110,29 @@ body {
 }
 
 .treeSearch input {
-	border-radius: 4rem;
-	border: 1px solid #ddd;
-	height: 3rem;
-	width: 70%;
-	background: url(../image/searchsmall.png) no-repeat 4px 5px;
-	padding-left: 25px;
-	position: relative;
+    border-radius: 4rem;
+    border: 1px solid #ddd;
+    height: 4rem;
+    width: 70%;
+    background: url(../image/searchsmall.png) no-repeat 4px 5px;
+    padding-left: 25px;
+    position: relative;
 }
 
 .treeSearch button {
-	width: 22%;
-	height: 3rem;
-	background: #02AC94;
-	color: #fff;
-	border-radius: 3rem;
-	border: 1px solid #02AC94;
+    width: 25%;
+    height: 4rem;
+    background: #02AC94;
+    color: #fff;
+    border-radius: 4rem;
+    border: 1px solid #02AC94;
 }
 
 .clear {
-	position: absolute;
-	right: 33%;
-	top: 1.8rem;
-	z-index: 9;
+    position: absolute;
+    right: 33%;
+    top: 2.3rem;
+    z-index: 9;
 }
 /*左侧弹窗增加透明灰底*/
 .tree {
