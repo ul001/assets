@@ -5,7 +5,9 @@
 .transform {
 	clear: both;
 }
-
+button{
+	outline:0!important;
+}
 .transform li {
 	display: block;
 	float: left;

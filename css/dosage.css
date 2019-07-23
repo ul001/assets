@@ -4,7 +4,9 @@
 	padding-right: 0;
 	padding-left: 0;
 }
-
+button{
+	outline:0!important;
+}
 body {
 	height: 100%;
     margin:0;

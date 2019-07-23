@@ -5,6 +5,9 @@
     padding: 0.3rem;
     margin: 0.3rem 0 0.3rem 0;
 }
+button{
+	outline:0!important;
+}
 #subList{
 	background:url("../image/down-h.png") no-repeat right center;
 	border:none;

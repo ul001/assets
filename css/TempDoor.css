@@ -1,6 +1,9 @@
 body{
 	background: #EDEDEC;
 }
+button{
+	outline:0!important;
+}
 section{
     text-align:center;
 	width:30%;
