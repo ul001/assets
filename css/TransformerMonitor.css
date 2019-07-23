@@ -65,7 +65,7 @@
 }
 .tran-statec {
 	width: calc(50% - 0.8rem);
-	height:9rem;
+	height:8rem;
 	background:#EEEEEF;
 	float:left;
 	margin-bottom:0.5rem;
@@ -87,7 +87,7 @@
 	margin:0 0 0.5rem 0.5rem;
 }
 #power,#service{
-	height:12rem;
+	height:11rem;
 }
 #temp{
 	width:calc(100% - 1rem);
