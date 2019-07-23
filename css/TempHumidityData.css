@@ -1,102 +1,124 @@
-body{
-	background: #EDEDEC;
+body {
+    background: #EDEDEC;
 }
-.container{
-    padding-left:0;
-    padding-right:0;
+
+.container {
+    padding-left: 0;
+    padding-right: 0;
 }
-.sectionCard{
-    text-align:center;
-	width:32%;
-	float:left;
-	background-color:#FFFFFF;
-	border:1px solid #b4b4b5;
-	border-radius:5px;
-	margin:10px;
+
+.sectionCard {
+    text-align: center;
+    width: 32%;
+    float: left;
+    background-color: #FFFFFF;
+    border: 1px solid #b4b4b5;
+    border-radius: 5px;
+    margin: 10px;
 }
-.sectionCard.sectionSelect{
-    color:#000;
-    background-color:#fff;
+
+.sectionCard.sectionSelect {
+    color: #000;
+    background-color: #fff;
 }
-.date{
-    clear:both;
+
+.date {
+    clear: both;
 }
-#tempTitle,#humiTitle{
+
+#tempTitle,
+#humiTitle {
     background-color: #42B685;
     color: #FFF;
-    line-height:30px;
-    padding-left:10px;
+    line-height: 30px;
+    padding-left: 10px;
 }
-.chart{
-    margin:0 auto;
-	width:100%;
-	padding:10px;
+
+.chart {
+    margin: 0 auto;
+    width: 100%;
+    padding: 10px;
 }
-.chart #tempChart,#humiChart{
-    width:100%;
-    height:200px;
-    background:#FFFFFF;
+
+.chart #tempChart,
+#humiChart {
+    width: 100%;
+    height: 200px;
+    background: #FFFFFF;
 }
-.mainBox{
+
+.mainBox {
     background: #FFF;
     border: 1px solid #b4b4b5;
     overflow: hidden;
     height: 100%;
-    margin-bottom:10px;
-}
-.sectionSelect{
-    padding:0.5rem 0;
-}
-.sectionSelect img{
-    width:55%;
-    margin-bottom:0.5rem;
-}
-.sectionSelect p{
-    margin-bottom:0;
-}
-#cardList{
-    overflow:hidden;
-    clear:both;
-}
-/*日期*/
-.selectTime{
-    margin-bottom:0;
-    padding-left:0.5rem;
-}
-.timeBtn{
-    width:100%;
-    background:linear-gradient(#56C676,#04BA6B);
-    height:4rem;
-    line-height:4rem;
-    border-radius:4rem;
-    margin:0 auto;
-    margin-top:0.5rem;
-}
-#date{
-    height:4rem;
-    border-radius:5px;
-    padding-left:0.5rem;
-    border:none;
-    width:calc(100% - 11rem);
-    background:transparent;
-    color:#fff;
-    text-align:center;
-    float:left;
-}
-#datePre,#dateNext{
-    display:block;
-    width:5rem;
-    height:4rem;
-    border-right:1px solid #fff;
-    float:left;
-    padding:0 1.3rem;
-}
-#dateNext{
-    float:right;
-    border-right:0;
-    border-left:1px solid #fff;
-}
-.date{
-    margin-top:1rem;
+    margin-bottom: 10px;
 }
 
+.sectionSelect {
+    padding: 0.5rem 0;
+}
+
+.sectionSelect img {
+    width: 55%;
+    margin-bottom: 0.5rem;
+}
+
+.sectionSelect p {
+    margin-bottom: 0;
+}
+
+#cardList {
+    overflow: hidden;
+    clear: both;
+}
+
+/*日期*/
+.selectTime {
+    margin-bottom: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.timeBtn {
+    width: 100%;
+    background: linear-gradient(#56C676, #04BA6B);
+    height: 3rem;
+    line-height: 3rem;
+    border-radius: 3rem;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+}
+
+#date {
+    height: 3rem;
+    line-height: 3rem;
+    border-radius: 5px;
+    padding-left: 0.5rem;
+    border: none;
+    width: calc(100% - 11rem);
+    background: transparent;
+    color: #fff;
+    text-align: center;
+    float: left;
+}
+
+#datePre,
+#dateNext {
+    display: block;
+    width: 5rem;
+    height: 3rem;
+    border-right: 1px solid #fff;
+    float: left;
+    padding: 0rem 0.5rem 0.5rem 1.8rem;
+}
+
+#dateNext {
+    float: right;
+    border-right: 0;
+    border-left: 1px solid #fff;
+}
+
+.date {
+    margin-top: 1rem;
+}
