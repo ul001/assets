@@ -266,8 +266,6 @@ button {
 .date {
 	width: 10.5rem;
 	background: url(../image/down.png) no-repeat right center;
-	float: left;
-	margin-left: 17%;
 	background-size: 1rem;
 }
 
@@ -309,6 +307,7 @@ button {
 
 .public .clearbg {
 	background: none;
+	text-align:center;
 }
 
 .public .elec-btn {
