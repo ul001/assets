@@ -38,7 +38,9 @@ button {
 	line-height: 5rem;
 	padding-top: 0.5rem;
 }
-
+.selectTime{
+    text-align:center;
+}
 .list {
 	padding: 0 0.5rem 0 0.5rem;
 	height: 2.5rem;
@@ -307,7 +309,6 @@ button {
 
 .public .clearbg {
 	background: none;
-	text-align:center;
 }
 
 .public .elec-btn {
