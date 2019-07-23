@@ -136,6 +136,7 @@ body {
 }
 /*左侧弹窗增加透明灰底*/
 .tree {
+	display: none;
 	width: 105%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
