@@ -326,13 +326,13 @@ body {
 	padding-left: 2rem;
 }
 
-.MOMSum p .fontsize {
+/* .MOMSum p .fontsize {
 	font-size: 1.2rem;
-}
+} */
 
-.MOMSum p .fontsize:first-child {
+/* .MOMSum p .fontsize:first-child {
 	padding-left: 0;
-}
+} */
 /*左侧弹窗增加透明灰底*/
 .tree {
 	width: 105%;
@@ -342,6 +342,7 @@ body {
 	right: 0;
 	top: 0;
 }
+
 .selectcontain-main {
 	width: 87%;
 	height: 100%;

@@ -1,7 +1,7 @@
 $(function () {
-        var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-       var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-    var subidFromAPP=10100001;
+    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
+    var subidFromAPP = 10100001;
 
     //iOS安卓基础传参
     // var u = navigator.userAgent,
@@ -342,9 +342,11 @@ $(function () {
                 nowValue.push(el.fNextvalue);
                 addvalue = el.fDvalue;
                 //                chainRatio = (el.fDvalue - el.fBeforevalue) / el.fBeforevalue * 100;
+                // $("#todayElectconSump").html(todayStr + "<br/><span class='Num'>" + el.fNextvalue + "kW·h</span>");
+                // $("#yesterdayElectconSump").html(yesterdayStr + "<br/><span class='Num'>" + el.fBeforevalue + "kW·h</span>");
 
-                $("#todayElectconSump") + "<span class='fontsize'>".html(todayStr  + "<br/><span class='Num'>" + el.fNextvalue + "kW·h</span>");
-                $("#yesterdayElectconSump") + "<span class='fontsize'>".html(yesterdayStr + "<br/><span class='Num'>" + el.fBeforevalue + "kW·h</span>");
+                $("#todayElectconSump").html(todayStr + "<br/><span class='Num'>" + el.fNextvalue + "kW·h</span>");
+                $("#yesterdayElectconSump").html(yesterdayStr + "<br/><span class='Num'>" + el.fBeforevalue + "kW·h</span>");
                 $("#addValue").html(addvalue);
                 $("#chainRatio").html(el.fMomvalue + "%");
             });
