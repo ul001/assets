@@ -1,29 +1,29 @@
 $(function () {
-   var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-   var subidFromAPP=10100001;
+//   var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+//    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
+//   var subidFromAPP=10100001;
     //iOS安卓基础传参
-    //  var u = navigator.userAgent,
-    //      app = navigator.appVersion;
-    //  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    //  var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    //  //判断数组中是否包含某字符串
-    //  var baseUrlFromAPP;
-    //  var tokenFromAPP;
-    //  var subidFromAPP;
-    //  if (isIOS) { //ios系统的处理
-    //      window.webkit.messageHandlers.iOS.postMessage(null);
-    //      var storage = localStorage.getItem("accessToken");
-    //      // storage = storage ? JSON.parse(storage):[];
-    //      storage = JSON.parse(storage);
-    //      baseUrlFromAPP = storage.baseurl;
-    //      tokenFromAPP = storage.token;
-    //      subidFromAPP = storage.fsubID;
-    //  } else {
-    //      baseUrlFromAPP = android.getBaseUrl();
-    //      tokenFromAPP = android.getToken();
-    //      subidFromAPP = android.getfSubid();
-    //  }
+      var u = navigator.userAgent,
+          app = navigator.appVersion;
+      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+      var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+      //判断数组中是否包含某字符串
+      var baseUrlFromAPP;
+      var tokenFromAPP;
+      var subidFromAPP;
+      if (isIOS) { //ios系统的处理
+          window.webkit.messageHandlers.iOS.postMessage(null);
+          var storage = localStorage.getItem("accessToken");
+          // storage = storage ? JSON.parse(storage):[];
+          storage = JSON.parse(storage);
+          baseUrlFromAPP = storage.baseurl;
+          tokenFromAPP = storage.token;
+          subidFromAPP = storage.fsubID;
+      } else {
+          baseUrlFromAPP = android.getBaseUrl();
+          tokenFromAPP = android.getToken();
+          subidFromAPP = android.getfSubid();
+      }
 
     var currentSelectVode = {}; //选中节点
     //页面初始化加载当日数据
@@ -132,22 +132,34 @@ $(function () {
         $(data).each(function (index, value) {
             var strName = this.fCircuitname;
             $(data[index].origEnergyValues).each(function () {
+            var startStr = "-";
+            var endStr = "-";
+            var consumeStr = "-";
+            if(this.hasOwnProperty("fStartvalue")){
+                startStr= this.fStartvalue;
+            }
+            if(this.hasOwnProperty("fEndvalue")){
+                endStr= this.fEndvalue;
+            }
+            if(this.hasOwnProperty("fConsumevalue")){
+                consumeStr= this.fConsumevalue;
+            }
             var str = "<div class=\"contain\">\n" +
                       "        <h1>"+strName+"</h1>\n" +
                       "        <div class=\"type\">\n" +
                       "            <img src=\"image/start.png\"/>\n" +
                       "            <p class=\"list1\">起始数值</p>\n" +
-                      "            <p>"+this.fStartvalue+"</p>\n" +
+                      "            <p>"+startStr+"</p>\n" +
                       "        </div>\n" +
                       "        <div class=\"type\">\n" +
                       "            <img src=\"image/stop.png\"/>\n" +
                       "            <p class=\"list1\">截止数值</p>\n" +
-                      "            <p>"+this.fEndvalue+"</p>\n" +
+                      "            <p>"+endStr+"</p>\n" +
                       "        </div>\n" +
                       "        <div class=\"type\">\n" +
                       "            <img src=\"image/between.png\"/>\n" +
                       "            <p class=\"list1\">差值</p>\n" +
-                      "            <p>"+this.fConsumevalue+"</p>\n" +
+                      "            <p>"+consumeStr+"</p>\n" +
                       "        </div>\n" +
                       "    </div>";
                 var liDom = document.createElement("li");

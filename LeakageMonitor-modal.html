@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
     <link rel="stylesheet" type="text/css" href="css/LeakageMonitor-modal.css" />
     <script src="lib/jquery-1.11.1.min.js"></script>
-    <script src="lib/bootstrap.min.js"></script>
     <script src="lib/rolldate.min.js"></script>
     <script src="lib/bootstrap-table.min.js"></script>
     <script src="lib/echarts.min.js"></script>
@@ -24,11 +23,11 @@
         <button id="return" onclick="window.history.back()">返回</button>
     </div>
     <div class="form-group form_date_end selectTime">
-        <span id="datePre"><a id="preVal">上一日</a></span>&nbsp;&nbsp;
+        <span id="datePre">上一日</span>&nbsp;&nbsp;
         <div class="date">
             <input readonly type="text" id="date">
         </div>
-        <span id="dateNext"><a id="nextVal">下一日</a></span>
+        <span id="dateNext">下一日</span>
     </div>
     <div class="btn">
         <button type="button" id="showChart" class="select">图表</button>
@@ -37,11 +36,11 @@
     <div class="chart">
         <div class="mainBox">
             <div id="elecTitle"><img src="image/elec-sb.png"/>漏电流</div>
-            <div id="elecChart">漏电流曲线</div>
+            <div id="elecChart"></div>
         </div>
         <div class="mainBox">
             <div id="tempTitle"><img src="image/temp-sb.png"/>温度</div>
-            <div id="tempChart">温度曲线</div>
+            <div id="tempChart"></div>
         </div>
     </div>
 </div>

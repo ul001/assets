@@ -1,6 +1,6 @@
 $(function () {
 //     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-//     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
+//     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQwNjQzMzEsInVzZXJuYW1lIjoiYWRtaW4ifQ.MZ79VV2SSsWVryQiC8BsGMryqKskCC5DxIt09fm_qAQ";
 //     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -29,7 +29,7 @@ $(function () {
     var info = null;
     var f_MeterCode = tool.getUrlParam("F_MeterCode");
     var fMeterName = localStorage.getItem("fMeterName");
-    $("#cirName").text(fMeterName);
+    $("#titleP").text(fMeterName);
 
     function setData() {
         var params = {
@@ -87,10 +87,10 @@ $(function () {
                 orient:'horizontal',
                 top:-6,
                 feature:{
-                    dataView: {readOnly: true},
                     dataZoom: {
                         yAxisIndex: 'none'
                     },
+                    dataView: {readOnly: true},
                     restore: {}
                 }
             },
@@ -105,7 +105,7 @@ $(function () {
                 left:'13%',
                 right:'11%',
                 top:'20%',
-                bottom:'28%'
+                bottom:'25%'
             },
             calculable: true,
             xAxis: [{
@@ -126,7 +126,7 @@ $(function () {
                 trigger: 'axis'
             },
             legend: {
-                top:11,
+                top:12,
                 data: ['温度A', '温度B', '温度C']
             },
             toolbox:{
@@ -134,10 +134,10 @@ $(function () {
                 orient:'horizontal',
                 top:-6,
                 feature:{
-                    dataView: {readOnly: true},
                     dataZoom: {
                         yAxisIndex: 'none'
                     },
+                    dataView: {readOnly: true},
                     restore: {}
                 }
             },
@@ -152,7 +152,7 @@ $(function () {
                 left:'13%',
                 right:'11%',
                 top:'20%',
-                bottom:'28%'
+                bottom:'25%'
             },
             calculable: true,
             xAxis: [{
@@ -176,15 +176,15 @@ $(function () {
                 data: tempC
             }]
         };
-        $(".chart").html('<div class="mainBox"><div id="tempTitle">漏电流(mA)</div>'+
-                          '<div id="IChart"></div></div>'+
-                          '<div class="mainBox"><div id="humiTitle">温度(°C)</div>'+
-                          '<div id="EChart"></div></div>');
-        $("#IChart").removeAttr('_echarts_instance_');
-        $("#EChart").removeAttr('_echarts_instance_');
-        myChart = echarts.init($("#IChart").get(0), 'macarons');
+        $(".chart").html('<div class="mainBox"><div id="elecTitle"><img src="image/elec-sb.png"/>漏电流(mA)</div>'+
+                          '<div id="elecChart"></div></div>'+
+                          '<div class="mainBox"><div id="tempTitle"><img src="image/temp-sb.png"/>温度(°C)</div>'+
+                          '<div id="tempChart"></div></div>');
+        $("#elecChart").removeAttr('_echarts_instance_');
+        $("#tempChart").removeAttr('_echarts_instance_');
+        myChart = echarts.init($("#elecChart").get(0), 'macarons');
         myChart.setOption(option);
-        myChart2 = echarts.init($("#EChart").get(0), 'macarons');
+        myChart2 = echarts.init($("#tempChart").get(0), 'macarons');
         myChart2.setOption(option2);
     }
 
@@ -272,11 +272,15 @@ $(function () {
 
     $("#showTable").click(function () {
         choise = 2;
+        $("#showTable").addClass("select");
+        $("#showChart").removeClass("select");
         showTable(info);
     });
 
     $("#showChart").click(function () {
         choise = 1;
+        $("#showChart").addClass("select");
+        $("#showTable").removeClass("select");
         showChart(info);
     });
 
