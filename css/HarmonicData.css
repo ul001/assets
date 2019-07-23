@@ -7,9 +7,12 @@
 
 body {
 	height: 100%;
+	font-size:1.5rem;
 	background: #EDEDEC;
 }
-
+#table {
+	font-size: 1rem;
+}
 .selectTime,
 .list,
 .Unbalance-btn,
