@@ -122,15 +122,12 @@ input {
 	position: absolute;
 	right: 0;
 	top: 0;
-	animation:IDENT ease 2s;
+	animation:IDENT linear 0.3s;
 }
 
 @keyframes IDENT{
 	0%{
 		right:-100%;
-	}
-	40%{
-		right:50%;
 	}
 	100%{
 		right:0;
