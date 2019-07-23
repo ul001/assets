@@ -309,7 +309,9 @@ body {
 #selectTime img {
 	vertical-align: -4px;
 }
-
+.selectTime{
+	text-align:center;
+}
 #dateNext {
 	float: right;
 }
@@ -317,8 +319,6 @@ body {
 .date {
 	width: 10.5rem;
 	background: url(../image/down.png) no-repeat right center;
-	float: left;
-	margin-left: 18%;
 	background-size: 1rem;
 }
 

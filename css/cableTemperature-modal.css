@@ -89,9 +89,10 @@ body{
 .date{
     width:7.5rem;
     background:url(../image/down.png) no-repeat right center;
-    float:left;
-    margin-left:11%;
     background-size:1rem;
+}
+.selectTime{
+    text-align:center;
 }
 #date{
     width:6rem;
