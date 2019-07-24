@@ -105,20 +105,6 @@ body {
 	box-shadow: 0 -15px 15px -10px #BFBFC0 inset;
 }
 
-/*.elec-btn button {*/
-/*	height: 4rem;*/
-/*	width: 6.2rem;*/
-/*	background-color: #fff;*/
-/*	border-top-left-radius: 5px;*/
-/*	border-top-right-radius: 5px;*/
-/*	padding-top: 1.5rem;*/
-/*	transform: perspective(25px) rotateX(8deg) rotateY(0deg) translateZ(0);*/
-/*	border: none;*/
-/*	margin-top: 0.35rem;*/
-/*	color: #FF6913;*/
-/*	box-shadow: 0 -12px 15px -10px #BFBFC0 inset;*/
-/*}*/
-
 .elec-btn button {
 	height: 5rem;
 	width: 35%;
@@ -153,14 +139,6 @@ body {
 	padding-top: 0.7rem;
 	padding-left: 2rem;
 }
-
-/*.elec-btn .select,*/
-/*.search {*/
-/*	background: #02AC94;*/
-/*	border: 1px solid #02AC94;*/
-/*	color: #fff;*/
-/*	z-index: 99;*/
-/*}*/
 .elec-btn .select,
 .search {
 	background: url(../image/day-g.png) no-repeat left 0.7rem;
@@ -170,7 +148,6 @@ body {
 	color: #fff;
 	z-index: 99;
 }
-
 .date {
 	margin: 0 0.2rem 0.6rem 0.2rem;
 	width: 100%;
