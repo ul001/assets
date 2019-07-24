@@ -4,7 +4,9 @@
 	padding-right: 0;
 	padding-left: 0;
 }
-
+#EnergyKind,#EnergyType{
+	outline:0;
+}
 button {
 	outline: 0 !important;
 }
@@ -236,11 +238,11 @@ body {
 .tree .cancel {
 	height: 4rem;
 	line-height: 3rem;
-	width: 44%;
+	width: 50%;
 	border-radius: 0;
 	border: none;
 	margin-bottom: 0;
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 }
 
@@ -344,7 +346,7 @@ body {
 	width: 105%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
-	position: absolute;
+	position: fixed;
 	right: 0;
 	top: 0;
 	z-index: 99;
