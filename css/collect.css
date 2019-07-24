@@ -374,6 +374,27 @@ body {
 	margin-bottom: 0;
 }
 
+/*.container{height:100%;}*/
+.selectcontain {
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	right: 0;
+	top: 0;
+	animation: IDENT2 linear 0.3s;
+}
+
+@keyframes IDENT2 {
+	0% {
+		opacity: 0.3;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
 /*左侧弹窗增加透明灰底*/
 .tree {
 	width: 105%;
