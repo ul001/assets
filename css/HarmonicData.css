@@ -375,3 +375,7 @@ body {
 		right: 0;
 	}
 }
+.ban_body{
+    height:100%;
+    overflow:hidden;
+}

@@ -41,6 +41,7 @@ $(function () {
     });
   }
 
+
   $("#CircuitidsList").click(function () {
     var search = $("#CircuitidsInput").val();
     var url = baseUrlFromAPP+"/main/getfCircuitidsList";
@@ -78,6 +79,7 @@ $(function () {
 
   $("#sideClick").click(function () {
     $(".tree").show();
+    $("html,body").addClass("ban_body")
   });
 
   $(".cancel").click(function () {
