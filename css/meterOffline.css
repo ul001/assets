@@ -4,11 +4,9 @@ button,
 input {
 	font-size: 0.9rem;
 }
-
-button {
-	outline: 0 !important;
+button{
+	outline:0!important;
 }
-
 .grey {
 	background: rgba(0, 0, 0, 0.5);
 	width: 100%;
@@ -118,6 +116,15 @@ button {
 	position: absolute;
 	right: 0;
 	top: 0;
+	animation:IDENT2 linear 0.3s;
+}
+@keyframes IDENT2{
+	0%{
+		opacity:0.3;
+	}
+	100%{
+		opacity:1;
+	}
 }
 
 .selectcontain-main {
@@ -127,20 +134,18 @@ button {
 	position: absolute;
 	right: 0;
 	top: 0;
-	padding: 2rem 0 0 1rem;
 	overflow: hidden;
 	clear: both;
 	z-index: 999;
-	animation: IDENT linear 0.3s;
+	padding: 2rem 0 0 1rem;
+	animation:IDENT linear 0.3s;
 }
-
-@keyframes IDENT {
-	0% {
-		right: -100%;
+@keyframes IDENT{
+	0%{
+		right:-100%;
 	}
-
-	100% {
-		right: 0;
+	100%{
+		right:0;
 	}
 }
 
