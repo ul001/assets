@@ -246,8 +246,8 @@ $(function () {
                 textStyle: {
                     fontWeight: 'small'
                 },
-                textAlign: 'center',
-                right: 5,
+                // textAlign: 'center',
+                right: '10',
                 top: 10
             }],
             tooltip: {
