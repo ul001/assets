@@ -188,6 +188,7 @@ button {
 	background-repeat: no-repeat;
 	background-position: 1.5rem 0.5rem;
 	background-size: 12%;
+	box-shadow:none;
 }
 
 .selectcontain button {
@@ -274,17 +275,17 @@ button {
 
 .selectcontain .search,
 .selectcontain .cancel {
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 	line-height: 3rem;
-	width: 43.5%;
+	width: 50%;
 	border-radius: 0;
 	border: none;
 	margin-bottom: 0;
 }
 
 .selectcontain .cancel {
-	left: 13%;
+	left: 0;
 	background: #d4d4d0;
 }
 
