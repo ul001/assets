@@ -2,6 +2,9 @@
 	background: #fff;
 	overflow:hidden;
 }
+body{
+    font-size:0.9rem;
+}
 .transform {
 	clear: both;
 }
@@ -178,8 +181,8 @@ button{
 /*按钮*/
 #tempLine,#NothingPower,#havePower,#NowPower{
 	width:22%;
-	height: 3rem;
-	line-height:2.9rem;
+	height: 2.5rem;
+	line-height:2.5rem;
 	text-align:center;
 	background-color: #F4F2F1;
 	color:#000;
@@ -259,7 +262,7 @@ button{
 }
 
 .t-ctn .s-ctn div {
-	font-size: 14px;
+	font-size: 1rem;
 	box-sizing: border-box;
 	white-space: normal;
 	word-wrap: break-word;
