@@ -157,6 +157,11 @@ button {
 	z-index: 10;
 }
 
+.ban_body{
+	height:100%;
+	overflow:hidden;
+}
+
 #treeview {
 	overflow: auto;
 	height: 84%

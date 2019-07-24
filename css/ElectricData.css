@@ -189,11 +189,11 @@ body {
 .tree .cancel {
 	height: 6rem;
 	line-height: 5rem;
-	width: 44%;
+	width: 50%;
 	border-radius: 0;
 	border: none;
 	margin-bottom: 0;
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 }
 
@@ -288,7 +288,7 @@ body {
 	width: 105%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
-	position: absolute;
+	position: fixed;
 	right: 0;
 	top: 0;
 }
@@ -315,4 +315,8 @@ body {
 	100% {
 		right: 0;
 	}
+}
+.ban_body{
+	height:100%;
+	overflow:hidden;
 }

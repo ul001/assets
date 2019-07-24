@@ -145,11 +145,14 @@ body {
 	width: 105%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
-	position: absolute;
+	position: fixed;
 	right: 0;
 	top: 0;
 }
-
+.ban_body{
+	height:100%;
+	overflow:hidden;
+}
 .selectcontain-main {
 	width: 87%;
 	height: 100%;
