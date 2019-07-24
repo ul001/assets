@@ -104,8 +104,8 @@ $(function () {
             alert("结束时间不能大于当前时间，请选择正确的查询时间！");
             return;
         } else {
-            $("#startDate").html(startDate);
-            $("#endDate").html(endDate);
+            $("#dateStart").html(startDate);
+            $("#dateEnd").html(endDate);
         }
         var fCircuitid = currentSelectVode.merterId;
         // var time = $("#date").val();
@@ -438,7 +438,7 @@ $(function () {
     var time = tool.initDate("YMD", new Date());
     $("#date").val(time);
 
-    new Rolldate({
+/*    new Rolldate({
         el: '#date',
         format: 'YYYY-MM-DD',
         beginYear: 2000,
@@ -453,10 +453,10 @@ $(function () {
         //         return false;
         //     };
         // }
-    });
+    });*/
     //初始化时间插件
 
-    new Rolldate({
+    var startRoll = new Rolldate({
         el: '#dateStart',
         format: 'YYYY-MM-DD hh:mm',
         beginYear: 2000,
@@ -474,7 +474,7 @@ $(function () {
         // }
     });
 
-    new Rolldate({
+    var endRoll = new Rolldate({
         el: '#dateEnd',
         format: 'YYYY-MM-DD hh:mm',
         beginYear: 2000,
@@ -490,6 +490,13 @@ $(function () {
         //         return false;
         //     };
         // }
+    });
+
+    $("#startDate").click(function(){
+        startRoll.show();
+    });
+    $("#endDate").click(function(){
+        endRoll.show();
     });
 
 });
