@@ -60,7 +60,7 @@ body {
 	background: transparent;
 	border: none;
 	-webkit-appearance: none;
-	width: calc(100% - 85px);
+	width: calc(100% - 78px);
 	background: url('../image/right.png') no-repeat right center;
 }
 
@@ -71,7 +71,7 @@ body {
 }
 
 #meter {
-	width: calc(100% - 97px);
+	width: calc(100% - 90px);
 	background: url('../image/right.png') no-repeat right center;
 }
 
