@@ -229,7 +229,7 @@ $(function () {
 
     //初始化时间插件
 
-    new Rolldate({
+    var startRoll = new Rolldate({
         el: '#dateStart',
         format: 'YYYY-MM-DD',
         beginYear: 2000,
@@ -247,7 +247,7 @@ $(function () {
         }
     });
 
-    new Rolldate({
+    var endRoll = new Rolldate({
         el: '#dateEnd',
         format: 'YYYY-MM-DD',
         beginYear: 2000,
@@ -265,4 +265,11 @@ $(function () {
         }
     });
 
+    $("#startDiv").click(function(){
+        startRoll.show();
+    });
+
+    $("#endDiv").click(function(){
+        endRoll.show();
+    });
 });
