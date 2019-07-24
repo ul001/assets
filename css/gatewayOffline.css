@@ -264,7 +264,6 @@ button {
 .selectcontain input,
 .selectcontain select {
 	height: 2rem;
-	width: inherit;
 	border: none;
 }
 
