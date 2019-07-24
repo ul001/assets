@@ -259,7 +259,9 @@ button {
 	text-align: left;
 	color: #565A68;
 }
-
+#alermType{
+    outline:none;
+}
 #meterName::-webkit-input-placeholder,
 #paramName::-webkit-input-placeholder {
 	color: #999DA6;
