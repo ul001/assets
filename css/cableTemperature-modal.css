@@ -8,9 +8,6 @@ button{
     padding-left:0;
     padding-right:0;
 }
-#datePre,#dateNext{
-    cursor:pointer;
-}
 #table{
     background-color:#FFFFFF;
     overflow:hidden;
@@ -81,7 +78,6 @@ button{
 }
 #datePre,#dateNext{
     padding:0 0.5rem;
-    cursor:pointer;
 }
 #selectTime img{
     vertical-align: -4px;
