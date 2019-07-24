@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 功率因数 -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css"/>
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" />
     <link rel="stylesheet" type="text/css" href="css/ElectricData.css" />
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
 </head>
+
 <body>
-<div class="container">
-    <div class="row tree">
-        <div class="selectcontain-main">
-        <div class="treeSearch">
-            <img class="clear" src="image/clear.png"/>
-            <input type="text" id="CircuitidsInput"/>
-            <button type="button" id="CircuitidsList">搜索</button>
+    <div class="container">
+        <div class="row tree">
+            <div class="selectcontain-main">
+                <div class="treeSearch">
+                    <img class="clear" src="image/clear.png" />
+                    <input type="text" id="CircuitidsInput" />
+                    <button type="button" id="CircuitidsList">搜索</button>
+                </div>
+                <div id="treeview" class="col-sm-4"></div>
+                <button type="button" class="cancel">取消</button>
+                <button type="button" class="search" id="confirm">查询</button>
+            </div>
         </div>
-        <div id="treeview" class="col-sm-4"></div>
-        <button type="button" class="cancel">取消</button>
-        <button type="button" class="search" id="confirm">查询</button>
-        </div>
-    </div>
-    <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body category">
@@ -55,40 +58,41 @@
             </div>
         </div>
     </div>-->
-    <ul class="public">
-        <li class="list" id="sideClick">
-            <p>
-                <img class="jiancedian" src="image/jiancedian.png"/>
-                <span>监测点：</span>
-                <span id="meter">10kV变压器</span>
-            </p>
-        </li>
-        <input id="EnergyKind" value="PF" hidden>
-        <li class="elec-btn" class="clearbg" id="EnergyContain">
-            <button type="button" class="btn select" value="fPf">总</button>
-            <button type="button" class="btn" value="fPfa">A相</button>
-            <button type="button" class="btn" value="fPfb">B相</button>
-            <button type="button" class="btn" value="fPfc">C相</button>
-        </li>
-        <li class="form-group selectTime list">
-            <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
-                <img src="image/date.png"/>
-                <label>日期：</label>
-                <input readonly type="text" id="date">
-            </div>
-        </li>
-    </ul>
-    <button type="button" class="search" id="search"><img src="image/search.png"/>查询</button>
-    <div class="diagram center" id="chartContain"></div>
-    <div class="dataTable center" id="tableContain"></div>
-</div>
-<script src="lib/jquery-1.11.1.min.js"></script>
-<script src="lib/bootstrap.min.js"></script>
-<script src="lib/rolldate.min.js"></script>
-<script src="lib/bootstrap-treeview.js"></script>
-<script src="lib/bootstrap-table.min.js"></script>
-<script src="lib/echarts.min.js"></script>
-<script src="js/tools.js"></script>
-<script src="js/powerFactor.js"></script>
+        <ul class="public">
+            <li class="list" id="sideClick">
+                <p>
+                    <img class="jiancedian" src="image/jiancedian.png" />
+                    <span>监测点：</span>
+                    <span id="meter">10kV变压器</span>
+                </p>
+            </li>
+            <input id="EnergyKind" value="PF" hidden>
+            <li class="elec-btn" class="clearbg" id="EnergyContain">
+                <button type="button" class="btn select" value="fPf">总</button>
+                <button type="button" class="btn" value="fPfa">A相</button>
+                <button type="button" class="btn" value="fPfb">B相</button>
+                <button type="button" class="btn" value="fPfc">C相</button>
+            </li>
+            <li class="form-group selectTime list">
+                <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
+                    <img src="image/date.png" />
+                    <label>日期：</label>
+                    <input readonly type="text" id="date">
+                </div>
+            </li>
+        </ul>
+        <button type="button" class="search" id="search"><img src="image/search.png" />查询</button>
+        <div class="diagram center" id="chartContain"></div>
+        <div class="dataTable center" id="tableContain"></div>
+    </div>
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/rolldate.min.js"></script>
+    <script src="lib/bootstrap-treeview.js"></script>
+    <script src="lib/bootstrap-table.min.js"></script>
+    <script src="lib/echarts.min.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="js/powerFactor.js"></script>
 </body>
+
 </html>
