@@ -115,12 +115,18 @@ button {
 	padding-top: 0.3rem;
 	padding-left: 2rem;
 }
-.elec-btn .select,
+.elec-btn .select{
+    background: url(../image/day-g.png) no-repeat left 0.7rem;
+    background-size:100% 85%;
+    padding-top:2.1rem;
+    box-shadow:none;
+    color: #fff;
+    z-index: 99;
+}
 .search {
-	background: url(../image/day-g.png) no-repeat left 0.7rem;
-	background-size:100% 85%;
-	padding-top:2.1rem;
+    background-color:#02AC94;
 	box-shadow:none;
+    border:none;
 	color: #fff;
 	z-index: 99;
 }
