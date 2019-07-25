@@ -68,7 +68,7 @@ $(function(){
 
     $("#sideClick").click(function () {
         $(".tree").show();
-        $("html,body").addClass("ban_body")
+//        $("html,body").addClass("ban_body")
     });
 
         $(".cancel").click(function(){
