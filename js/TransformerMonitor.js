@@ -1,7 +1,7 @@
 $(function () {
 //    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-//    var subidFromAPP = 10100002;
+//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
+//    var subidFromAPP = 10100001;
     //iOS安卓基础传参
       var u = navigator.userAgent,
           app = navigator.appVersion;
@@ -236,7 +236,7 @@ $(function () {
     }
 
     //配置图表
-    function generateChartLine(data) {
+    function generateChartLine(dataObject) {
 
         var time = [];
         var times = [];
@@ -254,13 +254,13 @@ $(function () {
             seriesB = [],
             seriesC = [];
 
-        if (data.yesterdayPowerValue != null) {
-            $.each(data.yesterdayPowerValue, function (key, val) {
+        if (dataObject.yesterdayPowerValue != null) {
+            $.each(dataObject.yesterdayPowerValue, function (key, val) {
                 times.push(val.fCollecttime.substring(11, 16))
             });
         }
-        if (data.PowerValue != null) {
-            $.each(data.PowerValue, function (key, val) {
+        if (dataObject.PowerValue != null) {
+            $.each(dataObject.PowerValue, function (key, val) {
                 time.push(val.fCollecttime.substring(11, 16));
             });
         }
@@ -268,11 +268,11 @@ $(function () {
 
         for (var i = 0; i < times.length; i++) {
             var index = 0;
-            for (var j = 0; j < data.yesterdayPowerValue.length; j++) {
-                if (data.yesterdayPowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
-                    yesterDayfP.push(data.yesterdayPowerValue[j].fP);
-                    yesterDayfQ.push(data.yesterdayPowerValue[j].fQ);
-                    yesterDayfS.push(data.yesterdayPowerValue[j].fS);
+            for (var j = 0; j < dataObject.yesterdayPowerValue.length; j++) {
+                if (dataObject.yesterdayPowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
+                    yesterDayfP.push(dataObject.yesterdayPowerValue[j].fP);
+                    yesterDayfQ.push(dataObject.yesterdayPowerValue[j].fQ);
+                    yesterDayfS.push(dataObject.yesterdayPowerValue[j].fS);
                     index = 1;
                 }
             }
@@ -283,14 +283,14 @@ $(function () {
             }
         }
 
-        if (data.PowerValue != null) {
+        if (dataObject.PowerValue != null) {
             for (var i = 0; i < times.length; i++) {
                 var index = 0;
-                for (var j = 0; j < data.PowerValue.length; j++) {
-                    if (data.PowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
-                        todayfP.push(data.PowerValue[j].fP);
-                        todayfQ.push(data.PowerValue[j].fQ);
-                        todayfS.push(data.PowerValue[j].fS);
+                for (var j = 0; j < dataObject.PowerValue.length; j++) {
+                    if (dataObject.PowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
+                        todayfP.push(dataObject.PowerValue[j].fP);
+                        todayfQ.push(dataObject.PowerValue[j].fQ);
+                        todayfS.push(dataObject.PowerValue[j].fS);
                         index = 1;
                     }
                 }
@@ -303,8 +303,8 @@ $(function () {
         }
 
 
-        if (!data.hasOwnProperty('tempABC') || data.tempABC != null) {
-            $.each(data.tempABC, function (key, val) {
+        if (!dataObject.hasOwnProperty('tempABC') || dataObject.tempABC != null) {
+            $.each(dataObject.tempABC, function (key, val) {
                 timeTemp.push(val.fCollecttime.substring(11, 16));
                 seriesA.push(val.fTempa);
                 seriesB.push(val.fTempb);
@@ -406,7 +406,7 @@ $(function () {
             var unitfS = 'kVA';
             initLine(seriesfS, legendfS, times, titlefS, unitfS);
         }
-        if (type == "havePower") {
+        else if (type == "havePower") {
             var seriesfP = [{
                     name: '当日',
                     type: 'line',
@@ -498,7 +498,7 @@ $(function () {
             var unitfP = 'kW';
             initLine(seriesfP, legendfP, times, titlefP, unitfP);
         }
-        if (type == "NothingPower") {
+        else if (type == "NothingPower") {
             var seriesfQ = [{
                     name: '当日',
                     type: 'line',
@@ -590,7 +590,7 @@ $(function () {
             var unitfQ = 'kVar';
             initLine(seriesfQ, legendfQ, times, titlefQ, unitfQ);
         }
-        if (type == "tempLine") {
+        else if (type == "tempLine") {
             var titleTem = transformerName + "  " + "绕阻温度";
             // var titleTem = $("#daycalendarBox").val() + "  " + transformerName + "  " + "绕阻温度";
             var seriesTem = [{
@@ -727,7 +727,8 @@ $(function () {
     }
 
     function initLine(series, legend, time, title, unit) {
-        var line = echarts.init($("#powerChart").get(0), 'macarons');
+        $(".chart").html('<div id="powerChart" class="showDIV"></div>');
+        var line = echarts.init(document.getElementById('powerChart'));
         // var line = echarts.init($("#powerChart").get(0));
         var option = {
 /*            title: {
@@ -795,19 +796,19 @@ $(function () {
     //点击有功、无功、视在的按钮
     $("#havePower").click(function () {
         $("#havePower").addClass("s-select").siblings('span').removeClass("s-select");
-        generateChartLine(info);
+        getDateCurveData();
     });
     $("#NothingPower").click(function () {
         $("#NothingPower").addClass("s-select").siblings('span').removeClass("s-select");
-        generateChartLine(info);
+        getDateCurveData();
     });
     $("#NowPower").click(function () {
         $("#NowPower").addClass("s-select").siblings('span').removeClass("s-select");
-        generateChartLine(info);
+        getDateCurveData();
     });
     $("#tempLine").click(function () {
         $("#tempLine").addClass("s-select").siblings('span').removeClass("s-select");
-        generateChartLine(info);
+        getDateCurveData();
     });
     $("#datePre").click(function () {
         var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
