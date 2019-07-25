@@ -1,29 +1,29 @@
 $(function () {
-//    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM1MzczMTAsInVzZXJuYW1lIjoiYWRtaW4ifQ.ty4m082uqMhF_j846hQ-dVCiYOdepOWdDIr7UiV9eTI";
-//    var subidFromAPP=10100001;
+    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTY1NjMsInVzZXJuYW1lIjoiYWRtaW4ifQ.DtIlyGjuhmdMSRgVnkZfOcCs-YbEOqV0Bx1jFTGlsTI";
+    var subidFromAPP = 10100001;
     //iOS安卓基础传参
-     var u = navigator.userAgent,
-         app = navigator.appVersion;
-     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-     //判断数组中是否包含某字符串
-     var baseUrlFromAPP;
-     var tokenFromAPP;
-     var subidFromAPP;
-     if (isIOS) { //ios系统的处理
-         window.webkit.messageHandlers.iOS.postMessage(null);
-         var storage = localStorage.getItem("accessToken");
-         // storage = storage ? JSON.parse(storage):[];
-         storage = JSON.parse(storage);
-         baseUrlFromAPP = storage.baseurl;
-         tokenFromAPP = storage.token;
-         subidFromAPP = storage.fsubID;
-     } else {
-         baseUrlFromAPP = android.getBaseUrl();
-         tokenFromAPP = android.getToken();
-         subidFromAPP = android.getfSubid();
-     }
+    // var u = navigator.userAgent,
+    //     app = navigator.appVersion;
+    // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    // //判断数组中是否包含某字符串
+    // var baseUrlFromAPP;
+    // var tokenFromAPP;
+    // var subidFromAPP;
+    // if (isIOS) { //ios系统的处理
+    //     window.webkit.messageHandlers.iOS.postMessage(null);
+    //     var storage = localStorage.getItem("accessToken");
+    //     // storage = storage ? JSON.parse(storage):[];
+    //     storage = JSON.parse(storage);
+    //     baseUrlFromAPP = storage.baseurl;
+    //     tokenFromAPP = storage.token;
+    //     subidFromAPP = storage.fsubID;
+    // } else {
+    //     baseUrlFromAPP = android.getBaseUrl();
+    //     tokenFromAPP = android.getToken();
+    //     subidFromAPP = android.getfSubid();
+    // }
 
     var currentSelectVode = {}; //选中节点
 
@@ -149,8 +149,8 @@ $(function () {
             });
             $("#dateNext").click(function () {
                 var d = new Date();
-                var nowDate = new Date((d.getFullYear()+"-01-01").replace(/\-/g, "\/"));
-                var selectDate = new Date(($("#date").val()+"-01"+"-01").replace(/\-/g, "\/"));
+                var nowDate = new Date((d.getFullYear() + "-01-01").replace(/\-/g, "\/"));
+                var selectDate = new Date(($("#date").val() + "-01" + "-01").replace(/\-/g, "\/"));
                 if (selectDate < nowDate) {
                     var nextDate = new Date(selectDate.setFullYear(selectDate.getFullYear() + 1));
                     $("#date").val(nextDate.getFullYear());
@@ -244,7 +244,7 @@ $(function () {
             // EnergyKind: EnergyKind,
         }
         getData(url, params, function (data) {
-                showCharts(data.EnergyReport);
+            showCharts(data.EnergyReport);
         });
     };
 
@@ -448,9 +448,9 @@ $(function () {
             tooltip: {
                 trigger: 'axis'
             },
-/*            legend: {
-                data: name,
-            },*/
+            /*            legend: {
+                            data: name,
+                        },*/
             grid: { // 控制图的大小，调整下面这些值就可以，
                 top: '18%',
                 left: '15%',
@@ -471,7 +471,9 @@ $(function () {
                     dataZoom: {
                         yAxisIndex: 'none'
                     },
-                    dataView: {readOnly: true},
+                    dataView: {
+                        readOnly: true
+                    },
                     restore: {}
                 }
             },
@@ -484,10 +486,15 @@ $(function () {
             series: [{
                 name: name,
                 data: value,
-                type: 'bar'
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: '#64BC78',
+                    }
+                }
             }]
         };
-        line.setOption(option,true);
+        line.setOption(option, true);
         // $(window).bind("resize",function(event) {
         //   line.resize();
         // });
@@ -496,11 +503,11 @@ $(function () {
     function showTable(data) {
         var selectParam = $(".btn.select").attr('value');
         var showName = "";
-        if(selectParam=="today"){
+        if (selectParam == "today") {
             showName = "日报";
-        }else if (selectParam == "month") {
+        } else if (selectParam == "month") {
             showName = "月报";
-        }else if (selectParam == "year") {
+        } else if (selectParam == "year") {
             showName = "年报";
         }
         var columns = [{
@@ -528,7 +535,7 @@ $(function () {
         beginYear: 2000,
         endYear: 2100,
         value: showtimeForElectSum,
-        confirm:function(data){
+        confirm: function (data) {
             $("#date").val(data);
             searchGetData();
         }
