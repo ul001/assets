@@ -239,7 +239,7 @@ button {
 	height: 6rem;
 	line-height: 6rem;
 	background: url('../image/right.png') no-repeat right 1rem center;
-	border-bottom: 1px dashed #C8C9CA;
+/*	border-bottom: 1px dashed #C8C9CA;*/
 }
 
 .public li img {
@@ -341,4 +341,9 @@ button {
 .ban_body{
 	height:100%;
 	overflow:hidden;
+}
+#energySelect{
+    outline:0;
+	width: calc(100% - 108px);
+	background: url('../image/right.png') no-repeat right center;
 }

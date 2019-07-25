@@ -41,9 +41,13 @@ $(function () {
 
 //放大缩小
     $("#BigDom").on('click', function () {
+        $(this).addClass("select");
+        $("#SimDom").removeClass("select");
         adjustSVG($('svg'), 1);
     });
     $("#SimDom").on('click', function () {
+        $(this).addClass("select");
+        $("#BigDom").removeClass("select");
         adjustSVG($('svg'), -1);
     });
     function adjustSVG($svg, type) {
