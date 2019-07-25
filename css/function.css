@@ -190,8 +190,8 @@ button {
 	background-repeat: no-repeat;
 	background-position: 1.5rem 0.5rem;
 	background-size: 12%;
-	outline:0;
-	box-shadow:none;
+	outline: 0;
+	box-shadow: none;
 }
 
 .selectcontain button {
@@ -259,9 +259,11 @@ button {
 	text-align: left;
 	color: #565A68;
 }
-#alermType{
-    outline:none;
+
+#alermType {
+	outline: none;
 }
+
 #meterName::-webkit-input-placeholder,
 #paramName::-webkit-input-placeholder {
 	color: #999DA6;
@@ -407,7 +409,8 @@ button {
 .data-date {
 	width: 65%;
 }
-.ban_body{
-	height:100%;
-	overflow:hidden;
+
+.ban_body {
+	height: 100%;
+	overflow: hidden;
 }
