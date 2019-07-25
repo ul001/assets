@@ -226,72 +226,11 @@ body {
 	margin: 0 auto;
 }
 
-.tree {
-	display: none;
-	width: 90%;
-	height: 100%;
-	background: #fff;
-	position: fixed;
-	top: 0;
-	right: 0;
-	z-index: 10;
-}
-
-#treeview {
-	overflow: auto;
-	height: 84%
-}
-
-.treeSearch {
-	padding: 1rem;
-}
-
-.tree .search,
-.tree .cancel {
-	height: 4rem;
-	line-height: 3rem;
-	width: 44%;
-	border-radius: 0;
-	border: none;
-	margin-bottom: 0;
-	position: fixed;
-	bottom: 0;
-}
-
 .elec-btn .select,
 .search {
 	background: #02AC94;
 	border: 1px solid #02AC94;
 	color: #fff;
-}
-
-.tree .cancel {
-	background: #d4d4d0;
-}
-
-.tree .search {
-	right: 0;
-	background: #02AC94;
-	color: #fff;
-}
-
-.treeSearch input {
-	border-radius: 4rem;
-	border: 1px solid #ddd;
-	height: 4rem;
-	width: 70%;
-	background: url(../image/searchsmall.png) no-repeat 4px 5px;
-	padding-left: 25px;
-	position: relative;
-}
-
-.treeSearch button {
-	width: 25%;
-	height: 4rem;
-	background: #02AC94;
-	color: #fff;
-	border-radius: 3rem;
-	border: 1px solid #02AC94;
 }
 
 .clear {
@@ -397,12 +336,14 @@ body {
 
 /*左侧弹窗增加透明灰底*/
 .tree {
-	width: 105%;
+	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
 	position: absolute;
 	right: 0;
 	top: 0;
+	display: none;
+    z-index: 10;
 }
 
 .selectcontain-main {
@@ -417,6 +358,62 @@ body {
 	z-index: 999;
 	padding: 0;
 	animation: IDENT linear 0.3s;
+}
+
+#treeview {
+	overflow: auto;
+	height: 80%
+}
+
+.treeSearch {
+	padding: 1rem;
+}
+
+.tree .search,
+.tree .cancel {
+	height: 6rem;
+	line-height: 5rem;
+	width: 50%;
+	border-radius: 0;
+	border: none;
+	margin-bottom: 0;
+	position: absolute;
+	bottom: 0;
+	padding:0;
+}
+
+.tree .cancel {
+	background: #d4d4d0;
+}
+
+.tree .search {
+	right: 0;
+	background: #02AC94;
+	color: #fff;
+}
+
+.treeSearch input {
+	border-radius: 4rem;
+	border: 1px solid #ddd;
+	height: 4rem;
+	width: 70%;
+	background: url(../image/searchsmall.png) no-repeat 4px 5px;
+	padding-left: 25px;
+	position: relative;
+}
+
+.treeSearch button {
+	width: 25%;
+	height: 4rem;
+	background: #02AC94;
+	color: #fff;
+	border-radius: 4rem;
+	border: 1px solid #02AC94;
+}
+
+.ban_body{
+	height:100%;
+	overflow:hidden;
 }
 
 @keyframes IDENT {

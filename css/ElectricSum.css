@@ -29,11 +29,6 @@ button {
 	width: 1.8rem;
 }
 
-.ban_body{
-	height:100%;
-	overflow:hidden;
-}
-
 .selectTime img {
 	margin-right: 0.5rem;
 }
@@ -295,7 +290,7 @@ body {
 
 #treeview {
 	overflow: auto;
-	height: 84%
+	height: 80%
 }
 
 .treeSearch {
@@ -342,6 +337,11 @@ body {
 	color: #fff;
 	border-radius: 4rem;
 	border: 1px solid #02AC94;
+}
+
+.ban_body{
+	height:100%;
+	overflow:hidden;
 }
 
 @keyframes IDENT {
