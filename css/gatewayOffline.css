@@ -61,9 +61,11 @@ button {
 
 .type img {
 	width: 30%;
+	max-width: 4rem;
 	position: absolute;
 	right: 0;
 	top: 5%;
+
 }
 
 .type p {
@@ -188,7 +190,7 @@ button {
 	background-repeat: no-repeat;
 	background-position: 1.5rem 0.5rem;
 	background-size: 12%;
-	box-shadow:none;
+	box-shadow: none;
 }
 
 .selectcontain button {
