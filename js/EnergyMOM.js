@@ -1,30 +1,30 @@
 $(function () {
-//    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-//    var subidFromAPP = 10100001;
+    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
+    var subidFromAPP = 10100001;
 
     //iOS安卓基础传参
-     var u = navigator.userAgent,
-         app = navigator.appVersion;
-     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-     //判断数组中是否包含某字符串
-     var baseUrlFromAPP;
-     var tokenFromAPP;
-     var subidFromAPP;
-     if (isIOS) { //ios系统的处理
-         window.webkit.messageHandlers.iOS.postMessage(null);
-         var storage = localStorage.getItem("accessToken");
-         // storage = storage ? JSON.parse(storage):[];
-         storage = JSON.parse(storage);
-         baseUrlFromAPP = storage.baseurl;
-         tokenFromAPP = storage.token;
-         subidFromAPP = storage.fsubID;
-     } else {
-         baseUrlFromAPP = android.getBaseUrl();
-         tokenFromAPP = android.getToken();
-         subidFromAPP = android.getfSubid();
-     }
+//     var u = navigator.userAgent,
+//         app = navigator.appVersion;
+//     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+//     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+//     //判断数组中是否包含某字符串
+//     var baseUrlFromAPP;
+//     var tokenFromAPP;
+//     var subidFromAPP;
+//     if (isIOS) { //ios系统的处理
+//         window.webkit.messageHandlers.iOS.postMessage(null);
+//         var storage = localStorage.getItem("accessToken");
+//         // storage = storage ? JSON.parse(storage):[];
+//         storage = JSON.parse(storage);
+//         baseUrlFromAPP = storage.baseurl;
+//         tokenFromAPP = storage.token;
+//         subidFromAPP = storage.fsubID;
+//     } else {
+//         baseUrlFromAPP = android.getBaseUrl();
+//         tokenFromAPP = android.getToken();
+//         subidFromAPP = android.getfSubid();
+//     }
 
     var currentSelectVode = {}; //选中节点
 
@@ -39,7 +39,7 @@ $(function () {
         }
         getData(url, params, function (data) {
             setListData(data);
-            $("#search").click();
+            $(".search").click();
         });
     }
 
@@ -72,11 +72,12 @@ $(function () {
 
     //配置时间
     var showtimeForElectSum = tool.initDate("YMD", new Date());
+    $("#date").val(showtimeForElectSum);
 
     $(document).on('click', '.elec-btn .btn', function () {
         var obj = $(this);
         $(this).addClass('select').siblings("button").removeClass('select');
-        var selectParam = $(this).attr('value');
+//        var selectParam = $(this).attr('value');
         // if (selectParam == "today") {
         showtimeForElectSum = tool.initDate("YMD", new Date());
         $("#date").val(showtimeForElectSum);
@@ -91,6 +92,7 @@ $(function () {
         //     roll.config.format = "YYYY";
         // }
         roll.value = showtimeForElectSum;
+        refreshData();
     });
 
     $("#sideClick").click(function () {
@@ -105,19 +107,11 @@ $(function () {
     $("#confirm").click(function () {
         $(".tree").hide();
         $("#meter").html(currentSelectVode.merterName);
+        refreshData();
     });
 
-    $("#electric").click(function () {
-        $(".category").show();
-    });
-
-
-    $(document).on('click', '#search', function () {
-        var EnergyKind = $("#EnergyKind").attr('value');
+    function refreshData(){
         var selectParam = $(".btn.select").attr('value');
-        if (EnergyKind == "fFr") {
-            selectParam = ""
-        }
         var time;
         var typeDA;
         if (selectParam == "today") {
@@ -146,8 +140,7 @@ $(function () {
         getData(url, params, function (data) {
             showCharts(data.EnergyReportDate);
         });
-    })
-
+    }
 
     function getData(url, params, successCallback) {
         var token = tokenFromAPP;
@@ -182,16 +175,16 @@ $(function () {
         })
     }
 
-    $(document).on("click", ".category li", function () {
+/*    $(document).on("click", ".category li", function () {
         var type = $(this).children('label').attr("value");
         var text = $(this).children('label').text();
         generateType(type);
         $("#EnergyKind").attr("value", type);
         $("#param").html(text);
         $("#myModal").modal("hide");
-    })
+    })*/
 
-    function generateType(type) {
+/*    function generateType(type) {
         var List = [{
                 "id": "P",
                 "name": "有功功率",
@@ -292,7 +285,7 @@ $(function () {
             })
             $("#EnergyContain button:first").addClass('select');
         }
-    }
+    }*/
 
     function showCharts(data) {
         var time = [];
@@ -474,6 +467,34 @@ $(function () {
         beginYear: 2000,
         endYear: 2100,
         value: showtimeForElectSum,
+        confirm: function (date) {
+          var d = new Date(),
+            d1 = new Date(date.replace(/\-/g, "\/")),
+            d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+          if (d1 > d2) {
+            return false;
+          }
+          $("#date").val(date);
+          refreshData();
+        }
     });
 
+    $("#datePre").click(function () {
+        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+        var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
+        $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
+        refreshData();
+    });
+    $("#dateNext").click(function () {
+        var d = new Date();
+        var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
+        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+        if (selectDate < nowDate) {
+            var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
+            $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)) + "-" + (nextDate.getDate() < 10 ? ("0" + nextDate.getDate()) : (nextDate.getDate())));
+            refreshData();
+        } else {
+            return;
+        }
+    });
 });

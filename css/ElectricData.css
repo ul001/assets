@@ -320,3 +320,11 @@ body {
 	height:100%;
 	overflow:hidden;
 }
+#electric{
+    background:none;
+}
+#energySelect{
+    outline:0;
+	width: calc(100% - 108px);
+	background: url('../image/right.png') no-repeat right center;
+}

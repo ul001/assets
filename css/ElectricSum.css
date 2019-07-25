@@ -29,6 +29,11 @@ button {
 	width: 1.8rem;
 }
 
+.ban_body{
+	height:100%;
+	overflow:hidden;
+}
+
 .selectTime img {
 	margin-right: 0.5rem;
 }
