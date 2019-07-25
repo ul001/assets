@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 变压器 -->
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <link rel="stylesheet" type="text/css" href="css/TransformerMonitor.css"/>
+    <link rel="stylesheet" type="text/css" href="css/TransformerMonitor.css" />
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/echarts.min.js"></script>
     <script src="lib/rolldate.min.js"></script>
@@ -15,10 +15,10 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="t-ctn">
-        <div class="s-ctn">
-<!--            <div class="trans select">
+    <div class="container">
+        <div class="t-ctn">
+            <div class="s-ctn">
+                <!--            <div class="trans select">
                 <img src="image/transform-orange.png"/>
                 <p>10kV变压器</p>
             </div>
@@ -34,175 +34,175 @@
                 <img src="image/transform-orange.png"/>
                 <p>10kV变压器</p>
             </div>-->
-        </div>
-    </div>
-<!--    <div class="side-left side-left-tran">-->
-<!--        &lt;!&ndash; 变压器列表 &ndash;&gt;-->
-<!--        <ul class="transform">-->
-<!--            &lt;!&ndash;            <li class="trans select">-->
-<!--                            <img src="image/transform-orange.png"/>-->
-<!--                            <p>10kV变压器</p>-->
-<!--                        </li>-->
-<!--                        <li class="trans">-->
-<!--                            <img src="image/transform-orange.png"/>-->
-<!--                            <p>10kV变压器</p>-->
-<!--                        </li>&ndash;&gt;-->
-<!--        </ul>-->
-<!--    </div>-->
-
-    <div class="tran-stateb">
-        <p class="title">
-            <!-- 变压器名称： -->
-            <img class="titleImg" src="image/transform.png"/>
-            <span class="i18n">变压器状态</span>
-        </p>
-        <ul>
-            <li id="power" class="tran-statec">
-                <p class="i18n" name="Load">
-                    负荷
-                </p>
-                <ul>
-                    <li>
-                        <!-- 额定功率： -->
-                        <span class="i18n" name="Ratedpower"></span>
-                        <span class="Ratedpower"></span>
-                    </li>
-                    <li>
-                        <!-- 视在功率： -->
-                        <span class="i18n" name="AP"></span>
-                        <span class="AP"></span>
-                    </li>
-                    <li>
-                        <!-- 负 荷 率： -->
-                        <span class="i18n" name="LF"></span>
-                        <span class="LF"></span>
-                    </li>
-                </ul>
-            </li>
-            <li id="service" class="tran-statec">
-                <p class="i18n" name="Power">
-                    功率
-                </p>
-                <ul>
-                    <li>
-                        <!-- 有功功率： -->
-                        <span class="i18n" name="Fp"></span>
-                        <span class="Fp"></span>
-                    </li>
-                    <li>
-                        <!-- 无功功率： -->
-                        <span class="i18n" name="Fq"></span>
-                        <span class="Fq"></span>
-                    </li>
-                    <li>
-                        <!-- 功率因数： -->
-                        <span class="i18n" name="PF"></span>
-                        <span class="Pf"></span>
-                    </li>
-                    <li>
-                        <!-- 最大需量： -->
-                        <span class="i18n" name="MaxD"></span>
-                        <span class="MaxD"></span>
-                    </li>
-                    <span class="MDTime"></span>
-                </ul>
-            </li>
-            <li id="current" class="tran-statec">
-                <p class="i18n" name="Current">
-                    电流
-                </p>
-                <ul>
-                    <li>
-                        <!-- A相电流： -->
-                        <span class="i18n" name="AphaseI"></span>
-                        <span class="AphaseI"></span>
-                    </li>
-                    <li>
-                        <!-- B相电流： -->
-                        <span class="i18n" name="BphaseI"></span>
-                        <span class="BphaseI"></span>
-                    </li>
-                    <li>
-                        <!-- C相电流： -->
-                        <span class="i18n" name="CphaseI"></span>
-                        <span class="CphaseI"></span>
-                    </li>
-                </ul>
-            </li>
-            <li id="voltage" class="tran-statec">
-                <p class="i18n" name="Voltage">
-                    电压
-                </p>
-                <ul>
-                    <li>
-                        <span class="i18n" name="Uab"></span>
-                        <span class="Uab"></span>
-                        <!-- Uab线电压： -->
-                    </li>
-                    <li>
-                        <span class="i18n" name="Ubc"></span>
-                        <span class="Ubc"></span>
-                        <!-- Ubc线电压： -->
-                    </li>
-                    <li>
-                        <span class="i18n" name="Uca"></span>
-                        <span class="Uca"></span>
-                        <!-- Uac线电压： -->
-                    </li>
-                </ul>
-            </li>
-            <li id="temp" class="tran-statec">
-                <p class="i18n" name="Temp">
-                    温度
-                </p>
-                <ul>
-                    <li>
-                        <!-- A相绕组温度： -->
-                        <span class="i18n" name="AphaseTemp"></span>
-                        <span class="AphaseTemp"></span>
-                    </li>
-                    <li>
-                        <!-- B相绕组温度： -->
-                        <span class="i18n" name="BphaseTemp"></span>
-                        <span class="BphaseTemp"></span>
-                    </li>
-                    <li>
-                        <!-- C相绕组温度： -->
-                        <span class="i18n" name="CphaseTemp"></span>
-                        <span class="CphaseTemp"></span>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div class="date">
-        <div class="form-group form_date_end selectTime">
-            <div class="timeBtn">
-                <span id="datePre"><img src="image/left-w.png"/></span>&nbsp;&nbsp;
-                <input readonly type="text" id="date">
-                <span id="dateNext"><img src="image/right-w.png"/></span>
             </div>
         </div>
-        <span class="temperature-r s-select i18n" id="tempLine" name="WindTemp">
-            绕阻温度
-        </span>
-        <span id="NothingPower" class="i18n" name="RePower">
-                    无功
-                </span>
-        <span id="havePower" class="i18n" name="AcPower">
-                    有功
-                </span>
-        <span id="NowPower" class="i18n" name="Apparentpower">
-                    视在
-                </span>
-    </div>
-</div>
+        <!--    <div class="side-left side-left-tran">-->
+        <!--        &lt;!&ndash; 变压器列表 &ndash;&gt;-->
+        <!--        <ul class="transform">-->
+        <!--            &lt;!&ndash;            <li class="trans select">-->
+        <!--                            <img src="image/transform-orange.png"/>-->
+        <!--                            <p>10kV变压器</p>-->
+        <!--                        </li>-->
+        <!--                        <li class="trans">-->
+        <!--                            <img src="image/transform-orange.png"/>-->
+        <!--                            <p>10kV变压器</p>-->
+        <!--                        </li>&ndash;&gt;-->
+        <!--        </ul>-->
+        <!--    </div>-->
 
-<div class="chart">
+        <div class="tran-stateb">
+            <p class="title">
+                <!-- 变压器名称： -->
+                <img class="titleImg" src="image/transform.png" />
+                <span class="i18n">变压器状态</span>
+            </p>
+            <ul>
+                <li id="power" class="tran-statec">
+                    <p class="i18n" name="Load">
+                        负荷
+                    </p>
+                    <ul>
+                        <li>
+                            <!-- 额定功率： -->
+                            <span class="i18n" name="Ratedpower"></span>
+                            <span class="Ratedpower"></span>
+                        </li>
+                        <li>
+                            <!-- 视在功率： -->
+                            <span class="i18n" name="AP"></span>
+                            <span class="AP"></span>
+                        </li>
+                        <li>
+                            <!-- 负 荷 率： -->
+                            <span class="i18n" name="LF"></span>
+                            <span class="LF"></span>
+                        </li>
+                    </ul>
+                </li>
+                <li id="service" class="tran-statec">
+                    <p class="i18n" name="Power">
+                        功率
+                    </p>
+                    <ul>
+                        <li>
+                            <!-- 有功功率： -->
+                            <span class="i18n" name="Fp"></span>
+                            <span class="Fp"></span>
+                        </li>
+                        <li>
+                            <!-- 无功功率： -->
+                            <span class="i18n" name="Fq"></span>
+                            <span class="Fq"></span>
+                        </li>
+                        <li>
+                            <!-- 功率因数： -->
+                            <span class="i18n" name="PF"></span>
+                            <span class="Pf"></span>
+                        </li>
+                        <li>
+                            <!-- 最大需量： -->
+                            <span class="i18n" name="MaxD"></span>
+                            <span class="MaxD"></span>
+                        </li>
+                        <span class="MDTime"></span>
+                    </ul>
+                </li>
+                <li id="current" class="tran-statec">
+                    <p class="i18n" name="Current">
+                        电流
+                    </p>
+                    <ul>
+                        <li>
+                            <!-- A相电流： -->
+                            <span class="i18n" name="AphaseI"></span>
+                            <span class="AphaseI"></span>
+                        </li>
+                        <li>
+                            <!-- B相电流： -->
+                            <span class="i18n" name="BphaseI"></span>
+                            <span class="BphaseI"></span>
+                        </li>
+                        <li>
+                            <!-- C相电流： -->
+                            <span class="i18n" name="CphaseI"></span>
+                            <span class="CphaseI"></span>
+                        </li>
+                    </ul>
+                </li>
+                <li id="voltage" class="tran-statec">
+                    <p class="i18n" name="Voltage">
+                        电压
+                    </p>
+                    <ul>
+                        <li>
+                            <span class="i18n" name="Uab"></span>
+                            <span class="Uab"></span>
+                            <!-- Uab线电压： -->
+                        </li>
+                        <li>
+                            <span class="i18n" name="Ubc"></span>
+                            <span class="Ubc"></span>
+                            <!-- Ubc线电压： -->
+                        </li>
+                        <li>
+                            <span class="i18n" name="Uca"></span>
+                            <span class="Uca"></span>
+                            <!-- Uac线电压： -->
+                        </li>
+                    </ul>
+                </li>
+                <li id="temp" class="tran-statec">
+                    <p class="i18n" name="Temp">
+                        温度
+                    </p>
+                    <ul>
+                        <li>
+                            <!-- A相绕组温度： -->
+                            <span class="i18n" name="AphaseTemp"></span>
+                            <span class="AphaseTemp"></span>
+                        </li>
+                        <li>
+                            <!-- B相绕组温度： -->
+                            <span class="i18n" name="BphaseTemp"></span>
+                            <span class="BphaseTemp"></span>
+                        </li>
+                        <li>
+                            <!-- C相绕组温度： -->
+                            <span class="i18n" name="CphaseTemp"></span>
+                            <span class="CphaseTemp"></span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="date">
+            <div class="form-group form_date_end selectTime">
+                <div class="timeBtn">
+                    <span id="datePre"><img src="image/left-w.png" /></span>&nbsp;&nbsp;
+                    <input readonly type="text" id="date">
+                    <span id="dateNext"><img src="image/right-w.png" /></span>
+                </div>
+            </div>
+            <span class="temperature-r s-select i18n" id="tempLine" name="WindTemp">
+                绕阻温度
+            </span>
+            <span id="NothingPower" class="i18n" name="RePower">
+                无功
+            </span>
+            <span id="havePower" class="i18n" name="AcPower">
+                有功
+            </span>
+            <span id="NowPower" class="i18n" name="Apparentpower">
+                视在
+            </span>
+        </div>
+    </div>
+
+    <div class="chart">
         <!-- <div id="tempTitle">变压器</div> -->
         <div id="powerChart" class="showDIV"></div>
-</div>
-</div>
+    </div>
+    </div>
 </body>
 
 </html>

@@ -1,16 +1,20 @@
 .container {
 	background: #fff;
-	overflow:hidden;
+	overflow: hidden;
 }
-body{
-    font-size:0.9rem;
+
+body {
+	font-size: 0.9rem;
 }
+
 .transform {
 	clear: both;
 }
-button{
-	outline:0!important;
+
+button {
+	outline: 0 !important;
 }
+
 .transform li {
 	display: block;
 	float: left;
@@ -35,220 +39,268 @@ button{
 
 
 /*变压器*/
-.side-left-tran{
-	padding:0 2rem;
+.side-left-tran {
+	padding: 0 2rem;
 }
-.side-left-tran,.transform,.tran-stateb{
-	overflow:hidden;
-	clear:both;
+
+.side-left-tran,
+.transform,
+.tran-stateb {
+	overflow: hidden;
+	clear: both;
 }
-.transform li{
-	text-align:center;
+
+.transform li {
+	text-align: center;
 }
-.side-left-tran img{
-	width:70%;
-	display:block;
-	margin:0 auto;
-	margin-bottom:0.5rem;
+
+.side-left-tran img {
+	width: 70%;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 0.5rem;
 }
+
 /*变压器状态*/
-.tran-stateb{
-	border:1px solid #C8C9CA;
-	border-radius:0.5rem;
-	margin:0 auto;
-	padding:0;
+.tran-stateb {
+	border: 1px solid #C8C9CA;
+	border-radius: 0.5rem;
+	margin: 0 auto;
+	padding: 0;
 }
-.title{
-	padding-left:0.5rem;
-	margin:0.5rem 0;
+
+.title {
+	padding-left: 0.5rem;
+	margin: 0.5rem 0;
 }
-.title img{
-	vertical-align:-0.2rem;
+
+.title img {
+	vertical-align: -0.2rem;
 }
-.tran-stateb .titleImg{
-	width:1.5rem;
+
+.tran-stateb .titleImg {
+	width: 1.5rem;
 }
+
 .tran-statec {
 	width: calc(50% - 0.8rem);
-	height:8rem;
-	background:#EEEEEF;
-	float:left;
-	margin-bottom:0.5rem;
+	height: 8rem;
+	background: #EEEEEF;
+	float: left;
+	margin-bottom: 0.5rem;
 }
-.tran-statec ul li{
-	padding-left:0.5rem;
+
+.tran-statec ul li {
+	padding-left: 0.5rem;
 }
-.tran-statec >.i18n{
-	background:#E57D22;
-	color:#fff;
-	padding:0.5rem;
-	margin-bottom:0.5rem;
-	margin-top:0;
+
+.tran-statec>.i18n {
+	background: #E57D22;
+	color: #fff;
+	padding: 0.5rem;
+	margin-bottom: 0.5rem;
+	margin-top: 0;
 }
-#power,#current,#temp{
-	margin:0 0 0.5rem 0.5rem;
+
+#power,
+#current,
+#temp {
+	margin: 0 0 0.5rem 0.5rem;
 }
-#service,#voltage{
-	margin:0 0 0.5rem 0.5rem;
+
+#service,
+#voltage {
+	margin: 0 0 0.5rem 0.5rem;
 }
-#power,#service{
-	height:11rem;
+
+#power,
+#service {
+	height: 11rem;
 }
-#temp{
-	width:calc(100% - 1rem);
+
+#temp {
+	width: calc(100% - 1rem);
 }
-.MDTime{
-	padding-left:0.5rem;
+
+.MDTime {
+	padding-left: 0.5rem;
 }
+
 /*时间选择*/
-#date{
-	height:4rem;
-	border-radius:5px;
-	padding-left:0.5rem;
-	border:none;
-	width:calc(100% - 11rem);
-	background:transparent;
-	color:#fff;
-	text-align:center;
-	float:left;
+#date {
+	height: 4rem;
+	border-radius: 5px;
+	padding-left: 0.5rem;
+	border: none;
+	width: calc(100% - 11rem);
+	background: transparent;
+	color: #fff;
+	text-align: center;
+	float: left;
 }
-#datePre,#dateNext{
-	display:block;
-	width:5rem;
-	height:4rem;
-	border-right:1px solid #fff;
-	float:left;
-	padding:0 1.3rem;
+
+#datePre,
+#dateNext {
+	display: block;
+	width: 5rem;
+	height: 4rem;
+	border-right: 1px solid #fff;
+	float: left;
+	padding: 0 1.3rem;
 }
-#dateNext{
-	float:right;
-	border-right:0;
-	border-left:1px solid #fff;
+
+#dateNext {
+	float: right;
+	border-right: 0;
+	border-left: 1px solid #fff;
 }
-.timeBtn{
-	width:80%;
-	background:linear-gradient(#56C676,#04BA6B);
-	height:4rem;
-	line-height:4rem;
-	border-radius:4rem;
-	margin:0 auto;
-	margin-top:0.5rem;
-}
-.selectTime{
-	margin-bottom:0;
-	padding-left:0.5rem;
-	clear:both;
-	float:left;
-}
-.timeBtn{
-	width:100%;
-	background:linear-gradient(#56C676,#04BA6B);
-	height:3rem;
-	line-height:3rem;
-	border-radius:4rem;
-	margin:0 auto;
-	margin-top:0.5rem;
-}
-#date{
-	height:3rem;
-	border-radius:5px;
-	padding-left:0.5rem;
-	border:none;
-	width:calc(100% - 13rem);
-	background:transparent;
-	color:#fff;
-	text-align:center;
-	float:left;
-}
-#datePre,#dateNext{
-	display:block;
-	width:3rem;
-	height:3rem;
-	line-height:3.5rem;
-	text-align:center;
-	border-right:1px solid #fff;
-	float:left;
-	padding:0 1.3rem;
-}
-#dateNext{
-	float:right;
-	border-right:0;
-	border-left:1px solid #fff;
-}
-.date{
-	margin-top:1rem;
-}
-/*按钮*/
-#tempLine,#NothingPower,#havePower,#NowPower{
-	width:22%;
-	height: 2.5rem;
-	line-height:2.5rem;
-	text-align:center;
-	background-color: #F4F2F1;
-	color:#000;
+
+.timeBtn {
+	width: 80%;
+	background: linear-gradient(#56C676, #04BA6B);
+	height: 4rem;
+	line-height: 4rem;
 	border-radius: 4rem;
-	border:none;
-	float:left;
-	margin:1rem 0 0.5rem 0.4rem;
-	background-size:1rem;
-	background-repeat:no-repeat;
-	background-position:3rem 0.7rem;
+	margin: 0 auto;
+	margin-top: 0.5rem;
 }
+
+.selectTime {
+	margin-bottom: 0;
+	padding-left: 0.5rem;
+	clear: both;
+	float: left;
+}
+
+.timeBtn {
+	width: 100%;
+	background: linear-gradient(#56C676, #04BA6B);
+	height: 3rem;
+	line-height: 3rem;
+	border-radius: 4rem;
+	margin: 0 auto;
+	margin-top: 0.5rem;
+}
+
+#date {
+	height: 3rem;
+	border-radius: 5px;
+	padding-left: 0.5rem;
+	border: none;
+	width: calc(100% - 13rem);
+	background: transparent;
+	color: #fff;
+	text-align: center;
+	float: left;
+}
+
+#datePre,
+#dateNext {
+	display: block;
+	width: 3rem;
+	height: 3rem;
+	line-height: 3.5rem;
+	text-align: center;
+	border-right: 1px solid #fff;
+	float: left;
+	padding: 0 1.3rem;
+}
+
+#dateNext {
+	float: right;
+	border-right: 0;
+	border-left: 1px solid #fff;
+}
+
+.date {
+	margin-top: 1rem;
+}
+
+/*按钮*/
+#tempLine,
+#NothingPower,
+#havePower,
+#NowPower {
+	width: 22%;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	text-align: center;
+	background-color: #F4F2F1;
+	color: #000;
+	border-radius: 4rem;
+	border: none;
+	float: left;
+	margin: 1rem 0 0.5rem 0.4rem;
+	background-size: 1rem;
+	background-repeat: no-repeat;
+	background-position: 3rem 0.7rem;
+}
+
 /*.select{*/
 /*	background-color:#02AC94!important;*/
 /*	color:#fff!important;*/
 /*}*/
-#tempLine[class*="select"]{
-	background-color:#02AC94!important;
-	color:#fff!important;
+#tempLine[class*="select"] {
+	background-color: #02AC94 !important;
+	color: #fff !important;
 }
-#NothingPower[class*="select"]{
-	background-color:#02AC94!important;
-	color:#fff!important;
+
+#NothingPower[class*="select"] {
+	background-color: #02AC94 !important;
+	color: #fff !important;
 }
-#havePower[class*="select"]{
-	background-color:#02AC94!important;
-	color:#fff!important;
+
+#havePower[class*="select"] {
+	background-color: #02AC94 !important;
+	color: #fff !important;
 }
-#NowPower[class*="select"]{
-	background-color:#02AC94!important;
-	color:#fff!important;
+
+#NowPower[class*="select"] {
+	background-color: #02AC94 !important;
+	color: #fff !important;
 }
+
 /*曲线图*/
 .chart {
-	margin:0 auto;
-	border-radius:0.5rem;
+	margin: 0 auto;
+	border-radius: 0.5rem;
 	width: 100%;
 	height: 26rem;
-	border:1px solid #C8C9CA;
-}
-#powerChart{
-    width:100%;
-    height:25rem;
-}
-.trans img{
-    content: url(../image/transform-grey.png);
-}
-.trans.select img{
-    content: url(../image/transform-orange.png);
+	border: 1px solid #C8C9CA;
 }
 
-.side-left{
-	width:100%;
-	overflow-x:auto;
+#powerChart {
+	width: 100%;
+	height: 25rem;
 }
-.transform{
-	height:5rem;
-	white-space:nowrap;
+
+.trans img {
+	content: url(../image/transform-grey.png);
+}
+
+.trans.select img {
+	content: url(../image/transform-orange.png);
+}
+
+.side-left {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.transform {
+	height: 5rem;
+	white-space: nowrap;
 
 }
-.transform li{
-	width:100px;
-	height:5rem;
-	display:inline-block;
-	word-wrap:break-word;
-	word-break:break-all;
+
+.transform li {
+	width: 100px;
+	height: 5rem;
+	display: inline-block;
+	word-wrap: break-word;
+	word-break: break-all;
 }
+
 /*滚动变压器*/
 .t-ctn {
 	width: 100%;
@@ -271,13 +323,16 @@ button{
 	display: inline-block;
 	width: 30%;
 	height: 100%;
-	text-align:center;
+	text-align: center;
 }
-.trans >p{
-	margin-top:0.5rem;
+
+.trans>p {
+	margin-top: 0.5rem;
 }
-.trans img{
-	width:70%;
-	display:block;
-	margin:0 auto;
+
+.trans img {
+	width: 70%;
+	display: block;
+	margin: 0 auto;
+	max-width: 5rem;
 }
