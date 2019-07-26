@@ -51,8 +51,8 @@ section {
 	margin-top:0.5rem;
 	margin-bottom:0.5rem;
 }
-button{
-	outline:0!important;
+*{
+	outline: 0 !important;
 }
 .searchBtn{
 	width:1rem;

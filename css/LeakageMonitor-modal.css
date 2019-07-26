@@ -1,8 +1,8 @@
 body{
     background: #fff;
 }
-button{
-    outline:0!important;
+*{
+	outline: 0 !important;
 }
 .container{
     padding-left:0;

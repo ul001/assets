@@ -5,8 +5,8 @@
 	padding: 0.3rem;
 	margin: 0.3rem 0 0.3rem 0;
 }
-button{
-	outline:0!important;
+*{
+	outline: 0 !important;
 }
 .container {
 	background: #fff;

@@ -5,7 +5,7 @@ input {
 	font-size: 0.9rem;
 }
 
-button {
+*{
 	outline: 0 !important;
 }
 

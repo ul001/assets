@@ -7,7 +7,7 @@
 #EnergyKind,#EnergyType{
 	outline:0;
 }
-button {
+*{
 	outline: 0 !important;
 }
 

@@ -4,8 +4,8 @@
 	padding-right: 0;
 	padding-left: 0;
 }
-button{
-	outline:0!important;
+*{
+	outline: 0 !important;
 }
 .form_date_end label {
 	font-weight: normal;

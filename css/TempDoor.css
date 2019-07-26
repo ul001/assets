@@ -2,7 +2,7 @@ body {
 	background: #f4f4f4;
 }
 
-button {
+*{
 	outline: 0 !important;
 }
 
