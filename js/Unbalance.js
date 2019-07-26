@@ -98,6 +98,7 @@ $(function () {
   });
 
   $(document).on('click', '#search', function () {
+    $("body").showLoading();
     var EnergyKind = "UnB";
     var selectParam = [];
     if (EnergyKind != "fFr") {
@@ -123,6 +124,7 @@ $(function () {
 
 
   function getData(url, params, successCallback) {
+    $("body").showLoading();
     var token = tokenFromAPP;
     $.ajax({
       type: 'GET',
@@ -132,6 +134,7 @@ $(function () {
         request.setRequestHeader("Authorization", token)
       },
       success: function (result) {
+        $("body").hideLoading();
         successCallback(result.data);
       }
     })

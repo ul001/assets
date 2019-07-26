@@ -26,6 +26,7 @@ $(function () {
       }
 
       function getData() {
+        $("body").showLoading();
         var params = {
             fSubid:subidFromAPP
         };
@@ -37,6 +38,7 @@ $(function () {
             request.setRequestHeader("Authorization", tokenFromAPP)
           },
           success: function (result) {
+            $("body").hideLoading();
             if(result.data!=null){
               if(result.data.length>0){
                 $(".container").empty();

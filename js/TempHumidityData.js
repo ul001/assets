@@ -26,6 +26,7 @@ $(function () {
    }
 
   function getData(url, params, successCallback) {
+    $("body").showLoading();
     $.ajax({
       type: 'GET',
       url: url,
@@ -35,6 +36,7 @@ $(function () {
         Authorization: tokenFromAPP
       },
       success: function (result) {
+        $("body").hideLoading();
         successCallback(result.data);
       }
     });
