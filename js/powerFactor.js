@@ -1,29 +1,29 @@
 $(function () {
-//  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-//  var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-//  var subidFromAPP=10100001;
-    //iOS安卓基础传参
-     var u = navigator.userAgent,
-         app = navigator.appVersion;
-     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-     //判断数组中是否包含某字符串
-     var baseUrlFromAPP;
-     var tokenFromAPP;
-     var subidFromAPP;
-     if (isIOS) { //ios系统的处理
-         window.webkit.messageHandlers.iOS.postMessage(null);
-         var storage = localStorage.getItem("accessToken");
-         // storage = storage ? JSON.parse(storage):[];
-         storage = JSON.parse(storage);
-         baseUrlFromAPP = storage.baseurl;
-         tokenFromAPP = storage.token;
-         subidFromAPP = storage.fsubID;
-     } else {
-         baseUrlFromAPP = android.getBaseUrl();
-         tokenFromAPP = android.getToken();
-         subidFromAPP = android.getfSubid();
-     }
+  //  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+  //  var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
+  //  var subidFromAPP=10100001;
+  //iOS安卓基础传参
+  var u = navigator.userAgent,
+    app = navigator.appVersion;
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+  var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+  //判断数组中是否包含某字符串
+  var baseUrlFromAPP;
+  var tokenFromAPP;
+  var subidFromAPP;
+  if (isIOS) { //ios系统的处理
+    window.webkit.messageHandlers.iOS.postMessage(null);
+    var storage = localStorage.getItem("accessToken");
+    // storage = storage ? JSON.parse(storage):[];
+    storage = JSON.parse(storage);
+    baseUrlFromAPP = storage.baseurl;
+    tokenFromAPP = storage.token;
+    subidFromAPP = storage.fsubID;
+  } else {
+    baseUrlFromAPP = android.getBaseUrl();
+    tokenFromAPP = android.getToken();
+    subidFromAPP = android.getfSubid();
+  }
 
   var currentSelectVode = {}; //选中节点
 
@@ -31,10 +31,11 @@ $(function () {
   var isClick = 0;
 
   function initFirstNode() {
-    var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+    var url = baseUrlFromAPP + "/main/getfCircuitidsList";
     var params = {
       fSubid: subidFromAPP,
     }
+    $("body").showLoading();
     getData(url, params, function (data) {
       setListData(data);
       $("#search").click();
@@ -43,7 +44,7 @@ $(function () {
 
   $("#CircuitidsList").click(function () {
     var search = $("#CircuitidsInput").val();
-    var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+    var url = baseUrlFromAPP + "/main/getfCircuitidsList";
     var params = {
       fSubid: subidFromAPP,
       search: search,
@@ -55,13 +56,15 @@ $(function () {
   });
 
   $(document).on('click', '.clear', function () {
+
     $("#CircuitidsInput").val("");
     if (isClick == 1) {
-      var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+      var url = baseUrlFromAPP + "/main/getfCircuitidsList";
       var params = {
         fSubid: subidFromAPP,
       }
       getData(url, params, function (data) {
+
         setListData(data);
       });
       isClick = 0;
@@ -97,6 +100,7 @@ $(function () {
   });
 
   $(document).on('click', '#search', function () {
+    $("body").showLoading();
     var EnergyKind = $("#EnergyKind").attr('value');
     var selectParam = [];
     if (EnergyKind != "fFr") {
@@ -107,7 +111,7 @@ $(function () {
     }
     var fCircuitid = currentSelectVode.merterId;
     var time = $("#date").val();
-    var url = baseUrlFromAPP+"/main/app/powerMonitoring/ElectricData";
+    var url = baseUrlFromAPP + "/main/app/powerMonitoring/ElectricData";
     var params = {
       fSubid: subidFromAPP,
       fCircuitid: fCircuitid,
@@ -116,6 +120,7 @@ $(function () {
       EnergyKind: EnergyKind,
     }
     getData(url, params, function (data) {
+      $("body").hideLoading();
       showCharts(data.CircuitValueByDate);
     });
   })
@@ -132,6 +137,7 @@ $(function () {
       },
       success: function (result) {
         successCallback(result.data);
+
       }
     })
   }
@@ -277,7 +283,7 @@ $(function () {
         trigger: 'axis'
       },
       legend: {
-        top:12,
+        top: 12,
         data: name,
       },
       grid: { // 控制图的大小，调整下面这些值就可以，
@@ -296,12 +302,14 @@ $(function () {
       },
       toolbox: {
         left: 'right',
-        top:-6,
+        top: -6,
         feature: {
           dataZoom: {
             yAxisIndex: 'none'
           },
-          dataView: {readOnly: true},
+          dataView: {
+            readOnly: true
+          },
           restore: {}
         }
       },
@@ -317,65 +325,66 @@ $(function () {
   }
 
   function showTable(data) {
-    var columns = [[{
-        field: "name",
-        title: "类型",
-        align: "center",
-        valign:"middle",
-        align:"center",
-        colspan: 1,
-        rowspan: 2
-      },
-      {
-        field: "maxVT",
-        title: "最大值",
-        valign:"middle",
-        align:"center",
-        colspan: 2,
-        rowspan: 1
-      },
-      {
-        field: "minVT",
-        title: "最小值",
-        valign:"middle",
-        align:"center",
-        colspan: 2,
-        rowspan: 1
-      },
-      {
-        field: "avg",
-        title: "平均值",
-        valign:"middle",
-        align:"center",
-        colspan: 1,
-        rowspan: 2
-      }
-    ],
-    [
-      {
-        field: "max",
-        title: "值",
-        valign:"middle",
-        align:"center"
-      },
-      {
-        field: "maxTime",
-        title: "时间",
-        valign:"middle",
-        align:"center"
-      },
-      {
-        field: "min",
-        title: "值",
-        valign:"middle",
-        align:"center"
-      },
-      {
-        field: "minTime",
-        title: "时间",
-        align: "center"
-      }
-    ]];
+    var columns = [
+      [{
+          field: "name",
+          title: "类型",
+          align: "center",
+          valign: "middle",
+          align: "center",
+          colspan: 1,
+          rowspan: 2
+        },
+        {
+          field: "maxVT",
+          title: "最大值",
+          valign: "middle",
+          align: "center",
+          colspan: 2,
+          rowspan: 1
+        },
+        {
+          field: "minVT",
+          title: "最小值",
+          valign: "middle",
+          align: "center",
+          colspan: 2,
+          rowspan: 1
+        },
+        {
+          field: "avg",
+          title: "平均值",
+          valign: "middle",
+          align: "center",
+          colspan: 1,
+          rowspan: 2
+        }
+      ],
+      [{
+          field: "max",
+          title: "值",
+          valign: "middle",
+          align: "center"
+        },
+        {
+          field: "maxTime",
+          title: "时间",
+          valign: "middle",
+          align: "center"
+        },
+        {
+          field: "min",
+          title: "值",
+          valign: "middle",
+          align: "center"
+        },
+        {
+          field: "minTime",
+          title: "时间",
+          align: "center"
+        }
+      ]
+    ];
     $("#tableContain").html("");
     $("#tableContain").html("<table id='table'></table>");
     $("#table").bootstrapTable({
@@ -403,7 +412,7 @@ $(function () {
       };
     }
   });
-    $(".selectTime").click(function(){
-      roll.show();
-    });
+  $(".selectTime").click(function () {
+    roll.show();
+  });
 });

@@ -61,6 +61,7 @@ $(function () {
         // $(".startDate").val(startDate);
         // $(".endDate").val(endDate);
         //开始时间不能大于截止时间
+        $("body").showLoading();
         var nowDate = tool.initDate("YMDhm", new Date());
         if (startDate > endDate) {
             alert("开始时间不能大于结束时间，请选择正确的查询时间！");
@@ -82,6 +83,7 @@ $(function () {
             endTime: endDate
         }
         getData(url, params, function (data) {
+            $("body").hideLoading();
             showChartBar(data, type);
         });
     }
