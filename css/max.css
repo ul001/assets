@@ -40,12 +40,17 @@ body {
 	font-size: 5rem;
 	font-weight: bold;
 }
-
+#noMatch{
+    line-height:9rem;
+    height:9rem;
+}
 .max h1 span {
 	font-size: 1rem;
 	margin-left: 0.5rem;
 }
-
+#noMatch span{
+    font-size:1.5rem;
+}
 /*.list p{
 */
 /*	display:block;

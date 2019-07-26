@@ -1,7 +1,7 @@
 $(function(){
-//    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-//   var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-//   var subidFromAPP=10100001;
+//    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
+//    var subidFromAPP = 10100001;
     //iOS安卓基础传参
           var u = navigator.userAgent,
               app = navigator.appVersion;
@@ -68,15 +68,17 @@ $(function(){
 
     $("#sideClick").click(function () {
         $(".tree").show();
-//        $("html,body").addClass("ban_body")
+        $("html,body").addClass("ban_body");
     });
 
         $(".cancel").click(function(){
            $(".tree").hide();
+           $("html,body").removeClass("ban_body");
         });
 
         $("#confirm").click(function(){
           $(".tree").hide();
+          $("html,body").removeClass("ban_body");
           $("#meter").html(currentSelectVode.merterName);
           showData(currentSelectVode.merterId,$("#dateSelect").val());
         });
@@ -155,7 +157,7 @@ $(function(){
                      $(".max").html("<p>当月最大需量</p><h1><span id='maxVal'>"+result.data[0].f_MDMaxValue+"</span><span>KW</span></h1>"+
                           "<p id='timeP'>"+myDate.slice(0,myDate.indexOf("."))+"</p>");
                 }else{
-                    $(".max").html("<p>没有找到匹配的记录</p>")
+                    $(".max").html("<p></p><h1 id='noMatch'><span>没有找到匹配的记录</span></h1><p id='timeP'></p>");
                 }
             }
             });

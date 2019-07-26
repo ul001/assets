@@ -78,16 +78,18 @@ $(function () {
 
   $("#sideClick").click(function () {
     $(".tree").show();
-    $("html,body").addClass("ban_body")
+    $("html,body").addClass("ban_body");
   });
 
 
   $(".cancel").click(function () {
     $(".tree").hide();
+    $("html,body").removeClass("ban_body");
   });
 
   $("#confirm").click(function () {
     $(".tree").hide();
+    $("html,body").removeClass("ban_body");
     $("#meter").html(currentSelectVode.merterName);
   });
 

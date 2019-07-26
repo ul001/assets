@@ -102,10 +102,12 @@ $(function () {
 
     $(".cancel").click(function () {
         $(".tree").hide();
+        $("html,body").removeClass("ban_body");
     });
 
     $("#confirm").click(function () {
         $(".tree").hide();
+        $("html,body").removeClass("ban_body");
         $("#meter").html(currentSelectVode.merterName);
         refreshData();
     });
