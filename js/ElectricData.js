@@ -1,29 +1,29 @@
 $(function () {
-//  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-// var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQyMzE3NzMsInVzZXJuYW1lIjoiYWRtaW4ifQ.pfgcsrczhtQN9jwzgeM568npgMAUVsca-cd1AJoc6_s";
-// var subidFromAPP=10100001;
+  //  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+  // var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQyMzE3NzMsInVzZXJuYW1lIjoiYWRtaW4ifQ.pfgcsrczhtQN9jwzgeM568npgMAUVsca-cd1AJoc6_s";
+  // var subidFromAPP=10100001;
   //iOS安卓基础传参
-     var u = navigator.userAgent,
-       app = navigator.appVersion;
-     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-     //判断数组中是否包含某字符串
-     var baseUrlFromAPP;
-     var tokenFromAPP;
-     var subidFromAPP;
-     if (isIOS) { //ios系统的处理
-       window.webkit.messageHandlers.iOS.postMessage(null);
-       var storage = localStorage.getItem("accessToken");
-       // storage = storage ? JSON.parse(storage):[];
-       storage = JSON.parse(storage);
-       baseUrlFromAPP = storage.baseurl;
-       tokenFromAPP = storage.token;
-       subidFromAPP = storage.fsubID;
-     } else {
-       baseUrlFromAPP = android.getBaseUrl();
-       tokenFromAPP = android.getToken();
-       subidFromAPP = android.getfSubid();
-     }
+  var u = navigator.userAgent,
+    app = navigator.appVersion;
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+  var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+  //判断数组中是否包含某字符串
+  var baseUrlFromAPP;
+  var tokenFromAPP;
+  var subidFromAPP;
+  if (isIOS) { //ios系统的处理
+    window.webkit.messageHandlers.iOS.postMessage(null);
+    var storage = localStorage.getItem("accessToken");
+    // storage = storage ? JSON.parse(storage):[];
+    storage = JSON.parse(storage);
+    baseUrlFromAPP = storage.baseurl;
+    tokenFromAPP = storage.token;
+    subidFromAPP = storage.fsubID;
+  } else {
+    baseUrlFromAPP = android.getBaseUrl();
+    tokenFromAPP = android.getToken();
+    subidFromAPP = android.getfSubid();
+  }
 
   var currentSelectVode = {}; //选中节点
 
@@ -149,7 +149,7 @@ $(function () {
     })
   }
 
-  $("#energySelect").dblclick(function(){
+  $("#energySelect").dblclick(function () {
     alert("1");
   });
 
@@ -163,6 +163,9 @@ $(function () {
         "id": "P",
         "name": "有功功率",
         "phase": [{
+          "id": "fP",
+          "name": "总"
+        }, {
           "id": "fPa",
           "name": "A相"
         }, {
@@ -223,6 +226,9 @@ $(function () {
         "id": "Q",
         "name": "无功功率",
         "phase": [{
+          "id": "fQ",
+          "name": "总"
+        }, {
           "id": "fQa",
           "name": "A相"
         }, {
@@ -237,6 +243,9 @@ $(function () {
         "id": "S",
         "name": "视在功率",
         "phase": [{
+          "id": "fS",
+          "name": "总"
+        }, {
           "id": "fSa",
           "name": "A相"
         }, {
@@ -335,42 +344,42 @@ $(function () {
         name: el.name,
         data: el.value,
         type: 'line',
-/*        markPoint: {
-                    symbol: 'circle',
-                    symbolSize: 10,
+        /*        markPoint: {
+                            symbol: 'circle',
+                            symbolSize: 10,
+                            data: [{
+                                name: '最大值',
+                                type: 'max',
+                                label: {
+                                  normal: {
+                                    formatter: 'Max:{c}'
+                                  }
+                                }
+                              },
+                              {
+                                name: '最小值',
+                                type: 'min',
+                                label: {
+                                  normal: {
+                                    formatter: 'Min:{c}'
+                                  }
+                                }
+                              }
+                            ],
+                            itemStyle: {
+                              normal: {
+                                label: {
+                                  position: 'top'
+                                }
+                              }
+                            }
+                          },
+                markLine: {
                     data: [{
-                        name: '最大值',
-                        type: 'max',
-                        label: {
-                          normal: {
-                            formatter: 'Max:{c}'
-                          }
-                        }
-                      },
-                      {
-                        name: '最小值',
-                        type: 'min',
-                        label: {
-                          normal: {
-                            formatter: 'Min:{c}'
-                          }
-                        }
-                      }
-                    ],
-                    itemStyle: {
-                      normal: {
-                        label: {
-                          position: 'top'
-                        }
-                      }
-                    }
-                  },
-        markLine: {
-            data: [{
-              name: '平均值',
-              type: 'average'
-            }]
-        }*/
+                      name: '平均值',
+                      type: 'average'
+                    }]
+                }*/
       })
     });
     $("#chartContain").removeAttr('_echarts_instance_');
@@ -380,7 +389,7 @@ $(function () {
         trigger: 'axis'
       },
       legend: {
-        top:12,
+        top: 12,
         data: name,
       },
       grid: { // 控制图的大小，调整下面这些值就可以，
@@ -399,12 +408,14 @@ $(function () {
       },
       toolbox: {
         left: 'right',
-        top:-6,
+        top: -6,
         feature: {
           dataZoom: {
             yAxisIndex: 'none'
           },
-          dataView: {readOnly: true},
+          dataView: {
+            readOnly: true
+          },
           restore: {}
         }
       },
@@ -420,65 +431,66 @@ $(function () {
   }
 
   function showTable(data) {
-    var columns = [[{
-        field: "name",
-        title: "类型",
-        align: "center",
-        valign:"middle",
-        align:"center",
-        colspan: 1,
-        rowspan: 2
-      },
-      {
-        field: "maxVT",
-        title: "最大值",
-        valign:"middle",
-        align:"center",
-        colspan: 2,
-        rowspan: 1
-      },
-      {
-        field: "minVT",
-        title: "最小值",
-        valign:"middle",
-        align:"center",
-        colspan: 2,
-        rowspan: 1
-      },
-      {
-        field: "avg",
-        title: "平均值",
-        valign:"middle",
-        align:"center",
-        colspan: 1,
-        rowspan: 2
-      }
-    ],
-    [
-      {
-        field: "max",
-        title: "值",
-        valign:"middle",
-        align:"center"
-      },
-      {
-        field: "maxTime",
-        title: "时间",
-        valign:"middle",
-        align:"center"
-      },
-      {
-        field: "min",
-        title: "值",
-        valign:"middle",
-        align:"center"
-      },
-      {
-        field: "minTime",
-        title: "时间",
-        align: "center"
-      }
-    ]];
+    var columns = [
+      [{
+          field: "name",
+          title: "类型",
+          align: "center",
+          valign: "middle",
+          align: "center",
+          colspan: 1,
+          rowspan: 2
+        },
+        {
+          field: "maxVT",
+          title: "最大值",
+          valign: "middle",
+          align: "center",
+          colspan: 2,
+          rowspan: 1
+        },
+        {
+          field: "minVT",
+          title: "最小值",
+          valign: "middle",
+          align: "center",
+          colspan: 2,
+          rowspan: 1
+        },
+        {
+          field: "avg",
+          title: "平均值",
+          valign: "middle",
+          align: "center",
+          colspan: 1,
+          rowspan: 2
+        }
+      ],
+      [{
+          field: "max",
+          title: "值",
+          valign: "middle",
+          align: "center"
+        },
+        {
+          field: "maxTime",
+          title: "时间",
+          valign: "middle",
+          align: "center"
+        },
+        {
+          field: "min",
+          title: "值",
+          valign: "middle",
+          align: "center"
+        },
+        {
+          field: "minTime",
+          title: "时间",
+          align: "center"
+        }
+      ]
+    ];
     $("#tableContain").html("");
     $("#tableContain").html("<table id='table'></table>");
     $("#table").bootstrapTable({
@@ -505,7 +517,7 @@ $(function () {
       };
     }
   });
-  $(".selectTime").click(function(){
+  $(".selectTime").click(function () {
     roll.show();
   });
 
