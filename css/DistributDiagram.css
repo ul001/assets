@@ -5,7 +5,7 @@
     padding: 0.3rem;
     margin: 0.3rem 0 0.3rem 0;
 }
-button{
+*{
 	outline:0!important;
 }
 #subList{
@@ -57,33 +57,42 @@ body{height: 100%;background:#fff;}
 	padding:0 0.5rem;
 }
 
-#BigDom[class*="select"]{
-	background-image:url("../image/fangda.png");
-}
-#SimDom[class*="select"]{
-	background-image:url("../image/suoxiao.png");
-}
 .container .SimDom{
 	margin-right:5px;
 	vertical-align:-4px;
 	background-image:url("../image/suoxiao-h.png");
 	background-repeat:no-repeat;
 	background-position:0.7rem 0.5rem;
-	background-size:1.2rem;
+	background-size:1rem;
 }
-.BigDom{
+.container .BigDom{
+	margin-right:5px;
+	vertical-align:-4px;
 	background-image:url("../image/fangda-h.png");
+    background-repeat:no-repeat;
+    background-position:0.8rem 0.4rem;
+    background-size:1.3rem;
 }
 .SimDom,.BigDom{
 	padding-left:2rem;
 }
-body .container .select{
+#BigDom[class*="select"]{
+	background-image:url("../image/fangda.png");
+	background-color:#02AC94;
+	color:#fff;
+}
+#SimDom[class*="select"]{
+	background-image:url("../image/suoxiao.png");
+	background-color:#02AC94;
+	color:#fff;
+}
+/*body .container .select{
 	background-color:#02AC94;
 	color:#fff;
 	background-repeat:no-repeat;
 	background-position:0.7rem 0.3rem;
 	background-size :1.5rem;
-}
+}*/
 
 .container button{
 	width:27%;
