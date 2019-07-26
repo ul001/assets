@@ -1,30 +1,30 @@
 $(function () {
-//    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
-//    var subidFromAPP = 10100001;
+    //    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+    //    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
+    //    var subidFromAPP = 10100001;
 
     //iOS安卓基础传参
-     var u = navigator.userAgent,
-         app = navigator.appVersion;
-     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-     //判断数组中是否包含某字符串
-     var baseUrlFromAPP;
-     var tokenFromAPP;
-     var subidFromAPP;
-     if (isIOS) { //ios系统的处理
-         window.webkit.messageHandlers.iOS.postMessage(null);
-         var storage = localStorage.getItem("accessToken");
-         // storage = storage ? JSON.parse(storage):[];
-         storage = JSON.parse(storage);
-         baseUrlFromAPP = storage.baseurl;
-         tokenFromAPP = storage.token;
-         subidFromAPP = storage.fsubID;
-     } else {
-         baseUrlFromAPP = android.getBaseUrl();
-         tokenFromAPP = android.getToken();
-         subidFromAPP = android.getfSubid();
-     }
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
 
     var currentSelectVode = {}; //选中节点
 
@@ -37,6 +37,7 @@ $(function () {
         var params = {
             fSubid: subidFromAPP,
         }
+        $("body").showLoading();
         getData(url, params, function (data) {
             setListData(data);
             $(".search").click();
@@ -75,9 +76,10 @@ $(function () {
     $("#date").val(showtimeForElectSum);
 
     $(document).on('click', '.elec-btn .btn', function () {
+
         var obj = $(this);
         $(this).addClass('select').siblings("button").removeClass('select');
-//        var selectParam = $(this).attr('value');
+        //        var selectParam = $(this).attr('value');
         // if (selectParam == "today") {
         showtimeForElectSum = tool.initDate("YMD", new Date());
         $("#date").val(showtimeForElectSum);
@@ -112,7 +114,8 @@ $(function () {
         refreshData();
     });
 
-    function refreshData(){
+    function refreshData() {
+        $("body").showLoading();
         var selectParam = $(".btn.select").attr('value');
         var time;
         var typeDA;
@@ -140,6 +143,7 @@ $(function () {
             // EnergyKind: EnergyKind,
         }
         getData(url, params, function (data) {
+            $("body").hideLoading();
             showCharts(data.EnergyReportDate);
         });
     }
@@ -177,117 +181,117 @@ $(function () {
         })
     }
 
-/*    $(document).on("click", ".category li", function () {
-        var type = $(this).children('label').attr("value");
-        var text = $(this).children('label').text();
-        generateType(type);
-        $("#EnergyKind").attr("value", type);
-        $("#param").html(text);
-        $("#myModal").modal("hide");
-    })*/
+    /*    $(document).on("click", ".category li", function () {
+            var type = $(this).children('label').attr("value");
+            var text = $(this).children('label').text();
+            generateType(type);
+            $("#EnergyKind").attr("value", type);
+            $("#param").html(text);
+            $("#myModal").modal("hide");
+        })*/
 
-/*    function generateType(type) {
-        var List = [{
-                "id": "P",
-                "name": "有功功率",
-                "phase": [{
-                    "id": "fPa",
-                    "name": "A相"
-                }, {
-                    "id": "fPb",
-                    "name": "B相"
-                }, {
-                    "id": "fPc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "I",
-                "name": "电流",
-                "phase": [{
-                    "id": "fIa",
-                    "name": "A相"
-                }, {
-                    "id": "fIb",
-                    "name": "B相"
-                }, {
-                    "id": "fIc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "U",
-                "name": "相电压",
-                "phase": [{
-                    "id": "fUa",
-                    "name": "A相"
-                }, {
-                    "id": "fUb",
-                    "name": "B相"
-                }, {
-                    "id": "fUc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "UL",
-                "name": "线电压",
-                "phase": [{
-                    "id": "fUab",
-                    "name": "Uab"
-                }, {
-                    "id": "fUbc",
-                    "name": "Ubc"
-                }, {
-                    "id": "fUca",
-                    "name": "Uca"
-                }]
-            },
-            {
-                "id": "fFr",
-                "name": "频率",
-            },
-            {
-                "id": "Q",
-                "name": "无功功率",
-                "phase": [{
-                    "id": "fQa",
-                    "name": "A相"
-                }, {
-                    "id": "fQb",
-                    "name": "B相"
-                }, {
-                    "id": "fQc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "S",
-                "name": "视在功率",
-                "phase": [{
-                    "id": "fSa",
-                    "name": "A相"
-                }, {
-                    "id": "fSb",
-                    "name": "B相"
-                }, {
-                    "id": "fSc",
-                    "name": "C相"
-                }]
-            },
-        ]
-        var arr = $.grep(List, function (obj) {
-            return obj.id == type;
-        })
-        $("#EnergyContain").html("");
-        if (arr[0].hasOwnProperty('phase')) {
-            $.each(arr[0].phase, function (index, val) {
-                var string = '<button type="button" class="btn" value="' + val.id + '">' + val.name + '</button>';
-                $("#EnergyContain").append(string);
+    /*    function generateType(type) {
+            var List = [{
+                    "id": "P",
+                    "name": "有功功率",
+                    "phase": [{
+                        "id": "fPa",
+                        "name": "A相"
+                    }, {
+                        "id": "fPb",
+                        "name": "B相"
+                    }, {
+                        "id": "fPc",
+                        "name": "C相"
+                    }]
+                },
+                {
+                    "id": "I",
+                    "name": "电流",
+                    "phase": [{
+                        "id": "fIa",
+                        "name": "A相"
+                    }, {
+                        "id": "fIb",
+                        "name": "B相"
+                    }, {
+                        "id": "fIc",
+                        "name": "C相"
+                    }]
+                },
+                {
+                    "id": "U",
+                    "name": "相电压",
+                    "phase": [{
+                        "id": "fUa",
+                        "name": "A相"
+                    }, {
+                        "id": "fUb",
+                        "name": "B相"
+                    }, {
+                        "id": "fUc",
+                        "name": "C相"
+                    }]
+                },
+                {
+                    "id": "UL",
+                    "name": "线电压",
+                    "phase": [{
+                        "id": "fUab",
+                        "name": "Uab"
+                    }, {
+                        "id": "fUbc",
+                        "name": "Ubc"
+                    }, {
+                        "id": "fUca",
+                        "name": "Uca"
+                    }]
+                },
+                {
+                    "id": "fFr",
+                    "name": "频率",
+                },
+                {
+                    "id": "Q",
+                    "name": "无功功率",
+                    "phase": [{
+                        "id": "fQa",
+                        "name": "A相"
+                    }, {
+                        "id": "fQb",
+                        "name": "B相"
+                    }, {
+                        "id": "fQc",
+                        "name": "C相"
+                    }]
+                },
+                {
+                    "id": "S",
+                    "name": "视在功率",
+                    "phase": [{
+                        "id": "fSa",
+                        "name": "A相"
+                    }, {
+                        "id": "fSb",
+                        "name": "B相"
+                    }, {
+                        "id": "fSc",
+                        "name": "C相"
+                    }]
+                },
+            ]
+            var arr = $.grep(List, function (obj) {
+                return obj.id == type;
             })
-            $("#EnergyContain button:first").addClass('select');
-        }
-    }*/
+            $("#EnergyContain").html("");
+            if (arr[0].hasOwnProperty('phase')) {
+                $.each(arr[0].phase, function (index, val) {
+                    var string = '<button type="button" class="btn" value="' + val.id + '">' + val.name + '</button>';
+                    $("#EnergyContain").append(string);
+                })
+                $("#EnergyContain button:first").addClass('select');
+            }
+        }*/
 
     function showCharts(data) {
         var time = [];
@@ -470,14 +474,14 @@ $(function () {
         endYear: 2100,
         value: showtimeForElectSum,
         confirm: function (date) {
-          var d = new Date(),
-            d1 = new Date(date.replace(/\-/g, "\/")),
-            d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-          if (d1 > d2) {
-            return false;
-          }
-          $("#date").val(date);
-          refreshData();
+            var d = new Date(),
+                d1 = new Date(date.replace(/\-/g, "\/")),
+                d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+            if (d1 > d2) {
+                return false;
+            }
+            $("#date").val(date);
+            refreshData();
         }
     });
 

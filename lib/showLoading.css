@@ -1,0 +1,12 @@
+.loading-indicator {
+    height: 100px;
+    width: 100px;
+    /* color: aqua; */
+    background: url('loading.gif') no-repeat center center;
+}
+
+.loading-indicator-overlay {
+    background-color: #FFFFFF;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}

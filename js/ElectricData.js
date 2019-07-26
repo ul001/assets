@@ -35,6 +35,7 @@ $(function () {
     var params = {
       fSubid: subidFromAPP,
     }
+    $("body").showLoading();
     getData(url, params, function (data) {
       setListData(data);
       $("#search").click();
@@ -94,6 +95,7 @@ $(function () {
 
 
   $(document).on('click', '#search', function () {
+    $("body").showLoading();
     var EnergyKind = $("#EnergyKind").attr('value');
     var selectParam = [];
     if (EnergyKind != "fFr") {
@@ -113,6 +115,7 @@ $(function () {
       EnergyKind: EnergyKind,
     }
     getData(url, params, function (data) {
+      $("body").hideLoading();
       showCharts(data.CircuitValueByDate);
     });
   });
