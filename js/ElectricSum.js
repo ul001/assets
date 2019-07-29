@@ -36,7 +36,7 @@ $(function () {
         var params = {
             fSubid: subidFromAPP,
         }
-        $("body").showLoading();
+        // $("body").showLoading();
         getData(url, params, function (data) {
             setListData(data);
             searchGetData();
@@ -219,7 +219,7 @@ $(function () {
     //     });
     // })
     function searchGetData() {
-        $("body").showLoading();
+        // $("body").showLoading();
         var EnergyKind = $("#EnergyKind").attr('value');
         var selectParam = $(".btn.select").attr('value');
         if (EnergyKind == "fFr") {
@@ -249,7 +249,7 @@ $(function () {
             // EnergyKind: EnergyKind,
         }
         getData(url, params, function (data) {
-            $("body").hideLoading();
+            // $("body").hideLoading();
             showCharts(data.EnergyReport);
         });
     };
