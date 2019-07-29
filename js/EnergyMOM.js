@@ -347,6 +347,10 @@ $(function () {
                     todayStr = "本周用电";
                     yesterdayStr = "上周用电";
                 }
+                var fMomStr = "-";
+                if(el.hasOwnProperty("fMomvalue")){
+                    fMomStr = el.fMomvalue;
+                }
                 value.push(el.fBeforevalue);
                 value.push(el.fNextvalue);
                 befValue.push(el.fBeforevalue);
@@ -359,7 +363,7 @@ $(function () {
                 $("#todayElectconSump").html(todayStr + "<br/><span class='Num'>" + el.fNextvalue + "kW·h</span>");
                 $("#yesterdayElectconSump").html(yesterdayStr + "<br/><span class='Num'>" + el.fBeforevalue + "kW·h</span>");
                 $("#addValue").html(addvalue);
-                $("#chainRatio").html(el.fMomvalue + "%");
+                $("#chainRatio").html( fMomStr + "%");
             });
 
         }
