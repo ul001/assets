@@ -139,7 +139,7 @@ $(function () {
       },
       success: function (result) {
         toast.hide();
-//         toast.show({text: '数据请求失败',duration: 3000});
+//        toast.show({text: '数据请求失败',duration: 3000});
         successCallback(result.data);
       },
       error:function (){
