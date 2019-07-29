@@ -25,6 +25,8 @@ $(function () {
           subidFromAPP = android.getfSubid();
       }
 
+    let toast = new ToastClass();//实例化toast对象
+
   var currentSelectVode = {}; //选中节点
 
   initFirstNode(); //初始化第一个回路
@@ -143,6 +145,7 @@ $(function () {
 
 
   function getData(url, params, successCallback) {
+    toast.show({text:'正在加载',loading: true});
     var token = tokenFromAPP;
     $.ajax({
       type: 'GET',
@@ -152,7 +155,11 @@ $(function () {
         request.setRequestHeader("Authorization", token)
       },
       success: function (result) {
+        toast.hide();
         successCallback(result.data);
+      },
+      error:function(){
+        toast.show({text: '数据请求失败',duration: 2000});
       }
     })
   }

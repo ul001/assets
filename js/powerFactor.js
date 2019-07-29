@@ -143,7 +143,7 @@ $(function () {
         successCallback(result.data);
       },
       error:function (){
-        toast.show({text: '数据请求失败',duration: 3000});
+        toast.show({text: '数据请求失败',duration: 2000});
       }
     })
   }

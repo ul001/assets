@@ -25,6 +25,8 @@ $(function () {
          subidFromAPP = android.getfSubid();
      }
 
+    let toast = new ToastClass();//实例化toast对象
+
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
         down: {

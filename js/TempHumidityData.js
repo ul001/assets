@@ -25,8 +25,10 @@ $(function () {
      subidFromAPP = android.getfSubid();
    }
 
+    let toast = new ToastClass();//实例化toast对象
+
   function getData(url, params, successCallback) {
-    $("body").showLoading();
+    toast.show({text:'正在加载',loading: true});
     $.ajax({
       type: 'GET',
       url: url,
@@ -36,8 +38,11 @@ $(function () {
         Authorization: tokenFromAPP
       },
       success: function (result) {
-        $("body").hideLoading();
+        toast.hide();
         successCallback(result.data);
+      },
+      error:function(){
+        toast.show({text: '数据请求失败',duration: 2000});
       }
     });
   }
