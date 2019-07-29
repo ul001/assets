@@ -25,6 +25,8 @@ $(function () {
     subidFromAPP = android.getfSubid();
   }
 
+  let toast = new ToastClass();//实例化toast对象
+
   var currentSelectVode = {}; //选中节点
 
   initFirstNode(); //初始化第一个回路
@@ -35,7 +37,7 @@ $(function () {
     var params = {
       fSubid: subidFromAPP,
     }
-    $("body").showLoading();
+//    $("body").showLoading();
     getData(url, params, function (data) {
       setListData(data);
       $("#search").click();
@@ -100,7 +102,7 @@ $(function () {
   });
 
   $(document).on('click', '#search', function () {
-    $("body").showLoading();
+//    $("body").showLoading();
     var EnergyKind = $("#EnergyKind").attr('value');
     var selectParam = [];
     if (EnergyKind != "fFr") {
@@ -120,13 +122,13 @@ $(function () {
       EnergyKind: EnergyKind,
     }
     getData(url, params, function (data) {
-      $("body").hideLoading();
+//      $("body").hideLoading();
       showCharts(data.CircuitValueByDate);
     });
-  })
-
+  });
 
   function getData(url, params, successCallback) {
+    toast.show({text:'正在加载',loading: true});
     var token = tokenFromAPP;
     $.ajax({
       type: 'GET',
@@ -136,8 +138,12 @@ $(function () {
         request.setRequestHeader("Authorization", token)
       },
       success: function (result) {
+        toast.hide();
+//        toast.show({text: '数据请求失败',duration: 3000});
         successCallback(result.data);
-
+      },
+      error:function (){
+        toast.show({text: '数据请求失败',duration: 3000});
       }
     })
   }

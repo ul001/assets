@@ -1,29 +1,31 @@
 $(function () {
-    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
-    var subidFromAPP = 10100001;
+//    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
+//    var subidFromAPP = 10100001;
   //iOS安卓基础传参
-//  var u = navigator.userAgent,
-//    app = navigator.appVersion;
-//  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-//  var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-//  //判断数组中是否包含某字符串
-//  var baseUrlFromAPP;
-//  var tokenFromAPP;
-//  var subidFromAPP;
-//  if (isIOS) { //ios系统的处理
-//    window.webkit.messageHandlers.iOS.postMessage(null);
-//    var storage = localStorage.getItem("accessToken");
-//    // storage = storage ? JSON.parse(storage):[];
-//    storage = JSON.parse(storage);
-//    baseUrlFromAPP = storage.baseurl;
-//    tokenFromAPP = storage.token;
-//    subidFromAPP = storage.fsubID;
-//  } else {
-//    baseUrlFromAPP = android.getBaseUrl();
-//    tokenFromAPP = android.getToken();
-//    subidFromAPP = android.getfSubid();
-//  }
+  var u = navigator.userAgent,
+    app = navigator.appVersion;
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+  var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+  //判断数组中是否包含某字符串
+  var baseUrlFromAPP;
+  var tokenFromAPP;
+  var subidFromAPP;
+  if (isIOS) { //ios系统的处理
+    window.webkit.messageHandlers.iOS.postMessage(null);
+    var storage = localStorage.getItem("accessToken");
+    // storage = storage ? JSON.parse(storage):[];
+    storage = JSON.parse(storage);
+    baseUrlFromAPP = storage.baseurl;
+    tokenFromAPP = storage.token;
+    subidFromAPP = storage.fsubID;
+  } else {
+    baseUrlFromAPP = android.getBaseUrl();
+    tokenFromAPP = android.getToken();
+    subidFromAPP = android.getfSubid();
+  }
+
+  let toast = new ToastClass();//实例化toast对象
 
   var currentSelectVode = {}; //选中节点
 
@@ -35,7 +37,6 @@ $(function () {
     var params = {
       fSubid: subidFromAPP,
     }
-    $("body").showLoading();
     getData(url, params, function (data) {
       setListData(data);
       $("#search").click();
@@ -95,7 +96,6 @@ $(function () {
 
 
   $(document).on('click', '#search', function () {
-    $("body").showLoading();
     var EnergyKind = $("#EnergyKind").attr('value');
     var selectParam = [];
     if (EnergyKind != "fFr") {
@@ -115,13 +115,13 @@ $(function () {
       EnergyKind: EnergyKind,
     }
     getData(url, params, function (data) {
-      $("body").hideLoading();
       showCharts(data.CircuitValueByDate);
     });
   });
 
 
   function getData(url, params, successCallback) {
+    toast.show({text:'正在加载',loading: true});
     var token = tokenFromAPP;
     $.ajax({
       type: 'GET',
@@ -131,9 +131,13 @@ $(function () {
         request.setRequestHeader("Authorization", token)
       },
       success: function (result) {
+        toast.hide();
         successCallback(result.data);
+      },
+      error:function(){
+        toast.show({text: '数据请求失败',duration: 3000});
       }
-    })
+    });
   }
 
   function setListData(data) {
@@ -153,10 +157,6 @@ $(function () {
       currentSelectVode.merterName = node.text;
     })
   }
-
-  $("#energySelect").dblclick(function () {
-    alert("1");
-  });
 
   $(document).on("change", "#energySelect", function () {
     generateType($("#energySelect").val());
