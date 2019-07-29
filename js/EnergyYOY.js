@@ -27,7 +27,7 @@ $(function () {
     }
 
     var currentSelectVode = {}; //选中节点
-
+    let toast = new ToastClass(); //实例化toast对象
     initFirstNode(); //初始化第一个回路
     var isClick = 0;
 
@@ -36,7 +36,7 @@ $(function () {
         var params = {
             fSubid: subidFromAPP
         };
-        $("body").showLoading();
+
         getData(url, params, function (data) {
             setListData(data);
             getURLData();
@@ -138,7 +138,7 @@ $(function () {
     // }
     //
     function getURLData() {
-        $("body").showLoading();
+
         var fCircuitid = currentSelectVode.merterId;
         var url = baseUrlFromAPP + "/main/powerAnalysis/getMoM";
         var params = {
@@ -150,12 +150,16 @@ $(function () {
             // EnergyKind: EnergyKind,
         };
         getData(url, params, function (data) {
-            $("body").hideLoading();
+
             showCharts(data.monthValueListUpToNow);
         });
     }
 
     function getData(url, params, successCallback) {
+        toast.show({
+            text: '正在加载',
+            loading: true
+        });
         var token = tokenFromAPP;
         $.ajax({
             type: "GET",
@@ -165,7 +169,14 @@ $(function () {
                 request.setRequestHeader("Authorization", token);
             },
             success: function (result) {
+                toast.hide();
                 successCallback(result.data);
+            },
+            error: function () {
+                toast.show({
+                    text: '数据请求失败',
+                    duration: 2000
+                });
             }
         });
     }

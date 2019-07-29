@@ -1,7 +1,7 @@
 $(function () {
-//    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
-//    var subidFromAPP = 10100001;
+    //    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+    //    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
+    //    var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -25,6 +25,7 @@ $(function () {
         subidFromAPP = android.getfSubid();
     }
 
+    let toast = new ToastClass();
     var url = baseUrlFromAPP + "/Subimg/getAppSubimgInfo";
     var params = {
         fSubid: subidFromAPP,
@@ -39,10 +40,10 @@ $(function () {
         $(".diagram").html("");
         $(".diagram").append(path);
         $('g[name="off"]').hide();
-//        $(".diagram").overscroll();
+        //        $(".diagram").overscroll();
     }
 
-//放大缩小
+    //放大缩小
     $("#BigDom").on('click', function () {
         $(this).addClass("select");
         $("#SimDom").removeClass("select");
@@ -53,6 +54,7 @@ $(function () {
         $("#BigDom").removeClass("select");
         adjustSVG($('svg'), -1);
     });
+
     function adjustSVG($svg, type) {
         var width = $svg.width();
         var height = $svg.height();
@@ -79,6 +81,10 @@ $(function () {
     }
 
     function getDataByAjax(url, params, successCallback) {
+        toast.show({
+            text: "正在加载",
+            loading: true
+        });
         $.ajax({
             type: 'GET',
             url: url,
@@ -87,7 +93,14 @@ $(function () {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
             success: function (result) {
+                toast.hide();
                 successCallback(result.data);
+            },
+            error: function () {
+                toast.show({
+                    text: '数据请求失败',
+                    duration: 2000
+                });
             }
         })
     };

@@ -26,7 +26,7 @@ $(function () {
     }
 
     //页面初始化加载当日数据
-
+    let toast = new ToastClass();
     var startDate = tool.initDate("first", new Date());
     var endDate = tool.initDate("YMD", new Date());
 
@@ -61,7 +61,7 @@ $(function () {
         // $(".startDate").val(startDate);
         // $(".endDate").val(endDate);
         //开始时间不能大于截止时间
-        $("body").showLoading();
+        // $("body").showLoading();
         var nowDate = tool.initDate("YMDhm", new Date());
         if (startDate > endDate) {
             alert("开始时间不能大于结束时间，请选择正确的查询时间！");
@@ -83,12 +83,16 @@ $(function () {
             endTime: endDate
         }
         getData(url, params, function (data) {
-            $("body").hideLoading();
+            // $("body").hideLoading();
             showChartBar(data, type);
         });
     }
 
     function getData(url, params, successCallback) {
+        toast.show({
+            text: "正在加载",
+            loading: true
+        });
         var token = tokenFromAPP;
         $.ajax({
             type: 'GET',
@@ -98,7 +102,14 @@ $(function () {
                 request.setRequestHeader("Authorization", token)
             },
             success: function (result) {
+                toast.hide();
                 successCallback(result.data);
+            },
+            error: function () {
+                toast.show({
+                    text: '数据请求失败',
+                    duration: 2000
+                });
             }
         })
     }
