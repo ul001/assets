@@ -1,35 +1,35 @@
 $(function () {
-//   var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-//   var subidFromAPP=10100001;
+    //   var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+    //    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
+    //   var subidFromAPP=10100001;
     //iOS安卓基础传参
-      var u = navigator.userAgent,
-          app = navigator.appVersion;
-      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-      var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-      //判断数组中是否包含某字符串
-      var baseUrlFromAPP;
-      var tokenFromAPP;
-      var subidFromAPP;
-      if (isIOS) { //ios系统的处理
-          window.webkit.messageHandlers.iOS.postMessage(null);
-          var storage = localStorage.getItem("accessToken");
-          // storage = storage ? JSON.parse(storage):[];
-          storage = JSON.parse(storage);
-          baseUrlFromAPP = storage.baseurl;
-          tokenFromAPP = storage.token;
-          subidFromAPP = storage.fsubID;
-      } else {
-          baseUrlFromAPP = android.getBaseUrl();
-          tokenFromAPP = android.getToken();
-          subidFromAPP = android.getfSubid();
-      }
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
 
     var currentSelectVode = {}; //选中节点
     //页面初始化加载当日数据
     var startDate = tool.initDate("YMD", new Date()) + " 00:00";
     var endDate = tool.initDate("YMDh", new Date()) + ":00";
-
+    let toast = new ToastClass();
     $(".startDate").val(startDate);
     $(".endDate").val(endDate);
 
@@ -135,36 +135,36 @@ $(function () {
         $(data).each(function (index, value) {
             var strName = this.fCircuitname;
             $(data[index].origEnergyValues).each(function () {
-            var startStr = "-";
-            var endStr = "-";
-            var consumeStr = "-";
-            if(this.hasOwnProperty("fStartvalue")){
-                startStr= this.fStartvalue;
-            }
-            if(this.hasOwnProperty("fEndvalue")){
-                endStr= this.fEndvalue;
-            }
-            if(this.hasOwnProperty("fConsumevalue")){
-                consumeStr= this.fConsumevalue;
-            }
-            var str = "<div class=\"contain\">\n" +
-                      "        <h1>"+strName+"</h1>\n" +
-                      "        <div class=\"type\">\n" +
-                      "            <img src=\"image/start.png\"/>\n" +
-                      "            <p class=\"list1\">起始数值</p>\n" +
-                      "            <p>"+startStr+"</p>\n" +
-                      "        </div>\n" +
-                      "        <div class=\"type\">\n" +
-                      "            <img src=\"image/stop.png\"/>\n" +
-                      "            <p class=\"list1\">截止数值</p>\n" +
-                      "            <p>"+endStr+"</p>\n" +
-                      "        </div>\n" +
-                      "        <div class=\"type\">\n" +
-                      "            <img src=\"image/between.png\"/>\n" +
-                      "            <p class=\"list1\">差值</p>\n" +
-                      "            <p>"+consumeStr+"</p>\n" +
-                      "        </div>\n" +
-                      "    </div>";
+                var startStr = "-";
+                var endStr = "-";
+                var consumeStr = "-";
+                if (this.hasOwnProperty("fStartvalue")) {
+                    startStr = this.fStartvalue;
+                }
+                if (this.hasOwnProperty("fEndvalue")) {
+                    endStr = this.fEndvalue;
+                }
+                if (this.hasOwnProperty("fConsumevalue")) {
+                    consumeStr = this.fConsumevalue;
+                }
+                var str = "<div class=\"contain\">\n" +
+                    "        <h1>" + strName + "</h1>\n" +
+                    "        <div class=\"type\">\n" +
+                    "            <img src=\"image/start.png\"/>\n" +
+                    "            <p class=\"list1\">起始数值</p>\n" +
+                    "            <p>" + startStr + "</p>\n" +
+                    "        </div>\n" +
+                    "        <div class=\"type\">\n" +
+                    "            <img src=\"image/stop.png\"/>\n" +
+                    "            <p class=\"list1\">截止数值</p>\n" +
+                    "            <p>" + endStr + "</p>\n" +
+                    "        </div>\n" +
+                    "        <div class=\"type\">\n" +
+                    "            <img src=\"image/between.png\"/>\n" +
+                    "            <p class=\"list1\">差值</p>\n" +
+                    "            <p>" + consumeStr + "</p>\n" +
+                    "        </div>\n" +
+                    "    </div>";
                 var liDom = document.createElement("li");
                 liDom.innerHTML = str;
                 listDom.appendChild(liDom); //加在列表的后面,上拉加载
@@ -175,6 +175,10 @@ $(function () {
     function getData(url, params, successCallback) {
         try {
             var token = tokenFromAPP;
+            toast.show({
+                text: "正在加载",
+                loading: true
+            });
             $.ajax({
                 type: 'GET',
                 url: url,
@@ -183,13 +187,22 @@ $(function () {
                     request.setRequestHeader("Authorization", token)
                 },
                 success: function (result) {
+                    toast.hide();
                     // mescroll.endSuccess(data.list.length);
                     successCallback(result.data);
+                },
+                error: function () {
+                    toast.show({
+                        text: '数据请求失败',
+                        duration: 2000
+                    });
                 }
             })
         } catch (e) {
             //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
             // mescroll.endErr();
+
+
             errorCallback && errorCallback();
         }
 
@@ -441,22 +454,22 @@ $(function () {
     var time = tool.initDate("YMD", new Date());
     $("#date").val(time);
 
-/*    new Rolldate({
-        el: '#date',
-        format: 'YYYY-MM-DD',
-        beginYear: 2000,
-        endYear: 2100,
-        value: time,
-        // confirm: function(date) {
-        //     var d = new Date(),
-        //     d1 = new Date(date.replace(/\-/g, "\/")),
-        //     d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-        //     d3 = new Date($("#date").val().replace(/\-/g, "\/"));
-        //     if (d1 > d2||d1<d3) {
-        //         return false;
-        //     };
-        // }
-    });*/
+    /*    new Rolldate({
+            el: '#date',
+            format: 'YYYY-MM-DD',
+            beginYear: 2000,
+            endYear: 2100,
+            value: time,
+            // confirm: function(date) {
+            //     var d = new Date(),
+            //     d1 = new Date(date.replace(/\-/g, "\/")),
+            //     d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+            //     d3 = new Date($("#date").val().replace(/\-/g, "\/"));
+            //     if (d1 > d2||d1<d3) {
+            //         return false;
+            //     };
+            // }
+        });*/
     //初始化时间插件
 
     var startRoll = new Rolldate({
@@ -495,10 +508,10 @@ $(function () {
         // }
     });
 
-    $("#startDate").click(function(){
+    $("#startDate").click(function () {
         startRoll.show();
     });
-    $("#endDate").click(function(){
+    $("#endDate").click(function () {
         endRoll.show();
     });
 

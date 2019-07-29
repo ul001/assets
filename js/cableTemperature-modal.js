@@ -1,30 +1,30 @@
 $(function () {
-//         var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-//        var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-//        var subidFromAPP = 10100001;
+    //         var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
+    //        var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
+    //        var subidFromAPP = 10100001;
     //iOS安卓基础传参
-      var u = navigator.userAgent,
-          app = navigator.appVersion;
-      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-      var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-      //判断数组中是否包含某字符串
-      var baseUrlFromAPP;
-      var tokenFromAPP;
-      var subidFromAPP;
-      if (isIOS) { //ios系统的处理
-          window.webkit.messageHandlers.iOS.postMessage(null);
-          var storage = localStorage.getItem("accessToken");
-          // storage = storage ? JSON.parse(storage):[];
-          storage = JSON.parse(storage);
-          baseUrlFromAPP = storage.baseurl;
-          tokenFromAPP = storage.token;
-          subidFromAPP = storage.fsubID;
-      } else {
-          baseUrlFromAPP = android.getBaseUrl();
-          tokenFromAPP = android.getToken();
-          subidFromAPP = android.getfSubid();
-      }
-
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
+    let toast = new ToastClass();
     var choise = 1;
     var info = null;
     var f_MeterCode = tool.getUrlParam("F_MeterCode");
@@ -38,6 +38,10 @@ $(function () {
             startDate: $("#date").val() + " 00:00:00",
             endDate: $("#date").val() + " 23:59:59"
         };
+        toast.show({
+            text: "正在加载",
+            loading: true
+        });
         $.ajax({
             type: 'GET',
             url: baseUrlFromAPP + "/main/getTempABCResultHistoryList",
@@ -46,6 +50,7 @@ $(function () {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
             success: function (result) {
+                toast.hide();
                 info = result.data;
                 $("#titleP").text(info.list[0].f_MeterName);
                 if (choise == 1) {
@@ -53,6 +58,12 @@ $(function () {
                 } else {
                     showTable(info.list);
                 }
+            },
+            error: function () {
+                toast.show({
+                    text: '数据请求失败',
+                    duration: 2000
+                });
             }
         })
     }
