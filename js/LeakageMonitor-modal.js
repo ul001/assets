@@ -25,6 +25,8 @@ $(function () {
          subidFromAPP = android.getfSubid();
      }
 
+    let toast = new ToastClass();//实例化toast对象
+
     var choise = 1;
     var info = null;
     var f_MeterCode = tool.getUrlParam("F_MeterCode");
@@ -32,6 +34,7 @@ $(function () {
     $("#titleP").text(fMeterName);
 
     function setData() {
+        toast.show({text:'正在加载',loading: true});
         var params = {
             fSubid: subidFromAPP,
             fMetercode: f_MeterCode,
@@ -45,6 +48,7 @@ $(function () {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
             success: function (result) {
+                toast.hide();
                 if (result.data.leakageCurrentAndTempValues.length > 0) {
                     info = result.data.leakageCurrentAndTempValues[0];
                 }
@@ -53,6 +57,9 @@ $(function () {
                 } else {
                     showTable(info);
                 }
+            },
+            error:function (){
+                toast.show({text: '数据请求失败',duration: 2000});
             }
         });
     }

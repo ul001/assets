@@ -25,8 +25,10 @@ $(function () {
           subidFromAPP = android.getfSubid();
       }
 
+    let toast = new ToastClass();//实例化toast对象
+
       function getData() {
-        $("body").showLoading();
+        toast.show({text:'正在加载',loading: true});
         var params = {
             fSubid:subidFromAPP
         };
@@ -38,7 +40,7 @@ $(function () {
             request.setRequestHeader("Authorization", tokenFromAPP)
           },
           success: function (result) {
-            $("body").hideLoading();
+            toast.hide();
             if(result.data!=null){
               if(result.data.length>0){
                 $(".container").empty();
@@ -51,7 +53,7 @@ $(function () {
             }
           },
           error:function(){
-            $(".container").html("服务器错误");
+            toast.show({text: '数据请求失败',duration: 2000});
           }
         });
       }
