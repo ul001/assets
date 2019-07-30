@@ -26,8 +26,8 @@ $(function () {
         subidFromAPP = android.getfSubid();
     }
 
-    var currentSelectVode = {}; //选中节点
     let toast = new ToastClass(); //实例化toast对象
+    var currentSelectVode = {}; //选中节点
 
     initFirstNode(); //初始化第一个回路
     var isClick = 0;
@@ -158,7 +158,6 @@ $(function () {
             url: url,
             data: params,
             beforeSend: function (request) {
-                toast.hide();
                 request.setRequestHeader("Authorization", token)
             },
             success: function (result) {
