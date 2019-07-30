@@ -72,7 +72,7 @@ $(function () {
     }
 
     function getListDataFromNet(num,page,successCallback,errorCallback){
-        var url = baseUrlFromAPP+"/main/energySecurity/leakageMonitor";
+        var url = baseUrlFromAPP+"/main/app/energySecurity/leakageMonitor";
         var params = {
             fSubid: subidFromAPP,
             pageNo:num,

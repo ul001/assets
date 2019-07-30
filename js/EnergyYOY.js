@@ -140,7 +140,7 @@ $(function () {
     function getURLData() {
 
         var fCircuitid = currentSelectVode.merterId;
-        var url = baseUrlFromAPP + "/main/powerAnalysis/getMoM";
+        var url = baseUrlFromAPP + "/main/app/powerAnalysis/getMoM";
         var params = {
             fSubid: subidFromAPP,
             fCircuitid: fCircuitid

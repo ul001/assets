@@ -132,7 +132,7 @@ $(function () {
         }
         var fCircuitid = currentSelectVode.merterId;
 
-        var url = baseUrlFromAPP + "/main/energyReportMOM";
+        var url = baseUrlFromAPP + "/main/app/energyReportMOM";
         var params = {
             fSubid: subidFromAPP,
             fCircuitids: fCircuitid,

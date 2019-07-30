@@ -89,7 +89,7 @@ $(function () {
     var fCircuitid = currentSelectVode.merterId;
     var time = $("#date").val();
     var selectVal = $(".elec-btn .select").attr('value');
-    var url = baseUrlFromAPP + "/main/elecMaxMinAvgValue";
+    var url = baseUrlFromAPP + "/main/app/elecMaxMinAvgValue";
     if (selectVal == "month") {
       time = time + "-01";
     }
