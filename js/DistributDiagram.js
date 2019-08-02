@@ -26,7 +26,7 @@ $(function () {
     }
 
     let toast = new ToastClass();
-    var url = baseUrlFromAPP + "/Subimg/getAppSubimgInfo";
+    var url = baseUrlFromAPP + "/getAppSubimgInfo";
     var params = {
         fSubid: subidFromAPP,
     }
@@ -107,7 +107,7 @@ $(function () {
 
     $("#subList").change(function (event) {
         var fCustomname = $("#subList").val();
-        var url = baseUrlFromAPP + "/Subimg/getAppSubimgInfo";
+        var url = baseUrlFromAPP + "/getAppSubimgInfo";
         var params = {
             fSubid: subidFromAPP,
             fCustomname: fCustomname,
