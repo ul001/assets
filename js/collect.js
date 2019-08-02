@@ -51,7 +51,7 @@ $(function () {
 
     initFirstNode(); //初始化第一个回路
     function initFirstNode() {
-        var url = baseUrlFromAPP + "/main/getfCircuitidsList";
+        var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
         }
@@ -112,7 +112,7 @@ $(function () {
         }
         var fCircuitid = currentSelectVode.merterId;
         // var time = $("#date").val();
-        var url = baseUrlFromAPP + "/main/app/powerAnalysis/ConsumeEnergyReport";
+        var url = baseUrlFromAPP + "/powerAnalysis/ConsumeEnergyReport";
         var params = {
             fSubid: subidFromAPP,
             fCircuitids: fCircuitid,

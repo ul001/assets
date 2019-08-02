@@ -197,7 +197,7 @@ $(function () {
         try {
             $.ajax({
                 type: 'GET',
-                url: baseUrlFromAPP + "/main/app/eventLog/OverLimitEvent",
+                url: baseUrlFromAPP + "/eventLog/OverLimitEvent",
                 data: params,
                 beforeSend: function (request) {
                     request.setRequestHeader("Authorization", tokenFromAPP)

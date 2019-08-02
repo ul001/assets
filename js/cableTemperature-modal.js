@@ -44,7 +44,7 @@ $(function () {
         });
         $.ajax({
             type: 'GET',
-            url: baseUrlFromAPP + "/main/getTempABCResultHistoryList",
+            url: baseUrlFromAPP + "/getTempABCResultHistoryList",
             data: params,
             beforeSend: function (request) {
                 request.setRequestHeader("Authorization", tokenFromAPP)

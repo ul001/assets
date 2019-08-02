@@ -33,7 +33,7 @@ $(function () {
     var isClick = 0;
 
     function initFirstNode() {
-        var url = baseUrlFromAPP + "/main/getfCircuitidsList";
+        var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
         }
@@ -46,7 +46,7 @@ $(function () {
 
     $("#CircuitidsList").click(function () {
         var search = $("#CircuitidsInput").val();
-        var url = baseUrlFromAPP + "/main/getfCircuitidsList";
+        var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
             search: search,
@@ -60,7 +60,7 @@ $(function () {
     $(document).on('click', '.clear', function () {
         $("#CircuitidsInput").val("");
         if (isClick == 1) {
-            var url = baseUrlFromAPP + "/main/getfCircuitidsList";
+            var url = baseUrlFromAPP + "/getfCircuitidsList";
             var params = {
                 fSubid: subidFromAPP,
             }
@@ -132,7 +132,7 @@ $(function () {
         }
         var fCircuitid = currentSelectVode.merterId;
 
-        var url = baseUrlFromAPP + "/main/app/energyReportMOM";
+        var url = baseUrlFromAPP + "/energyReportMOM";
         var params = {
             fSubid: subidFromAPP,
             fCircuitids: fCircuitid,
@@ -347,7 +347,7 @@ $(function () {
                     yesterdayStr = "上周用电";
                 }
                 var fMomStr = "-";
-                if(el.hasOwnProperty("fMomvalue")){
+                if (el.hasOwnProperty("fMomvalue")) {
                     fMomStr = el.fMomvalue;
                 }
                 value.push(el.fBeforevalue);
@@ -362,7 +362,7 @@ $(function () {
                 $("#todayElectconSump").html(todayStr + "<br/><span class='Num'>" + el.fNextvalue + "kW·h</span>");
                 $("#yesterdayElectconSump").html(yesterdayStr + "<br/><span class='Num'>" + el.fBeforevalue + "kW·h</span>");
                 $("#addValue").html(addvalue);
-                $("#chainRatio").html( fMomStr + "%");
+                $("#chainRatio").html(fMomStr + "%");
             });
 
         }

@@ -171,7 +171,7 @@ $(function () {
         try {
             $.ajax({
                 type: 'GET',
-                url: baseUrlFromAPP + "/main/app/eventLog/PlatformRunLog",
+                url: baseUrlFromAPP + "/eventLog/PlatformRunLog",
                 data: params,
                 beforeSend: function (request) {
                     request.setRequestHeader("Authorization", tokenFromAPP)

@@ -70,7 +70,7 @@ $(function () {
 
 
     function getListDataFromNet(num,page,successCallback,errorCallback){
-        var url = baseUrlFromAPP+"/main/getTempABCResult";
+        var url = baseUrlFromAPP+"/getTempABCResult";
         var params = {
             fSubid: subidFromAPP,
             pageNo:num,

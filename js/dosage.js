@@ -76,7 +76,7 @@ $(function () {
         startDate = $("#dateStart").val();
         endDate = $("#dateEnd").val();
 
-        var url = baseUrlFromAPP + "/main/getMothJFPG";
+        var url = baseUrlFromAPP + "/getMothJFPG";
         var params = {
             fSubid: subidFromAPP,
             startTime: startDate,

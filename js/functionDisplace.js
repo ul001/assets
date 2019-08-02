@@ -205,7 +205,7 @@ $(function () {
             var token = tokenFromAPP;
             $.ajax({
                 type: 'GET',
-                url: baseUrlFromAPP + "/main/app/eventLog/EnergyLineLoss",
+                url: baseUrlFromAPP + "/eventLog/EnergyLineLoss",
                 data: params,
                 beforeSend: function (request) {
                     request.setRequestHeader("Authorization", token)

@@ -52,7 +52,7 @@ $(function () {
   getListData();
 
   function getListData() {
-    var url = baseUrlFromAPP + "/main/app/getTempHumi";
+    var url = baseUrlFromAPP + "/getTempHumi";
     var params = {
       fSubid: subidFromAPP
     };
@@ -85,7 +85,7 @@ $(function () {
     var temp = [];
     var humi = [];
     var selectCode = $(".sectionSelect").attr('value');
-    var url = baseUrlFromAPP + "/main/app/getTempHumi";
+    var url = baseUrlFromAPP + "/getTempHumi";
     var params = {
       fSubid: subidFromAPP,
       fMetercode: selectCode,

@@ -32,7 +32,7 @@ $(function () {
     var isClick = 0;
 
     function initFirstNode() {
-        var url = baseUrlFromAPP + "/main/getfCircuitidsList";
+        var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
         }
@@ -44,7 +44,7 @@ $(function () {
 
     $("#CircuitidsList").click(function () {
         var search = $("#CircuitidsInput").val();
-        var url = baseUrlFromAPP + "/main/getfCircuitidsList";
+        var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
             search: search,
@@ -58,7 +58,7 @@ $(function () {
     $(document).on('click', '.clear', function () {
         $("#CircuitidsInput").val("");
         if (isClick == 1) {
-            var url = baseUrlFromAPP + "/main/getfCircuitidsList";
+            var url = baseUrlFromAPP + "/getfCircuitidsList";
             var params = {
                 fSubid: subidFromAPP,
             }
@@ -154,7 +154,7 @@ $(function () {
         };
         $.ajax({
             type: 'GET',
-            url: baseUrlFromAPP + "/main/selectMaxMD",
+            url: baseUrlFromAPP + "/selectMaxMD",
             data: data,
             beforeSend: function (request) {
                 request.setRequestHeader("Authorization", tokenFromAPP)
@@ -176,7 +176,7 @@ $(function () {
                 };
                 $.ajax({
                     type:'GET',
-                    url:baseUrl+"/main/getfCircuitidsList",
+                    url:baseUrl+"/getfCircuitidsList",
                     data:data,
                     beforeSend:function(request){
                         request.setRequestHeader("Authorization",token)

@@ -42,7 +42,7 @@ $(function () {
         };
         $.ajax({
             type: 'GET',
-            url: baseUrlFromAPP + "/main/energySecurity/leakageCurrentAndTemp",
+            url: baseUrlFromAPP + "/energySecurity/leakageCurrentAndTemp",
             data: params,
             beforeSend: function (request) {
                 request.setRequestHeader("Authorization", tokenFromAPP)

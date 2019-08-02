@@ -32,7 +32,7 @@ $(function () {
     var isClick = 0;
 
     function initFirstNode() {
-        var url = baseUrlFromAPP + "/main/getfCircuitidsList";
+        var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
         }
@@ -46,7 +46,7 @@ $(function () {
 
     $("#CircuitidsList").click(function () {
         var search = $("#CircuitidsInput").val();
-        var url = baseUrlFromAPP + "/main/getfCircuitidsList";
+        var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
             search: search,
@@ -60,7 +60,7 @@ $(function () {
     $(document).on('click', '.clear', function () {
         $("#CircuitidsInput").val("");
         if (isClick == 1) {
-            var url = baseUrlFromAPP + "/main/getfCircuitidsList";
+            var url = baseUrlFromAPP + "/getfCircuitidsList";
             var params = {
                 fSubid: subidFromAPP,
             }
@@ -205,7 +205,7 @@ $(function () {
     //     }
     //     var fCircuitid = currentSelectVode.merterId;
 
-    //     var url = baseUrlFromAPP + "/main/app/powerAnalysis/EnergyReport";
+    //     var url = baseUrlFromAPP + "/powerAnalysis/EnergyReport";
     //     var params = {
     //         fSubid: subidFromAPP,
     //         fCircuitids: fCircuitid,
@@ -239,7 +239,7 @@ $(function () {
         }
         var fCircuitid = currentSelectVode.merterId;
 
-        var url = baseUrlFromAPP + "/main/app/powerAnalysis/EnergyReport";
+        var url = baseUrlFromAPP + "/powerAnalysis/EnergyReport";
         var params = {
             fSubid: subidFromAPP,
             fCircuitids: fCircuitid,

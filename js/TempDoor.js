@@ -34,7 +34,7 @@ $(function () {
     };
     $.ajax({
       type: 'GET',
-      url: baseUrlFromAPP + "/main/app/listDoorStatus",
+      url: baseUrlFromAPP + "/listDoorStatus",
       data: params,
       beforeSend: function (request) {
         request.setRequestHeader("Authorization", tokenFromAPP)

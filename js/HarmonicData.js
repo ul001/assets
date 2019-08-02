@@ -33,7 +33,7 @@ $(function () {
   var isClick = 0;
 
   function initFirstNode() {
-    var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+    var url = baseUrlFromAPP+"/getfCircuitidsList";
     var params = {
       fSubid: subidFromAPP,
     }
@@ -46,7 +46,7 @@ $(function () {
 
   $("#CircuitidsList").click(function () {
     var search = $("#CircuitidsInput").val();
-    var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+    var url = baseUrlFromAPP+"/getfCircuitidsList";
     var params = {
       fSubid: subidFromAPP,
       search: search,
@@ -60,7 +60,7 @@ $(function () {
   $(document).on('click', '.clear', function () {
     $("#CircuitidsInput").val("");
     if (isClick == 1) {
-      var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+      var url = baseUrlFromAPP+"/getfCircuitidsList";
       var params = {
         fSubid: subidFromAPP,
       }
@@ -129,7 +129,7 @@ $(function () {
   $(document).on('click', '#search', function () {
     var fCircuitid = currentSelectVode.merterId;
     var time = $("#date").val();
-    var url = baseUrlFromAPP+"/main/app/powerQuality/Harmonic";
+    var url = baseUrlFromAPP+"/powerQuality/Harmonic";
     var params = {
       fSubid: subidFromAPP,
       fCircuitid: fCircuitid,

@@ -50,7 +50,7 @@ $(function () {
     getTransList();
 
     function getTransList(){
-        var url = baseUrlFromAPP+"/main/app/powerMonitoring/transformerList";
+        var url = baseUrlFromAPP+"/powerMonitoring/transformerList";
         var params = {fSubid:subidFromAPP};
         getData(url,params,function(data){
             if(data.hasOwnProperty("TransformerList")){
@@ -78,7 +78,7 @@ $(function () {
     $("#date").val(time);
 
     function getListData() {
-        var url = baseUrlFromAPP + "/main/app/powerMonitoring/transformerStatus";
+        var url = baseUrlFromAPP + "/powerMonitoring/transformerStatus";
         var selectTrans = $(".trans.select").attr("value");
         var params = {
             fSubid: subidFromAPP,
@@ -92,7 +92,7 @@ $(function () {
     }
 
     function getDateCurveData() {
-        var url = baseUrlFromAPP + "/main/getCurveDataOfPowerAndTempABC";
+        var url = baseUrlFromAPP + "/getCurveDataOfPowerAndTempABC";
         var selectTrans = $(".trans.select").attr("value");
         var params = {
             fTransid: selectTrans,

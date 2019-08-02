@@ -33,7 +33,7 @@ $(function () {
   var isClick = 0;
 
   function initFirstNode() {
-    var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+    var url = baseUrlFromAPP+"/getfCircuitidsList";
     var params = {
       fSubid: subidFromAPP,
     }
@@ -45,7 +45,7 @@ $(function () {
 
   $("#CircuitidsList").click(function () {
     var search = $("#CircuitidsInput").val();
-    var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+    var url = baseUrlFromAPP+"/getfCircuitidsList";
     var params = {
       fSubid: subidFromAPP,
       search: search,
@@ -59,7 +59,7 @@ $(function () {
   $(document).on('click', '.clear', function () {
     $("#CircuitidsInput").val("");
     if (isClick == 1) {
-      var url = baseUrlFromAPP+"/main/getfCircuitidsList";
+      var url = baseUrlFromAPP+"/getfCircuitidsList";
       var params = {
         fSubid: subidFromAPP,
       }
@@ -110,7 +110,7 @@ $(function () {
     }
     var fCircuitid = currentSelectVode.merterId;
     var time = $("#date").val();
-    var url = baseUrlFromAPP+"/main/app/powerMonitoring/ElectricData";
+    var url = baseUrlFromAPP+"/powerMonitoring/ElectricData";
     var params = {
       fSubid: subidFromAPP,
       fCircuitid: fCircuitid,

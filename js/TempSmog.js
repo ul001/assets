@@ -35,7 +35,7 @@ $(function () {
         };
         $.ajax({
             type: 'GET',
-            url: baseUrlFromAPP + "/main/app/listSmogStatus",
+            url: baseUrlFromAPP + "/listSmogStatus",
             data: params,
             beforeSend: function (request) {
                 request.setRequestHeader("Authorization", tokenFromAPP)
