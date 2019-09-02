@@ -33,6 +33,9 @@ section img {
 
 section p {
 	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 section p:last-child {
