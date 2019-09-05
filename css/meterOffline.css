@@ -396,3 +396,9 @@ input {
 .data-date {
 	width: 65%;
 }
+
+.limit-length {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
