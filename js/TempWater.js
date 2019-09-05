@@ -47,7 +47,7 @@ $(function () {
                 $(result.data).each(function(){
                     $(".container").append('<section><img src="image/sj.png"/>'+
                                             '<p>'+this.fMeterName+'</p>'+
-                                            '<p>'+(this.fStatus=="有水"?"<a class='redColor'>开门</a>":this.fStatus)+'</p></section>');
+                                            '<p>'+(this.fStatus=="有水"?"<a class='redColor'>有水</a>":this.fStatus)+'</p></section>');
                 });
               }
             }
