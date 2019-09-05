@@ -131,7 +131,7 @@ $(function () {
         }
         $(data.list).each(function () {
             var str = "<div class=\"container\">\n" +
-                      "                <h1>"+this.f_DeviceName+"</h1>\n" +
+                      "                <h1 class=\"limit-length\">"+this.f_DeviceName+"</h1>\n" +
                       "                <div class=\"type\">\n" +
                       "                    <img src=\"image/yblx.png\"/>\n" +
                       "                    <p class=\"list\">仪表编号</p>\n" +
