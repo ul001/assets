@@ -133,7 +133,7 @@ $(function () {
             var deviceStr = this.f_AlarmDesc;
             var deviceName = deviceStr.substring(deviceStr.indexOf("[")+1,deviceStr.indexOf("]"));
             var str = "        <div class=\"container\">\n" +
-                      "            <h1>"+deviceName+"</h1>\n" +
+                      "            <h1 class=\"limit-length\">"+deviceName+"</h1>\n" +
                       "            <div class=\"type\">\n" +
                       "                <img src=\"image/znwg.png\"/>\n" +
                       "                <p class=\"list\">设备编号</p>\n" +
