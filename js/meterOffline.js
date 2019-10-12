@@ -1,35 +1,35 @@
 $(function () {
-//    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-//    var subidFromAPP=10100001;
+    //    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+    //    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
+    //    var subidFromAPP=10100001;
     //iOS安卓基础传参
-      var u = navigator.userAgent,
-          app = navigator.appVersion;
-      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-      var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-      //判断数组中是否包含某字符串
-      var baseUrlFromAPP;
-      var tokenFromAPP;
-      var subidFromAPP;
-      if (isIOS) { //ios系统的处理
-          window.webkit.messageHandlers.iOS.postMessage(null);
-          var storage = localStorage.getItem("accessToken");
-          // storage = storage ? JSON.parse(storage):[];
-          storage = JSON.parse(storage);
-          baseUrlFromAPP = storage.baseurl;
-          tokenFromAPP = storage.token;
-          subidFromAPP = storage.fsubID;
-      } else {
-          baseUrlFromAPP = android.getBaseUrl();
-          tokenFromAPP = android.getToken();
-          subidFromAPP = android.getfSubid();
-          $("#meterId").on("click", function () {
-              var _this = this;
-              setTimeout(function () {
-                  _this.scrollIntoViewIfNeeded();
-              }, 200);
-          });
-      }
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+        $("#meterId").on("click", function () {
+            var _this = this;
+            setTimeout(function () {
+                _this.scrollIntoViewIfNeeded();
+            }, 200);
+        });
+    }
 
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
@@ -131,14 +131,14 @@ $(function () {
         }
         $(data.list).each(function () {
             var str = "<div class=\"container\">\n" +
-                      "                <h1 class=\"limit-length\">"+this.f_DeviceName+"</h1>\n" +
-                      "                <div class=\"type\">\n" +
-                      "                    <img src=\"image/yblx.png\"/>\n" +
-                      "                    <p class=\"list\">仪表编号</p>\n" +
-                      "                    <p>"+this.f_DeviceCode+"</p>\n" +
-                      "                    <p class=\"list\">"+this.f_StartTime.split(".")[0]+"</p>\n" +
-                      "                </div>\n" +
-                      "            </div>";
+                "                <h1 class=\"limit-length\">" + this.f_DeviceName + "</h1>\n" +
+                "                <div class=\"type\">\n" +
+                "                    <img src=\"image/yblx.png\"/>\n" +
+                "                    <p class=\"list\">仪表编号</p>\n" +
+                "                    <p>" + this.f_DeviceCode + "</p>\n" +
+                "                    <p class=\"list\">" + this.f_StartTime.split(".")[0] + "</p>\n" +
+                "                </div>\n" +
+                "            </div>";
             var liDom = document.createElement("li");
             liDom.innerHTML = str;
             listDom.appendChild(liDom); //加在列表的后面,上拉加载
@@ -160,8 +160,8 @@ $(function () {
 
         var params = {
             fSubid: subidFromAPP,
-            startDate: startDate+" 00:00:00",
-            endDate: endDate+" 23:59:59",
+            startDate: startDate + " 00:00:00",
+            endDate: endDate + " 23:59:59",
             fDevicecode: fDeviceCode,
             fAlarmtype: 1,
             pageNo: pageNum,
@@ -216,7 +216,7 @@ $(function () {
         } else {
             var day = new Date(year, month, 0);
             lastDay = day.getDate(); //获取某月最后一天
-            if (month < 9) {
+            if (month <= 9) {
                 YandM = year + '-' + '0' + month;
             }
             if (month >= 10) {
@@ -263,11 +263,11 @@ $(function () {
         }
     });
 
-    $("#startDiv").click(function(){
+    $("#startDiv").click(function () {
         startRoll.show();
     });
 
-    $("#endDiv").click(function(){
+    $("#endDiv").click(function () {
         endRoll.show();
     });
 });
