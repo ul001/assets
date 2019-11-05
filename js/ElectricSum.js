@@ -458,6 +458,7 @@ $(function () {
                 tableData.push(dic);
             });
             var avg = (sum / data.length).toFixed(2);
+            tableData.push({"value":sum,"time":"合计"});
         }
         showTable(tableData);
         var line = echarts.init(document.getElementById('chartContain'));
