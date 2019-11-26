@@ -226,7 +226,7 @@ $(function () {
             else
                 $(".Fq").html("--");
             if (capacity.PF != null)
-                $(".Pf").html("功率因素:" + capacity.PF);
+                $(".Pf").html("功率因数:" + capacity.PF);
             else
                 $(".Pf").html("--");
             if (capacity.MD != null)
