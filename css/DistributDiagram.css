@@ -45,7 +45,8 @@ body{height: 100%;background:#fff;}
     left: 0;
 }
 .container select{
-	width:48%;
+	width:auto;
+	max-width:48%;
 	border-radius: 1.2rem;
 	margin:0 auto;
 	height:2rem;
