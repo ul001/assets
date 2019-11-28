@@ -9,7 +9,7 @@ section{
 	float:left;
     padding-top:2rem;
 }
-.container{
+#container{
     padding:0.5rem 0 0.5rem 0.5rem;
 }
 .tempDiv h3{
