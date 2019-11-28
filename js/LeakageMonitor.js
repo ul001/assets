@@ -1,29 +1,29 @@
 $(function () {
-   // var baseUrlFromAPP = "http://122.192.163.218:5050/SubstationWEBV2/v3";
-   // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzU1MTAwOTgsInVzZXJuYW1lIjoiYWRtaW4ifQ.BkWf-d8hBF5hov86iAjr147jGGXAvzS3un70T4D93PI";
-   // var subidFromAPP = 10100001;
+   var baseUrlFromAPP = "http://122.192.163.218:5050/SubstationWEBV2/v3";
+   var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzU1MTAwOTgsInVzZXJuYW1lIjoiYWRtaW4ifQ.BkWf-d8hBF5hov86iAjr147jGGXAvzS3un70T4D93PI";
+   var subidFromAPP = 10100001;
     //iOS安卓基础传参
-     var u = navigator.userAgent,
-         app = navigator.appVersion;
-     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-     //判断数组中是否包含某字符串
-     var baseUrlFromAPP;
-     var tokenFromAPP;
-     var subidFromAPP;
-     if (isIOS) { //ios系统的处理
-         window.webkit.messageHandlers.iOS.postMessage(null);
-         var storage = localStorage.getItem("accessToken");
-         // storage = storage ? JSON.parse(storage):[];
-         storage = JSON.parse(storage);
-         baseUrlFromAPP = storage.baseurl;
-         tokenFromAPP = storage.token;
-         subidFromAPP = storage.fsubID;
-     } else {
-         baseUrlFromAPP = android.getBaseUrl();
-         tokenFromAPP = android.getToken();
-         subidFromAPP = android.getfSubid();
-     }
+     // var u = navigator.userAgent,
+     //     app = navigator.appVersion;
+     // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+     // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+     // //判断数组中是否包含某字符串
+     // var baseUrlFromAPP;
+     // var tokenFromAPP;
+     // var subidFromAPP;
+     // if (isIOS) { //ios系统的处理
+     //     window.webkit.messageHandlers.iOS.postMessage(null);
+     //     var storage = localStorage.getItem("accessToken");
+     //     // storage = storage ? JSON.parse(storage):[];
+     //     storage = JSON.parse(storage);
+     //     baseUrlFromAPP = storage.baseurl;
+     //     tokenFromAPP = storage.token;
+     //     subidFromAPP = storage.fsubID;
+     // } else {
+     //     baseUrlFromAPP = android.getBaseUrl();
+     //     tokenFromAPP = android.getToken();
+     //     subidFromAPP = android.getfSubid();
+     // }
 
     let toast = new ToastClass();//实例化toast对象
 
@@ -71,8 +71,9 @@ $(function () {
     //     });
     // }
     getListDataFromNet();
-    
+
     function getListDataFromNet(){
+        toast.show({text:'正在加载',loading: true});
         var url = baseUrlFromAPP+"/energySecurity/leakageMonitor";
         var params = {
             fSubid: subidFromAPP
@@ -85,10 +86,11 @@ $(function () {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
             success: function (result) {
+                toast.hide();
                 creatList(result.data.leakageCurrentValues);
             },
             error:function () {
-                
+                toast.show({text: '数据请求失败',duration: 2000});
             }
         })
     }
