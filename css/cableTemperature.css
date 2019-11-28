@@ -9,6 +9,7 @@ body {
 section {
 	width: 33.33%;
 	float: left;
+	margin-bottom: 0.5rem;
 }
 
 .chart {
