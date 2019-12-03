@@ -50,6 +50,8 @@ $(function () {
                                 '<p>' + this.fMeterName + '</p>' +
                                 '<p>' + (this.fStatus == "有烟" ? "<a class='redColor'>有烟</a>" : this.fStatus) + '</p></section>');
                         });
+                    }else{
+                        window.location.href="noData.html";
                     }
                 }
             },
