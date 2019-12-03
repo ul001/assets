@@ -49,6 +49,8 @@ $(function () {
                                             '<p>'+this.fMeterName+'</p>'+
                                             '<p>'+(this.fStatus=="有水"?"<a class='redColor'>有水</a>":this.fStatus)+'</p></section>');
                 });
+              }else{
+                window.location.href="noData.html";
               }
             }
           },
