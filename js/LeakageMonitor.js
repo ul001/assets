@@ -134,6 +134,8 @@ $(function () {
                     '</section>';
                 $("#container").append(string);
             });
+        }else{
+            window.location.href="noData.html";
         }
 
         $(".tempBtn").unbind().click(function () {
