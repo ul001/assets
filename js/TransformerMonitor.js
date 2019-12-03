@@ -1,7 +1,7 @@
 $(function () {
-//    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
-//    var subidFromAPP = 10100001;
+   // var baseUrlFromAPP = "http://www.acrelcloud.cn/SubstationWEBV2/v3";
+   // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzU5Mzg3NTYsInVzZXJuYW1lIjoieG1weiJ9.pqP7RSasT_AJRwDQgkDBJXbtHurK2yYneU-zZb6Vv8k";
+   // var subidFromAPP = 10100001;
     //iOS安卓基础传参
       var u = navigator.userAgent,
           app = navigator.appVersion;
@@ -26,6 +26,16 @@ $(function () {
       }
 
     let toast = new ToastClass();//实例化toast对象
+
+    function upperJSONKey(jsonobj) {
+      for (var key in jsonobj) {
+        if (jsonobj[key.toUpperCase()] != jsonobj[key]) {
+          jsonobj[key.toUpperCase()] = jsonobj[key];
+          delete jsonobj[key];
+        }
+      }
+      return jsonobj;
+    }
 
     function getData(url, params, successCallback) {
         toast.show({text:'正在加载',loading: true});
@@ -107,10 +117,11 @@ $(function () {
     //配置变压器状态
     function generateTransStatus(data) {
         if (data.hasOwnProperty('TransformerStatus')){
-            showTemperature(data.TransformerStatus);
-            showCurrent(data.TransformerStatus);
-            showPower(data.TransformerStatus);
-            showVoltage(data.TransformerStatus);
+            var transStatus = upperJSONKey(data.TransformerStatus);
+            showTemperature(transStatus);
+            showCurrent(transStatus);
+            showPower(transStatus);
+            showVoltage(transStatus);
         }
     }
 
@@ -122,18 +133,18 @@ $(function () {
             $(".CphaseTemp").html("--");
         } else {
 
-            if (temp.TempA != null)
-                $(".AphaseTemp").html("A相绕组温度:" + temp.TempA);
+            if (temp.TEMPA != null)
+                $(".AphaseTemp").html(temp.TEMPA);
             else
                 $(".AphaseTemp").html("--");
 
-            if (temp.TempB != null)
-                $(".BphaseTemp").html("B相绕组温度:" + temp.TempB);
+            if (temp.TEMPB != null)
+                $(".BphaseTemp").html(temp.TEMPB);
             else
                 $(".BphaseTemp").html("--");
 
-            if (temp.TempC != null)
-                $(".CphaseTemp").html("C相绕组温度:" + temp.TempC);
+            if (temp.TEMPC != null)
+                $(".CphaseTemp").html(temp.TEMPC);
             else
                 $(".CphaseTemp").html("--");
         }
@@ -147,18 +158,18 @@ $(function () {
             $(".Uca").html("--");
         } else {
 
-            if (voltage.Uab != null)
-                $(".Uab").html("Uab线电压:" + voltage.Uab);
+            if (voltage.UAB != null)
+                $(".Uab").html(voltage.UAB);
             else
                 $(".Uab").eq(0).html("--");
 
-            if (voltage.Ubc != null)
-                $(".Ubc").html("Ubc线电压:" + voltage.Ubc);
+            if (voltage.UBC != null)
+                $(".Ubc").html(voltage.UBC);
             else
                 $(".Ubc").html("--");
 
-            if (voltage.Uca != null)
-                $(".Uca").html("Uca线电压:" + voltage.Uca);
+            if (voltage.UCA != null)
+                $(".Uca").html(voltage.UCA);
             else
                 $(".Uca").html("--");
         }
@@ -172,18 +183,18 @@ $(function () {
             $(".CphaseI").html("--");
         } else {
 
-            if (current.Ia != null)
-                $(".AphaseI").html("A相电流:" + current.Ia);
+            if (current.IA != null)
+                $(".AphaseI").html(current.IA);
             else
                 $(".AphaseI").html("--");
 
-            if (current.Ib != null)
-                $(".BphaseI").html("B相电流:" + current.Ib);
+            if (current.IB != null)
+                $(".BphaseI").html(current.IB);
             else
                 $(".BphaseI").html("--");
 
-            if (current.Ic != null)
-                $(".CphaseI").html("C相电流:" + current.Ic);
+            if (current.IC != null)
+                $(".CphaseI").html(current.IC);
             else
                 $(".CphaseI").html("--");
         }
@@ -202,39 +213,39 @@ $(function () {
             $(".MDTime").html("");
         } else {
 
-            if (capacity.fInstalledcapacity != null)
-                $(".Ratedpower").html("额定功率:" + capacity.fInstalledcapacity + "kVA");
+            if (capacity.FINSTALLEDCAPACITY != null)
+                $(".Ratedpower").html(capacity.FINSTALLEDCAPACITY + "kVA");
             else
                 $(".Ratedpower").html("--");
 
             if (capacity.S != null)
-                $(".AP").html("视在功率:" + capacity.S);
+                $(".AP").html(capacity.S);
             else
                 $(".AP").html("--");
 
-            if (capacity.loadFactor != null)
-                $(".LF").html("负荷率:" + (capacity.loadFactor).toFixed(2) + "%");
+            if (capacity.LOADFACTOR != null)
+                $(".LF").html((capacity.LOADFACTOR).toFixed(2) + "%");
             else
                 $(".LF").html("--");
 
             if (capacity.P != null)
-                $(".Fp").html("有功功率:" + capacity.P);
+                $(".Fp").html(capacity.P);
             else
                 $(".Fp").html("--");
             if (capacity.Q != null)
-                $(".Fq").html("无功功率:" + capacity.Q);
+                $(".Fq").html(capacity.Q);
             else
                 $(".Fq").html("--");
             if (capacity.PF != null)
-                $(".Pf").html("功率因数:" + capacity.PF);
+                $(".Pf").html(capacity.PF);
             else
                 $(".Pf").html("--");
             if (capacity.MD != null)
-                $(".MaxD").html("最大需量:" + capacity.MD);
+                $(".MaxD").html(capacity.MD);
             else
                 $(".MaxD").html("--");
-            if (capacity.MDTimeStamp != null) {
-                var time = capacity.MDTimeStamp.substring(0, 16);
+            if (capacity.MDTIMESTAMP != null) {
+                var time = capacity.MDTIMESTAMP.substring(0, 16);
                 $(".MDTime").html(time);
             } else {
                 $(".MDTime").html("");
