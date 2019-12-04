@@ -92,8 +92,8 @@ $(function () {
       time: $("#date").val()
     };
     getData(url, params, function (data) {
-      if (data.FTempFHumidityByDate != null) {
-        if (data.FTempFHumidityByDate.length > 0) {
+      if (data.FTempFHumidityByDate != undefined) {
+//         if (data.FTempFHumidityByDate.length > 0) {
           $(data.FTempFHumidityByDate).each(function () {
             time.push(this.fCollecttime.substring(11, 16));
             temp.push(this.fTemp);
@@ -105,7 +105,7 @@ $(function () {
             humis: humi
           };
           setChart(chartData);
-        }
+//         }
       }
     });
   }
