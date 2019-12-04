@@ -1,7 +1,7 @@
 $(function () {
-//    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjM2MjcxNzYsInVzZXJuYW1lIjoiYWRtaW4ifQ.6MQ7AdQdCC1VlppKNa4gdoUOEiJ6W4wWGQDhET27HZs";
-//    var subidFromAPP = 10100001;
+   // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v3";
+   // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzYwMjU4MjgsInVzZXJuYW1lIjoiaGFoYWhhIn0.i4g9MoJxLI-rJK6FE2-CYISduuumT2vFPY6YTGbyys8";
+   // var subidFromAPP = 10100001;
   //iOS安卓基础传参
    var u = navigator.userAgent,
      app = navigator.appVersion;
@@ -92,21 +92,21 @@ $(function () {
       time: $("#date").val()
     };
     getData(url, params, function (data) {
-      if (data.FTempFHumidityByDate != undefined) {
-//         if (data.FTempFHumidityByDate.length > 0) {
+      if (data.FTempFHumidityByDate != null) {
+        if (data.FTempFHumidityByDate.length > 0) {
           $(data.FTempFHumidityByDate).each(function () {
             time.push(this.fCollecttime.substring(11, 16));
             temp.push(this.fTemp);
             humi.push(this.fHumidity);
           });
-          chartData = {
-            times: time,
-            temps: temp,
-            humis: humi
-          };
-          setChart(chartData);
-//         }
+        }
       }
+	chartData = {
+		times: time,
+		temps: temp,
+		humis: humi
+	};
+	setChart(chartData);
     });
   }
 
