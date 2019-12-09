@@ -60,7 +60,7 @@ section{
 
 }
 /*内容设置*/
-.title p,.data p{
+.title p,.data p,.timeClass p{
     font-size:14px;
 	margin-bottom:0
 }
@@ -78,6 +78,12 @@ section{
 	background:url(../image/temp-b.png) no-repeat 0.5rem center;
 	background-size:10%;
 }
-.data{
+.timeClass{
+	clear: both;
 	margin-bottom:0.5rem;
+}
+.timeClass p{
+	background:url(../image/time-b.png) no-repeat 0.3rem center;
+	background-size:8%;
+	padding-left:1.2rem;
 }
