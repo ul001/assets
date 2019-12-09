@@ -1,31 +1,31 @@
-$(function () {
-//    var baseUrlFromAPP = "http://122.192.163.218:5050/SubstationWEBV2/v3";
-//    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzU1MTAwOTgsInVzZXJuYW1lIjoiYWRtaW4ifQ.BkWf-d8hBF5hov86iAjr147jGGXAvzS3un70T4D93PI";
-//    var subidFromAPP = 10100001;
+$(function() {
+    // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v3";
+    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzY0NjM4NzAsInVzZXJuYW1lIjoiaGFoYWhhIn0.2sVtqOzj78vnr7-fh325VN-RduqF3VZ-Ohm98nVSsAI";
+    // var subidFromAPP = 10100001;
     //iOS安卓基础传参
-     var u = navigator.userAgent,
-         app = navigator.appVersion;
-     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-     //判断数组中是否包含某字符串
-     var baseUrlFromAPP;
-     var tokenFromAPP;
-     var subidFromAPP;
-     if (isIOS) { //ios系统的处理
-         window.webkit.messageHandlers.iOS.postMessage(null);
-         var storage = localStorage.getItem("accessToken");
-         // storage = storage ? JSON.parse(storage):[];
-         storage = JSON.parse(storage);
-         baseUrlFromAPP = storage.baseurl;
-         tokenFromAPP = storage.token;
-         subidFromAPP = storage.fsubID;
-     } else {
-         baseUrlFromAPP = android.getBaseUrl();
-         tokenFromAPP = android.getToken();
-         subidFromAPP = android.getfSubid();
-     }
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
 
-    let toast = new ToastClass();//实例化toast对象
+    let toast = new ToastClass(); //实例化toast对象
 
     // //创建MeScroll对象
     // var mescroll = new MeScroll("mescroll", {
@@ -72,25 +72,25 @@ $(function () {
     // }
     getListDataFromNet();
 
-    function getListDataFromNet(){
-        toast.show({text:'正在加载',loading: true});
-        var url = baseUrlFromAPP+"/energySecurity/leakageMonitor";
+    function getListDataFromNet() {
+        toast.show({ text: '正在加载', loading: true });
+        var url = baseUrlFromAPP + "/energySecurity/leakageMonitor";
         var params = {
             fSubid: subidFromAPP
         };
         $.ajax({
             type: 'GET',
-            url:url,
+            url: url,
             data: params,
-            beforeSend: function (request) {
+            beforeSend: function(request) {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
-            success: function (result) {
+            success: function(result) {
                 toast.hide();
                 creatList(result.data.leakageCurrentValues);
             },
-            error:function () {
-                toast.show({text: '数据请求失败',duration: 2000});
+            error: function() {
+                toast.show({ text: '数据请求失败', duration: 2000 });
             }
         })
     }
@@ -99,50 +99,61 @@ $(function () {
         $("#container").html('');
         var string = '';
         if (data.length > 0) {
-            $.each(data, function (key, val) {
+            $.each(data, function(key, val) {
                 var tempA = "--";
                 var tempB = "--";
                 var tempC = "--";
-                if (val.fTempa != undefined) {
-                    tempA = val.fTempa;
+                var IVal = "--";
+                var updateTime = "--";
+                var timeVal = val.fUpdatetime;
+                var startTime = new Date(timeVal.replace(/\-/g, "/"));
+                var endTime = new Date();
+                var ms = endTime.getTime() - startTime.getTime();
+                var hourVal = ms / 1000 / 60 / 60;
+                if (hourVal > 12) {} else {
+                    IVal = val.fIl;
+                    if (val.fTempa != undefined) {
+                        tempA = val.fTempa;
+                    }
+                    if (val.fTempb != undefined) {
+                        tempB = val.fTempb;
+                    }
+                    if (val.fTempc != undefined) {
+                        tempC = val.fTempc;
+                    }
+                    updateTime = timeVal;
                 }
-                if (val.fTempb != undefined) {
-                    tempB = val.fTempb;
-                }
-                if (val.fTempc != undefined) {
-                    tempC = val.fTempc;
-                }
-
                 string = '<section>' +
                     '<div class="tempDiv">' +
-                    '<div class="alarm">'+
-                    '<img src="image/alarm-green.png"/>'+
-                    '</div>'+
+                    '<div class="alarm">' +
+                    '<img src="image/alarm-green.png"/>' +
+                    '</div>' +
                     '<h3>' + val.fMeterName + '</h3>' +
-                    '<div class="title">'+
-                    '<p>漏电流：</p><p>线缆温度：</p></div>'+
+                    '<div class="title">' +
+                    '<p>漏电流：</p><p>线缆温度：</p></div>' +
                     '<div class="data">' +
-                    '<p>'+val.fIl+'mA</p>'+
+                    '<p>' + IVal + 'mA</p>' +
                     '<p>A:<span>' + tempA + '</span>℃</p>' +
                     '<p>B:<span>' + tempB + '</span>℃</p>' +
                     '<p>C:<span>' + tempC + '</span>℃</p>' +
                     '</div>' +
-                    '<button class="search tempBtn" type="button" name="'+val.fMeterName+'" value="' + val.fMetercode + '"> ' +
+                    '<div class="timeClass"><p>'+updateTime+'</p></div>'+
+                    '<button class="search tempBtn" type="button" name="' + val.fMeterName + '" value="' + val.fMetercode + '"> ' +
                     '<img class="searchBtn" src="image/search.png"/> ' +
                     '查询</button>' +
                     '</div>' +
                     '</section>';
                 $("#container").append(string);
             });
-        }else{
-            window.location.href="noData.html";
+        } else {
+            window.location.href = "noData.html";
         }
 
-        $(".tempBtn").unbind().click(function () {
+        $(".tempBtn").unbind().click(function() {
             var F_MeterCode = $(this).attr("value");
             var F_MeterName = $(this).attr("name");
-            localStorage.setItem("fMeterName",F_MeterName);
-            location.href="LeakageMonitor-modal.html?F_MeterCode="+F_MeterCode;
+            localStorage.setItem("fMeterName", F_MeterName);
+            location.href = "LeakageMonitor-modal.html?F_MeterCode=" + F_MeterCode;
         })
     }
 });
