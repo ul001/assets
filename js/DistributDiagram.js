@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
   //    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
   //    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
   //    var subidFromAPP = 10100001;
@@ -31,7 +31,7 @@ $(function() {
   var params = {
     fSubid: subidFromAPP
   };
-  getDataByAjax(url, params, function(data) {
+  getDataByAjax(url, params, function (data) {
     showSVG(data.xmlContent);
     showList(data.list);
     showDataOnSVG(data.SvgInfo);
@@ -45,12 +45,12 @@ $(function() {
   }
 
   //放大缩小
-  $("#BigDom").on("click", function() {
+  $("#BigDom").on("click", function () {
     $(this).addClass("select");
     $("#SimDom").removeClass("select");
     adjustSVG($("svg"), 1);
   });
-  $("#SimDom").on("click", function() {
+  $("#SimDom").on("click", function () {
     $(this).addClass("select");
     $("#BigDom").removeClass("select");
     adjustSVG($("svg"), -1);
@@ -74,7 +74,7 @@ $(function() {
   function showList(data) {
     $("#subList").html("");
     if (data.length > 0) {
-      $.each(data, function(index, el) {
+      $.each(data, function (index, el) {
         var string = "<option>" + el.fCustomname + "</option>";
         $("#subList").append(string);
       });
@@ -90,14 +90,14 @@ $(function() {
       type: "GET",
       url: url,
       data: params,
-      beforeSend: function(request) {
+      beforeSend: function (request) {
         request.setRequestHeader("Authorization", tokenFromAPP);
       },
-      success: function(result) {
+      success: function (result) {
         toast.hide();
         successCallback(result.data);
       },
-      error: function() {
+      error: function () {
         toast.show({
           text: "数据请求失败",
           duration: 2000
@@ -106,14 +106,14 @@ $(function() {
     });
   }
 
-  $("#subList").change(function(event) {
+  $("#subList").change(function (event) {
     var fCustomname = $("#subList").val();
     var url = baseUrlFromAPP + "/getAppSubimgInfo";
     var params = {
       fSubid: subidFromAPP,
       fCustomname: fCustomname
     };
-    getDataByAjax(url, params, function(data) {
+    getDataByAjax(url, params, function (data) {
       showSVG(data.xmlContent);
       showDataOnSVG(data.SvgInfo);
     });
@@ -123,7 +123,7 @@ $(function() {
     var map = new Map();
     var group;
     if (data.length > 0) {
-      $.each(data, function(key, val) {
+      $.each(data, function (key, val) {
         group = $("#" + val.fCircuitid);
         for (i = 0; i < val.meterParamValues.length; i++) {
           var paramCode = val.meterParamValues[i].fParamcode;
@@ -133,34 +133,47 @@ $(function() {
           switch (paramCode.toUpperCase()) {
             case "SWITCH":
             case "SWITCHON":
-              1 === fvalue
-                ? (group.children('g[name="off"]').hide(),
-                  group.children('g[name="on"]').show())
-                : (group.children('g[name="on"]').hide(),
+              1 === fvalue ?
+                (group.children('g[name="off"]').hide(),
+                  group.children('g[name="on"]').show()) :
+                (group.children('g[name="on"]').hide(),
                   group.children('g[name="off"]').show());
               break;
             case "SWITCHOFF":
-              0 === fvalue
-                ? (group.children('g[name="off"]').hide(),
-                  group.children('g[name="on"]').show())
-                : (group.children('g[name="on"]').hide(),
+              0 === fvalue ?
+                (group.children('g[name="off"]').hide(),
+                  group.children('g[name="on"]').show()) :
+                (group.children('g[name="on"]').hide(),
                   group.children('g[name="off"]').show());
               break;
             default:
           }
         }
 
-        $.each(group.children("g text"), function(index, element) {
+        $.each(group.children("g text"), function (index, element) {
           try {
             var m = element.attributes.name.textContent;
             if (map.has(m.toLowerCase())) {
               var v = map.get(m.toLowerCase());
               var childName = "text[name='" + m + "']";
-
-              group.children(childName).text(map.get(m.toLowerCase()));
+              if (v == undefined || v == 0 || v == '0') {
+                group.children(childName).text("-");
+              } else {
+                group.children(childName).text(map.get(m.toLowerCase()));
+              }
+            } else {
+              group.children(childName).text("-");
             }
           } catch (err) {}
         });
+      });
+    } else {
+      $.each(group.children("g text"), function (index, element) {
+        try {
+
+          group.children(childName).text("-");
+
+        } catch (err) {}
       });
     }
   }
