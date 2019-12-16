@@ -156,7 +156,7 @@ $(function () {
             if (map.has(m.toLowerCase())) {
               var v = map.get(m.toLowerCase());
               var childName = "text[name='" + m + "']";
-              if (v == undefined || v == 0 || v == '0') {
+              if (v == undefined) {
                 group.children(childName).text("-");
               } else {
                 group.children(childName).text(map.get(m.toLowerCase()));
