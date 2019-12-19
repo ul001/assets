@@ -1,89 +1,110 @@
-body{
-	background: #EDEDEC;
+body {
+    background: #EDEDEC;
 }
-*{
-	outline: 0 !important;
+
+* {
+    outline: 0 !important;
 }
-section{
-	width:50%;
-	float:left;
-    	padding-top:1.5rem;
-	margin-bottom: 0.5rem;
+
+section {
+    width: 50%;
+    float: left;
+    padding-top: 1.5rem;
+    margin-bottom: 0.5rem;
 }
-#container{
-    padding:0.5rem 0 0.5rem 0.5rem;
+
+#container {
+    padding: 0.5rem 0 0.5rem 0.5rem;
 }
-.tempDiv h3{
-	font-size:1rem;
-	text-align:center;
-	padding-top:0.5rem;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+
+.tempDiv h3 {
+    font-size: 1rem;
+    text-align: center;
+    padding-top: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-.tempDiv{
-	background:#fff;
-	border:1px solid #C8C9CA;
-	border-radius:0.5rem;
-	margin-right:0.5rem;
+
+.tempDiv {
+    background: #fff;
+    border: 1px solid #C8C9CA;
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
 }
-.tempBtn{
-	display:block;
-	width:90%;
-	margin:0 auto;
-	height: 2.5rem;
-	background-color: #02AC94;
-	color:#fff;
-	border-radius: 4rem;
-	border:none;
-	margin-top:0.5rem;
-	margin-bottom:0.5rem;
+
+.tempBtn {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    height: 2.5rem;
+    background-color: #02AC94;
+    color: #fff;
+    border-radius: 4rem;
+    border: none;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
-.searchBtn{
-	width:1rem;
+
+.searchBtn {
+    width: 1rem;
 }
+
 /*报警*/
-.alarm{
-    margin:0 auto;
-    margin-top:-1.5rem;
-    width:4rem;
-    height:4rem;
-    border-radius:4rem;
-    border:1px solid #C8C9CA;
-    background:#fff;
+.alarm {
+    margin: 0 auto;
+    margin-top: -1.5rem;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 4rem;
+    border: 1px solid #C8C9CA;
+    background: #fff;
 }
-.alarm img{
-	width:50%;
-	margin:0 auto;
-	display:block;
-	padding-top:0.5rem;
+
+.alarm img {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    padding-top: 0.5rem;
 
 }
+
 /*内容设置*/
-.title p,.data p,.timeClass p{
-    font-size:14px;
-	margin-bottom:0
+.title p,
+.data p,
+.timeClass p {
+    font-size: 14px;
+    margin-bottom: 0
 }
-.title,.data{
-	float:left;
+
+.title,
+.data {
+    float: left;
 }
-.title p{
-    padding-left:1.2rem;
+
+.title p {
+    padding-left: 1.2rem;
 }
-.title p{
-	background:url(../image/elec-b.png) no-repeat 0.5rem center;
-	background-size:10%;
+
+.title p {
+    background: url(../image/elec-b.png) no-repeat 0.5rem center;
+    background-size: 10%;
 }
-.title p:nth-child(2){
-	background:url(../image/temp-b.png) no-repeat 0.5rem center;
-	background-size:10%;
+
+.title p:nth-child(2) {
+    background: url(../image/temp-b.png) no-repeat 0.5rem center;
+    background-size: 10%;
 }
-.timeClass{
-	clear: both;
-	margin-bottom:0.5rem;
+
+.timeClass {
+    clear: both;
+    margin-bottom: 0.5rem;
 }
-.timeClass p{
-	background:url(../image/time-b.png) no-repeat 0.3rem center;
-	background-size:8%;
-	padding-left:1.2rem;
+
+.timeClass p {
+    background: url(../image/clock.png) no-repeat 0.3rem center;
+    background-size: 0.85rem;
+    padding-left: 1.3rem;
+    font-size: 0.85rem;
+    color: #b8b8b8;
 }
