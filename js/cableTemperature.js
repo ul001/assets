@@ -1,29 +1,29 @@
-$(function () {
-   // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v3";
-   // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzU1MDgyMDgsInVzZXJuYW1lIjoiYWRtaW4ifQ.qiKgWSZ-f5TLhv4iZlWBtaWYLo4vD0tmpXZxEZyBIP0";
-   // var subidFromAPP = 10100001;
+$(function() {
+    // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
+    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzczMjcxNDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.nJ3QuAFYNiHDBxvdoIQOjrPQWq5Vy7Uo490k5HVmv1U";
+    // var subidFromAPP = 10100001;
     //iOS安卓基础传参
-        var u = navigator.userAgent,
-            app = navigator.appVersion;
-        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-        //判断数组中是否包含某字符串
-        var baseUrlFromAPP;
-        var tokenFromAPP;
-        var subidFromAPP;
-        if (isIOS) { //ios系统的处理
-            window.webkit.messageHandlers.iOS.postMessage(null);
-            var storage = localStorage.getItem("accessToken");
-            // storage = storage ? JSON.parse(storage):[];
-            storage = JSON.parse(storage);
-            baseUrlFromAPP = storage.baseurl;
-            tokenFromAPP = storage.token;
-            subidFromAPP = storage.fsubID;
-        } else {
-            baseUrlFromAPP = android.getBaseUrl();
-            tokenFromAPP = android.getToken();
-            subidFromAPP = android.getfSubid();
-        }
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
 
     //创建MeScroll对象
     // var mescroll = new MeScroll("mescroll", {
@@ -68,11 +68,12 @@ $(function () {
     //     });
     // }
 
-    let toast = new ToastClass();//实例化toast对象
+    let toast = new ToastClass(); //实例化toast对象
     getListDataFromNet();
-    function getListDataFromNet(){
-        toast.show({text:'正在加载',loading: true});
-        var url = baseUrlFromAPP+"/getTempABCResult";
+
+    function getListDataFromNet() {
+        toast.show({ text: '正在加载', loading: true });
+        var url = baseUrlFromAPP + "/getTempABCResult";
         var params = {
             fSubid: subidFromAPP,
             // pageNo:num,
@@ -80,17 +81,17 @@ $(function () {
         };
         $.ajax({
             type: 'GET',
-            url:url,
+            url: url,
             data: params,
-            beforeSend: function (request) {
+            beforeSend: function(request) {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
-            success: function (result) {
+            success: function(result) {
                 toast.hide();
                 creatList(result.data.list);
             },
-            error:function () {
-                toast.show({text: '数据请求失败',duration: 2000});
+            error: function() {
+                toast.show({ text: '数据请求失败', duration: 2000 });
             }
         })
     }
@@ -100,20 +101,28 @@ $(function () {
         $("#container").html('');
         var string = '';
         if (data.length > 0) {
-            $.each(data, function (key, val) {
+            $.each(data, function(key, val) {
                 var tempA = "--";
                 var tempB = "--";
                 var tempC = "--";
-                if (val.a != undefined) {
-                    tempA = val.a;
+                var updateTime = "--";
+                var timeVal = val.timeA.substring(0, 19);
+                var startTime = new Date(timeVal.replace(/\-/g, "/"));
+                var endTime = new Date();
+                var ms = endTime.getTime() - startTime.getTime();
+                var hourVal = ms / 1000 / 60 / 60;
+                if (hourVal > 12) {} else {
+                    if (val.a != undefined) {
+                        tempA = val.a;
+                    }
+                    if (val.b != undefined) {
+                        tempB = val.b;
+                    }
+                    if (val.c != undefined) {
+                        tempC = val.c;
+                    }
+                    updateTime = timeVal;
                 }
-                if (val.b != undefined) {
-                    tempB = val.b;
-                }
-                if (val.c != undefined) {
-                    tempC = val.c;
-                }
-
                 string = '<section>' +
                     '<div class="tempDiv">' +
                     '<h3>' + val.f_MeterName + '</h3>' +
@@ -123,6 +132,7 @@ $(function () {
                     '<p>B:<span>' + tempB + '</span>℃</p>' +
                     '<p>C:<span>' + tempC + '</span>℃</p>' +
                     '</div>' +
+                    '<div class="timeClass"><p>' + updateTime + '</p></div>' +
                     '<button class="search tempBtn" type="button" value="' + val.f_MeterCode + '"> ' +
                     '<img class="searchBtn" src="image/search.png"/> ' +
                     '查询</button>' +
@@ -130,13 +140,13 @@ $(function () {
                     '</section>';
                 $("#container").append(string);
             });
-        }else{
-           window.location.href="noData.html";
+        } else {
+            window.location.href = "noData.html";
         }
 
-        $(".tempBtn").unbind().click(function () {
+        $(".tempBtn").unbind().click(function() {
             var F_MeterCode = $(this).attr("value");
-            location.href="cableTemperature-modal.html?F_MeterCode="+F_MeterCode;
+            location.href = "cableTemperature-modal.html?F_MeterCode=" + F_MeterCode;
         })
     }
 });
