@@ -753,6 +753,7 @@ $(function () {
                 text: title,
                 x: 'center'
             },*/
+            color: ['#B6A2DE','#2EC7C9','#3CA4E4'],
             tooltip: {
                 trigger: 'axis'
             },
