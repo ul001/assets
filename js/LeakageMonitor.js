@@ -1,6 +1,6 @@
 $(function() {
-    // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v3";
-    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzY0NjM4NzAsInVzZXJuYW1lIjoiaGFoYWhhIn0.2sVtqOzj78vnr7-fh325VN-RduqF3VZ-Ohm98nVSsAI";
+    // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
+    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzczMjcxNDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.nJ3QuAFYNiHDBxvdoIQOjrPQWq5Vy7Uo490k5HVmv1U";
     // var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -111,7 +111,9 @@ $(function() {
                 var ms = endTime.getTime() - startTime.getTime();
                 var hourVal = ms / 1000 / 60 / 60;
                 if (hourVal > 12) {} else {
-                    IVal = val.fIl;
+                    if (val.fIl != undefined) {
+                        IVal = val.fIl;
+                    }
                     if (val.fTempa != undefined) {
                         tempA = val.fTempa;
                     }
@@ -137,7 +139,7 @@ $(function() {
                     '<p>B:<span>' + tempB + '</span>℃</p>' +
                     '<p>C:<span>' + tempC + '</span>℃</p>' +
                     '</div>' +
-                    '<div class="timeClass"><p>'+updateTime+'</p></div>'+
+                    '<div class="timeClass"><p>' + updateTime + '</p></div>' +
                     '<button class="search tempBtn" type="button" name="' + val.fMeterName + '" value="' + val.fMetercode + '"> ' +
                     '<img class="searchBtn" src="image/search.png"/> ' +
                     '查询</button>' +
