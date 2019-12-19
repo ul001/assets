@@ -1,63 +1,86 @@
 body {
-	background: #EDEDEC;
+    background: #EDEDEC;
 }
-#container{
-	width:100%;
-	overflow:hidden;
-	padding:0.5rem 0 0 0.5rem;
+
+#container {
+    width: 100%;
+    overflow: hidden;
+    padding: 0.5rem 0 0 0.5rem;
 }
+
 section {
-	width: 33.33%;
-	float: left;
-	margin-bottom: 0.5rem;
+    width: 33.33%;
+    float: left;
+    margin-bottom: 0.5rem;
 }
 
 .chart {
-	width: 100%;
-	height: 300px;
-	border: 1px solid red;
+    width: 100%;
+    height: 300px;
+    border: 1px solid red;
 }
-.tempDiv{
-	background:#fff;
-	border:1px solid #C8C9CA;
-	border-radius:0.5rem;
-	margin-right:0.3rem;
+
+.tempDiv {
+    background: #fff;
+    border: 1px solid #C8C9CA;
+    border-radius: 0.5rem;
+    margin-right: 0.3rem;
 }
-.tempDiv h3{
-	font-size:1rem;
-	text-align:center;
-	padding-top:0.5rem;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+
+.tempDiv h3 {
+    font-size: 1rem;
+    text-align: center;
+    padding-top: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-.tempNum p{
-	margin-bottom:0;
-	display:block;
+
+.tempNum p,
+.timeClass p {
+    margin-bottom: 0;
+    display: block;
 }
-.tempNum img{
-	float:left;
-	width:1.2rem;
-	margin-right:0.4rem;
-	vertical-align:2rem;
-	padding-top:1rem;
-	margin-left:0.3rem;
+
+.tempNum img {
+    float: left;
+    width: 1.2rem;
+    margin-right: 0.4rem;
+    vertical-align: 2rem;
+    padding-top: 1rem;
+    margin-left: 0.3rem;
 }
-.tempBtn{
-	display:block;
-	width:90%;
-	margin:0 auto;
-	height: 2.5rem;
-	background-color: #02AC94;
-	color:#fff;
-	border-radius: 4rem;
-	border:none;
-	margin-top:0.5rem;
-	margin-bottom:0.5rem;
+
+.tempBtn {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    height: 2.5rem;
+    background-color: #02AC94;
+    color: #fff;
+    border-radius: 4rem;
+    border: none;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
-*{
-	outline: 0 !important;
+
+* {
+    outline: 0 !important;
 }
-.searchBtn{
-	width:1rem;
+
+.searchBtn {
+    width: 1rem;
+}
+
+.timeClass {
+    clear: both;
+    margin-bottom: 0.5rem;
+}
+
+.timeClass p {
+    background: url(../image/clock.png) no-repeat 0.3rem center;
+    background-size: 0.85rem;
+    padding-left: 1.3rem;
+    font-size: 0.85rem;
+    color: #b8b8b8;
 }
