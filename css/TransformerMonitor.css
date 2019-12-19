@@ -11,7 +11,7 @@ body {
 	clear: both;
 }
 
-*{
+* {
 	outline: 0 !important;
 }
 
@@ -124,21 +124,10 @@ body {
 
 .MDTime {
 	padding-left: 0.5rem;
-	font-size:0.75rem;
+	font-size: 0.75rem;
 }
 
-/*时间选择*/
-#date {
-	height: 4rem;
-	border-radius: 5px;
-	padding-left: 0.5rem;
-	border: none;
-	width: calc(100% - 11rem);
-	background: transparent;
-	color: #fff;
-	text-align: center;
-	float: left;
-}
+
 
 #datePre,
 #dateNext {
@@ -168,7 +157,8 @@ body {
 
 .selectTime {
 	margin-bottom: 0;
-	padding-left: 0.5rem;
+	margin-left: 5%;
+	width: 90%;
 	clear: both;
 	float: left;
 }
@@ -193,7 +183,21 @@ body {
 	color: #fff;
 	text-align: center;
 	float: left;
+	font-size: 0.85rem;
 }
+
+/*时间选择*/
+/* #date {
+	height: 4rem;
+	border-radius: 5px;
+	padding-left: 0.5rem;
+	border: none;
+	width: calc(100% - 11rem);
+	background: transparent;
+	color: #fff;
+	text-align: center;
+	float: left;
+} */
 
 #datePre,
 #dateNext {
@@ -231,7 +235,7 @@ body {
 	border-radius: 4rem;
 	border: none;
 	float: left;
-	margin: 1rem 0 0.5rem 0.4rem;
+	margin: 1rem 0 1rem 2.4%;
 	background-size: 1rem;
 	background-repeat: no-repeat;
 	background-position: 3rem 0.7rem;
@@ -341,6 +345,6 @@ body {
 	max-width: 5rem;
 }
 
-.tran-statec ul{
+.tran-statec ul {
 	font-size: 0.85rem;
 }
