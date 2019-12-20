@@ -50,16 +50,45 @@ $(function () {
     // });
 
     initFirstNode(); //初始化第一个回路
+    var isClick = 0;
+
     function initFirstNode() {
         var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
         }
-        getData(url, params, function (data) {
+        getData(url, params, function(data) {
             setListData(data);
             $("#search").click();
         });
     }
+
+    $("#CircuitidsList").click(function() {
+        var search = $("#CircuitidsInput").val();
+        var url = baseUrlFromAPP + "/getfCircuitidsList";
+        var params = {
+            fSubid: subidFromAPP,
+            search: search,
+        }
+        getData(url, params, function(data) {
+            setListData(data);
+        });
+        isClick = 1;
+    });
+
+    $(document).on('click', '.clear', function() {
+        $("#CircuitidsInput").val("");
+        if (isClick == 1) {
+            var url = baseUrlFromAPP + "/getfCircuitidsList";
+            var params = {
+                fSubid: subidFromAPP,
+            }
+            getData(url, params, function(data) {
+                setListData(data);
+            });
+            isClick = 0;
+        }
+    });
 
     $(document).on('click', '.elec-btn .btn', function () {
         if ($(this).hasClass('select')) {
