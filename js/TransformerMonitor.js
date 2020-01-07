@@ -157,21 +157,32 @@ $(function () {
             $(".Ubc").html("--");
             $(".Uca").html("--");
         } else {
-
-            if (voltage.UAB != null)
-                $(".Uab").html(voltage.UAB);
-            else
-                $(".Uab").eq(0).html("--");
-
-            if (voltage.UBC != null)
-                $(".Ubc").html(voltage.UBC);
-            else
-                $(".Ubc").html("--");
-
-            if (voltage.UCA != null)
-                $(".Uca").html(voltage.UCA);
-            else
-                $(".Uca").html("--");
+           var UStrA = voltage.UAB;
+           if (UStrA != null){
+               if(UStrA.substr(-2,2).toUpperCase()=="KV"){
+                  $(".Uab").html(voltage.UAB);
+                  $(".Ubc").html(voltage.UBC);
+                  $(".Uca").html(voltage.UCA);
+               }else{
+                  var numa = UStrA.substring(0,UStrA.length-1);
+                  if(numa>1000){
+                     var numb = voltage.UBC.substring(0,voltage.UBC.length-1);
+                     var numc = voltage.UCA.substring(0,voltage.UCA.length-1);
+                     var unit = UStrA.substr(UStrA.length-1,1);
+                     $(".Uab").html((numa/1000).toFixed(2)+unit);
+                     $(".Ubc").html((numb/1000).toFixed(2)+unit);
+                     $(".Uca").html((numc/1000).toFixed(2)+unit);
+                  }else{
+                     $(".Uab").html(voltage.UAB);
+                     $(".Ubc").html(voltage.UBC);
+                     $(".Uca").html(voltage.UCA);
+                  }
+               }
+           }else{
+               $(".Uab").html("--");
+               $(".Ubc").html("--");
+               $(".Uca").html("--");
+           }
         }
     }
 
