@@ -480,6 +480,7 @@ $(function () {
                 data: time,
             },
             yAxis: {
+                name,'kW·h',
                 type: 'value',
                 scale: true, //y轴自适应
             },
