@@ -239,7 +239,7 @@ $(function () {
 
         if (type == 'sum') {
             var sum = (fBar + pBar + gBar).toFixed(0);
-            initBar($("#lineChart"), time, jian, feng, ping, gu, bar, sum, 'kW.h');
+            initBar($("#lineChart"), time, jian, feng, ping, gu, bar, sum, 'kW·h');
             // initPie($("#lineChart"), time, jian, feng, ping, gu, bar, sum, 'kW.h');
         }
         if (type == 'price') {
