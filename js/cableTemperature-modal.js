@@ -138,7 +138,7 @@ $(function () {
                 data: tempC
             }]
         };
-        $(".chart").html('<div class="mainBox"><div id="tempTitle">线缆温度</div><div id="tempChart"></div></div>');
+        $(".chart").html('<div class="mainBox"><div id="tempTitle">线缆温度(℃)</div><div id="tempChart"></div></div>');
         $("#tempChart").removeAttr('_echarts_instance_');
         myChart = echarts.init($("#tempChart").get(0), 'macarons');
         myChart.setOption(option);
