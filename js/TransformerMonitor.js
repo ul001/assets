@@ -1,44 +1,44 @@
-$(function () {
-   // var baseUrlFromAPP = "http://www.acrelcloud.cn/SubstationWEBV2/v3";
-   // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzU5Mzg3NTYsInVzZXJuYW1lIjoieG1weiJ9.pqP7RSasT_AJRwDQgkDBJXbtHurK2yYneU-zZb6Vv8k";
-   // var subidFromAPP = 10100001;
+$(function() {
+    // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
+    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzg5NjYwNDksInVzZXJuYW1lIjoiaGFoYWhhIn0.qCkxuhXzGveb15_jmfAUc_Pc-QLmZuoXxMfWHwQYVnk";
+    // var subidFromAPP = 10100001;
     //iOS安卓基础传参
-      var u = navigator.userAgent,
-          app = navigator.appVersion;
-      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-      var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-      //判断数组中是否包含某字符串
-      var baseUrlFromAPP;
-      var tokenFromAPP;
-      var subidFromAPP;
-      if (isIOS) { //ios系统的处理
-          window.webkit.messageHandlers.iOS.postMessage(null);
-          var storage = localStorage.getItem("accessToken");
-          // storage = storage ? JSON.parse(storage):[];
-          storage = JSON.parse(storage);
-          baseUrlFromAPP = storage.baseurl;
-          tokenFromAPP = storage.token;
-          subidFromAPP = storage.fsubID;
-      } else {
-          baseUrlFromAPP = android.getBaseUrl();
-          tokenFromAPP = android.getToken();
-          subidFromAPP = android.getfSubid();
-      }
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
 
-    let toast = new ToastClass();//实例化toast对象
+    let toast = new ToastClass(); //实例化toast对象
 
     function upperJSONKey(jsonobj) {
-      for (var key in jsonobj) {
-        if (jsonobj[key.toUpperCase()] != jsonobj[key]) {
-          jsonobj[key.toUpperCase()] = jsonobj[key];
-          delete jsonobj[key];
+        for (var key in jsonobj) {
+            if (jsonobj[key.toUpperCase()] != jsonobj[key]) {
+                jsonobj[key.toUpperCase()] = jsonobj[key];
+                delete jsonobj[key];
+            }
         }
-      }
-      return jsonobj;
+        return jsonobj;
     }
 
     function getData(url, params, successCallback) {
-        toast.show({text:'正在加载',loading: true});
+        toast.show({ text: '正在加载', loading: true });
         $.ajax({
             type: 'GET',
             url: url,
@@ -47,35 +47,35 @@ $(function () {
                 Accept: "application/json; charset=utf-8",
                 Authorization: tokenFromAPP
             },
-            success: function (result) {
+            success: function(result) {
                 toast.hide();
                 successCallback(result.data);
             },
-            error:function (){
-                toast.show({text: '数据请求失败',duration: 2000});
+            error: function() {
+                toast.show({ text: '数据请求失败', duration: 2000 });
             }
         });
     }
 
     getTransList();
 
-    function getTransList(){
-        var url = baseUrlFromAPP+"/powerMonitoring/transformerList";
-        var params = {fSubid:subidFromAPP};
-        getData(url,params,function(data){
-            if(data.hasOwnProperty("TransformerList")){
+    function getTransList() {
+        var url = baseUrlFromAPP + "/powerMonitoring/transformerList";
+        var params = { fSubid: subidFromAPP };
+        getData(url, params, function(data) {
+            if (data.hasOwnProperty("TransformerList")) {
                 showTransNames(data.TransformerList);
             }
         });
     }
 
     function showTransNames(transList) {
-        if(transList.length>0){
+        if (transList.length > 0) {
             $(".s-ctn").empty();
-            $(transList).each(function(){
-                $(".s-ctn").append("<div class='trans' value='"+this.fTransid+"'><img/><p>"+this.fTransname+"</p></div>");
+            $(transList).each(function() {
+                $(".s-ctn").append("<div class='trans' value='" + this.fTransid + "'><img/><p>" + this.fTransname + "</p></div>");
             });
-            $(".trans").click(function(){
+            $(".trans").click(function() {
                 $(this).addClass("select").siblings().removeClass("select");
                 getListData();
             });
@@ -95,7 +95,7 @@ $(function () {
             fTransid: selectTrans,
             selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp"
         };
-        getData(url, params, function (data) {
+        getData(url, params, function(data) {
             generateTransStatus(data);
             getDateCurveData();
         });
@@ -108,7 +108,7 @@ $(function () {
             fTransid: selectTrans,
             fDate: $("#date").val()
         };
-        getData(url, params, function (data) {
+        getData(url, params, function(data) {
             info = data;
             generateChartLine(data);
         });
@@ -116,7 +116,7 @@ $(function () {
 
     //配置变压器状态
     function generateTransStatus(data) {
-        if (data.hasOwnProperty('TransformerStatus')){
+        if (data.hasOwnProperty('TransformerStatus')) {
             var transStatus = upperJSONKey(data.TransformerStatus);
             showTemperature(transStatus);
             showCurrent(transStatus);
@@ -157,32 +157,31 @@ $(function () {
             $(".Ubc").html("--");
             $(".Uca").html("--");
         } else {
-           var UStrA = voltage.UAB;
-           if (UStrA != null){
-               if(UStrA.substr(-2,2).toUpperCase()=="KV"){
-                  $(".Uab").html(voltage.UAB);
-                  $(".Ubc").html(voltage.UBC);
-                  $(".Uca").html(voltage.UCA);
-               }else{
-                  var numa = UStrA.substring(0,UStrA.length-1);
-                  if(numa>1000){
-                     var numb = voltage.UBC.substring(0,voltage.UBC.length-1);
-                     var numc = voltage.UCA.substring(0,voltage.UCA.length-1);
-                     var unit = UStrA.substr(UStrA.length-1,1);
-                     $(".Uab").html((numa/1000).toFixed(2)+unit);
-                     $(".Ubc").html((numb/1000).toFixed(2)+unit);
-                     $(".Uca").html((numc/1000).toFixed(2)+unit);
-                  }else{
-                     $(".Uab").html(voltage.UAB);
-                     $(".Ubc").html(voltage.UBC);
-                     $(".Uca").html(voltage.UCA);
-                  }
-               }
-           }else{
-               $(".Uab").html("--");
-               $(".Ubc").html("--");
-               $(".Uca").html("--");
-           }
+            var UStrA = voltage.UAB;
+            if (UStrA != null) {
+                if (UStrA.substr(-2, 2).toUpperCase() == "KV") {
+                    $(".Uab").html(voltage.UAB);
+                    $(".Ubc").html(voltage.UBC);
+                    $(".Uca").html(voltage.UCA);
+                } else {
+                    var numa = UStrA.substring(0, UStrA.length - 1);
+                    if (numa > 1000) {
+                        var numb = voltage.UBC.substring(0, voltage.UBC.length - 1);
+                        var numc = voltage.UCA.substring(0, voltage.UCA.length - 1);
+                        $(".Uab").html((numa / 1000).toFixed(2) + "kV");
+                        $(".Ubc").html((numb / 1000).toFixed(2) + "kV");
+                        $(".Uca").html((numc / 1000).toFixed(2) + "kV");
+                    } else {
+                        $(".Uab").html(voltage.UAB);
+                        $(".Ubc").html(voltage.UBC);
+                        $(".Uca").html(voltage.UCA);
+                    }
+                }
+            } else {
+                $(".Uab").html("--");
+                $(".Ubc").html("--");
+                $(".Uca").html("--");
+            }
         }
     }
 
@@ -284,12 +283,12 @@ $(function () {
             seriesC = [];
 
         if (dataObject.yesterdayPowerValue != null) {
-            $.each(dataObject.yesterdayPowerValue, function (key, val) {
+            $.each(dataObject.yesterdayPowerValue, function(key, val) {
                 times.push(val.fCollecttime.substring(11, 16))
             });
         }
         if (dataObject.PowerValue != null) {
-            $.each(dataObject.PowerValue, function (key, val) {
+            $.each(dataObject.PowerValue, function(key, val) {
                 time.push(val.fCollecttime.substring(11, 16));
             });
         }
@@ -333,7 +332,7 @@ $(function () {
 
 
         if (!dataObject.hasOwnProperty('tempABC') || dataObject.tempABC != null) {
-            $.each(dataObject.tempABC, function (key, val) {
+            $.each(dataObject.tempABC, function(key, val) {
                 timeTemp.push(val.fCollecttime.substring(11, 16));
                 seriesA.push(val.fTempa);
                 seriesB.push(val.fTempb);
@@ -434,8 +433,7 @@ $(function () {
             };
             var unitfS = 'kVA';
             initLine(seriesfS, legendfS, times, titlefS, unitfS);
-        }
-        else if (type == "havePower") {
+        } else if (type == "havePower") {
             var seriesfP = [{
                     name: '当日',
                     type: 'line',
@@ -526,8 +524,7 @@ $(function () {
             var titlefP = transformerName + "  " + "有功功率";
             var unitfP = 'kW';
             initLine(seriesfP, legendfP, times, titlefP, unitfP);
-        }
-        else if (type == "NothingPower") {
+        } else if (type == "NothingPower") {
             var seriesfQ = [{
                     name: '当日',
                     type: 'line',
@@ -618,8 +615,7 @@ $(function () {
             var titlefQ = transformerName + "  " + "无功功率";
             var unitfQ = 'kVar';
             initLine(seriesfQ, legendfQ, times, titlefQ, unitfQ);
-        }
-        else if (type == "tempLine") {
+        } else if (type == "tempLine") {
             var titleTem = transformerName + "  " + "绕阻温度";
             // var titleTem = $("#daycalendarBox").val() + "  " + transformerName + "  " + "绕阻温度";
             var seriesTem = [{
@@ -760,11 +756,11 @@ $(function () {
         var line = echarts.init(document.getElementById('powerChart'));
         // var line = echarts.init($("#powerChart").get(0));
         var option = {
-/*            title: {
-                text: title,
-                x: 'center'
-            },*/
-            color: ['#B6A2DE','#2EC7C9','#3CA4E4'],
+            /*            title: {
+                            text: title,
+                            x: 'center'
+                        },*/
+            color: ['#B6A2DE', '#2EC7C9', '#3CA4E4'],
             tooltip: {
                 trigger: 'axis'
             },
@@ -797,14 +793,14 @@ $(function () {
             yAxis: {
                 name: unit,
                 type: 'value',
-                min: function (value) {
+                min: function(value) {
                     if (value.min <= 0) {
                         return (value.min + value.min * 0.2).toFixed(2);
                     } else {
                         return (value.min - value.min * 0.2).toFixed(2);
                     }
                 },
-                max: function (value) {
+                max: function(value) {
                     return (value.max + value.max * 0.1).toFixed(2);
                 },
                 axisLabel: {
@@ -824,30 +820,30 @@ $(function () {
     }
 
     //点击有功、无功、视在的按钮
-    $("#havePower").click(function () {
+    $("#havePower").click(function() {
         $("#havePower").addClass("s-select").siblings('span').removeClass("s-select");
         getDateCurveData();
     });
-    $("#NothingPower").click(function () {
+    $("#NothingPower").click(function() {
         $("#NothingPower").addClass("s-select").siblings('span').removeClass("s-select");
         getDateCurveData();
     });
-    $("#NowPower").click(function () {
+    $("#NowPower").click(function() {
         $("#NowPower").addClass("s-select").siblings('span').removeClass("s-select");
         getDateCurveData();
     });
-    $("#tempLine").click(function () {
+    $("#tempLine").click(function() {
         $("#tempLine").addClass("s-select").siblings('span').removeClass("s-select");
         getDateCurveData();
     });
-    $("#datePre").click(function () {
+    $("#datePre").click(function() {
         var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
         var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
         $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
         getDateCurveData();
     });
 
-    $("#dateNext").click(function () {
+    $("#dateNext").click(function() {
         var d = new Date();
         var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
         var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
@@ -866,7 +862,7 @@ $(function () {
         beginYear: 2000,
         endYear: 2100,
         value: $("#date").val(),
-        confirm: function (date) {
+        confirm: function(date) {
             var d = new Date(),
                 d1 = new Date(date.replace(/\-/g, "\/")),
                 d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
