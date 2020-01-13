@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
     // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzg5NjYwNDksInVzZXJuYW1lIjoiaGFoYWhhIn0.qCkxuhXzGveb15_jmfAUc_Pc-QLmZuoXxMfWHwQYVnk";
     // var subidFromAPP = 10100001;
@@ -37,40 +37,40 @@ $(function() {
         var params = {
             fSubid: subidFromAPP,
         }
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             setListData(data);
             $("#search").click();
         });
     }
 
-    $("#CircuitidsList").click(function() {
+    $("#CircuitidsList").click(function () {
         var search = $("#CircuitidsInput").val();
         var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
             search: search,
         }
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             setListData(data);
         });
         isClick = 1;
     });
 
-    $(document).on('click', '.clear', function() {
+    $(document).on('click', '.clear', function () {
         $("#CircuitidsInput").val("");
         if (isClick == 1) {
             var url = baseUrlFromAPP + "/getfCircuitidsList";
             var params = {
                 fSubid: subidFromAPP,
             }
-            getData(url, params, function(data) {
+            getData(url, params, function (data) {
                 setListData(data);
             });
             isClick = 0;
         }
     });
 
-    $(document).on('click', '.elec-btn .btn', function() {
+    $(document).on('click', '.elec-btn .btn', function () {
         if ($(this).hasClass('select')) {
             $(this).removeClass('select');
         } else {
@@ -78,33 +78,33 @@ $(function() {
         }
     });
 
-    $("#sideClick").click(function() {
+    $("#sideClick").click(function () {
         $(".tree").show();
         $("html,body").addClass("ban_body");
     });
 
 
-    $(".cancel").click(function() {
+    $(".cancel").click(function () {
         $(".tree").hide();
         $("html,body").removeClass("ban_body");
     });
 
-    $("#confirm").click(function() {
+    $("#confirm").click(function () {
         $(".tree").hide();
         $("html,body").removeClass("ban_body");
         $("#meter").html(currentSelectVode.merterName);
     });
 
-    $("#electric").click(function() {
+    $("#electric").click(function () {
         $(".category").show();
     });
 
-    $(document).on('click', '#search', function() {
+    $(document).on('click', '#search', function () {
         var EnergyKind = "UnB";
         var selectParam = [];
         if (EnergyKind != "fFr") {
             var select = $(".btn.select");
-            $.each(select, function(index, val) {
+            $.each(select, function (index, val) {
                 selectParam.push($(val).attr("value"))
             })
         }
@@ -118,28 +118,65 @@ $(function() {
             fPhase: selectParam.join("-"),
             EnergyKind: EnergyKind,
         }
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             showCharts(data.CircuitValueByDate);
         });
     })
 
 
     function getData(url, params, successCallback) {
-        toast.show({ text: '正在加载', loading: true });
+        toast.show({
+            text: '正在加载',
+            loading: true
+        });
         var token = tokenFromAPP;
         $.ajax({
             type: 'GET',
             url: url,
             data: params,
-            beforeSend: function(request) {
+            beforeSend: function (request) {
                 request.setRequestHeader("Authorization", token)
             },
-            success: function(result) {
+            success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 successCallback(result.data);
             },
-            error: function() {
-                toast.show({ text: '数据请求失败', duration: 2000 });
+            error: function (jsonStr) {
+                var strArr = baseUrlFromAPP.split("/");
+                strArr = strArr.pop().pop();
+                var ipAddress = strArr.join("/");
+                $.ajax({
+                    url: ipAddress + "/SubstationWEBV2/main/uploadExceptionLog",
+                    type: "POST",
+                    data: {
+                        ip: ipAddress,
+                        exceptionMessage: jsonStr
+                    },
+                    success: function (data) {
+
+                    }
+                });
+
+                toast.show({
+                    text: '数据请求失败',
+                    duration: 2000
+                });
             }
         })
     }
@@ -156,7 +193,7 @@ $(function() {
         currentSelectVode.merterId = $('#treeview').treeview('getSelected')[0].id;
         currentSelectVode.merterName = $('#treeview').treeview('getSelected')[0].text;
         $("#meter").html(currentSelectVode.merterName);
-        $('#treeview').on('nodeSelected', function(event, node) {
+        $('#treeview').on('nodeSelected', function (event, node) {
             currentSelectVode.merterId = node.id;
             currentSelectVode.merterName = node.text;
         })
@@ -183,12 +220,12 @@ $(function() {
                 "name": "电压三相不平衡度"
             }]
         }]
-        var arr = $.grep(List, function(obj) {
+        var arr = $.grep(List, function (obj) {
             return obj.id == type;
         })
         $("#EnergyContain").html("");
         if (arr[0].hasOwnProperty('phase')) {
-            $.each(arr[0].phase, function(index, val) {
+            $.each(arr[0].phase, function (index, val) {
                 var string = '<button type="button" class="btn" value="' + val.id + '">' + val.name + '</button>';
                 $("#EnergyContain").append(string);
             })
@@ -202,7 +239,7 @@ $(function() {
         var name = [];
         var tableData = [];
         if (data.length > 0) {
-            $.each(data, function(index, el) {
+            $.each(data, function (index, el) {
                 if ($.inArray(el.fCollecttime.substring(11, 16), time) == -1) {
                     time.push(el.fCollecttime.substring(11, 16));
                 }
@@ -265,7 +302,7 @@ $(function() {
 
     function showLine(name, time, value) {
         var series = [];
-        $.each(value, function(index, el) {
+        $.each(value, function (index, el) {
             series.push({
                 name: el.name,
                 data: el.value,
@@ -339,7 +376,9 @@ $(function() {
                     dataZoom: {
                         yAxisIndex: 'none'
                     },
-                    dataView: { readOnly: true },
+                    dataView: {
+                        readOnly: true
+                    },
                     restore: {}
                 }
             },
@@ -423,13 +462,13 @@ $(function() {
         })
     }
 
-    $("#datePre").click(function() {
+    $("#datePre").click(function () {
         var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
         var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
         $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
     });
 
-    $("#dateNext").click(function() {
+    $("#dateNext").click(function () {
         var d = new Date();
         var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
         var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
@@ -451,7 +490,7 @@ $(function() {
         beginYear: 2000,
         endYear: 2100,
         value: $("#date").val(),
-        confirm: function(date) {
+        confirm: function (date) {
             var d = new Date(),
                 d1 = new Date(date.replace(/\-/g, "\/")),
                 d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整

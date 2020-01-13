@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
     // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzc2ODQzMjcsInVzZXJuYW1lIjoiaGFoYWhhIn0.leVb9Crja_XFXT03AHSLngGlrBfb0QxQuQDIAMbMxLM";
     // var subidFromAPP = 10100001;
@@ -28,7 +28,10 @@ $(function() {
     let toast = new ToastClass(); //实例化toast对象
 
     function getData(url, params, successCallback) {
-        toast.show({ text: '正在加载', loading: true });
+        toast.show({
+            text: '正在加载',
+            loading: true
+        });
         $.ajax({
             type: 'GET',
             url: url,
@@ -37,12 +40,31 @@ $(function() {
                 Accept: "application/json; charset=utf-8",
                 Authorization: tokenFromAPP
             },
-            success: function(result) {
+            success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 successCallback(result.data);
             },
-            error: function() {
-                toast.show({ text: '数据请求失败', duration: 2000 });
+            error: function () {
+                toast.show({
+                    text: '数据请求失败',
+                    duration: 2000
+                });
             }
         });
     }
@@ -56,11 +78,11 @@ $(function() {
         var params = {
             fSubid: subidFromAPP
         };
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             if (data.TempHumiObList != null) {
                 if (data.TempHumiObList.length > 0) {
                     $("#cardList").empty();
-                    $(data.TempHumiObList).each(function() {
+                    $(data.TempHumiObList).each(function () {
                         var tempVal = "--";
                         var humiVal = "--";
                         if (this.temp != undefined && this.temp != null) {
@@ -76,7 +98,7 @@ $(function() {
                             '<p>湿度：' + humiVal + this.humiUnit + '</p></section>');
                     });
                     $("#cardList section:first").addClass("sectionSelect");
-                    $(".sectionCard").on("click", function() {
+                    $(".sectionCard").on("click", function () {
                         $(this).addClass("sectionSelect").siblings().removeClass("sectionSelect");
                         $("#date").val(time);
                         getChartData();
@@ -99,10 +121,10 @@ $(function() {
             fMetercode: selectCode,
             time: $("#date").val()
         };
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             if (data.FTempFHumidityByDate != null) {
                 if (data.FTempFHumidityByDate.length > 0) {
-                    $(data.FTempFHumidityByDate).each(function() {
+                    $(data.FTempFHumidityByDate).each(function () {
                         time.push(this.fCollecttime.substring(11, 16));
                         temp.push(this.fTemp);
                         humi.push(this.fHumidity);
@@ -217,14 +239,14 @@ $(function() {
         myChart2.setOption(option2);
     };
 
-    $("#datePre").click(function() {
+    $("#datePre").click(function () {
         var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
         var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
         $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
         getChartData();
     });
 
-    $("#dateNext").click(function() {
+    $("#dateNext").click(function () {
         var d = new Date();
         var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
         var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
@@ -243,7 +265,7 @@ $(function() {
         beginYear: 2000,
         endYear: 2100,
         value: $("#date").val(),
-        confirm: function(date) {
+        confirm: function (date) {
             var d = new Date(),
                 d1 = new Date(date.replace(/\-/g, "\/")),
                 d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整

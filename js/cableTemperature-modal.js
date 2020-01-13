@@ -50,6 +50,22 @@ $(function () {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
             success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 info = result.data;
                 $("#titleP").text(info.list[0].f_MeterName);

@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
     // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzczMjcxNDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.nJ3QuAFYNiHDBxvdoIQOjrPQWq5Vy7Uo490k5HVmv1U";
     // var subidFromAPP = 10100001;
@@ -72,7 +72,10 @@ $(function() {
     getListDataFromNet();
 
     function getListDataFromNet() {
-        toast.show({ text: '正在加载', loading: true });
+        toast.show({
+            text: '正在加载',
+            loading: true
+        });
         var url = baseUrlFromAPP + "/getTempABCResult";
         var params = {
             fSubid: subidFromAPP,
@@ -83,15 +86,34 @@ $(function() {
             type: 'GET',
             url: url,
             data: params,
-            beforeSend: function(request) {
+            beforeSend: function (request) {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
-            success: function(result) {
+            success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 creatList(result.data.list);
             },
-            error: function() {
-                toast.show({ text: '数据请求失败', duration: 2000 });
+            error: function () {
+                toast.show({
+                    text: '数据请求失败',
+                    duration: 2000
+                });
             }
         })
     }
@@ -101,7 +123,7 @@ $(function() {
         $("#container").html('');
         var string = '';
         if (data.length > 0) {
-            $.each(data, function(key, val) {
+            $.each(data, function (key, val) {
                 var tempA = "--";
                 var tempB = "--";
                 var tempC = "--";
@@ -144,7 +166,7 @@ $(function() {
             window.location.href = "noData.html";
         }
 
-        $(".tempBtn").unbind().click(function() {
+        $(".tempBtn").unbind().click(function () {
             var F_MeterCode = $(this).attr("value");
             location.href = "cableTemperature-modal.html?F_MeterCode=" + F_MeterCode;
         })

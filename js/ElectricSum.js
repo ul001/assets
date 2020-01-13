@@ -1,7 +1,7 @@
 $(function () {
-    //    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-    //    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTY1NjMsInVzZXJuYW1lIjoiYWRtaW4ifQ.DtIlyGjuhmdMSRgVnkZfOcCs-YbEOqV0Bx1jFTGlsTI";
-    //    var subidFromAPP = 10100001;
+    // var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v4";
+    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTY1NjMsInVzZXJuYW1lIjoiYWRtaW4ifQ.DtIlyGjuhmdMSRgVnkZfOcCs-YbEOqV0Bx1jFTGlsTI";
+    // var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -20,9 +20,9 @@ $(function () {
         tokenFromAPP = storage.token;
         subidFromAPP = storage.fsubID;
     } else {
-        baseUrlFromAPP = android.getBaseUrl();
-        tokenFromAPP = android.getToken();
-        subidFromAPP = android.getfSubid();
+        // baseUrlFromAPP = android.getBaseUrl();
+        // tokenFromAPP = android.getToken();
+        // subidFromAPP = android.getfSubid();
     }
 
     var currentSelectVode = {}; //选中节点
@@ -268,10 +268,26 @@ $(function () {
                 request.setRequestHeader("Authorization", token)
             },
             success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 successCallback(result.data);
             },
-            error: function () {
+            error: function (data) {
                 toast.show({
                     text: '数据请求失败',
                     duration: 2000
@@ -458,7 +474,10 @@ $(function () {
                 tableData.push(dic);
             });
             var avg = (sum / data.length).toFixed(2);
-            tableData.push({"value":sum,"time":"合计"});
+            tableData.push({
+                "value": sum,
+                "time": "合计"
+            });
         }
         showTable(tableData);
         var line = echarts.init(document.getElementById('chartContain'));
@@ -480,7 +499,7 @@ $(function () {
                 data: time,
             },
             yAxis: {
-                name:'kW·h',
+                name: 'kW·h',
                 type: 'value',
                 scale: true, //y轴自适应
             },

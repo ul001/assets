@@ -1,31 +1,31 @@
 $(function () {
-//     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-//     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQyMzE3NzMsInVzZXJuYW1lIjoiYWRtaW4ifQ.pfgcsrczhtQN9jwzgeM568npgMAUVsca-cd1AJoc6_s";
-//     var subidFromAPP=10100001;
+    //     var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+    //     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQyMzE3NzMsInVzZXJuYW1lIjoiYWRtaW4ifQ.pfgcsrczhtQN9jwzgeM568npgMAUVsca-cd1AJoc6_s";
+    //     var subidFromAPP=10100001;
     //iOS安卓基础传参
-     var u = navigator.userAgent,
-         app = navigator.appVersion;
-     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-     //判断数组中是否包含某字符串
-     var baseUrlFromAPP;
-     var tokenFromAPP;
-     var subidFromAPP;
-     if (isIOS) { //ios系统的处理
-         window.webkit.messageHandlers.iOS.postMessage(null);
-         var storage = localStorage.getItem("accessToken");
-         // storage = storage ? JSON.parse(storage):[];
-         storage = JSON.parse(storage);
-         baseUrlFromAPP = storage.baseurl;
-         tokenFromAPP = storage.token;
-         subidFromAPP = storage.fsubID;
-     } else {
-         baseUrlFromAPP = android.getBaseUrl();
-         tokenFromAPP = android.getToken();
-         subidFromAPP = android.getfSubid();
-     }
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
 
-    let toast = new ToastClass();//实例化toast对象
+    let toast = new ToastClass(); //实例化toast对象
 
     var choise = 1;
     var info = null;
@@ -34,7 +34,10 @@ $(function () {
     $("#titleP").text(fMeterName);
 
     function setData() {
-        toast.show({text:'正在加载',loading: true});
+        toast.show({
+            text: '正在加载',
+            loading: true
+        });
         var params = {
             fSubid: subidFromAPP,
             fMetercode: f_MeterCode,
@@ -48,6 +51,22 @@ $(function () {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
             success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 if (result.data.leakageCurrentAndTempValues.length > 0) {
                     info = result.data.leakageCurrentAndTempValues[0];
@@ -58,8 +77,11 @@ $(function () {
                     showTable(info);
                 }
             },
-            error:function (){
-                toast.show({text: '数据请求失败',duration: 2000});
+            error: function () {
+                toast.show({
+                    text: '数据请求失败',
+                    duration: 2000
+                });
             }
         });
     }
@@ -89,30 +111,32 @@ $(function () {
             tooltip: {
                 trigger: 'axis'
             },
-            toolbox:{
-                show:true,
-                orient:'horizontal',
-                top:-6,
-                feature:{
+            toolbox: {
+                show: true,
+                orient: 'horizontal',
+                top: -6,
+                feature: {
                     dataZoom: {
                         yAxisIndex: 'none'
                     },
-                    dataView: {readOnly: true},
+                    dataView: {
+                        readOnly: true
+                    },
                     restore: {}
                 }
             },
-            dataZoom: [{   // 这个dataZoom组件，默认控制x轴。
+            dataZoom: [{ // 这个dataZoom组件，默认控制x轴。
                 type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-                start: 0,      // 左边在 10% 的位置。
-                end: 100,         // 右边在 60% 的位置。
-                height:25,
-                bottom:8
+                start: 0, // 左边在 10% 的位置。
+                end: 100, // 右边在 60% 的位置。
+                height: 25,
+                bottom: 8
             }],
-            grid:{
-                left:'13%',
-                right:'11%',
-                top:'20%',
-                bottom:'25%'
+            grid: {
+                left: '13%',
+                right: '11%',
+                top: '20%',
+                bottom: '25%'
             },
             calculable: true,
             xAxis: [{
@@ -133,33 +157,35 @@ $(function () {
                 trigger: 'axis'
             },
             legend: {
-                top:12,
+                top: 12,
                 data: ['温度A', '温度B', '温度C']
             },
-            toolbox:{
-                show:true,
-                orient:'horizontal',
-                top:-6,
-                feature:{
+            toolbox: {
+                show: true,
+                orient: 'horizontal',
+                top: -6,
+                feature: {
                     dataZoom: {
                         yAxisIndex: 'none'
                     },
-                    dataView: {readOnly: true},
+                    dataView: {
+                        readOnly: true
+                    },
                     restore: {}
                 }
             },
-            dataZoom: [{   // 这个dataZoom组件，默认控制x轴。
+            dataZoom: [{ // 这个dataZoom组件，默认控制x轴。
                 type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-                start: 0,      // 左边在 10% 的位置。
-                end: 100,         // 右边在 60% 的位置。
-                height:25,
-                bottom:8
+                start: 0, // 左边在 10% 的位置。
+                end: 100, // 右边在 60% 的位置。
+                height: 25,
+                bottom: 8
             }],
-            grid:{
-                left:'13%',
-                right:'11%',
-                top:'20%',
-                bottom:'25%'
+            grid: {
+                left: '13%',
+                right: '11%',
+                top: '20%',
+                bottom: '25%'
             },
             calculable: true,
             xAxis: [{
@@ -183,10 +209,10 @@ $(function () {
                 data: tempC
             }]
         };
-        $(".chart").html('<div class="mainBox"><div id="elecTitle"><img src="image/elec-sb.png"/>漏电流(mA)</div>'+
-                          '<div id="elecChart"></div></div>'+
-                          '<div class="mainBox"><div id="tempTitle"><img src="image/temp-sb.png"/>温度(°C)</div>'+
-                          '<div id="tempChart"></div></div>');
+        $(".chart").html('<div class="mainBox"><div id="elecTitle"><img src="image/elec-sb.png"/>漏电流(mA)</div>' +
+            '<div id="elecChart"></div></div>' +
+            '<div class="mainBox"><div id="tempTitle"><img src="image/temp-sb.png"/>温度(°C)</div>' +
+            '<div id="tempChart"></div></div>');
         $("#elecChart").removeAttr('_echarts_instance_');
         $("#tempChart").removeAttr('_echarts_instance_');
         myChart = echarts.init($("#elecChart").get(0), 'macarons');

@@ -211,6 +211,22 @@ $(function () {
                     request.setRequestHeader("Authorization", token)
                 },
                 success: function (result) {
+                    if (result.code == "5000") {
+                        var strArr = baseUrlFromAPP.split("/");
+                        strArr.pop();
+                        var ipAddress = strArr.join("/");
+                        $.ajax({
+                            url: ipAddress + "/main/uploadExceptionLog",
+                            type: "POST",
+                            data: {
+                                ip: ipAddress,
+                                exceptionMessage: data.data.stackTrace
+                            },
+                            success: function (data) {
+
+                            }
+                        });
+                    }
                     successCallback && successCallback(result.data);
                 }
             })

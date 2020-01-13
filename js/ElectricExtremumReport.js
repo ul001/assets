@@ -1,10 +1,10 @@
-$(function() {
+$(function () {
     // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
     // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzg5NjYwNDksInVzZXJuYW1lIjoiaGFoYWhhIn0.qCkxuhXzGveb15_jmfAUc_Pc-QLmZuoXxMfWHwQYVnk";
     // var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
-      app = navigator.appVersion;
+        app = navigator.appVersion;
     var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
@@ -12,18 +12,18 @@ $(function() {
     var tokenFromAPP;
     var subidFromAPP;
     if (isIOS) {
-      //ios系统的处理
-      window.webkit.messageHandlers.iOS.postMessage(null);
-      var storage = localStorage.getItem("accessToken");
-      // storage = storage ? JSON.parse(storage):[];
-      storage = JSON.parse(storage);
-      baseUrlFromAPP = storage.baseurl;
-      tokenFromAPP = storage.token;
-      subidFromAPP = storage.fsubID;
+        //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
     } else {
-      baseUrlFromAPP = android.getBaseUrl();
-      tokenFromAPP = android.getToken();
-      subidFromAPP = android.getfSubid();
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
     }
 
     var currentSelectVode = {}; //选中节点
@@ -36,56 +36,56 @@ $(function() {
         var params = {
             fSubid: subidFromAPP
         };
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             setListData(data);
             $("#search").click();
         });
     }
 
-    $("#CircuitidsList").click(function() {
+    $("#CircuitidsList").click(function () {
         var search = $("#CircuitidsInput").val();
         var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
             search: search
         };
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             setListData(data);
         });
         isClick = 1;
     });
 
-    $(document).on("click", ".clear", function() {
+    $(document).on("click", ".clear", function () {
         $("#CircuitidsInput").val("");
         if (isClick == 1) {
             var url = baseUrlFromAPP + "/getfCircuitidsList";
             var params = {
                 fSubid: subidFromAPP
             };
-            getData(url, params, function(data) {
+            getData(url, params, function (data) {
                 setListData(data);
             });
             isClick = 0;
         }
     });
 
-    $("#sideClick").click(function() {
+    $("#sideClick").click(function () {
         $(".tree").show();
         $("html,body").addClass("ban_body");
     });
 
-    $(".cancel").click(function() {
+    $(".cancel").click(function () {
         $(".tree").hide();
         $("html,body").removeClass("ban_body");
     });
 
-    $("#confirm").click(function() {
+    $("#confirm").click(function () {
         $(".tree").hide();
         $("html,body").removeClass("ban_body");
         $("#meter").html(currentSelectVode.merterName);
     });
 
-    $(document).on("click", "#search", function() {
+    $(document).on("click", "#search", function () {
         var EnergyKind = $("#energySelect").val();
         var fCircuitid = currentSelectVode.merterId;
         var time = $("#date").val();
@@ -105,7 +105,7 @@ $(function() {
             params.selectParam = "Voltage";
         }
 
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             switch (EnergyKind) {
                 case "P":
                     generateType(EnergyKind, data.P);
@@ -143,14 +143,30 @@ $(function() {
             type: "GET",
             url: url,
             data: params,
-            beforeSend: function(request) {
+            beforeSend: function (request) {
                 request.setRequestHeader("Authorization", token);
             },
-            success: function(result) {
+            success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 successCallback(result.data);
             },
-            error: function() {
+            error: function () {
                 toast.show({
                     text: "数据请求失败",
                     duration: 2000
@@ -173,7 +189,7 @@ $(function() {
             "getSelected"
         )[0].text;
         $("#meter").html(currentSelectVode.merterName);
-        $("#treeview").on("nodeSelected", function(event, node) {
+        $("#treeview").on("nodeSelected", function (event, node) {
             currentSelectVode.merterId = node.id;
             currentSelectVode.merterName = node.text;
         });
@@ -190,8 +206,8 @@ $(function() {
                 changeUnit = 1;
             }
         }
-        $.each(list, function(key, obj) {
-            $.each(arr, function(key1, obj1) {
+        $.each(list, function (key, obj) {
+            $.each(arr, function (key1, obj1) {
                 if (selectVal == "day") {
                     if (changeUnit == 1) {
                         tableData.push({
@@ -389,7 +405,7 @@ $(function() {
                 ]
             }
         ];
-        var arr = $.grep(paramList, function(obj) {
+        var arr = $.grep(paramList, function (obj) {
             return obj.id == type;
         });
         setTableData(arr[0].phase, list);
@@ -465,7 +481,7 @@ $(function() {
     }
 
     var time = tool.initDate("YMD", new Date());
-    $(document).on("click", ".elec-btn .btn", function() {
+    $(document).on("click", ".elec-btn .btn", function () {
         var obj = $(this);
         $(this)
             .addClass("select")
@@ -511,7 +527,7 @@ $(function() {
         $("#datePre").unbind("click");
         $("#dateNext").unbind("click");
         if (type == "day") {
-            $("#datePre").click(function() {
+            $("#datePre").click(function () {
                 var selectDate = new Date(
                     $("#date")
                     .val()
@@ -530,7 +546,7 @@ $(function() {
                         preDate.getDate())
                 );
             });
-            $("#dateNext").click(function() {
+            $("#dateNext").click(function () {
                 var d = new Date();
                 var nowDate = new Date(
                     d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
@@ -558,7 +574,7 @@ $(function() {
                 }
             });
         } else if (type == "month") {
-            $("#datePre").click(function() {
+            $("#datePre").click(function () {
                 var selectDate = new Date(
                     ($("#date").val() + "-01").replace(/\-/g, "/")
                 );
@@ -571,7 +587,7 @@ $(function() {
                         preDate.getMonth() + 1)
                 );
             });
-            $("#dateNext").click(function() {
+            $("#dateNext").click(function () {
                 var d = new Date();
                 var nowDate = new Date(
                     d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + "01"

@@ -25,7 +25,7 @@ $(function () {
         subidFromAPP = android.getfSubid();
     }
 
-    let toast = new ToastClass();//实例化toast对象
+    let toast = new ToastClass(); //实例化toast对象
 
     var currentSelectVode = {}; //选中节点
     initFirstNode(); //初始化第一个回路
@@ -105,7 +105,10 @@ $(function () {
     };
 
     function getData(url, params, successCallback) {
-        toast.show({text:'正在加载',loading: true});
+        toast.show({
+            text: '正在加载',
+            loading: true
+        });
         $.ajax({
             type: 'GET',
             url: url,
@@ -114,11 +117,30 @@ $(function () {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
             success: function (result) {
+                if (data.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 successCallback(result.data);
             },
-            error:function (){
-                toast.show({text: '数据请求失败',duration: 2000});
+            error: function () {
+                toast.show({
+                    text: '数据请求失败',
+                    duration: 2000
+                });
             }
         })
     };
@@ -160,6 +182,22 @@ $(function () {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
             success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 if (result.data[0] != null) {
                     var myDate = result.data[0].f_MDMaxTime;
                     $(".max").html("<p>当月最大需量</p><h1><span id='maxVal'>" + result.data[0].f_MDMaxValue + "</span><span>KW</span></h1>" +

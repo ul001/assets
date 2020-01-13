@@ -57,33 +57,33 @@ $(function () {
         var params = {
             fSubid: subidFromAPP,
         }
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             setListData(data);
             $("#search").click();
         });
     }
 
-    $("#CircuitidsList").click(function() {
+    $("#CircuitidsList").click(function () {
         var search = $("#CircuitidsInput").val();
         var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
             search: search,
         }
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             setListData(data);
         });
         isClick = 1;
     });
 
-    $(document).on('click', '.clear', function() {
+    $(document).on('click', '.clear', function () {
         $("#CircuitidsInput").val("");
         if (isClick == 1) {
             var url = baseUrlFromAPP + "/getfCircuitidsList";
             var params = {
                 fSubid: subidFromAPP,
             }
-            getData(url, params, function(data) {
+            getData(url, params, function (data) {
                 setListData(data);
             });
             isClick = 0;
@@ -216,6 +216,22 @@ $(function () {
                     request.setRequestHeader("Authorization", token)
                 },
                 success: function (result) {
+                    if (result.code == "5000") {
+                        var strArr = baseUrlFromAPP.split("/");
+                        strArr.pop();
+                        var ipAddress = strArr.join("/");
+                        $.ajax({
+                            url: ipAddress + "/main/uploadExceptionLog",
+                            type: "POST",
+                            data: {
+                                ip: ipAddress,
+                                exceptionMessage: data.data.stackTrace
+                            },
+                            success: function (data) {
+
+                            }
+                        });
+                    }
                     toast.hide();
                     // mescroll.endSuccess(data.list.length);
                     successCallback(result.data);

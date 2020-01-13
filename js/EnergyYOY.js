@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     // var baseUrlFromAPP = "http://47.111.190.45:8080/SubstationWEBV2/v3";
     // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzI3MTI0NzgsInVzZXJuYW1lIjoiYWRtaW4ifQ.w99WV_8QkrVKVHTbYBLQvSFsDqVGJtaktY6rLt5N7RY";
     // var subidFromAPP = 10100070;
@@ -37,34 +37,34 @@ $(function() {
             fSubid: subidFromAPP
         };
 
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             setListData(data);
             getURLData();
             // $("#search").click();
         });
     }
 
-    $("#CircuitidsList").click(function() {
+    $("#CircuitidsList").click(function () {
         var search = $("#CircuitidsInput").val();
         var url = baseUrlFromAPP + "/getfCircuitidsList";
         var params = {
             fSubid: subidFromAPP,
             search: search
         };
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             setListData(data);
         });
         isClick = 1;
     });
 
-    $(document).on("click", ".clear", function() {
+    $(document).on("click", ".clear", function () {
         $("#CircuitidsInput").val("");
         if (isClick == 1) {
             var url = baseUrlFromAPP + "/getfCircuitidsList";
             var params = {
                 fSubid: subidFromAPP
             };
-            getData(url, params, function(data) {
+            getData(url, params, function (data) {
                 setListData(data);
             });
             isClick = 0;
@@ -74,7 +74,7 @@ $(function() {
     //配置时间
     var showtimeForElectSum = tool.initDate("YMD", new Date());
 
-    $(document).on("click", ".elec-btn .btn", function() {
+    $(document).on("click", ".elec-btn .btn", function () {
         var obj = $(this);
         $(this)
             .addClass("select")
@@ -97,24 +97,24 @@ $(function() {
         roll.value = showtimeForElectSum;
     });
 
-    $("#sideClick").click(function() {
+    $("#sideClick").click(function () {
         $(".tree").show();
         $("html,body").addClass("ban_body");
     });
 
-    $(".cancel").click(function() {
+    $(".cancel").click(function () {
         $(".tree").hide();
         $("html,body").removeClass("ban_body");
     });
 
-    $("#confirm").click(function() {
+    $("#confirm").click(function () {
         $(".tree").hide();
         $("html,body").removeClass("ban_body");
         $("#meter").html(currentSelectVode.merterName);
         getURLData();
     });
 
-    $("#electric").click(function() {
+    $("#electric").click(function () {
         $(".category").show();
     });
 
@@ -149,7 +149,7 @@ $(function() {
             // fPhase: selectParam,
             // EnergyKind: EnergyKind,
         };
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
 
             showCharts(data.monthValueListUpToNow);
         });
@@ -165,14 +165,30 @@ $(function() {
             type: "GET",
             url: url,
             data: params,
-            beforeSend: function(request) {
+            beforeSend: function (request) {
                 request.setRequestHeader("Authorization", token);
             },
-            success: function(result) {
+            success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 successCallback(result.data);
             },
-            error: function() {
+            error: function () {
                 toast.show({
                     text: '数据请求失败',
                     duration: 2000
@@ -195,13 +211,13 @@ $(function() {
             "getSelected"
         )[0].text;
         $("#meter").html(currentSelectVode.merterName);
-        $("#treeview").on("nodeSelected", function(event, node) {
+        $("#treeview").on("nodeSelected", function (event, node) {
             currentSelectVode.merterId = node.id;
             currentSelectVode.merterName = node.text;
         });
     }
 
-    $(document).on("click", ".category li", function() {
+    $(document).on("click", ".category li", function () {
         var type = $(this)
             .children("label")
             .attr("value");
@@ -322,12 +338,12 @@ $(function() {
                 ]
             }
         ];
-        var arr = $.grep(List, function(obj) {
+        var arr = $.grep(List, function (obj) {
             return obj.id == type;
         });
         $("#EnergyContain").html("");
         if (arr[0].hasOwnProperty("phase")) {
-            $.each(arr[0].phase, function(index, val) {
+            $.each(arr[0].phase, function (index, val) {
                 var string =
                     '<button type="button" class="btn" value="' +
                     val.id +
@@ -363,7 +379,7 @@ $(function() {
             "12月"
         ];
         if (data.length > 0) {
-            $.each(timearr, function() {
+            $.each(timearr, function () {
                 nowvalue.push("-");
                 pervalue.push("-");
             });
@@ -376,7 +392,7 @@ $(function() {
             var tableData;
 
 
-            $.each(data, function(index, el) {
+            $.each(data, function (index, el) {
 
                 // nowtime.push(el.fDate);
                 // var predate = new Date(el.fDate); //根据字符串获得日期

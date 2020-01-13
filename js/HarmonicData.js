@@ -1,31 +1,31 @@
 $(function () {
-//  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-//  var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQyMzE3NzMsInVzZXJuYW1lIjoiYWRtaW4ifQ.pfgcsrczhtQN9jwzgeM568npgMAUVsca-cd1AJoc6_s";
-//  var subidFromAPP=10100001;
-    //iOS安卓基础传参
-      var u = navigator.userAgent,
-          app = navigator.appVersion;
-      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-      var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-      //判断数组中是否包含某字符串
-      var baseUrlFromAPP;
-      var tokenFromAPP;
-      var subidFromAPP;
-      if (isIOS) { //ios系统的处理
-          window.webkit.messageHandlers.iOS.postMessage(null);
-          var storage = localStorage.getItem("accessToken");
-          // storage = storage ? JSON.parse(storage):[];
-          storage = JSON.parse(storage);
-          baseUrlFromAPP = storage.baseurl;
-          tokenFromAPP = storage.token;
-          subidFromAPP = storage.fsubID;
-      } else {
-          baseUrlFromAPP = android.getBaseUrl();
-          tokenFromAPP = android.getToken();
-          subidFromAPP = android.getfSubid();
-      }
+  //  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
+  //  var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQyMzE3NzMsInVzZXJuYW1lIjoiYWRtaW4ifQ.pfgcsrczhtQN9jwzgeM568npgMAUVsca-cd1AJoc6_s";
+  //  var subidFromAPP=10100001;
+  //iOS安卓基础传参
+  var u = navigator.userAgent,
+    app = navigator.appVersion;
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+  var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+  //判断数组中是否包含某字符串
+  var baseUrlFromAPP;
+  var tokenFromAPP;
+  var subidFromAPP;
+  if (isIOS) { //ios系统的处理
+    window.webkit.messageHandlers.iOS.postMessage(null);
+    var storage = localStorage.getItem("accessToken");
+    // storage = storage ? JSON.parse(storage):[];
+    storage = JSON.parse(storage);
+    baseUrlFromAPP = storage.baseurl;
+    tokenFromAPP = storage.token;
+    subidFromAPP = storage.fsubID;
+  } else {
+    baseUrlFromAPP = android.getBaseUrl();
+    tokenFromAPP = android.getToken();
+    subidFromAPP = android.getfSubid();
+  }
 
-    let toast = new ToastClass();//实例化toast对象
+  let toast = new ToastClass(); //实例化toast对象
 
   var currentSelectVode = {}; //选中节点
 
@@ -33,7 +33,7 @@ $(function () {
   var isClick = 0;
 
   function initFirstNode() {
-    var url = baseUrlFromAPP+"/getfCircuitidsList";
+    var url = baseUrlFromAPP + "/getfCircuitidsList";
     var params = {
       fSubid: subidFromAPP,
     }
@@ -46,7 +46,7 @@ $(function () {
 
   $("#CircuitidsList").click(function () {
     var search = $("#CircuitidsInput").val();
-    var url = baseUrlFromAPP+"/getfCircuitidsList";
+    var url = baseUrlFromAPP + "/getfCircuitidsList";
     var params = {
       fSubid: subidFromAPP,
       search: search,
@@ -60,7 +60,7 @@ $(function () {
   $(document).on('click', '.clear', function () {
     $("#CircuitidsInput").val("");
     if (isClick == 1) {
-      var url = baseUrlFromAPP+"/getfCircuitidsList";
+      var url = baseUrlFromAPP + "/getfCircuitidsList";
       var params = {
         fSubid: subidFromAPP,
       }
@@ -129,7 +129,7 @@ $(function () {
   $(document).on('click', '#search', function () {
     var fCircuitid = currentSelectVode.merterId;
     var time = $("#date").val();
-    var url = baseUrlFromAPP+"/powerQuality/Harmonic";
+    var url = baseUrlFromAPP + "/powerQuality/Harmonic";
     var params = {
       fSubid: subidFromAPP,
       fCircuitid: fCircuitid,
@@ -145,7 +145,10 @@ $(function () {
 
 
   function getData(url, params, successCallback) {
-    toast.show({text:'正在加载',loading: true});
+    toast.show({
+      text: '正在加载',
+      loading: true
+    });
     var token = tokenFromAPP;
     $.ajax({
       type: 'GET',
@@ -155,11 +158,30 @@ $(function () {
         request.setRequestHeader("Authorization", token)
       },
       success: function (result) {
+        if (result.code == "5000") {
+          var strArr = baseUrlFromAPP.split("/");
+          strArr.pop();
+          var ipAddress = strArr.join("/");
+          $.ajax({
+            url: ipAddress + "/main/uploadExceptionLog",
+            type: "POST",
+            data: {
+              ip: ipAddress,
+              exceptionMessage: data.data.stackTrace
+            },
+            success: function (data) {
+
+            }
+          });
+        }
         toast.hide();
         successCallback(result.data);
       },
-      error:function(){
-        toast.show({text: '数据请求失败',duration: 2000});
+      error: function () {
+        toast.show({
+          text: '数据请求失败',
+          duration: 2000
+        });
       }
     })
   }
@@ -257,40 +279,40 @@ $(function () {
         data: el.value,
         type: 'line',
         markPoint: {
-                    symbol: 'circle',
-                    symbolSize: 10,
-                    data: [{
-                        name: '最大值',
-                        type: 'max',
-                        label: {
-                          normal: {
-                            formatter: 'Max:{c}'
-                          }
-                        }
-                      },
-                      {
-                        name: '最小值',
-                        type: 'min',
-                        label: {
-                          normal: {
-                            formatter: 'Min:{c}'
-                          }
-                        }
-                      }
-                    ],
-                    itemStyle: {
-                      normal: {
-                        label: {
-                          position: 'top'
-                        }
-                      }
-                    }
-                  },
+          symbol: 'circle',
+          symbolSize: 10,
+          data: [{
+              name: '最大值',
+              type: 'max',
+              label: {
+                normal: {
+                  formatter: 'Max:{c}'
+                }
+              }
+            },
+            {
+              name: '最小值',
+              type: 'min',
+              label: {
+                normal: {
+                  formatter: 'Min:{c}'
+                }
+              }
+            }
+          ],
+          itemStyle: {
+            normal: {
+              label: {
+                position: 'top'
+              }
+            }
+          }
+        },
         markLine: {
-            data: [{
-              name: '平均值',
-              type: 'average'
-            }]
+          data: [{
+            name: '平均值',
+            type: 'average'
+          }]
         }
       })
     });
@@ -300,9 +322,9 @@ $(function () {
       tooltip: {
         trigger: 'axis'
       },
-/*      legend: {
-        data: name,
-      },*/
+      /*      legend: {
+              data: name,
+            },*/
       grid: { // 控制图的大小，调整下面这些值就可以，
         top: '18%',
         left: '10%',
@@ -319,12 +341,14 @@ $(function () {
       },
       toolbox: {
         left: 'right',
-        top:-6,
+        top: -6,
         feature: {
           dataZoom: {
             yAxisIndex: 'none'
           },
-          dataView: {readOnly: true},
+          dataView: {
+            readOnly: true
+          },
           restore: {}
         }
       },
@@ -340,65 +364,66 @@ $(function () {
   }
 
   function showTable(data) {
-    var columns = [[{
-        field: "name",
-        title: "类型",
-        align: "center",
-        valign:"middle",
-        align:"center",
-        colspan: 1,
-        rowspan: 2
-      },
-      {
-        field: "maxVT",
-        title: "最大值",
-        valign:"middle",
-        align:"center",
-        colspan: 2,
-        rowspan: 1
-      },
-      {
-        field: "minVT",
-        title: "最小值",
-        valign:"middle",
-        align:"center",
-        colspan: 2,
-        rowspan: 1
-      },
-      {
-        field: "avg",
-        title: "平均值",
-        valign:"middle",
-        align:"center",
-        colspan: 1,
-        rowspan: 2
-      }
-    ],
-    [
-      {
-        field: "max",
-        title: "值",
-        valign:"middle",
-        align:"center"
-      },
-      {
-        field: "maxTime",
-        title: "时间",
-        valign:"middle",
-        align:"center"
-      },
-      {
-        field: "min",
-        title: "值",
-        valign:"middle",
-        align:"center"
-      },
-      {
-        field: "minTime",
-        title: "时间",
-        align: "center"
-      }
-    ]];
+    var columns = [
+      [{
+          field: "name",
+          title: "类型",
+          align: "center",
+          valign: "middle",
+          align: "center",
+          colspan: 1,
+          rowspan: 2
+        },
+        {
+          field: "maxVT",
+          title: "最大值",
+          valign: "middle",
+          align: "center",
+          colspan: 2,
+          rowspan: 1
+        },
+        {
+          field: "minVT",
+          title: "最小值",
+          valign: "middle",
+          align: "center",
+          colspan: 2,
+          rowspan: 1
+        },
+        {
+          field: "avg",
+          title: "平均值",
+          valign: "middle",
+          align: "center",
+          colspan: 1,
+          rowspan: 2
+        }
+      ],
+      [{
+          field: "max",
+          title: "值",
+          valign: "middle",
+          align: "center"
+        },
+        {
+          field: "maxTime",
+          title: "时间",
+          valign: "middle",
+          align: "center"
+        },
+        {
+          field: "min",
+          title: "值",
+          valign: "middle",
+          align: "center"
+        },
+        {
+          field: "minTime",
+          title: "时间",
+          align: "center"
+        }
+      ]
+    ];
     $("#tableContain").html("");
     $("#tableContain").html("<table id='table'></table>");
     $("#table").bootstrapTable({

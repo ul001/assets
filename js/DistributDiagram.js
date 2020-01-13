@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
     // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzg5NjYwNDksInVzZXJuYW1lIjoiaGFoYWhhIn0.qCkxuhXzGveb15_jmfAUc_Pc-QLmZuoXxMfWHwQYVnk";
     // var subidFromAPP = 10100001;
@@ -31,7 +31,7 @@ $(function() {
     var params = {
         fSubid: subidFromAPP
     };
-    getDataByAjax(url, params, function(data) {
+    getDataByAjax(url, params, function (data) {
         showSVG(data.xmlContent);
         showList(data.list);
         showDataOnSVG(data.SvgInfo);
@@ -45,12 +45,12 @@ $(function() {
     }
 
     //放大缩小
-    $("#BigDom").on("click", function() {
+    $("#BigDom").on("click", function () {
         $(this).addClass("select");
         $("#SimDom").removeClass("select");
         adjustSVG($("svg"), 1);
     });
-    $("#SimDom").on("click", function() {
+    $("#SimDom").on("click", function () {
         $(this).addClass("select");
         $("#BigDom").removeClass("select");
         adjustSVG($("svg"), -1);
@@ -74,7 +74,7 @@ $(function() {
     function showList(data) {
         $("#subList").html("");
         if (data.length > 0) {
-            $.each(data, function(index, el) {
+            $.each(data, function (index, el) {
                 var string = "<option>" + el.fCustomname + "</option>";
                 $("#subList").append(string);
             });
@@ -90,14 +90,30 @@ $(function() {
             type: "GET",
             url: url,
             data: params,
-            beforeSend: function(request) {
+            beforeSend: function (request) {
                 request.setRequestHeader("Authorization", tokenFromAPP);
             },
-            success: function(result) {
+            success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 successCallback(result.data);
             },
-            error: function() {
+            error: function () {
                 toast.show({
                     text: "数据请求失败",
                     duration: 2000
@@ -106,14 +122,14 @@ $(function() {
         });
     }
 
-    $("#subList").change(function(event) {
+    $("#subList").change(function (event) {
         var fCustomname = $("#subList").val();
         var url = baseUrlFromAPP + "/getAppSubimgInfo";
         var params = {
             fSubid: subidFromAPP,
             fCustomname: fCustomname
         };
-        getDataByAjax(url, params, function(data) {
+        getDataByAjax(url, params, function (data) {
             showSVG(data.xmlContent);
             showDataOnSVG(data.SvgInfo);
         });
@@ -123,7 +139,7 @@ $(function() {
         var map = new Map();
         var group;
         if (data.length > 0) {
-            $.each(data, function(key, val) {
+            $.each(data, function (key, val) {
                 group = $("#" + val.fCircuitid);
                 for (i = 0; i < val.meterParamValues.length; i++) {
                     var paramCode = val.meterParamValues[i].fParamcode;
@@ -155,7 +171,7 @@ $(function() {
                     }
                 }
 
-                $.each(group.children("g text"), function(index, element) {
+                $.each(group.children("g text"), function (index, element) {
                     try {
                         var m = element.attributes.name.textContent;
                         if (map.has(m.toLowerCase())) {
@@ -173,7 +189,7 @@ $(function() {
                 });
             });
         } else {
-            $.each(group.children("g text"), function(index, element) {
+            $.each(group.children("g text"), function (index, element) {
                 try {
 
                     group.children(childName).text("-");

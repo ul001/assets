@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
     // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzg5NjYwNDksInVzZXJuYW1lIjoiaGFoYWhhIn0.qCkxuhXzGveb15_jmfAUc_Pc-QLmZuoXxMfWHwQYVnk";
     // var subidFromAPP = 10100001;
@@ -38,7 +38,10 @@ $(function() {
     }
 
     function getData(url, params, successCallback) {
-        toast.show({ text: '正在加载', loading: true });
+        toast.show({
+            text: '正在加载',
+            loading: true
+        });
         $.ajax({
             type: 'GET',
             url: url,
@@ -47,12 +50,31 @@ $(function() {
                 Accept: "application/json; charset=utf-8",
                 Authorization: tokenFromAPP
             },
-            success: function(result) {
+            success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    strArr.pop();
+                    var ipAddress = strArr.join("/");
+                    $.ajax({
+                        url: ipAddress + "/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: data.data.stackTrace
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
                 toast.hide();
                 successCallback(result.data);
             },
-            error: function() {
-                toast.show({ text: '数据请求失败', duration: 2000 });
+            error: function () {
+                toast.show({
+                    text: '数据请求失败',
+                    duration: 2000
+                });
             }
         });
     }
@@ -61,8 +83,10 @@ $(function() {
 
     function getTransList() {
         var url = baseUrlFromAPP + "/powerMonitoring/transformerList";
-        var params = { fSubid: subidFromAPP };
-        getData(url, params, function(data) {
+        var params = {
+            fSubid: subidFromAPP
+        };
+        getData(url, params, function (data) {
             if (data.hasOwnProperty("TransformerList")) {
                 showTransNames(data.TransformerList);
             }
@@ -72,10 +96,10 @@ $(function() {
     function showTransNames(transList) {
         if (transList.length > 0) {
             $(".s-ctn").empty();
-            $(transList).each(function() {
+            $(transList).each(function () {
                 $(".s-ctn").append("<div class='trans' value='" + this.fTransid + "'><img/><p>" + this.fTransname + "</p></div>");
             });
-            $(".trans").click(function() {
+            $(".trans").click(function () {
                 $(this).addClass("select").siblings().removeClass("select");
                 getListData();
             });
@@ -95,7 +119,7 @@ $(function() {
             fTransid: selectTrans,
             selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp"
         };
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             generateTransStatus(data);
             getDateCurveData();
         });
@@ -108,7 +132,7 @@ $(function() {
             fTransid: selectTrans,
             fDate: $("#date").val()
         };
-        getData(url, params, function(data) {
+        getData(url, params, function (data) {
             info = data;
             generateChartLine(data);
         });
@@ -283,12 +307,12 @@ $(function() {
             seriesC = [];
 
         if (dataObject.yesterdayPowerValue != null) {
-            $.each(dataObject.yesterdayPowerValue, function(key, val) {
+            $.each(dataObject.yesterdayPowerValue, function (key, val) {
                 times.push(val.fCollecttime.substring(11, 16))
             });
         }
         if (dataObject.PowerValue != null) {
-            $.each(dataObject.PowerValue, function(key, val) {
+            $.each(dataObject.PowerValue, function (key, val) {
                 time.push(val.fCollecttime.substring(11, 16));
             });
         }
@@ -332,7 +356,7 @@ $(function() {
 
 
         if (!dataObject.hasOwnProperty('tempABC') || dataObject.tempABC != null) {
-            $.each(dataObject.tempABC, function(key, val) {
+            $.each(dataObject.tempABC, function (key, val) {
                 timeTemp.push(val.fCollecttime.substring(11, 16));
                 seriesA.push(val.fTempa);
                 seriesB.push(val.fTempb);
@@ -793,14 +817,14 @@ $(function() {
             yAxis: {
                 name: unit,
                 type: 'value',
-                min: function(value) {
+                min: function (value) {
                     if (value.min <= 0) {
                         return (value.min + value.min * 0.2).toFixed(2);
                     } else {
                         return (value.min - value.min * 0.2).toFixed(2);
                     }
                 },
-                max: function(value) {
+                max: function (value) {
                     return (value.max + value.max * 0.1).toFixed(2);
                 },
                 axisLabel: {
@@ -820,30 +844,30 @@ $(function() {
     }
 
     //点击有功、无功、视在的按钮
-    $("#havePower").click(function() {
+    $("#havePower").click(function () {
         $("#havePower").addClass("s-select").siblings('span').removeClass("s-select");
         getDateCurveData();
     });
-    $("#NothingPower").click(function() {
+    $("#NothingPower").click(function () {
         $("#NothingPower").addClass("s-select").siblings('span').removeClass("s-select");
         getDateCurveData();
     });
-    $("#NowPower").click(function() {
+    $("#NowPower").click(function () {
         $("#NowPower").addClass("s-select").siblings('span').removeClass("s-select");
         getDateCurveData();
     });
-    $("#tempLine").click(function() {
+    $("#tempLine").click(function () {
         $("#tempLine").addClass("s-select").siblings('span').removeClass("s-select");
         getDateCurveData();
     });
-    $("#datePre").click(function() {
+    $("#datePre").click(function () {
         var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
         var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
         $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
         getDateCurveData();
     });
 
-    $("#dateNext").click(function() {
+    $("#dateNext").click(function () {
         var d = new Date();
         var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
         var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
@@ -862,7 +886,7 @@ $(function() {
         beginYear: 2000,
         endYear: 2100,
         value: $("#date").val(),
-        confirm: function(date) {
+        confirm: function (date) {
             var d = new Date(),
                 d1 = new Date(date.replace(/\-/g, "\/")),
                 d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
