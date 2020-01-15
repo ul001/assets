@@ -200,7 +200,7 @@ $(function () {
                 }
                 if (result.data[0] != null) {
                     var myDate = result.data[0].f_MDMaxTime;
-                    $(".max").html("<p>当月最大需量</p><h1><span id='maxVal'>" + result.data[0].f_MDMaxValue + "</span><span>KW</span></h1>" +
+                    $(".max").html("<p>当月最大需量</p><h1><span id='maxVal'>" + result.data[0].f_MDMaxValue + "</span><span>kW</span></h1>" +
                         "<p id='timeP'>" + myDate.slice(0, myDate.indexOf(".")) + "</p>");
                 } else {
                     $(".max").html("<p></p><h1 id='noMatch'><span>没有找到匹配的记录</span></h1><p id='timeP'></p>");
