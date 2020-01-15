@@ -116,7 +116,7 @@ $(function () {
             beforeSend: function (request) {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
-            success: function (result) {
+            success: function (data) {
                 if (data.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
                     strArr.pop();
@@ -134,7 +134,7 @@ $(function () {
                     });
                 }
                 toast.hide();
-                successCallback(result.data);
+                successCallback(data.data);
             },
             error: function () {
                 toast.show({
@@ -191,7 +191,7 @@ $(function () {
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: data.data.stackTrace
+                            exceptionMessage: result.data.stackTrace
                         },
                         success: function (data) {
 
