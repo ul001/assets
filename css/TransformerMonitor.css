@@ -135,15 +135,14 @@ body {
 }
 
 .selectTime {
-    margin-bottom: 0;
-    margin-left: 5%;
-    width: 90%;
+    margin:0 auto;
+    width: 100%;
     clear: both;
     float: left;
 }
 
 .timeBtn {
-    width: 100%;
+    width: 90%;
     background: linear-gradient(#56C676, #04BA6B);
     height: 3rem;
     line-height: 3rem;
@@ -155,9 +154,8 @@ body {
 /*时间选择*/
 #date {
     height: 3rem;
-    border-radius: 5px;
     border: none;
-    width: calc(60% - 0.02rem);
+    width: calc(60% - 0.06rem);
     background: transparent;
     color: #fff;
     text-align: center;
