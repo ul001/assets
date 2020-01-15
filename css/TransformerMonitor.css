@@ -145,12 +145,13 @@ body {
 #date {
     height: 3rem;
     border: none;
-    width: calc(59% - 0.06rem);
+    width: calc(59% - 0.02rem);
     background: transparent;
     color: #fff;
     text-align: center;
     float: left;
     font-size: 0.85rem;
+    padding: 0;
 }
 
 #datePre,
