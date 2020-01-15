@@ -20,9 +20,9 @@ $(function () {
         tokenFromAPP = storage.token;
         subidFromAPP = storage.fsubID;
     } else {
-        // baseUrlFromAPP = android.getBaseUrl();
-        // tokenFromAPP = android.getToken();
-        // subidFromAPP = android.getfSubid();
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
     }
 
     var currentSelectVode = {}; //选中节点
