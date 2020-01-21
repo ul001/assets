@@ -55,7 +55,7 @@ $(function () {
                     strArr.pop();
                     var ipAddress = strArr.join("/");
                     $.ajax({
-                        url: ipAddress + "/main/uploadExceptionLog",
+                        url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,

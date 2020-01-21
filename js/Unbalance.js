@@ -143,7 +143,7 @@ $(function () {
                     strArr.pop();
                     var ipAddress = strArr.join("/");
                     $.ajax({
-                        url: ipAddress + "/main/uploadExceptionLog",
+                        url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
@@ -162,7 +162,7 @@ $(function () {
                 strArr = strArr.pop().pop();
                 var ipAddress = strArr.join("/");
                 $.ajax({
-                    url: ipAddress + "/SubstationWEBV2/main/uploadExceptionLog",
+                    url: "http://www.acrelcloud.cn/SubstationWEBV2/SubstationWEBV2/main/uploadExceptionLog",
                     type: "POST",
                     data: {
                         ip: ipAddress,
