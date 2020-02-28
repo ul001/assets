@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <!-- 变压器 -->
 
 <head>
@@ -11,6 +11,8 @@
     <script src="lib/echarts.min.js"></script>
     <script src="lib/rolldate.min.js"></script>
     <script src="js/tools.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
     <script src="lib/toast.js"></script>
     <script src="js/TransformerMonitor.js"></script>
 </head>
@@ -55,121 +57,111 @@
             <p class="title">
                 <!-- 变压器名称： -->
                 <img class="titleImg" src="image/transform.png" />
-                <span class="i18n">变压器状态</span>
+                <span class="i18n" data-i18n="ui_transstatus"></span>
             </p>
             <ul>
                 <li id="power" class="tran-statec">
-                    <p class="i18n" name="Load">
-                        负荷
-                    </p>
+                    <p class="i18n" name="Load" data-i18n="ui_transload"></p>
                     <ul>
                         <li>
                             <!-- 额定功率： -->
-                            <span class="i18n" name="Ratedpower">额定功率:</span>
+                            <span class="i18n" name="Ratedpower" data-i18n="ui_ratedpower"></span>:
                             <span class="Ratedpower"></span>
                         </li>
                         <li>
                             <!-- 视在功率： -->
-                            <span class="i18n" name="AP">视在功率:</span>
+                            <span class="i18n" name="AP" data-i18n="ui_szpower"></span>:
                             <span class="AP"></span>
                         </li>
                         <li>
                             <!-- 负 荷 率： -->
-                            <span class="i18n" name="LF">负荷率:</span>
+                            <span class="i18n" name="LF" data-i18n="ui_loadrate"></span>:
                             <span class="LF"></span>
                         </li>
                     </ul>
                 </li>
                 <li id="service" class="tran-statec">
-                    <p class="i18n" name="Power">
-                        功率
-                    </p>
+                    <p class="i18n" name="Power" data-i18n="ui_power"></p>
                     <ul>
                         <li>
                             <!-- 有功功率： -->
-                            <span class="i18n" name="Fp">有功功率:</span>
+                            <span class="i18n" name="Fp" data-i18n="ui_ygpower"></span>:
                             <span class="Fp"></span>
                         </li>
                         <li>
                             <!-- 无功功率： -->
-                            <span class="i18n" name="Fq">无功功率:</span>
+                            <span class="i18n" name="Fq" data-i18n="ui_wgpower"></span>:
                             <span class="Fq"></span>
                         </li>
                         <li>
                             <!-- 功率因数： -->
-                            <span class="i18n" name="PF">功率因数:</span>
+                            <span class="i18n" name="PF" data-i18n="ui_yspower"></span>:
                             <span class="Pf"></span>
                         </li>
                         <li>
                             <!-- 最大需量： -->
-                            <span class="i18n" name="MaxD">当月最大需量:</span>
+                            <span class="i18n" name="MaxD" data-i18n="ui_dyzdxl"></span>:
                             <span class="MaxD"></span>
                         </li>
                         <span class="MDTime"></span>
                     </ul>
                 </li>
                 <li id="current" class="tran-statec">
-                    <p class="i18n" name="Current">
-                        电流
-                    </p>
+                    <p class="i18n" name="Current" data-i18n="ui_i"></p>
                     <ul>
                         <li>
                             <!-- A相电流： -->
-                            <span class="i18n" name="AphaseI">A相电流:</span>
+                            <span class="i18n" name="AphaseI" data-i18n="ui_Ia"></span>:
                             <span class="AphaseI"></span>
                         </li>
                         <li>
                             <!-- B相电流： -->
-                            <span class="i18n" name="BphaseI">B相电流:</span>
+                            <span class="i18n" name="BphaseI" data-i18n="ui_Ib"></span>:
                             <span class="BphaseI"></span>
                         </li>
                         <li>
                             <!-- C相电流： -->
-                            <span class="i18n" name="CphaseI">C相电流:</span>
+                            <span class="i18n" name="CphaseI" data-i18n="ui_Ic"></span>:
                             <span class="CphaseI"></span>
                         </li>
                     </ul>
                 </li>
                 <li id="voltage" class="tran-statec">
-                    <p class="i18n" name="Voltage">
-                        电压
-                    </p>
+                    <p class="i18n" name="Voltage" data-i18n="ui_voltage"></p>
                     <ul>
                         <li>
-                            <span class="i18n" name="Uab">Uab线电压:</span>
+                            <span class="i18n" name="Uab" data-i18n="ui_uab"></span>:
                             <span class="Uab"></span>
                             <!-- Uab线电压： -->
                         </li>
                         <li>
-                            <span class="i18n" name="Ubc">Ubc线电压:</span>
+                            <span class="i18n" name="Ubc" data-i18n="ui_ubc"></span>:
                             <span class="Ubc"></span>
                             <!-- Ubc线电压： -->
                         </li>
                         <li>
-                            <span class="i18n" name="Uca">Uca线电压:</span>
+                            <span class="i18n" name="Uca" data-i18n="ui_uca"></span>:
                             <span class="Uca"></span>
                             <!-- Uac线电压： -->
                         </li>
                     </ul>
                 </li>
                 <li id="temp" class="tran-statec">
-                    <p class="i18n" name="Temp">
-                        温度
-                    </p>
+                    <p class="i18n" name="Temp" data-i18n="ui_temp"></p>
                     <ul>
                         <li>
                             <!-- A相绕组温度： -->
-                            <span class="i18n" name="AphaseTemp">A相绕组温度:</span>
+                            <span class="i18n" name="AphaseTemp" data-i18n="ui_tempa"></span>:
                             <span class="AphaseTemp"></span>
                         </li>
                         <li>
                             <!-- B相绕组温度： -->
-                            <span class="i18n" name="BphaseTemp">B相绕组温度:</span>
+                            <span class="i18n" name="BphaseTemp" data-i18n="ui_tempb"></span>:
                             <span class="BphaseTemp"></span>
                         </li>
                         <li>
                             <!-- C相绕组温度： -->
-                            <span class="i18n" name="CphaseTemp">C相绕组温度:</span>
+                            <span class="i18n" name="CphaseTemp" data-i18n="ui_tempc"></span>:
                             <span class="CphaseTemp"></span>
                         </li>
                     </ul>
@@ -184,18 +176,10 @@
                     <span id="dateNext"><img src="image/right-w.png" /></span>
                 </div>
             </div>
-            <span id="NowPower" class="i18n s-select" name="Apparentpower">
-                视在
-            </span>
-            <span id="havePower" class="i18n" name="AcPower">
-                有功
-            </span>
-            <span id="NothingPower" class="i18n" name="RePower">
-                无功
-            </span>
-            <span class="temperature-r i18n" id="tempLine" name="WindTemp">
-                绕阻温度
-            </span>
+            <span id="NowPower" class="i18n s-select" name="Apparentpower" data-i18n="ui_nowpower"></span>
+            <span id="havePower" class="i18n" name="AcPower" data-i18n="ui_haspower"></span>
+            <span id="NothingPower" class="i18n" name="RePower" data-i18n="ui_nopower"></span>
+            <span class="temperature-r i18n" id="tempLine" name="WindTemp" data-i18n="ui_tempLine"></span>
         </div>
     </div>
 

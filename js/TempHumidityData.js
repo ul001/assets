@@ -1,16 +1,13 @@
 $(function () {
-    // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzc2ODQzMjcsInVzZXJuYW1lIjoiaGFoYWhhIn0.leVb9Crja_XFXT03AHSLngGlrBfb0QxQuQDIAMbMxLM";
-    // var subidFromAPP = 10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
     if (isIOS) { //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
         var storage = localStorage.getItem("accessToken");
@@ -29,7 +26,7 @@ $(function () {
 
     function getData(url, params, successCallback) {
         toast.show({
-            text: '正在加载',
+            text: Operation['ui_loading'],
             loading: true
         });
         $.ajax({
@@ -43,14 +40,14 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    strArr.pop();
-                    var ipAddress = strArr.join("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
+
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: data.data.stackTrace
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
                         success: function (data) {
 
@@ -58,11 +55,17 @@ $(function () {
                     });
                 }
                 toast.hide();
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
                 successCallback(result.data);
             },
             error: function () {
                 toast.show({
-                    text: '数据请求失败',
+                    text: Operation['code_fail'],
                     duration: 2000
                 });
             }
@@ -94,8 +97,8 @@ $(function () {
                         $("#cardList").append('<section class="sectionCard" value="' + this.f_MeterCode + '">' +
                             '<p>' + this.f_MeterName + '</p>' +
                             '<img src="image/wsd.png"/>' +
-                            '<p>温度：' + tempVal + this.tempUnit + '</p>' +
-                            '<p>湿度：' + humiVal + this.humiUnit + '</p></section>');
+                            '<p>'+Operation['ui_temp']+':' + tempVal + this.tempUnit + '</p>' +
+                            '<p>'+Operation['ui_humi']+':' + humiVal + this.humiUnit + '</p></section>');
                     });
                     $("#cardList section:first").addClass("sectionSelect");
                     $(".sectionCard").on("click", function () {
@@ -168,7 +171,7 @@ $(function () {
             }],
             grid: {
                 left: '13%',
-                right: '11%',
+                right: '12%',
                 top: '20%',
                 bottom: '28%'
             },
@@ -193,7 +196,7 @@ $(function () {
                     symbol: 'circle',
                     symbolSize: 10,
                     data: [{
-                            name: '最大值',
+                            name: Operation['ui_maxval'],
                             type: 'max',
                             label: {
                                 normal: {
@@ -202,7 +205,7 @@ $(function () {
                             }
                         },
                         {
-                            name: '最小值',
+                            name: Operation['ui_minval'],
                             type: 'min',
                             label: {
                                 normal: {
@@ -221,7 +224,7 @@ $(function () {
                 },
                 markLine: {
                     data: [{
-                        name: '平均值',
+                        name: Operation['ui_avgval'],
                         type: 'average'
                     }]
                 }
@@ -231,8 +234,8 @@ $(function () {
     }
 
     function setChart(chartData) {
-        var option = initLineAnal(chartData.temps, chartData.times, "温度", "°C");
-        var option2 = initLineAnal(chartData.humis, chartData.times, "湿度", "%");
+        var option = initLineAnal(chartData.temps, chartData.times, Operation['ui_temp'], "°C");
+        var option2 = initLineAnal(chartData.humis, chartData.times, Operation['ui_humi'], "%");
         var myChart = echarts.init($("#tempChart").get(0));
         myChart.setOption(option);
         var myChart2 = echarts.init($("#humiChart").get(0));

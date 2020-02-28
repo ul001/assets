@@ -1,16 +1,13 @@
 $(function () {
-  //  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-  //  var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQyMzE3NzMsInVzZXJuYW1lIjoiYWRtaW4ifQ.pfgcsrczhtQN9jwzgeM568npgMAUVsca-cd1AJoc6_s";
-  //  var subidFromAPP=10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
   //iOS安卓基础传参
   var u = navigator.userAgent,
     app = navigator.appVersion;
   var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
   var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
   //判断数组中是否包含某字符串
-  var baseUrlFromAPP;
-  var tokenFromAPP;
-  var subidFromAPP;
   if (isIOS) { //ios系统的处理
     window.webkit.messageHandlers.iOS.postMessage(null);
     var storage = localStorage.getItem("accessToken");
@@ -102,9 +99,9 @@ $(function () {
   loadEnergyType();
 
   function loadEnergyType() {
-    $("#EnergyType").html("<option value='fThd' selected>总谐波</option>");
+    $("#EnergyType").html("<option value='fThd' selected>"+Operation['ui_totalharm']+"</option>");
     for (i = 2; i <= 31; i++) {
-      $("#EnergyType").append("<option value='fHr" + (i < 10 ? ("0" + i) : i) + "'>" + i + "次谐波含量</option>")
+      $("#EnergyType").append("<option value='fHr" + (i < 10 ? ("0" + i) : i) + "'>" +(Operation['ui_numharm']=="Hr"?(Operation['ui_numharm']+i):(i+Operation['ui_numharm']))+ "</option>")
     }
   };
 
@@ -146,7 +143,7 @@ $(function () {
 
   function getData(url, params, successCallback) {
     toast.show({
-      text: '正在加载',
+      text: Operation['ui_loading'],
       loading: true
     });
     var token = tokenFromAPP;
@@ -160,14 +157,14 @@ $(function () {
       success: function (result) {
         if (result.code == "5000") {
           var strArr = baseUrlFromAPP.split("/");
-          strArr.pop();
-          var ipAddress = strArr.join("/");
+          var ipAddress = strArr[0]+"//"+strArr[2];
+
           $.ajax({
             url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
             type: "POST",
             data: {
               ip: ipAddress,
-              exceptionMessage: data.data.stackTrace
+              exceptionMessage: JSON.stringify(result.data.stackTrace)
             },
             success: function (data) {
 
@@ -175,11 +172,17 @@ $(function () {
           });
         }
         toast.hide();
+        if(result.code != "200"){
+            toast.show({
+                text: Substation.showCodeTips(result.code),
+                duration: 2000
+            });
+        }
         successCallback(result.data);
       },
       error: function () {
         toast.show({
-          text: '数据请求失败',
+          text: Operation['code_fail'],
           duration: 2000
         });
       }
@@ -282,7 +285,7 @@ $(function () {
           symbol: 'circle',
           symbolSize: 10,
           data: [{
-              name: '最大值',
+              name: Operation['ui_maxval'],
               type: 'max',
               label: {
                 normal: {
@@ -291,7 +294,7 @@ $(function () {
               }
             },
             {
-              name: '最小值',
+              name: Operation['ui_minval'],
               type: 'min',
               label: {
                 normal: {
@@ -310,7 +313,7 @@ $(function () {
         },
         markLine: {
           data: [{
-            name: '平均值',
+            name: Operation['ui_avgval'],
             type: 'average'
           }]
         }
@@ -328,7 +331,7 @@ $(function () {
       grid: { // 控制图的大小，调整下面这些值就可以，
         top: '18%',
         left: '10%',
-        right: '8%',
+        right: '10%',
         bottom: '29%',
       },
       xAxis: {
@@ -367,7 +370,7 @@ $(function () {
     var columns = [
       [{
           field: "name",
-          title: "类型",
+          title: Operation['ui_type'],
           align: "center",
           valign: "middle",
           align: "center",
@@ -376,7 +379,7 @@ $(function () {
         },
         {
           field: "maxVT",
-          title: "最大值",
+          title: Operation['ui_maxval'],
           valign: "middle",
           align: "center",
           colspan: 2,
@@ -384,7 +387,7 @@ $(function () {
         },
         {
           field: "minVT",
-          title: "最小值",
+          title: Operation['ui_minval'],
           valign: "middle",
           align: "center",
           colspan: 2,
@@ -392,7 +395,7 @@ $(function () {
         },
         {
           field: "avg",
-          title: "平均值",
+          title: Operation['ui_avgval'],
           valign: "middle",
           align: "center",
           colspan: 1,
@@ -401,25 +404,25 @@ $(function () {
       ],
       [{
           field: "max",
-          title: "值",
+          title: Operation['ui_val'],
           valign: "middle",
           align: "center"
         },
         {
           field: "maxTime",
-          title: "时间",
+          title: Operation['ui_time'],
           valign: "middle",
           align: "center"
         },
         {
           field: "min",
-          title: "值",
+          title: Operation['ui_val'],
           valign: "middle",
           align: "center"
         },
         {
           field: "minTime",
-          title: "时间",
+          title: Operation['ui_time'],
           align: "center"
         }
       ]

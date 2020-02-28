@@ -1,16 +1,13 @@
 $(function () {
-    //    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-    //    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
-    //    var subidFromAPP = 10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
     if (isIOS) { //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
         var storage = localStorage.getItem("accessToken");
@@ -106,7 +103,7 @@ $(function () {
 
     function getData(url, params, successCallback) {
         toast.show({
-            text: '正在加载',
+            text: Operation['ui_loading'],
             loading: true
         });
         $.ajax({
@@ -116,17 +113,17 @@ $(function () {
             beforeSend: function (request) {
                 request.setRequestHeader("Authorization", tokenFromAPP)
             },
-            success: function (data) {
-                if (data.code == "5000") {
+            success: function (result) {
+                if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    strArr.pop();
-                    var ipAddress = strArr.join("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
+
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: data.data.stackTrace
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
                         success: function (data) {
 
@@ -134,11 +131,17 @@ $(function () {
                     });
                 }
                 toast.hide();
-                successCallback(data.data);
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
+                successCallback(result.data);
             },
             error: function () {
                 toast.show({
-                    text: '数据请求失败',
+                    text: Operation['code_fail'],
                     duration: 2000
                 });
             }
@@ -174,6 +177,10 @@ $(function () {
             timeStart: date + "-01 00:00:00",
             timeEnd: date + "-31 23:59:59"
         };
+        toast.show({
+            text: Operation['ui_loading'],
+            loading: true
+        });
         $.ajax({
             type: 'GET',
             url: baseUrlFromAPP + "/selectMaxMD",
@@ -184,26 +191,33 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    strArr.pop();
-                    var ipAddress = strArr.join("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
+
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: result.data.stackTrace
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
                         success: function (data) {
 
                         }
                     });
                 }
+                toast.hide();
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
                 if (result.data[0] != null) {
                     var myDate = result.data[0].f_MDMaxTime;
-                    $(".max").html("<p>当月最大需量</p><h1><span id='maxVal'>" + result.data[0].f_MDMaxValue + "</span><span>kW</span></h1>" +
+                    $(".max").html("<p>"+Operation['ui_monthmaxkw']+"</p><h1><span id='maxVal'>" + result.data[0].f_MDMaxValue + "</span><span>kW</span></h1>" +
                         "<p id='timeP'>" + myDate.slice(0, myDate.indexOf(".")) + "</p>");
                 } else {
-                    $(".max").html("<p></p><h1 id='noMatch'><span>没有找到匹配的记录</span></h1><p id='timeP'></p>");
+                    $(".max").html("<p></p><h1 id='noMatch'><span>"+Operation['ui_nodata']+"</span></h1><p id='timeP'></p>");
                 }
             }
         });

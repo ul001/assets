@@ -1,16 +1,13 @@
 $(function () {
-    // var baseUrlFromAPP = "http://47.111.190.45:8080/SubstationWEBV2/v3";
-    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzI3MTI0NzgsInVzZXJuYW1lIjoiYWRtaW4ifQ.w99WV_8QkrVKVHTbYBLQvSFsDqVGJtaktY6rLt5N7RY";
-    // var subidFromAPP = 10100070;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
     if (isIOS) {
         //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
@@ -118,25 +115,6 @@ $(function () {
         $(".category").show();
     });
 
-    // $(document).on('click', '#search', function () {
-    //     var EnergyKind = $("#EnergyKind").attr('value');
-    //     var selectParam = $(".btn.select").attr('value');
-    //     if (EnergyKind == "fFr") {
-    //         selectParam = ""
-    //     }
-    // var time;
-    // var typeDA;
-    // if (selectParam == "today") {
-    //     time = $("#date").val();
-    //     typeDA = "D";
-    // } else if (selectParam == "month") {
-    //     time = $("#date").val().substring(0, 7);
-    //     typeDA = "M";
-    // } else if (selectParam == "year") {
-    //     time = $("#date").val().substring(0, 4);
-    //     typeDA = "Y";
-    // }
-    //
     function getURLData() {
 
         var fCircuitid = currentSelectVode.merterId;
@@ -157,7 +135,7 @@ $(function () {
 
     function getData(url, params, successCallback) {
         toast.show({
-            text: '正在加载',
+            text: Operation['ui_loading'],
             loading: true
         });
         var token = tokenFromAPP;
@@ -171,14 +149,14 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    strArr.pop();
-                    var ipAddress = strArr.join("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
+
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: data.data.stackTrace
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
                         success: function (data) {
 
@@ -186,11 +164,17 @@ $(function () {
                     });
                 }
                 toast.hide();
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
                 successCallback(result.data);
             },
             error: function () {
                 toast.show({
-                    text: '数据请求失败',
+                    text: Operation['code_fail'],
                     duration: 2000
                 });
             }
@@ -215,145 +199,6 @@ $(function () {
             currentSelectVode.merterId = node.id;
             currentSelectVode.merterName = node.text;
         });
-    }
-
-    $(document).on("click", ".category li", function () {
-        var type = $(this)
-            .children("label")
-            .attr("value");
-        var text = $(this)
-            .children("label")
-            .text();
-        generateType(type);
-        $("#EnergyKind").attr("value", type);
-        $("#param").html(text);
-        $("#myModal").modal("hide");
-    });
-
-    function generateType(type) {
-        var List = [{
-                id: "P",
-                name: "有功功率",
-                phase: [{
-                        id: "fPa",
-                        name: "A相"
-                    },
-                    {
-                        id: "fPb",
-                        name: "B相"
-                    },
-                    {
-                        id: "fPc",
-                        name: "C相"
-                    }
-                ]
-            },
-            {
-                id: "I",
-                name: "电流",
-                phase: [{
-                        id: "fIa",
-                        name: "A相"
-                    },
-                    {
-                        id: "fIb",
-                        name: "B相"
-                    },
-                    {
-                        id: "fIc",
-                        name: "C相"
-                    }
-                ]
-            },
-            {
-                id: "U",
-                name: "相电压",
-                phase: [{
-                        id: "fUa",
-                        name: "A相"
-                    },
-                    {
-                        id: "fUb",
-                        name: "B相"
-                    },
-                    {
-                        id: "fUc",
-                        name: "C相"
-                    }
-                ]
-            },
-            {
-                id: "UL",
-                name: "线电压",
-                phase: [{
-                        id: "fUab",
-                        name: "Uab"
-                    },
-                    {
-                        id: "fUbc",
-                        name: "Ubc"
-                    },
-                    {
-                        id: "fUca",
-                        name: "Uca"
-                    }
-                ]
-            },
-            {
-                id: "fFr",
-                name: "频率"
-            },
-            {
-                id: "Q",
-                name: "无功功率",
-                phase: [{
-                        id: "fQa",
-                        name: "A相"
-                    },
-                    {
-                        id: "fQb",
-                        name: "B相"
-                    },
-                    {
-                        id: "fQc",
-                        name: "C相"
-                    }
-                ]
-            },
-            {
-                id: "S",
-                name: "视在功率",
-                phase: [{
-                        id: "fSa",
-                        name: "A相"
-                    },
-                    {
-                        id: "fSb",
-                        name: "B相"
-                    },
-                    {
-                        id: "fSc",
-                        name: "C相"
-                    }
-                ]
-            }
-        ];
-        var arr = $.grep(List, function (obj) {
-            return obj.id == type;
-        });
-        $("#EnergyContain").html("");
-        if (arr[0].hasOwnProperty("phase")) {
-            $.each(arr[0].phase, function (index, val) {
-                var string =
-                    '<button type="button" class="btn" value="' +
-                    val.id +
-                    '">' +
-                    val.name +
-                    "</button>";
-                $("#EnergyContain").append(string);
-            });
-            $("#EnergyContain button:first").addClass("select");
-        }
     }
 
     function showCharts(data) {
@@ -462,7 +307,7 @@ $(function () {
                 trigger: "axis"
             },
             legend: {
-                data: ["本期", "同期"]
+                data: [Operation['ui_theperiod'], Operation['ui_sameperiod']]
             },
             grid: {
                 // 控制图的大小，调整下面这些值就可以，
@@ -504,12 +349,12 @@ $(function () {
             ],
             calculable: true,
             series: [{
-                    name: "本期",
+                    name: Operation['ui_theperiod'],
                     data: nowvalue,
                     type: "bar"
                 },
                 {
-                    name: "同期",
+                    name: Operation['ui_sameperiod'],
                     data: pervalue,
                     type: "bar"
                 }
@@ -531,27 +376,27 @@ $(function () {
         // };
         var columns = [{
                 field: "time",
-                title: "月份",
+                title: Operation['ui_month'],
                 align: "center"
             },
             {
                 field: "dayvalue",
-                title: "本期",
+                title: Operation['ui_theperiod'],
                 align: "center"
             },
             {
                 field: "pervalue",
-                title: "同期",
+                title: Operation['ui_sameperiod'],
                 align: "center"
             },
             {
                 field: "monthlycomparison",
-                title: "同比(%)",
+                title: Operation['ui_samepercent']+"(%)",
                 align: "center"
             },
             {
                 field: "monthlysumcomparison",
-                title: "累计同比(%)",
+                title: Operation['ui_totalsamepercent']+"(%)",
                 align: "center"
             }
         ];

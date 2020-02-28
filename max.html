@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -16,29 +16,29 @@
                 <div class="treeSearch">
                     <img class="clear" src="image/clear.png" />
                     <input type="text" id="CircuitidsInput" />
-                    <button type="button" id="CircuitidsList">搜索</button>
+                    <button type="button" id="CircuitidsList" data-i18n="ui_search"></button>
                 </div>
                 <div id="treeview" class="col-sm-4"></div>
                 <div id="footer">
-                    <button type="button" class="cancel">取消</button>
-                    <button type="button" class="search" id="confirm">查询</button>
+                    <button type="button" class="cancel" data-i18n="ui_cancel"></button>
+                    <button type="button" class="search" id="confirm" data-i18n="ui_select"></button>
                 </div>
             </div>
         </div>
         <div class="maxBG">
             <div class="max">
-                <p>当月最大需量</p>
-                <h1><span id="maxVal"></span><span>KW</span></h1>
+                <p data-i18n="ui_monthmaxkw"></p>
+                <h1><span id="maxVal"></span><span>kW</span></h1>
                 <p id="timeP"></p>
                 <p id="noData"></p>
             </div>
         </div>
         <ul class="public">
             <li class="list" id="sideClick">
-                <p><img src="image/jiancedian.png" /><span>监测点：</span><span id="meter"></span></p>
+                <p><img src="image/jiancedian.png" /><span data-i18n="ui_watchposition"></span>：<span id="meter"></span></p>
             </li>
             <li class="list" id="timeClick">
-                <p><img src="image/date.png" /><span>发生时间：</span><input readonly type="text" id="dateSelect"></p>
+                <p><img src="image/date.png" /><span data-i18n="ui_starttime"></span>：<input readonly type="text" id="dateSelect"></p>
             </li>
         </ul>
     </div>
@@ -47,6 +47,8 @@
     <script src="lib/bootstrap-treeview.js"></script>
     <script src="lib/rolldate.min.js"></script>
     <script src="lib/toast.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
     <script src="js/max.js"></script>
 </body>
 

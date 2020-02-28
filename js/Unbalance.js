@@ -1,7 +1,7 @@
 $(function () {
-    // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzg5NjYwNDksInVzZXJuYW1lIjoiaGFoYWhhIn0.qCkxuhXzGveb15_jmfAUc_Pc-QLmZuoXxMfWHwQYVnk";
-    // var subidFromAPP = 10100001;
+     var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
+     var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMzOTQzMjUsInVzZXJuYW1lIjoiaGFoYWhhIn0.jdBGeEsNwAvhHvpwLG2vlB-G4VDrsWqfQV5x-JAUHQE";
+     var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -126,7 +126,7 @@ $(function () {
 
     function getData(url, params, successCallback) {
         toast.show({
-            text: '正在加载',
+            text: Operation['ui_loading'],
             loading: true
         });
         var token = tokenFromAPP;
@@ -140,14 +140,13 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    strArr.pop();
-                    var ipAddress = strArr.join("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: data.data.stackTrace
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
                         success: function (data) {
 
@@ -155,12 +154,24 @@ $(function () {
                     });
                 }
                 toast.hide();
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
+                if(result.code!="200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
                 successCallback(result.data);
             },
             error: function (jsonStr) {
                 var strArr = baseUrlFromAPP.split("/");
                 strArr = strArr.pop().pop();
-                var ipAddress = strArr.join("/");
+
                 $.ajax({
                     url: "http://www.acrelcloud.cn/SubstationWEBV2/SubstationWEBV2/main/uploadExceptionLog",
                     type: "POST",
@@ -174,7 +185,7 @@ $(function () {
                 });
 
                 toast.show({
-                    text: '数据请求失败',
+                    text: Operation['code_fail'],
                     duration: 2000
                 });
             }
@@ -197,40 +208,6 @@ $(function () {
             currentSelectVode.merterId = node.id;
             currentSelectVode.merterName = node.text;
         })
-    }
-
-    /*  $(document).on("click",".category li",function(){
-        var type = $(this).children('label').attr("value");
-        var text = $(this).children('label').text();
-        generateType(type);
-        $("#EnergyKind").attr("value",type);
-        $("#param").html(text);
-        $("#myModal").modal("hide");
-      })*/
-
-    function generateType(type) {
-        var List = [{
-            "id": "UnB",
-            "name": "三相不平衡度",
-            "phase": [{
-                "id": "IUnB",
-                "name": "电流三相不平衡度"
-            }, {
-                "id": "UUnB",
-                "name": "电压三相不平衡度"
-            }]
-        }]
-        var arr = $.grep(List, function (obj) {
-            return obj.id == type;
-        })
-        $("#EnergyContain").html("");
-        if (arr[0].hasOwnProperty('phase')) {
-            $.each(arr[0].phase, function (index, val) {
-                var string = '<button type="button" class="btn" value="' + val.id + '">' + val.name + '</button>';
-                $("#EnergyContain").append(string);
-            })
-            $("#EnergyContain button:first").addClass('select');
-        }
     }
 
     function showCharts(data) {
@@ -311,7 +288,7 @@ $(function () {
                     symbol: 'circle',
                     symbolSize: 10,
                     data: [{
-                            name: '最大值',
+                            name: Operation['ui_maxval'],
                             type: 'max',
                             label: {
                                 normal: {
@@ -320,7 +297,7 @@ $(function () {
                             }
                         },
                         {
-                            name: '最小值',
+                            name: Operation['ui_minval'],
                             type: 'min',
                             label: {
                                 normal: {
@@ -339,7 +316,7 @@ $(function () {
                 },
                 markLine: {
                     data: [{
-                        name: '平均值',
+                        name: Operation['ui_avgval'],
                         type: 'average'
                     }]
                 }
@@ -357,7 +334,7 @@ $(function () {
             grid: { // 控制图的大小，调整下面这些值就可以，
                 top: '18%',
                 left: '10%',
-                right: '8%',
+                right: '10%',
                 bottom: '29%',
             },
             xAxis: {
@@ -397,7 +374,7 @@ $(function () {
         var columns = [
             [{
                     field: "name",
-                    title: "类型",
+                    title: Operation['ui_type'],
                     align: "center",
                     valign: "middle",
                     align: "center",
@@ -406,7 +383,7 @@ $(function () {
                 },
                 {
                     field: "maxVT",
-                    title: "最大值",
+                    title: Operation['ui_maxval'],
                     valign: "middle",
                     align: "center",
                     colspan: 2,
@@ -414,7 +391,7 @@ $(function () {
                 },
                 {
                     field: "minVT",
-                    title: "最小值",
+                    title: Operation['ui_minval'],
                     valign: "middle",
                     align: "center",
                     colspan: 2,
@@ -422,7 +399,7 @@ $(function () {
                 },
                 {
                     field: "avg",
-                    title: "平均值",
+                    title: Operation['ui_avgval'],
                     valign: "middle",
                     align: "center",
                     colspan: 1,
@@ -431,25 +408,25 @@ $(function () {
             ],
             [{
                     field: "max",
-                    title: "值",
+                    title: Operation['ui_val'],
                     valign: "middle",
                     align: "center"
                 },
                 {
                     field: "maxTime",
-                    title: "时间",
+                    title: Operation['ui_time'],
                     valign: "middle",
                     align: "center"
                 },
                 {
                     field: "min",
-                    title: "值",
+                    title: Operation['ui_val'],
                     valign: "middle",
                     align: "center"
                 },
                 {
                     field: "minTime",
-                    title: "时间",
+                    title: Operation['ui_time'],
                     align: "center"
                 }
             ]

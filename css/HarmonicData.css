@@ -60,11 +60,17 @@ body {
 	background: transparent;
 	border: none;
 	-webkit-appearance: none;
-	width: calc(100% - 78px);
-	background: url('../image/right.png') no-repeat right center;
+	width: calc(100% - 92px);
+/*	background: url('../image/right.png') no-repeat right center;*/
 }
 
-.monitor,
+.listImg{
+    float: right;
+    margin-right: 1rem;
+    margin-top: 1.8rem;
+}
+
+/*.monitor,
 #meter {
 	display: block;
 	float: left;
@@ -73,7 +79,7 @@ body {
 #meter {
 	width: calc(100% - 90px);
 	background: url('../image/right.png') no-repeat right center;
-}
+}*/
 
 #sideClick,
 #electric,
@@ -82,6 +88,11 @@ body {
 	height: 6rem;
 	line-height: 5rem;
 	padding-top: 0.5rem;
+}
+
+#electric,
+#select{
+    background: url(../image/right.png) no-repeat right 1rem center;
 }
 
 .category ul {

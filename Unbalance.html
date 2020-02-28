@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -17,35 +17,34 @@
                 <div class="treeSearch">
                     <img class="clear" src="image/clear.png" />
                     <input type="text" id="CircuitidsInput" />
-                    <button type="button" id="CircuitidsList">搜索</button>
+                    <button type="button" id="CircuitidsList" data-i18n="ui_search"></button>
                 </div>
                 <div id="treeview" class="col-sm-4"></div>
-                <button type="button" class="cancel">取消</button>
-                <button type="button" class="search" id="confirm">查询</button>
+                <button type="button" class="cancel" data-i18n="ui_cancel"></button>
+                <button type="button" class="search" id="confirm" data-i18n="ui_select"></button>
             </div>
         </div>
         <div class="list" id="sideClick">
             <p>
                 <img class="jiancedian" src="image/jiancedian.png" />
-                <span>监测点：</span>
-                <span id="meter">10kV变压器</span>
+                <span><span data-i18n="ui_watchposition"></span>：</span>
+                <span id="meter"></span>
             </p>
             <img src="image/right.png" />
         </div>
         <div class="elec-btn" id="EnergyContain">
-            <button type="button" class="btn select" value="IUnB">电流三相不平衡度</button>
-            <button type="button" class="btn" value="UUnB">电压三相不平衡度</button>
+            <button type="button" class="btn select" value="IUnB" data-i18n="ui_IUnB"></button>
+            <button type="button" class="btn" value="UUnB" data-i18n="ui_UUnB"></button>
         </div>
         <div class="form-group form_date_end selectTime">
-            <span id="datePre">上一日</span>&nbsp;&nbsp;
+            <span id="datePre" data-i18n="ui_perday"></span>&nbsp;&nbsp;
             <span class="date">
                 <input readonly type="text" id="date">
             </span>
-            <span id="dateNext">下一日</span>
+            <span id="dateNext" data-i18n="ui_nextday"></span>
         </div>
-        <button type="button" class="search" id="search"><img src="image/search.png" />查询</button>
+        <button type="button" class="search" id="search"><img src="image/search.png" /><span data-i18n="ui_select"></span></button>
         <div class="diagram center" id="chartContain"></div>
-
         <div class="dataTable center" id="tableContain"></div>
     </div>
     <script src="lib/jquery-1.11.1.min.js"></script>
@@ -56,6 +55,8 @@
     <script src="lib/rolldate.min.js"></script>
     <script src="js/tools.js"></script>
     <script src="lib/toast.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
     <script src="js/Unbalance.js"></script>
 </body>
 

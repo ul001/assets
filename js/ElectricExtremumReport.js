@@ -1,16 +1,13 @@
 $(function () {
-    // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzg5NjYwNDksInVzZXJuYW1lIjoiaGFoYWhhIn0.qCkxuhXzGveb15_jmfAUc_Pc-QLmZuoXxMfWHwQYVnk";
-    // var subidFromAPP = 10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
     if (isIOS) {
         //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
@@ -135,7 +132,7 @@ $(function () {
 
     function getData(url, params, successCallback) {
         toast.show({
-            text: "正在加载",
+            text: Operation['ui_loading'],
             loading: true
         });
         var token = tokenFromAPP;
@@ -149,14 +146,14 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    strArr.pop();
-                    var ipAddress = strArr.join("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
+
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: data.data.stackTrace
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
                         success: function (data) {
 
@@ -164,11 +161,17 @@ $(function () {
                     });
                 }
                 toast.hide();
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
                 successCallback(result.data);
             },
             error: function () {
                 toast.show({
-                    text: "数据请求失败",
+                    text: Operation['code_fail'],
                     duration: 2000
                 });
             }
@@ -287,120 +290,120 @@ $(function () {
     function generateType(type, list) {
         var paramList = [{
                 id: "P",
-                name: "功率",
+                name: Operation['ui_power'],
                 phase: [{
                         id: "fP",
-                        name: "有功功率(kW)"
+                        name: Operation['ui_activepower']+"(kW)"
                     },
                     {
                         id: "fQ",
-                        name: "无功功率(kVar)"
+                        name: Operation['ui_reactivepower']+"(kVar)"
                     },
                     {
                         id: "fS",
-                        name: "视在功率(kVA)"
+                        name: Operation['ui_apparentpower']+"(kVA)"
                     },
                     {
                         id: "fPf",
-                        name: "功率因数"
+                        name: Operation['ui_pf']
                     }
                 ]
             },
             {
                 id: "I",
-                name: "电流",
+                name: Operation['ui_i'],
                 phase: [{
                         id: "fIa",
-                        name: "A相电流(A)"
+                        name: Operation['ui_a']+Operation['ui_i']+"(A)"
                     },
                     {
                         id: "fIb",
-                        name: "B相电流(A)"
+                        name: Operation['ui_b']+Operation['ui_i']+"(A)"
                     },
                     {
                         id: "fIc",
-                        name: "C相电流(A)"
+                        name: Operation['ui_c']+Operation['ui_i']+"(A)"
                     }
                 ]
             },
             {
                 id: "Voltage",
-                name: "相电压",
+                name: Operation['ui_u'],
                 phase: [{
                         id: "fUa",
-                        name: "A相电压"
+                        name: "A"+Operation['ui_u']
                     },
                     {
                         id: "fUb",
-                        name: "B相电压"
+                        name: "B"+Operation['ui_u']
                     },
                     {
                         id: "fUc",
-                        name: "C相电压"
+                        name: "C"+Operation['ui_u']
                     }
                 ]
             },
             {
                 id: "Voltage2",
-                name: "线电压",
+                name: Operation['ui_ul'],
                 phase: [{
                         id: "fUab",
-                        name: "AB线电压"
+                        name: "AB"+Operation['ui_ul']
                     },
                     {
                         id: "fUbc",
-                        name: "BC线电压"
+                        name: "BC"+Operation['ui_ul']
                     },
                     {
                         id: "fUca",
-                        name: "CA线电压"
+                        name: "CA"+Operation['ui_ul']
                     }
                 ]
             },
             {
                 id: "UnBalance",
-                name: "不平衡度",
+                name: Operation['ui_unbalance'],
                 phase: [{
                         id: "fVub",
-                        name: "电压三相不平衡度(%)"
+                        name: Operation['ui_uub']+"(%)"
                     },
                     {
                         id: "fCub",
-                        name: "电流三相不平衡度(%)"
+                        name: Operation['ui_cub']+"(%)"
                     }
                 ]
             },
             {
                 id: "UHR",
-                name: "电压谐波",
+                name: Operation['ui_uharm'],
                 phase: [{
                         id: "fUahr",
-                        name: "A相电压总谐波含有率(%)"
+                        name: Operation['ui_uahr']+"(%)"
                     },
                     {
                         id: "fUbhr",
-                        name: "B相电压总谐波含有率(%)"
+                        name: Operation['ui_ubhr']+"(%)"
                     },
                     {
                         id: "fUchr",
-                        name: "C相电压总谐波含有率(%)"
+                        name: Operation['ui_uchr']+"(%)"
                     }
                 ]
             },
             {
                 id: "IHR",
-                name: "电流谐波",
+                name: Operation['ui_Iharm'],
                 phase: [{
                         id: "fIahr",
-                        name: "A相电流总谐波含有率(%)"
+                        name: Operation['ui_iahr']+"(%)"
                     },
                     {
                         id: "fIbhr",
-                        name: "B相电流总谐波含有率(%)"
+                        name: Operation['ui_ibhr']+"(%)"
                     },
                     {
                         id: "fIchr",
-                        name: "C相电流总谐波含有率(%)"
+                        name: Operation['ui_ichr']+"(%)"
                     }
                 ]
             }
@@ -415,7 +418,7 @@ $(function () {
         var columns = [
             [{
                     field: "paramName",
-                    title: "参数名称",
+                    title: Operation['ui_paramname'],
                     align: "center",
                     valign: "middle",
                     align: "center",
@@ -424,7 +427,7 @@ $(function () {
                 },
                 {
                     field: "maxVT",
-                    title: "最大值",
+                    title: Operation['ui_maxval'],
                     valign: "middle",
                     align: "center",
                     colspan: 2,
@@ -432,7 +435,7 @@ $(function () {
                 },
                 {
                     field: "minVT",
-                    title: "最小值",
+                    title: Operation['ui_minval'],
                     valign: "middle",
                     align: "center",
                     colspan: 2,
@@ -440,7 +443,7 @@ $(function () {
                 },
                 {
                     field: "avg",
-                    title: "平均值",
+                    title: Operation['ui_avgval'],
                     valign: "middle",
                     align: "center",
                     colspan: 1,
@@ -449,25 +452,25 @@ $(function () {
             ],
             [{
                     field: "max",
-                    title: "值",
+                    title: Operation['ui_val'],
                     valign: "middle",
                     align: "center"
                 },
                 {
                     field: "maxTime",
-                    title: "时间",
+                    title: Operation['ui_time'],
                     valign: "middle",
                     align: "center"
                 },
                 {
                     field: "min",
-                    title: "值",
+                    title: Operation['ui_val'],
                     valign: "middle",
                     align: "center"
                 },
                 {
                     field: "minTime",
-                    title: "时间",
+                    title: Operation['ui_time'],
                     align: "center"
                 }
             ]
@@ -492,14 +495,14 @@ $(function () {
             showtimeForElectSum = tool.initDate("YMD", new Date());
             $("#date").val(showtimeForElectSum);
             roll.config.format = "YYYY-MM-DD";
-            $("#preVal").text("上一日");
-            $("#nextVal").text("下一日");
+            $("#preVal").text(Operation['ui_perday']);
+            $("#nextVal").text(Operation['ui_nextday']);
         } else if (selectParam == "month") {
             showtimeForElectSum = tool.initDate("YM", new Date());
             $("#date").val(showtimeForElectSum);
             roll.config.format = "YYYY-MM";
-            $("#preVal").text("上一月");
-            $("#nextVal").text("下一月");
+            $("#preVal").text(Operation['ui_lastmonth']);
+            $("#nextVal").text(Operation['ui_nextmonth']);
         }
         initQuick(selectParam);
         roll.value = showtimeForElectSum;

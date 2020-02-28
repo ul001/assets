@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <!-- 遥信越限 -->
 
 <head>
@@ -13,6 +13,9 @@
     <script src="lib/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="lib/rolldate.min.js"></script>
     <script src="lib/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
+    <script src="lib/toast.js"></script>
     <script src="js/function.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/tools.js" type="text/javascript" charset="utf-8"></script>
 </head>
@@ -20,8 +23,8 @@
 <body>
     <div id="mescroll" class="mescroll mescroll-bar">
         <p class="data">
-            日期：<a id="startDate">2019-06-11</a>&nbsp;&nbsp;&nbsp;
-            至&nbsp;&nbsp;&nbsp;<a id="endDate">2019-06-11</a>
+            <a data-i18n="ui_date"></a>：<a id="startDate"></a>&nbsp;&nbsp;&nbsp;
+            <a data-i18n="ui_to"></a>&nbsp;&nbsp;&nbsp;<a id="endDate"></a>
             <img id="select" src="image/select.png" />
         </p>
         <ul class="list-unstyled" id="listUl">
@@ -56,13 +59,13 @@
         <div id="hiddenDiv"></div>
         <div class="selectcontain-main">
             <div class="functionDate">
-                <button id="today" type="button" class="btn select">当日</button>
-                <button id="yesterday" type="button" class="btn">昨日</button>
-                <button id="thisMon" type="button" class="btn">当月</button>
-                <button id="lastMon" type="button" class="btn">上月</button>
+                <button id="today" type="button" class="btn select" data-i18n="ui_today"></button>
+                <button id="yesterday" type="button" class="btn" data-i18n="ui_yestoday"></button>
+                <button id="thisMon" type="button" class="btn" data-i18n="ui_themonth"></button>
+                <button id="lastMon" type="button" class="btn" data-i18n="ui_permonth"></button>
             </div>
             <div class="form-group function-group" id="startDiv">
-                <label for="dtp_input2" class="col-md-2 control-label"><img src="image/date.png" />起始日期</label>
+                <label for="dtp_input2" class="col-md-2 control-label"><img src="image/date.png" /><a data-i18n="ui_startdate"></a></label>
                 <div class="input-group date form_date_start col-md-5" data-date="" data-link-field="dtp_input2">
                     <input readonly type="text" id="dateStart" class="startDate">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -71,7 +74,7 @@
 
             </div>
             <div class="form-group function-group" id="endDiv">
-                <label for="dtp_input2" class="col-md-2 control-label"><img src="image/date.png" />截止日期</label>
+                <label for="dtp_input2" class="col-md-2 control-label"><img src="image/date.png" /><a data-i18n="ui_enddate"></a></label>
                 <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
                     <input readonly type="text" id="dateEnd" class="endDate">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -79,26 +82,26 @@
                 <input type="hidden" id="dtp_input3" value="">
             </div>
             <div class="sRow">
-                <span><img src="image/type.png" />类型</span>
+                <span><img src="image/type.png" /><a data-i18n="ui_type"></a></span>
                 <select id="alermType">
-                    <option value="全部">全部</option>
-                    <option value="高限报警">高限报警</option>
-                    <option value="高高限报警">高高限报警</option>
-                    <option value="低限报警">低限报警</option>
-                    <option value="低低限报警">低低限报警</option>
-                    <option value="报警恢复">报警恢复</option>
+                    <option value="全部" data-i18n="ui_all"></option>
+                    <option value="高限报警" data-i18n="ui_highalarm"></option>
+                    <option value="高高限报警" data-i18n="ui_higheralarm"></option>
+                    <option value="低限报警" data-i18n="ui_lowalarm"></option>
+                    <option value="低低限报警" data-i18n="ui_loweralarm"></option>
+                    <option value="报警恢复" data-i18n="ui_alarmremove"></option>
                 </select>
             </div>
             <div class="sRow">
-                <span><img src="image/yibiao.png" />仪表名称</span>
-                <input type="text" id="meterName" placeholder="请输入仪表名称" />
+                <span><img src="image/yibiao.png" /><a data-i18n="ui_metername"></a></span>
+                <input type="text" id="meterName" placeholder=""  data-placeholder="ui_meterholder"/>
             </div>
             <div class="sRow">
-                <span><img src="image/cansu.png" />参数名称</span>
-                <input type="text" id="paramName" placeholder="请输入参数名称" />
+                <span><img src="image/cansu.png" /><a data-i18n="ui_paramname"></a></span>
+                <input type="text" id="paramName" placeholder="" data-placeholder="ui_paramholder"/>
             </div>
-            <button type="button" class="cancel">取消</button>
-            <button type="button" class="search">查询</button>
+            <button type="button" class="cancel" data-i18n="ui_cancel"></button>
+            <button type="button" class="search" data-i18n="ui_select"></button>
         </div>
     </div>
 </body>

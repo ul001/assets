@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -13,6 +13,8 @@
     <script src="lib/rolldate.min.js"></script>
     <script src="js/tools.js"></script>
     <script src="lib/toast.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
     <script src="js/TempHumidityData.js"></script>
 </head>
 
@@ -29,11 +31,11 @@
         </div>
         <div class="chart">
             <div class="mainBox">
-                <div id="tempTitle">温度</div>
+                <div id="tempTitle" data-i18n="ui_temp"></div>
                 <div id="tempChart"></div>
             </div>
             <div class="mainBox">
-                <div id="humiTitle">湿度</div>
+                <div id="humiTitle" data-i18n="ui_humi"></div>
                 <div id="humiChart"></div>
             </div>
         </div>

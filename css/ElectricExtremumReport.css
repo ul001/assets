@@ -194,7 +194,8 @@ button {
 
 #datePre,
 #dateNext {
-	padding: 0 1rem;
+	/*padding: 0 1rem;*/
+	width:25%;
 	cursor: pointer;
 }
 
@@ -220,7 +221,7 @@ button {
 	width: 12rem;
 	height: 2.5rem;
 	border-radius: 5px;
-	padding-right: 2rem;
+	padding-right: 1rem;
 	text-align: center;
 	padding-left: 0.8rem;
 	border: none;
@@ -344,6 +345,6 @@ button {
 }
 #energySelect{
     outline:0;
-	width: calc(100% - 108px);
-	background: url('../image/right.png') no-repeat right center;
+	width: calc(100% - 104px);
+	/*background: url('../image/right.png') no-repeat right center;*/
 }

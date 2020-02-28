@@ -1,7 +1,7 @@
 $(function () {
-    //    var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-    //    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-    //    var subidFromAPP=10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
     // 遥测越限
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -9,9 +9,6 @@ $(function () {
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
     if (isIOS) { //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
         var storage = localStorage.getItem("accessToken");
@@ -32,6 +29,8 @@ $(function () {
         });
     }
 
+    let toast = new ToastClass(); //实例化toast对象
+
     //创建MeScroll对象
     var mescroll = new MeScroll("mescroll", {
         // down: {
@@ -42,7 +41,7 @@ $(function () {
             auto: true, //是否在初始化时以上拉加载的方式自动加载第一页数据; 默认false
             callback: upCallback, //上拉回调,此处可简写; 相当于 callback: function (page) { upCallback(page); }
             empty: {
-                tip: "暂无相关数据", //提示
+                tip: Operation['ui_nodata'], //提示
             },
             clearEmptyId: "listUl" //相当于同时设置了clearId和empty.warpId; 简化写法;默认null
         }
@@ -140,22 +139,22 @@ $(function () {
                 "                <h1>" + this.fMetername + "<span>" + this.fStarttime + "</span></h1>\n" +
                 "                <div class=\"type\">\n" +
                 "                    <img src=\"image/ycyx1.png\"/>\n" +
-                "                    <p class=\"list\">仪表编号</p>\n" +
+                "                    <p class=\"list\">"+Operation['ui_meterid']+"</p>\n" +
                 "                    <p>" + this.fMetercode + "</p>\n" +
                 "                </div>\n" +
                 "                <div class=\"type\">\n" +
                 "                    <img src=\"image/ycyx2.png\"/>\n" +
-                "                    <p class=\"list\">仪表名称</p>\n" +
+                "                    <p class=\"list\">"+Operation['ui_metername']+"</p>\n" +
                 "                    <p>" + this.fMetername + "</p>\n" +
                 "                </div>\n" +
                 "                <div class=\"type\">\n" +
                 "                    <img src=\"image/ycyx3.png\"/>\n" +
-                "                    <p class=\"list\">参数名称</p>\n" +
+                "                    <p class=\"list\">"+Operation['ui_paramname']+"</p>\n" +
                 "                    <p>" + this.fParamname + "</p>\n" +
                 "                </div>\n" +
                 "                <div class=\"type\">\n" +
                 "                    <img src=\"image/ycyx4.png\"/>\n" +
-                "                    <p class=\"list\">类型</p>\n" +
+                "                    <p class=\"list\">"+Operation['ui_type']+"</p>\n" +
                 "                    <p>" + fValueStr + "</p>\n" +
                 "                </div>\n" +
                 "            </div>";
@@ -174,7 +173,10 @@ $(function () {
     function getListDataFromNet(pageNum, pageSize, successCallback, errorCallback) {
         //开始时间不能大于截止时间
         if (startDate > endDate) {
-            $("#startDate").html("请选择正确的查询时间！");
+            toast.show({
+                text: Operation['ui_dateselecttip']+"！",
+                duration: 2000
+            });
             return;
         } else {
             $("#startDate").html(startDate);
@@ -211,16 +213,22 @@ $(function () {
                     request.setRequestHeader("Authorization", token)
                 },
                 success: function (result) {
+                    if(result.code != "200"){
+                        toast.show({
+                            text: Substation.showCodeTips(result.code),
+                            duration: 2000
+                        });
+                    }
                     if (result.code == "5000") {
                         var strArr = baseUrlFromAPP.split("/");
-                        strArr.pop();
-                        var ipAddress = strArr.join("/");
+                        var ipAddress = strArr[0]+"//"+strArr[2];
+
                         $.ajax({
                             url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                             type: "POST",
                             data: {
                                 ip: ipAddress,
-                                exceptionMessage: data.data.stackTrace
+                                exceptionMessage: JSON.stringify(result.data.stackTrace)
                             },
                             success: function (data) {
 

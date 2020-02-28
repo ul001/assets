@@ -313,11 +313,8 @@ body {
 		right: 0;
 	}
 }
-#electric{
-    background:none;
-}
 #energySelect{
     outline:0;
-	width: calc(100% - 108px);
-	background: url('../image/right.png') no-repeat right center;
+	width: calc(100% - 104px);
+	/*background: url('../image/right.png') no-repeat right center;*/
 }

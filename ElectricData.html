@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <!-- 电力参数 -->
 
 <head>
@@ -16,8 +16,10 @@
     <script src="lib/bootstrap-table.min.js"></script>
     <script src="lib/echarts.min.js"></script>
     <script src="js/tools.js"></script>
-    <script src="js/ElectricData.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
     <script src="lib/toast.js"></script>
+    <script src="js/ElectricData.js"></script>
 
 </head>
 
@@ -28,11 +30,11 @@
                 <div class="treeSearch">
                     <img class="clear" src="image/clear.png" />
                     <input type="text" id="CircuitidsInput" />
-                    <button type="button" id="CircuitidsList">搜索</button>
+                    <button type="button" id="CircuitidsList" data-i18n="ui_search"></button>
                 </div>
                 <div id="treeview" class="col-sm-4"></div>
-                <button type="button" class="cancel">取消</button>
-                <button type="button" class="search" id="confirm">查询</button>
+                <button type="button" class="cancel" data-i18n="ui_cancel"></button>
+                <button type="button" class="search" id="confirm" data-i18n="ui_select"></button>
             </div>
         </div>
         <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -72,38 +74,38 @@
             <li class="list" id="sideClick">
                 <p>
                     <img class="jiancedian" src="image/jiancedian.png" />
-                    <span>监测点：</span>
+                    <span><span data-i18n="ui_watchposition"></span>：</span>
                     <span id="meter">-</span>
                 </p>
             </li>
             <li class="list" id="electric">
                 <img class="type" src="image/type.png" />
-                <span value="P" id="EnergyKind">电力类别：</span>
+                <span value="P" id="EnergyKind" data-i18n="ui_eleckind"></span>：
                 <select id="energySelect">
-                    <option value="P">有功功率</option>
-                    <option value="I">电流</option>
-                    <option value="U">相电压</option>
-                    <option value="UL">线电压</option>
-                    <option value="fFr">频率</option>
-                    <option value="Q">无功功率</option>
-                    <option value="S">视在功率</option>
+                    <option value="P" data-i18n="ui_p"></option>
+                    <option value="I" data-i18n="ui_i"></option>
+                    <option value="U" data-i18n="ui_u"></option>
+                    <option value="UL" data-i18n="ui_ul"></option>
+                    <option value="fFr" data-i18n="ui_ffr"></option>
+                    <option value="Q" data-i18n="ui_q"></option>
+                    <option value="S" data-i18n="ui_s"></option>
                 </select>
             </li>
             <li class="elec-btn" class="clearbg" id="EnergyContain">
-                <button type="button" class="btn select" value="fP">总</button>
-                <button type="button" class="btn" value="fPa">A相</button>
-                <button type="button" class="btn" value="fPb">B相</button>
-                <button type="button" class="btn" value="fPc">C相</button>
+                <button type="button" class="btn select" value="fP" data-i18n="ui_sum"></button>
+                <button type="button" class="btn" value="fPa" data-i18n="ui_a"></button>
+                <button type="button" class="btn" value="fPb" data-i18n="ui_b"></button>
+                <button type="button" class="btn" value="fPc" data-i18n="ui_c"></button>
             </li>
             <li class="form-group selectTime list">
                 <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
                     <img src="image/date.png" />
-                    <span>日期：</span>
+                    <span data-i18n="ui_date"></span>：
                     <input readonly type="text" id="date">
                 </div>
             </li>
         </ul>
-        <button type="button" class="search" id="search"><img src="image/search.png" />查询</button>
+        <button type="button" class="search" id="search"><img src="image/search.png" /><span data-i18n="ui_select"></span></button>
         <div class="diagram center" id="chartContain"></div>
         <div class="dataTable center" id="tableContain"></div>
     </div>

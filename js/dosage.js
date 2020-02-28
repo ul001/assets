@@ -1,16 +1,13 @@
 $(function () {
-    //    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-    //    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-    //    var subidFromAPP = 10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
     if (isIOS) { //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
         var storage = localStorage.getItem("accessToken");
@@ -64,10 +61,16 @@ $(function () {
         // $("body").showLoading();
         var nowDate = tool.initDate("YMDhm", new Date());
         if (startDate > endDate) {
-            alert("开始时间不能大于结束时间，请选择正确的查询时间！");
+            toast.show({
+                text: Operation['ui_dateselecttip']+"！",
+                duration: 2000
+            });
             return;
         } else if (endDate > nowDate) {
-            alert("结束时间不能大于当前时间，请选择正确的查询时间！");
+            toast.show({
+                text: Operation['ui_dateselecttip']+"！",
+                duration: 2000
+            });
             return;
         } else {
             $("#startDate").html(startDate);
@@ -90,7 +93,7 @@ $(function () {
 
     function getData(url, params, successCallback) {
         toast.show({
-            text: "正在加载",
+            text: Operation['ui_loading'],
             loading: true
         });
         var token = tokenFromAPP;
@@ -104,14 +107,14 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    strArr.pop();
-                    var ipAddress = strArr.join("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
+
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: data.data.stackTrace
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
                         success: function (data) {
 
@@ -119,11 +122,17 @@ $(function () {
                     });
                 }
                 toast.hide();
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
                 successCallback(result.data);
             },
             error: function () {
                 toast.show({
-                    text: '数据请求失败',
+                    text: Operation['code_fail'],
                     duration: 2000
                 });
             }
@@ -228,29 +237,29 @@ $(function () {
         });
         bar.push({
             value: jBar.toFixed(0),
-            name: '尖'
+            name: Operation['ui_jian']
         }, {
             value: fBar.toFixed(0),
-            name: '峰'
+            name: Operation['ui_feng']
         }, {
             value: pBar.toFixed(0),
-            name: '平'
+            name: Operation['ui_ping']
         }, {
             value: gBar.toFixed(0),
-            name: '谷'
+            name: Operation['ui_gu']
         });
         priceBar.push({
             value: jpBar.toFixed(0),
-            name: '尖'
+            name: Operation['ui_jian']
         }, {
             value: fpBar.toFixed(0),
-            name: '峰'
+            name: Operation['ui_feng']
         }, {
             value: ppBar.toFixed(0),
-            name: '平'
+            name: Operation['ui_ping']
         }, {
             value: gpBar.toFixed(0),
-            name: '谷'
+            name: Operation['ui_gu']
         });
 
         if (type == 'sum') {
@@ -260,7 +269,7 @@ $(function () {
         }
         if (type == 'price') {
             var sum = (fpBar + ppBar + gpBar).toFixed(0);
-            initBar($("#lineChart"), time, jPrice, fPrice, pPrice, gPrice, priceBar, sum, '元');
+            initBar($("#lineChart"), time, jPrice, fPrice, pPrice, gPrice, priceBar, sum, Operation['ui_yuan']);
             // initPie($("#lineChart"), time, jPrice, fPrice, pPrice, gPrice, priceBar, sum, '元');
         }
     }
@@ -270,8 +279,8 @@ $(function () {
         var bar = echarts.init(document.getElementById('chartDosage'));
         var option = {
             title: [{
-                text: '当月占比环形图',
-                subtext: '总计：' + sum + y,
+                text: Operation['ui_donut'],
+                subtext: y=="￥"?(Operation['ui_totalsum']+'：' + y + sum):(Operation['ui_totalsum']+'：' + sum + y),
                 textStyle: {
                     fontWeight: 'small'
                 },
@@ -286,7 +295,7 @@ $(function () {
                 }
             },
             legend: {
-                data: ['尖', '峰', '平', '谷'],
+                data: [Operation['ui_jian'], Operation['ui_feng'], Operation['ui_ping'], Operation['ui_gu']],
                 bottom: 50
             },
             grid: {
@@ -322,9 +331,9 @@ $(function () {
                 type: 'inside'
             }],
             series: [{
-                    name: '尖',
+                    name: Operation['ui_jian'],
                     type: 'bar',
-                    stack: '用电量',
+                    stack: Operation['ui_consumeelecval'],
                     label: {
                         normal: {
                             show: false,
@@ -339,9 +348,9 @@ $(function () {
                     data: j
                 },
                 {
-                    name: '峰',
+                    name: Operation['ui_feng'],
                     type: 'bar',
-                    stack: '用电量',
+                    stack: Operation['ui_consumeelecval'],
                     label: {
                         normal: {
                             show: false,
@@ -356,9 +365,9 @@ $(function () {
                     data: f
                 },
                 {
-                    name: '平',
+                    name: Operation['ui_ping'],
                     type: 'bar',
-                    stack: '用电量',
+                    stack: Operation['ui_consumeelecval'],
                     label: {
                         normal: {
                             show: false,
@@ -373,9 +382,9 @@ $(function () {
                     data: p
                 },
                 {
-                    name: '谷',
+                    name: Operation['ui_gu'],
                     type: 'bar',
-                    stack: '用电量',
+                    stack: Operation['ui_consumeelecval'],
                     label: {
                         normal: {
                             show: false,
@@ -390,7 +399,7 @@ $(function () {
                     data: g
                 },
                 {
-                    name: "当月占比",
+                    name: Operation['ui_proportion'],
                     type: 'pie',
                     radius: ['20%', '45%'],
                     center: ['50%', '25%'],

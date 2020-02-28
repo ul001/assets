@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -12,8 +12,10 @@
     <script src="lib/echarts.min.js"></script>
     <script src="lib/rolldate.min.js"></script>
     <script src="js/tools.js"></script>
-    <script src="js/cableTemperature-modal.js"></script>
     <script src="lib/toast.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
+    <script src="js/cableTemperature-modal.js"></script>
 </head>
 
 <body>
@@ -21,22 +23,22 @@
         <div class="address">
             <img src="image/address.png" />
             <a id="titleP"></a>
-            <button id="return" onclick="window.history.back()">返回</button>
+            <button id="return" onclick="window.history.back()" data-i18n="ui_back"></button>
         </div>
         <div class="form-group form_date_end selectTime">
-            <span id="datePre">上一日</span>&nbsp;&nbsp;
+            <span id="datePre" data-i18n="ui_perday"></span>&nbsp;&nbsp;
             <span class="date">
                 <input readonly type="text" id="date">
             </span>
-            <span id="dateNext">下一日</span>
+            <span id="dateNext" data-i18n="ui_nextday"></span>
         </div>
         <div class="btn">
-            <button type="button" id="showChart" class="select">图表</button>
-            <button type="button" id="showTable">数据</button>
+            <button type="button" id="showChart" class="select" data-i18n="ui_chart"></button>
+            <button type="button" id="showTable" data-i18n="ui_data"></button>
         </div>
         <div class="chart">
             <div class="mainBox">
-                <div id="tempTitle">线缆温度</div>
+                <div id="tempTitle"></div>
                 <div id="tempChart"></div>
             </div>
         </div>

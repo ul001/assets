@@ -1,16 +1,13 @@
 $(function () {
-    //         var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-    //        var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-    //        var subidFromAPP = 10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
     if (isIOS) { //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
         var storage = localStorage.getItem("accessToken");
@@ -24,6 +21,7 @@ $(function () {
         tokenFromAPP = android.getToken();
         subidFromAPP = android.getfSubid();
     }
+
     let toast = new ToastClass();
     var choise = 1;
     var info = null;
@@ -39,7 +37,7 @@ $(function () {
             endDate: $("#date").val() + " 23:59:59"
         };
         toast.show({
-            text: "正在加载",
+            text: Operation['ui_loading'],
             loading: true
         });
         $.ajax({
@@ -52,14 +50,14 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    strArr.pop();
-                    var ipAddress = strArr.join("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
+
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: data.data.stackTrace
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
                         success: function (data) {
 
@@ -67,6 +65,12 @@ $(function () {
                     });
                 }
                 toast.hide();
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
                 info = result.data;
                 $("#titleP").text(info.list[0].f_MeterName);
                 if (choise == 1) {
@@ -77,7 +81,7 @@ $(function () {
             },
             error: function () {
                 toast.show({
-                    text: '数据请求失败',
+                    text: Operation['code_fail'],
                     duration: 2000
                 });
             }
@@ -103,7 +107,7 @@ $(function () {
             },
             legend: {
                 top: 11,
-                data: ['温度A', '温度B', '温度C']
+                data: [Operation['ui_temp']+'A', Operation['ui_temp']+'B', Operation['ui_temp']+'C']
             },
             grid: {
                 left: '13%',
@@ -141,20 +145,20 @@ $(function () {
                 scale: true,
             }],
             series: [{
-                name: '温度A',
+                name: Operation['ui_temp']+'A',
                 type: 'line',
                 data: tempA
             }, {
-                name: '温度B',
+                name: Operation['ui_temp']+'B',
                 type: 'line',
                 data: tempB
             }, {
-                name: '温度C',
+                name: Operation['ui_temp']+'C',
                 type: 'line',
                 data: tempC
             }]
         };
-        $(".chart").html('<div class="mainBox"><div id="tempTitle">线缆温度(℃)</div><div id="tempChart"></div></div>');
+        $(".chart").html('<div class="mainBox"><div id="tempTitle">'+Operation['ui_cabtemp']+'(℃)</div><div id="tempChart"></div></div>');
         $("#tempChart").removeAttr('_echarts_instance_');
         myChart = echarts.init($("#tempChart").get(0), 'macarons');
         myChart.setOption(option);
@@ -175,13 +179,13 @@ $(function () {
         var columns = [
             [{
                     field: 'time',
-                    title: '采集时间',
+                    title: Operation['ui_collecttime'],
                     valign: 'middle',
                     align: 'center',
                     rowspan: 2
                 },
                 {
-                    title: '温度(℃)',
+                    title: Operation['ui_temp']+'(℃)',
                     valign: "middle",
                     align: 'center',
                     colspan: 3

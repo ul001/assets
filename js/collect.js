@@ -1,16 +1,13 @@
 $(function () {
-    //   var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-    //    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-    //   var subidFromAPP=10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
     if (isIOS) { //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
         var storage = localStorage.getItem("accessToken");
@@ -130,10 +127,16 @@ $(function () {
         startDate = $("#dateStart").val();
         endDate = $("#dateEnd").val();
         if (startDate > endDate) {
-            alert("开始时间不能大于结束时间，请选择正确的查询时间！");
+            toast.show({
+                text: Operation['ui_dateselecttip']+"！",
+                duration: 2000
+            });
             return;
         } else if (endDate > nowDate) {
-            alert("结束时间不能大于当前时间，请选择正确的查询时间！");
+            toast.show({
+                text: Operation['ui_dateselecttip']+"！",
+                duration: 2000
+            });
             return;
         } else {
             $("#dateStart").html(startDate);
@@ -180,17 +183,17 @@ $(function () {
                     "        <h1>" + strName + "</h1>\n" +
                     "        <div class=\"type\">\n" +
                     "            <img src=\"image/start.png\"/>\n" +
-                    "            <p class=\"list1\">起始数值</p>\n" +
+                    "            <p class=\"list1\">"+Operation['ui_startval']+"</p>\n" +
                     "            <p>" + startStr + "</p>\n" +
                     "        </div>\n" +
                     "        <div class=\"type\">\n" +
                     "            <img src=\"image/stop.png\"/>\n" +
-                    "            <p class=\"list1\">截止数值</p>\n" +
+                    "            <p class=\"list1\">"+Operation['ui_endval']+"</p>\n" +
                     "            <p>" + endStr + "</p>\n" +
                     "        </div>\n" +
                     "        <div class=\"type\">\n" +
                     "            <img src=\"image/between.png\"/>\n" +
-                    "            <p class=\"list1\">差值</p>\n" +
+                    "            <p class=\"list1\">"+Operation['ui_minusval']+"</p>\n" +
                     "            <p>" + consumeStr + "</p>\n" +
                     "        </div>\n" +
                     "    </div>";
@@ -205,7 +208,7 @@ $(function () {
         try {
             var token = tokenFromAPP;
             toast.show({
-                text: "正在加载",
+                text: Operation['ui_loading'],
                 loading: true
             });
             $.ajax({
@@ -218,14 +221,13 @@ $(function () {
                 success: function (result) {
                     if (result.code == "5000") {
                         var strArr = baseUrlFromAPP.split("/");
-                        strArr.pop();
-                        var ipAddress = strArr.join("/");
+                        var ipAddress = strArr[0]+"//"+strArr[2];
                         $.ajax({
                             url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                             type: "POST",
                             data: {
                                 ip: ipAddress,
-                                exceptionMessage: data.data.stackTrace
+                                exceptionMessage: JSON.stringify(result.data.stackTrace)
                             },
                             success: function (data) {
 
@@ -233,12 +235,18 @@ $(function () {
                         });
                     }
                     toast.hide();
+                    if(result.code != "200"){
+                        toast.show({
+                            text: Substation.showCodeTips(result.code),
+                            duration: 2000
+                        });
+                    }
                     // mescroll.endSuccess(data.list.length);
                     successCallback(result.data);
                 },
                 error: function () {
                     toast.show({
-                        text: '数据请求失败',
+                        text: Operation['code_fail'],
                         duration: 2000
                     });
                 }
@@ -270,231 +278,6 @@ $(function () {
             currentSelectVode.merterName = node.text;
         })
     }
-
-    $(document).on("click", ".category li", function () {
-        var type = $(this).children('label').attr("value");
-        var text = $(this).children('label').text();
-        generateType(type);
-        $("#EnergyKind").attr("value", type);
-        $("#param").html(text);
-        $("#myModal").modal("hide");
-    })
-
-    function generateType(type) {
-        var List = [{
-                "id": "P",
-                "name": "有功功率",
-                "phase": [{
-                    "id": "fPa",
-                    "name": "A相"
-                }, {
-                    "id": "fPb",
-                    "name": "B相"
-                }, {
-                    "id": "fPc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "I",
-                "name": "电流",
-                "phase": [{
-                    "id": "fIa",
-                    "name": "A相"
-                }, {
-                    "id": "fIb",
-                    "name": "B相"
-                }, {
-                    "id": "fIc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "U",
-                "name": "相电压",
-                "phase": [{
-                    "id": "fUa",
-                    "name": "A相"
-                }, {
-                    "id": "fUb",
-                    "name": "B相"
-                }, {
-                    "id": "fUc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "UL",
-                "name": "线电压",
-                "phase": [{
-                    "id": "fUab",
-                    "name": "Uab"
-                }, {
-                    "id": "fUbc",
-                    "name": "Ubc"
-                }, {
-                    "id": "fUca",
-                    "name": "Uca"
-                }]
-            },
-            {
-                "id": "fFr",
-                "name": "频率",
-            },
-            {
-                "id": "Q",
-                "name": "无功功率",
-                "phase": [{
-                    "id": "fQa",
-                    "name": "A相"
-                }, {
-                    "id": "fQb",
-                    "name": "B相"
-                }, {
-                    "id": "fQc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "S",
-                "name": "视在功率",
-                "phase": [{
-                    "id": "fSa",
-                    "name": "A相"
-                }, {
-                    "id": "fSb",
-                    "name": "B相"
-                }, {
-                    "id": "fSc",
-                    "name": "C相"
-                }]
-            },
-        ]
-        var arr = $.grep(List, function (obj) {
-            return obj.id == type;
-        })
-        $("#EnergyContain").html("");
-        if (arr[0].hasOwnProperty('phase')) {
-            $.each(arr[0].phase, function (index, val) {
-                var string = '<button type="button" class="btn" value="' + val.id + '">' + val.name + '</button>';
-                $("#EnergyContain").append(string);
-            })
-            $("#EnergyContain button:first").addClass('select');
-        }
-    }
-
-    function showCharts(data) {
-        var time = [];
-        var value = [];
-        var name = [];
-        if (data.length > 0) {
-            var sum = 0;
-            var max = data[0].fParamvalue;
-            var min = data[0].fParamvalue;
-            var maxTime;
-            var minTime;
-            var type = data[0].fParamcode.substring(1);
-            name.push(type);
-            $.each(data, function (index, el) {
-                time.push(el.fCollecttime.substring(11, 16));
-                value.push(el.fParamvalue);
-                if (el.fParamvalue > max) {
-                    max = el.fParamvalue;
-                    maxTime = el.fCollecttime.substring(0, 16)
-                }
-                if (el.fParamvalue < min) {
-                    min = el.fParamvalue;
-                    minTime = el.fCollecttime.substring(0, 16)
-                }
-                sum += el.fParamvalue;
-            });
-            var avg = (sum / data.length).toFixed(2);
-            var tableData = [{
-                "type": type,
-                "max": max,
-                "maxTime": maxTime,
-                "min": min,
-                "minTime": minTime,
-                "avg": avg
-            }];
-            showTable(tableData);
-        }
-
-        var line = echarts.init(document.getElementById('chartContain'));
-        var option = {
-            tooltip: {
-                trigger: 'axis'
-            },
-            legend: {
-                data: name,
-            },
-            grid: { // 控制图的大小，调整下面这些值就可以，
-                top: '8%',
-                left: '8%',
-                right: '3%',
-                bottom: '12%',
-            },
-            xAxis: {
-                type: 'category',
-                data: time,
-            },
-            yAxis: {
-                type: 'value',
-                scale: true, //y轴自适应
-            },
-            calculable: true,
-            series: [{
-                name: name,
-                data: value,
-                type: 'line'
-            }]
-        };
-        line.setOption(option);
-        // $(window).bind("resize",function(event) {
-        //   line.resize();
-        // });
-    }
-
-    function showTable(data) {
-        var columns = [{
-                field: "type",
-                title: "类型",
-                align: "center"
-            },
-            {
-                field: "max",
-                title: "最大值",
-                align: "center"
-            },
-            {
-                field: "maxTime",
-                title: "发生时间",
-                align: "center"
-            },
-            {
-                field: "min",
-                title: "最小值",
-                align: "center"
-            },
-            {
-                field: "minTime",
-                title: "发生时间",
-                align: "center"
-            },
-            {
-                field: "avg",
-                title: "平均值",
-                align: "center"
-            },
-        ]
-        $("#tableContain").html("");
-        $("#tableContain").html("<table id='table'></table>");
-        $("#table").bootstrapTable({
-            columns: columns,
-            data: data,
-        })
-    }
-
 
     var time = tool.initDate("YMD", new Date());
     $("#date").val(time);

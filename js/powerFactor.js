@@ -1,16 +1,13 @@
 $(function () {
-  //  var baseUrlFromAPP="http://116.236.149.162:8090/SubstationWEBV2";
-  //  var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQxNDMxODksInVzZXJuYW1lIjoiYWRtaW4ifQ.t7BbigTS38rYbKXSNWSu2ggIbuLn9nAEneQv_Gkze44";
-  //  var subidFromAPP=10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
   //iOS安卓基础传参
   var u = navigator.userAgent,
     app = navigator.appVersion;
   var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
   var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
   //判断数组中是否包含某字符串
-  var baseUrlFromAPP;
-  var tokenFromAPP;
-  var subidFromAPP;
   if (isIOS) { //ios系统的处理
     window.webkit.messageHandlers.iOS.postMessage(null);
     var storage = localStorage.getItem("accessToken");
@@ -129,7 +126,7 @@ $(function () {
 
   function getData(url, params, successCallback) {
     toast.show({
-      text: '正在加载',
+      text: Operation['ui_loading'],
       loading: true
     });
     var token = tokenFromAPP;
@@ -143,14 +140,14 @@ $(function () {
       success: function (result) {
         if (result.code == "5000") {
           var strArr = baseUrlFromAPP.split("/");
-          strArr.pop();
-          var ipAddress = strArr.join("/");
+          var ipAddress = strArr[0]+"//"+strArr[2];
+
           $.ajax({
             url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
             type: "POST",
             data: {
               ip: ipAddress,
-              exceptionMessage: data.data.stackTrace
+              exceptionMessage: JSON.stringify(result.data.stackTrace)
             },
             success: function (data) {
 
@@ -158,12 +155,18 @@ $(function () {
           });
         }
         toast.hide();
-        //        toast.show({text: '数据请求失败',duration: 3000});
+        if(result.code != "200"){
+            toast.show({
+                text: Substation.showCodeTips(result.code),
+                duration: 2000
+            });
+        }
+        //        toast.show({text: Operation['code_fail'],duration: 3000});
         successCallback(result.data);
       },
       error: function () {
         toast.show({
-          text: '数据请求失败',
+          text: Operation['code_fail'],
           duration: 2000
         });
       }
@@ -200,19 +203,19 @@ $(function () {
   function generateType(type) {
     var List = [{
       "id": "PF",
-      "name": "功率因数",
+      "name": Operation['ui_pf'],
       "phase": [{
         "id": "fPf",
-        "name": "总"
+        "name": Operation['ui_sum']
       }, {
         "id": "fPfa",
-        "name": "A相"
+        "name": Operation['ui_a']
       }, {
         "id": "fPfb",
-        "name": "B相"
+        "name": Operation['ui_b']
       }, {
         "id": "fPfc",
-        "name": "C相"
+        "name": Operation['ui_c']
       }]
     }]
     var arr = $.grep(List, function (obj) {
@@ -356,7 +359,7 @@ $(function () {
     var columns = [
       [{
           field: "name",
-          title: "类型",
+          title: Operation['ui_type'],
           align: "center",
           valign: "middle",
           align: "center",
@@ -365,7 +368,7 @@ $(function () {
         },
         {
           field: "maxVT",
-          title: "最大值",
+          title: Operation['ui_maxval'],
           valign: "middle",
           align: "center",
           colspan: 2,
@@ -373,7 +376,7 @@ $(function () {
         },
         {
           field: "minVT",
-          title: "最小值",
+          title: Operation['ui_minval'],
           valign: "middle",
           align: "center",
           colspan: 2,
@@ -381,7 +384,7 @@ $(function () {
         },
         {
           field: "avg",
-          title: "平均值",
+          title: Operation['ui_avgval'],
           valign: "middle",
           align: "center",
           colspan: 1,
@@ -390,25 +393,25 @@ $(function () {
       ],
       [{
           field: "max",
-          title: "值",
+          title: Operation['ui_val'],
           valign: "middle",
           align: "center"
         },
         {
           field: "maxTime",
-          title: "时间",
+          title: Operation['ui_time'],
           valign: "middle",
           align: "center"
         },
         {
           field: "min",
-          title: "值",
+          title: Operation['ui_val'],
           valign: "middle",
           align: "center"
         },
         {
           field: "minTime",
-          title: "时间",
+          title: Operation['ui_time'],
           align: "center"
         }
       ]

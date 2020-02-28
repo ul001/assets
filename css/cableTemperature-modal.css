@@ -80,7 +80,7 @@ body{
     float:left;
 }
 #datePre,#dateNext{
-    padding:0 0.5rem;
+    width:24%;
 }
 #selectTime img{
     vertical-align: -4px;
@@ -89,7 +89,7 @@ body{
     float:right;
 }
 .date{
-    width:7.5rem;
+    /*width:70%;*/
     background:url(../image/down.png) no-repeat right center;
     background-size:1rem;
 }

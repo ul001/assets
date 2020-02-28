@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <!-- 配电图 -->
 
 <head>
@@ -11,6 +11,8 @@
     <script src="lib/jquery-1.12.4.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="js/tools.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
     <script src="js/DistributDiagram.js"></script>
     <script src="lib/toast.js"></script>
 
@@ -19,11 +21,10 @@
 <body>
     <div class="container">
         <select id="subList">
-            <option>图1</option>
-            <option>图2</option>
+            <option></option>
         </select>
-        <button id="BigDom" class="BigDom select">放大</button>
-        <button id="SimDom" class="SimDom">缩小</button>
+        <button id="BigDom" class="BigDom select" data-i18n="ui_larger"></button>
+        <button id="SimDom" class="SimDom" data-i18n="ui_smaller"></button>
         <div class="diagram"></div>
     </div>
 </body>

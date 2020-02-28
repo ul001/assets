@@ -425,3 +425,9 @@ body {
 		right: 0;
 	}
 }
+
+.listImg{
+    float: right;
+    margin-right: 1rem;
+    margin-top: 1.8rem;
+}

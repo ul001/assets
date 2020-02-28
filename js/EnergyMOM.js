@@ -1,7 +1,7 @@
 $(function () {
-    //    var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2";
-    //    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjQzMTkyMTksInVzZXJuYW1lIjoiYWRtaW4ifQ.5pQCWw5-ebBpM85B1bJLQV-ySiKt3cT9RL-aJ9uIqno";
-    //    var subidFromAPP = 10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
 
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -9,9 +9,6 @@ $(function () {
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
     if (isIOS) { //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
         var storage = localStorage.getItem("accessToken");
@@ -149,7 +146,7 @@ $(function () {
 
     function getData(url, params, successCallback) {
         toast.show({
-            text: '正在加载',
+            text: Operation['ui_loading'],
             loading: true
         });
         var token = tokenFromAPP;
@@ -163,14 +160,14 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    strArr.pop();
-                    var ipAddress = strArr.join("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
+
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: data.data.stackTrace
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
                         success: function (data) {
 
@@ -178,11 +175,17 @@ $(function () {
                     });
                 }
                 toast.hide();
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
                 successCallback(result.data);
             },
             error: function () {
                 toast.show({
-                    text: '数据请求失败',
+                    text: Operation['code_fail'],
                     duration: 2000
                 });
             }
@@ -206,118 +209,6 @@ $(function () {
             currentSelectVode.merterName = node.text;
         })
     }
-
-    /*    $(document).on("click", ".category li", function () {
-            var type = $(this).children('label').attr("value");
-            var text = $(this).children('label').text();
-            generateType(type);
-            $("#EnergyKind").attr("value", type);
-            $("#param").html(text);
-            $("#myModal").modal("hide");
-        })*/
-
-    /*    function generateType(type) {
-            var List = [{
-                    "id": "P",
-                    "name": "有功功率",
-                    "phase": [{
-                        "id": "fPa",
-                        "name": "A相"
-                    }, {
-                        "id": "fPb",
-                        "name": "B相"
-                    }, {
-                        "id": "fPc",
-                        "name": "C相"
-                    }]
-                },
-                {
-                    "id": "I",
-                    "name": "电流",
-                    "phase": [{
-                        "id": "fIa",
-                        "name": "A相"
-                    }, {
-                        "id": "fIb",
-                        "name": "B相"
-                    }, {
-                        "id": "fIc",
-                        "name": "C相"
-                    }]
-                },
-                {
-                    "id": "U",
-                    "name": "相电压",
-                    "phase": [{
-                        "id": "fUa",
-                        "name": "A相"
-                    }, {
-                        "id": "fUb",
-                        "name": "B相"
-                    }, {
-                        "id": "fUc",
-                        "name": "C相"
-                    }]
-                },
-                {
-                    "id": "UL",
-                    "name": "线电压",
-                    "phase": [{
-                        "id": "fUab",
-                        "name": "Uab"
-                    }, {
-                        "id": "fUbc",
-                        "name": "Ubc"
-                    }, {
-                        "id": "fUca",
-                        "name": "Uca"
-                    }]
-                },
-                {
-                    "id": "fFr",
-                    "name": "频率",
-                },
-                {
-                    "id": "Q",
-                    "name": "无功功率",
-                    "phase": [{
-                        "id": "fQa",
-                        "name": "A相"
-                    }, {
-                        "id": "fQb",
-                        "name": "B相"
-                    }, {
-                        "id": "fQc",
-                        "name": "C相"
-                    }]
-                },
-                {
-                    "id": "S",
-                    "name": "视在功率",
-                    "phase": [{
-                        "id": "fSa",
-                        "name": "A相"
-                    }, {
-                        "id": "fSb",
-                        "name": "B相"
-                    }, {
-                        "id": "fSc",
-                        "name": "C相"
-                    }]
-                },
-            ]
-            var arr = $.grep(List, function (obj) {
-                return obj.id == type;
-            })
-            $("#EnergyContain").html("");
-            if (arr[0].hasOwnProperty('phase')) {
-                $.each(arr[0].phase, function (index, val) {
-                    var string = '<button type="button" class="btn" value="' + val.id + '">' + val.name + '</button>';
-                    $("#EnergyContain").append(string);
-                })
-                $("#EnergyContain button:first").addClass('select');
-            }
-        }*/
 
     function showCharts(data) {
         var time = [];
@@ -345,22 +236,22 @@ $(function () {
 
             $.each(data, function (index, el) {
                 if (selectParam == "today") {
-                    time.push("昨日");
-                    time.push("当日");
-                    todayStr = "当日用电";
-                    yesterdayStr = "昨日用电";
+                    time.push(Operation['ui_today']);
+                    time.push(Operation['ui_yestoday']);
+                    todayStr = Operation['ui_today']+Operation['ui_consumeelec'];
+                    yesterdayStr = Operation['ui_yestoday']+Operation['ui_consumeelec'];
 
                 } else if (selectParam == "month") {
-                    time.push("上月");
-                    time.push("当月");
-                    todayStr = "当月用电";
-                    yesterdayStr = "上月用电";
+                    time.push(Operation['ui_themonth']);
+                    time.push(Operation['ui_permonth']);
+                    todayStr = Operation['ui_themonth']+Operation['ui_consumeelec'];
+                    yesterdayStr = Operation['ui_permonth']+Operation['ui_consumeelec'];
 
                 } else if (selectParam == "week") {
-                    time.push("上周");
-                    time.push("本周");
-                    todayStr = "本周用电";
-                    yesterdayStr = "上周用电";
+                    time.push(Operation['ui_theweek']);
+                    time.push(Operation['ui_perweek']);
+                    todayStr = Operation['ui_theweek']+Operation['ui_consumeelec'];
+                    yesterdayStr = Operation['ui_perweek']+Operation['ui_consumeelec'];
                 }
                 var fMomStr = "-";
                 if (el.hasOwnProperty("fMomvalue")) {
@@ -442,7 +333,7 @@ $(function () {
             calculable: true,
             series: [{
                 name: time[0],
-                data: befValue,
+                data: nowValue,
                 type: 'bar',
                 itemStyle: {
                     normal: {
@@ -457,7 +348,7 @@ $(function () {
                 },
             }, {
                 name: time[1],
-                data: nowValue,
+                data: befValue,
                 type: 'bar',
                 itemStyle: {
                     normal: {
@@ -475,26 +366,6 @@ $(function () {
         line.setOption(option);
 
 
-    }
-
-    function showTable(data) {
-        var columns = [{
-                field: "time",
-                title: data[0].showData,
-                align: "center"
-            },
-            {
-                field: "value",
-                title: "电量(单位：kW.h)",
-                align: "center"
-            }
-        ]
-        $("#tableContain").html("");
-        $("#tableContain").html("<table id='table'></table>");
-        $("#table").bootstrapTable({
-            columns: columns,
-            data: data,
-        })
     }
 
     var roll = new Rolldate({

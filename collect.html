@@ -1,84 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <title></title>
     <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/collect.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/collect.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css"/>
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="lib/rolldate.min.js"></script>
     <script src="lib/bootstrap-treeview.js"></script>
     <script src="lib/bootstrap-table.min.js"></script>
     <script src="js/tools.js"></script>
-    <script src="js/collect.js"></script>
     <script src="lib/toast.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
+    <script src="js/collect.js"></script>
 </head>
 <!-- 集抄 -->
 
 <body>
-    <div class="container">
-        <div class="tree">
-            <div class="selectcontain-main">
-                <div class="treeSearch">
-                    <img class="clear" src="image/clear.png" />
-                    <input type="text" id="CircuitidsInput" />
-                    <button type="button" id="CircuitidsList">搜索</button>
-                </div>
-                <div id="treeview" class="col-sm-4"></div>
-                <button type="button" class="cancel">取消</button>
-                <button type="button" class="search" id="confirm">查询</button>
+<div class="container">
+    <div class="tree">
+        <div class="selectcontain-main">
+            <div class="treeSearch">
+                <img class="clear" src="image/clear.png"/>
+                <input type="text" id="CircuitidsInput"/>
+                <button type="button" id="CircuitidsList" data-i18n="ui_search"></button>
             </div>
+            <div id="treeview" class="col-sm-4"></div>
+            <button type="button" class="cancel" data-i18n="ui_cancel"></button>
+            <button type="button" class="search" id="confirm" data-i18n="ui_select"></button>
         </div>
-        <div class="list" id="sideClick">
-            <p>
-                <img class="jiancedian" src="image/jiancedian.png" />
-                <span>监测点：</span>
-                <span id="meter"></span>
-            </p>
-            <img src="image/right.png" />
+    </div>
+    <div class="list" id="sideClick">
+        <p>
+            <img class="jiancedian" src="image/jiancedian.png"/>
+            <span><span data-i18n="ui_watchposition"></span>：</span>
+            <span id="meter"></span>
+        </p>
+        <img src="image/right.png"/>
+    </div>
+    <div class="form-group function-group" id="startDate">
+        <!--            <div class="dosageSelect">-->
+        <img class="dateImg" src="image/date.png"/>
+        <label class="col-md-2 control-label"><span data-i18n="ui_startdate"></span>：</label>
+        <div class="input-group date form_date_start" data-date="" data-link-field="dtp_input2">
+            <input readonly type="text" id="dateStart" class="startDate">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-calendar"></span></span>
         </div>
-        <div class="form-group function-group" id="startDate">
-            <div class="dosageSelect">
-                <img class="dateImg" src="image/date.png" />
-                <label class="col-md-2 control-label">起始日期：</label>
-                <div class="input-group date form_date_start" data-date="" data-link-field="dtp_input2">
-                    <input readonly type="text" id="dateStart" class="startDate">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                </div>
-            </div>
+        <img class="listImg" src="image/right.png">
+        <!--            </div>-->
+    </div>
+    <div class="form-group function-group" id="endDate">
+        <img class="dateImg" src="image/date.png"/>
+        <label class="col-md-2 control-label"><span data-i18n="ui_enddate"></span>：</label>
+        <div class="input-group date form_date_end" data-date="" data-link-field="dtp_input2">
+            <input readonly type="text" id="dateEnd" class="endDate">
+            <span class="input-group-addon"><span
+                    class="glyphicon glyphicon-calendar"></span></span>
         </div>
-        <div class="form-group function-group" id="endDate">
-            <img class="dateImg" src="image/date.png" />
-            <label class="col-md-2 control-label">截止日期：</label>
-            <div class="input-group date form_date_end" data-date="" data-link-field="dtp_input2">
-                <input readonly type="text" id="dateEnd" class="endDate">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-            </div>
-        </div>
-        <button type="button" class="search" id="search"><img src="image/search.png" />查询</button>
-        <ul class="list-unstyled" id="listUl"></ul>
+        <img class="listImg" src="image/right.png">
     </div>
-    <!--<div class="contain">
-    <h1>主进线柜<span>2019-06-11</span></h1>
-    <div class="type">
-        <img src="image/start.png"/>
-        <p class="list1">类型</p>
-        <p>报警恢复</p>
-    </div>
-    <div class="type">
-        <img src="image/stop.png"/>
-        <p class="list1">参数名称</p>
-        <p>B相电压</p>
-    </div>
-    <div class="type">
-        <img src="image/between.png"/>
-        <p class="list1">报警值</p>
-        <p>286.6</p>
-    </div>
+    <button type="button" class="search" id="search"><img src="image/search.png"/><span
+            data-i18n="ui_select"></span></button>
+    <ul class="list-unstyled" id="listUl"></ul>
+</div>
+<!--<div class="contain">
+<h1>主进线柜<span>2019-06-11</span></h1>
+<div class="type">
+    <img src="image/start.png"/>
+    <p class="list1">类型</p>
+    <p>报警恢复</p>
+</div>
+<div class="type">
+    <img src="image/stop.png"/>
+    <p class="list1">参数名称</p>
+    <p>B相电压</p>
+</div>
+<div class="type">
+    <img src="image/between.png"/>
+    <p class="list1">报警值</p>
+    <p>286.6</p>
+</div>
 </div>-->
 </body>
 

@@ -1,16 +1,13 @@
 $(function () {
-    // var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-    // var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzg5NjYwNDksInVzZXJuYW1lIjoiaGFoYWhhIn0.qCkxuhXzGveb15_jmfAUc_Pc-QLmZuoXxMfWHwQYVnk";
-    // var subidFromAPP = 10100001;
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
     if (isIOS) { //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
         var storage = localStorage.getItem("accessToken");
@@ -39,7 +36,7 @@ $(function () {
 
     function getData(url, params, successCallback) {
         toast.show({
-            text: '正在加载',
+            text: Operation['ui_loading'],
             loading: true
         });
         $.ajax({
@@ -53,14 +50,14 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    strArr.pop();
-                    var ipAddress = strArr.join("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
+
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
                         data: {
                             ip: ipAddress,
-                            exceptionMessage: data.data.stackTrace
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
                         success: function (data) {
 
@@ -68,11 +65,17 @@ $(function () {
                     });
                 }
                 toast.hide();
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
                 successCallback(result.data);
             },
             error: function () {
                 toast.show({
-                    text: '数据请求失败',
+                    text: Operation['code_fail'],
                     duration: 2000
                 });
             }
@@ -318,39 +321,39 @@ $(function () {
         }
         var times = times.length > time.length ? times : time;
 
-        for (var i = 0; i < times.length; i++) {
-            var index = 0;
-            for (var j = 0; j < dataObject.yesterdayPowerValue.length; j++) {
+        for (var j = 0; j < dataObject.yesterdayPowerValue.length; j++) {
+            for (var i = 0; i < times.length; i++) {
+//            var index = 0;
                 if (dataObject.yesterdayPowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
                     yesterDayfP.push(dataObject.yesterdayPowerValue[j].fP);
                     yesterDayfQ.push(dataObject.yesterdayPowerValue[j].fQ);
                     yesterDayfS.push(dataObject.yesterdayPowerValue[j].fS);
-                    index = 1;
+//                    index = 1;
                 }
             }
-            if (index == 0) {
-                yesterDayfP.push(null);
-                yesterDayfQ.push(null);
-                yesterDayfS.push(null);
-            }
+//            if (index == 0) {
+//                yesterDayfP.push(null);
+//                yesterDayfQ.push(null);
+//                yesterDayfS.push(null);
+//            }
         }
 
         if (dataObject.PowerValue != null) {
-            for (var i = 0; i < times.length; i++) {
-                var index = 0;
-                for (var j = 0; j < dataObject.PowerValue.length; j++) {
+//                var index = 0;
+            for (var j = 0; j < dataObject.PowerValue.length; j++) {
+                for (var i = 0; i < times.length; i++) {
                     if (dataObject.PowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
                         todayfP.push(dataObject.PowerValue[j].fP);
                         todayfQ.push(dataObject.PowerValue[j].fQ);
                         todayfS.push(dataObject.PowerValue[j].fS);
-                        index = 1;
+//                        index = 1;
                     }
                 }
-                if (index == 0) {
-                    todayfP.push(null);
-                    todayfQ.push(null);
-                    todayfS.push(null);
-                }
+//                if (index == 0) {
+//                    todayfP.push(null);
+//                    todayfQ.push(null);
+//                    todayfS.push(null);
+//                }
             }
         }
 
@@ -364,19 +367,19 @@ $(function () {
             });
         }
         //TODO：waring
-        var transformerName = "变压器";
+        var transformerName = Operation['ui_trans'];
         var type = $(".s-select")[0].id;
         if (type == "NowPower") {
-            var titlefS = transformerName + "  " + "视在功率";
+            var titlefS = transformerName + "  " + Operation['ui_s'];
             var seriesfS = [{
-                    name: '当日',
+                    name: Operation['ui_today'],
                     type: 'line',
                     data: todayfS,
                     markPoint: {
                         symbol: 'circle',
                         symbolSize: 10,
                         data: [{
-                                name: '最大值',
+                                name: Operation['ui_maxval'],
                                 type: 'max',
                                 label: {
                                     normal: {
@@ -385,7 +388,7 @@ $(function () {
                                 }
                             },
                             {
-                                name: '最小值',
+                                name: Operation['ui_minval'],
                                 type: 'min',
                                 label: {
                                     normal: {
@@ -404,20 +407,20 @@ $(function () {
                     },
                     markLine: {
                         data: [{
-                            name: '平均值',
+                            name: Operation['ui_avgval'],
                             type: 'average'
                         }]
                     }
                 },
                 {
-                    name: '上日',
+                    name: Operation['ui_yestoday'],
                     type: 'line',
                     data: yesterDayfS,
                     markPoint: {
                         symbol: 'circle',
                         symbolSize: 10,
                         data: [{
-                                name: '最大值',
+                                name: Operation['ui_maxval'],
                                 type: 'max',
                                 label: {
                                     normal: {
@@ -426,7 +429,7 @@ $(function () {
                                 }
                             },
                             {
-                                name: '最小值',
+                                name: Operation['ui_minval'],
                                 type: 'min',
                                 label: {
                                     normal: {
@@ -445,28 +448,28 @@ $(function () {
                     },
                     markLine: {
                         data: [{
-                            name: '平均值',
+                            name: Operation['ui_avgval'],
                             type: 'average'
                         }]
                     }
                 }
             ];
             var legendfS = {
-                data: ['当日', '上日'],
+                data: [Operation['ui_today'], Operation['ui_yestoday']],
                 bottom: '2%'
             };
             var unitfS = 'kVA';
             initLine(seriesfS, legendfS, times, titlefS, unitfS);
         } else if (type == "havePower") {
             var seriesfP = [{
-                    name: '当日',
+                    name: Operation['ui_today'],
                     type: 'line',
                     data: todayfP,
                     markPoint: {
                         symbol: 'circle',
                         symbolSize: 10,
                         data: [{
-                                name: '最大值',
+                                name: Operation['ui_maxval'],
                                 type: 'max',
                                 label: {
                                     normal: {
@@ -475,7 +478,7 @@ $(function () {
                                 }
                             },
                             {
-                                name: '最小值',
+                                name: Operation['ui_minval'],
                                 type: 'min',
                                 label: {
                                     normal: {
@@ -494,20 +497,20 @@ $(function () {
                     },
                     markLine: {
                         data: [{
-                            name: '平均值',
+                            name: Operation['ui_avgval'],
                             type: 'average'
                         }]
                     }
                 },
                 {
-                    name: '上日',
+                    name: Operation['ui_yestoday'],
                     type: 'line',
                     data: yesterDayfP,
                     markPoint: {
                         symbol: 'circle',
                         symbolSize: 10,
                         data: [{
-                                name: '最大值',
+                                name: Operation['ui_maxval'],
                                 type: 'max',
                                 label: {
                                     normal: {
@@ -516,7 +519,7 @@ $(function () {
                                 }
                             },
                             {
-                                name: '最小值',
+                                name: Operation['ui_minval'],
                                 type: 'min',
                                 label: {
                                     normal: {
@@ -535,29 +538,29 @@ $(function () {
                     },
                     markLine: {
                         data: [{
-                            name: '平均值',
+                            name: Operation['ui_avgval'],
                             type: 'average'
                         }]
                     }
                 }
             ];
             var legendfP = {
-                data: ['当日', '上日'],
+                data: [Operation['ui_today'], Operation['ui_yestoday']],
                 bottom: '2%'
             };
-            var titlefP = transformerName + "  " + "有功功率";
+            var titlefP = transformerName + "  " + Operation['ui_p'];
             var unitfP = 'kW';
             initLine(seriesfP, legendfP, times, titlefP, unitfP);
         } else if (type == "NothingPower") {
             var seriesfQ = [{
-                    name: '当日',
+                    name: Operation['ui_today'],
                     type: 'line',
                     data: todayfQ,
                     markPoint: {
                         symbol: 'circle',
                         symbolSize: 10,
                         data: [{
-                                name: '最大值',
+                                name: Operation['ui_maxval'],
                                 type: 'max',
                                 label: {
                                     normal: {
@@ -566,7 +569,7 @@ $(function () {
                                 }
                             },
                             {
-                                name: '最小值',
+                                name: Operation['ui_minval'],
                                 type: 'min',
                                 label: {
                                     normal: {
@@ -585,20 +588,20 @@ $(function () {
                     },
                     markLine: {
                         data: [{
-                            name: '平均值',
+                            name: Operation['ui_avgval'],
                             type: 'average'
                         }]
                     }
                 },
                 {
-                    name: '上日',
+                    name: Operation['ui_yestoday'],
                     type: 'line',
                     data: yesterDayfQ,
                     markPoint: {
                         symbol: 'circle',
                         symbolSize: 10,
                         data: [{
-                                name: '最大值',
+                                name: Operation['ui_maxval'],
                                 type: 'max',
                                 label: {
                                     normal: {
@@ -607,7 +610,7 @@ $(function () {
                                 }
                             },
                             {
-                                name: '最小值',
+                                name: Operation['ui_minval'],
                                 type: 'min',
                                 label: {
                                     normal: {
@@ -626,31 +629,31 @@ $(function () {
                     },
                     markLine: {
                         data: [{
-                            name: '平均值',
+                            name: Operation['ui_avgval'],
                             type: 'average'
                         }]
                     }
                 }
             ];
             var legendfQ = {
-                data: ['当日', '上日'],
+                data: [Operation['ui_today'], Operation['ui_yestoday']],
                 bottom: '2%'
             };
-            var titlefQ = transformerName + "  " + "无功功率";
+            var titlefQ = transformerName + "  " + Operation['ui_q'];
             var unitfQ = 'kVar';
             initLine(seriesfQ, legendfQ, times, titlefQ, unitfQ);
         } else if (type == "tempLine") {
-            var titleTem = transformerName + "  " + "绕阻温度";
+            var titleTem = transformerName + "  " + Operation['ui_tempLine'];
             // var titleTem = $("#daycalendarBox").val() + "  " + transformerName + "  " + "绕阻温度";
             var seriesTem = [{
-                    name: '温度A',
+                    name: Operation['ui_temp']+'A',
                     type: 'line',
                     data: seriesA,
                     markPoint: {
                         symbol: 'circle',
                         symbolSize: 10,
                         data: [{
-                                name: '最大值',
+                                name: Operation['ui_maxval'],
                                 type: 'max',
                                 label: {
                                     normal: {
@@ -659,7 +662,7 @@ $(function () {
                                 }
                             },
                             {
-                                name: '最小值',
+                                name: Operation['ui_minval'],
                                 type: 'min',
                                 label: {
                                     normal: {
@@ -678,20 +681,20 @@ $(function () {
                     },
                     markLine: {
                         data: [{
-                            name: '平均值',
+                            name: Operation['ui_avgval'],
                             type: 'average'
                         }]
                     }
                 },
                 {
-                    name: '温度B',
+                    name: Operation['ui_temp']+'B',
                     type: 'line',
                     data: seriesB,
                     markPoint: {
                         symbol: 'circle',
                         symbolSize: 10,
                         data: [{
-                                name: '最大值',
+                                name: Operation['ui_maxval'],
                                 type: 'max',
                                 label: {
                                     normal: {
@@ -700,7 +703,7 @@ $(function () {
                                 }
                             },
                             {
-                                name: '最小值',
+                                name: Operation['ui_minval'],
                                 type: 'min',
                                 label: {
                                     normal: {
@@ -719,20 +722,20 @@ $(function () {
                     },
                     markLine: {
                         data: [{
-                            name: '平均值',
+                            name: Operation['ui_avgval'],
                             type: 'average'
                         }]
                     }
                 },
                 {
-                    name: '温度C',
+                    name: Operation['ui_temp']+'C',
                     type: 'line',
                     data: seriesC,
                     markPoint: {
                         symbol: 'circle',
                         symbolSize: 10,
                         data: [{
-                                name: '最大值',
+                                name: Operation['ui_maxval'],
                                 type: 'max',
                                 label: {
                                     normal: {
@@ -741,7 +744,7 @@ $(function () {
                                 }
                             },
                             {
-                                name: '最小值',
+                                name: Operation['ui_minval'],
                                 type: 'min',
                                 label: {
                                     normal: {
@@ -760,14 +763,14 @@ $(function () {
                     },
                     markLine: {
                         data: [{
-                            name: '平均值',
+                            name: Operation['ui_avgval'],
                             type: 'average'
                         }]
                     }
                 }
             ];
             var legendTem = {
-                data: ['温度A', '温度B', '温度C'],
+                data: [Operation['ui_temp']+'A', Operation['ui_temp']+'B', Operation['ui_temp']+'C'],
                 bottom: '2%'
             };
             var unitTem = '℃';
@@ -805,7 +808,7 @@ $(function () {
             },
             grid: {
                 left: '13%',
-                right: '11%',
+                right: '12%',
                 top: '16%',
                 bottom: '25%'
             },
