@@ -84,7 +84,7 @@ html {
 }
 
 .date {
-	margin: 0.8rem 0.2rem;
+	/*margin: 0.8rem 0.2rem;*/
 	display: block;
 	float: left;
 }
@@ -118,19 +118,13 @@ html {
 	padding-left: 0.3rem;
 }
 
-.form_date_start,
-#dateStart,
-.form_date_end,
-#dateEnd {
-	width: 5rem;
-	background: transparent;
-	border: none;
-	float: left;
-    padding-top:0.5rem;
-}
 #dateStart,#dateEnd{
-    background:url(../image/down.png) no-repeat right 0.8rem;
-    background-size:0.5rem;
+    background: url(../image/down.png) no-repeat right;
+    background-size: 0.5rem;
+    width: 5rem;
+    line-height: 3rem;
+    padding: 0.7rem 0 0.5rem 0;
+    border: none;
 }
 .function-group label {
 	font-weight: normal;
