@@ -1,6 +1,5 @@
 $(function () {
-//    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var baseUrlFromAPP="http://www.acrelcloud.cn/SubstationWEBV2/v4";
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODQ0MTgyMDgsInVzZXJuYW1lIjoieG1weiJ9.x8Y5dw89SBzvlPtEKg5RXU4WzMw0EfkD_LgoRKwpqW8";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
@@ -9,20 +8,20 @@ $(function () {
     var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-//    if (isIOS) {
-//        //ios系统的处理
-//        window.webkit.messageHandlers.iOS.postMessage(null);
-//        var storage = localStorage.getItem("accessToken");
-//        // storage = storage ? JSON.parse(storage):[];
-//        storage = JSON.parse(storage);
-//        baseUrlFromAPP = storage.baseurl;
-//        tokenFromAPP = storage.token;
-//        subidFromAPP = storage.fsubID;
-//    } else {
-//        baseUrlFromAPP = android.getBaseUrl();
-//        tokenFromAPP = android.getToken();
-//        subidFromAPP = android.getfSubid();
-//    }
+    if (isIOS) {
+        //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
 
     let toast = new ToastClass();
     var url = baseUrlFromAPP + "/getAppSubimgInfo";
