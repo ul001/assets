@@ -1,6 +1,6 @@
 $(function () {
     var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODQ0MTgyMDgsInVzZXJuYW1lIjoieG1weiJ9.x8Y5dw89SBzvlPtEKg5RXU4WzMw0EfkD_LgoRKwpqW8";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -176,26 +176,33 @@ $(function () {
                 $.each(group.children("g text"), function (index, element) {
                     try {
                         var m = element.attributes.name.textContent;
-                        if (map.has(m.toLowerCase())) {
-                            var v = map.get(m.toLowerCase());
-                            var childName = "text[name='" + m + "']";
-                            if (v == undefined) {
-                                group.children(childName).text("-");
+                        if(m==""||m==undefined){
+                            return ture;
+                        }else{
+                            if (map.has(m.toLowerCase())) {
+                                var v = map.get(m.toLowerCase());
+                                var childName = "text[name='" + m + "']";
+                                if (v == undefined) {
+                                    group.children(childName).children('tspan').text("-");
+                                } else {
+                                    group.children(childName).children('tspan').text(map.get(m.toLowerCase()));
+                                }
                             } else {
-                                group.children(childName).text(map.get(m.toLowerCase()));
+                                $(this).children("tspan").text("-");
                             }
-                        } else {
-                            group.children(childName).text("-");
                         }
                     } catch (err) {}
                 });
             });
         } else {
-            $.each(group.children("g text"), function (index, element) {
+            $.each($("text"), function (index, element) {
                 try {
-
-                    group.children(childName).text("-");
-
+                    var m = element.attributes.name.textContent;
+                    if(m==""||m==undefined){
+                        return ture;
+                    }else{
+                        $(this).children("tspan").text("-");
+                    }
                 } catch (err) {}
             });
         }
