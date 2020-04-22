@@ -1,6 +1,6 @@
 $(function () {
     var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODgwMzU2NzgsInVzZXJuYW1lIjoiaGFoYWhhIn0.ZjupNziTSkDFXdBPvyBAinlDTgKAos7B_6Aig6peg3o";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -16,7 +16,7 @@ $(function () {
         baseUrlFromAPP = storage.baseurl;
         tokenFromAPP = storage.token;
         subidFromAPP = storage.fsubID;
-    } else {
+    } else if(isAndroid){
         baseUrlFromAPP = android.getBaseUrl();
         tokenFromAPP = android.getToken();
         subidFromAPP = android.getfSubid();
@@ -87,6 +87,7 @@ $(function () {
                 var tempA = "--";
                 var tempB = "--";
                 var tempC = "--";
+                var tempN = "--";
                 var updateTime = "--";
                 var timeVal = val.timeA.substring(0, 19);
                 var startTime = new Date(timeVal.replace(/\-/g, "/"));
@@ -103,6 +104,9 @@ $(function () {
                     if (val.c != undefined) {
                         tempC = val.c;
                     }
+                    if (val.n != undefined) {
+                        tempN = val.n;
+                    }
                     updateTime = timeVal;
                 }
                 string = '<section>' +
@@ -113,6 +117,7 @@ $(function () {
                     '<p>A:<span>' + tempA + '</span>℃</p>' +
                     '<p>B:<span>' + tempB + '</span>℃</p>' +
                     '<p>C:<span>' + tempC + '</span>℃</p>' +
+                    '<p>N:<span>' + tempN + '</span>℃</p>' +
                     '</div>' +
                     '<div class="timeClass"><p>' + updateTime + '</p></div>' +
                     '<button class="search tempBtn" type="button" value="' + val.f_MeterCode + '"> ' +

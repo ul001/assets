@@ -48,6 +48,7 @@ section {
 
 .searchBtn {
     width: 1rem;
+    margin-bottom:.2rem;
 }
 
 /*报警*/
@@ -73,7 +74,7 @@ section {
 .title p,
 .data p,
 .timeClass p {
-    font-size: 14px;
+    font-size: .85rem;
     margin-bottom: 0
 }
 

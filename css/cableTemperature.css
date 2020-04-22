@@ -40,6 +40,7 @@ section {
 .timeClass p {
     margin-bottom: 0;
     display: block;
+    font-size:.85rem;
 }
 
 .tempNum img {
@@ -55,10 +56,10 @@ section {
     display: block;
     width: 90%;
     margin: 0 auto;
-    height: 2.5rem;
+    height: 2rem;
     background-color: #02AC94;
     color: #fff;
-    border-radius: 4rem;
+    border-radius: 2rem;
     border: none;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -70,6 +71,7 @@ section {
 
 .searchBtn {
     width: 1rem;
+    margin-bottom:.2rem;
 }
 
 .timeClass {
@@ -81,6 +83,6 @@ section {
     background: url(../image/clock.png) no-repeat 0.3rem center;
     background-size: 0.85rem;
     padding-left: 1.3rem;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #b8b8b8;
 }
