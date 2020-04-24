@@ -454,8 +454,8 @@ $(function () {
                     datatime = el.fTime.substring(11, 16);
                     time.push(el.fTime.substring(11, 16));
                 } else if (selectParam == "month") {
-                    datatime = el.fTime.substring(6, 10);
-                    time.push(el.fTime.substring(6, 10));
+                    datatime = el.fTime.substring(5, 10);
+                    time.push(el.fTime.substring(5, 10));
                 } else if (selectParam == "year") {
                     datatime = el.fTime.substring(2, 7);
                     time.push(el.fTime.substring(2, 7));

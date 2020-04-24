@@ -1,6 +1,6 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODgyMjkwNTksInVzZXJuYW1lIjoiaGFoYWhhIn0.0rPtex1A_IXCvgvGqb6XNLBrZJaVJCl-lYPxbRJsxq0";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -77,28 +77,23 @@ $(function () {
     getListData();
 
     function getListData() {
-        var url = baseUrlFromAPP + "/getTempHumi";
+        var url = baseUrlFromAPP + "/getNoise";
         var params = {
             fSubid: subidFromAPP
         };
         getData(url, params, function (data) {
-            if (data.TempHumiObList != null) {
-                if (data.TempHumiObList.length > 0) {
+            if (data.noiseList != null) {
+                if (data.noiseList.length > 0) {
                     $("#cardList").empty();
-                    $(data.TempHumiObList).each(function () {
-                        var tempVal = "--";
-                        var humiVal = "--";
-                        if (this.temp != undefined && this.temp != null) {
-                            tempVal = parseFloat(this.temp).toFixed(1);
-                        }
-                        if (this.humi != undefined && this.humi != null) {
-                            humiVal = parseFloat(this.humi).toFixed(1);
+                    $(data.noiseList).each(function () {
+                        var noiseVal = "--";
+                        if (this.noise != undefined && this.noise != null) {
+                            noiseVal = parseFloat(this.noise).toFixed(1);
                         }
                         $("#cardList").append('<section class="sectionCard" value="' + this.f_MeterCode + '">' +
                             '<p>' + this.f_MeterName + '</p>' +
-                            '<img src="image/wsd.png"/>' +
-                            '<p>'+Operation['ui_temp']+':' + tempVal + this.tempUnit + '</p>' +
-                            '<p>'+Operation['ui_humi']+':' + humiVal + this.humiUnit + '</p></section>');
+                            '<img src="image/noisepic.png"/>' +
+                            '<p>'+Operation['ui_noise']+':' + noiseVal + this.noiseUnit + '</p></section>');
                     });
                     $("#cardList section:first").addClass("sectionSelect");
                     $(".sectionCard").on("click", function () {
@@ -115,29 +110,26 @@ $(function () {
     function getChartData() {
         var chartData = {};
         var time = [];
-        var temp = [];
-        var humi = [];
+        var noise = [];
         var selectCode = $(".sectionSelect").attr('value');
-        var url = baseUrlFromAPP + "/getTempHumi";
+        var url = baseUrlFromAPP + "/getNoise";
         var params = {
             fSubid: subidFromAPP,
             fMetercode: selectCode,
             time: $("#date").val()
         };
         getData(url, params, function (data) {
-            if (data.FTempFHumidityByDate != null) {
-                if (data.FTempFHumidityByDate.length > 0) {
-                    $(data.FTempFHumidityByDate).each(function () {
+            if (data.FNoiseByDate != null) {
+                if (data.FNoiseByDate.length > 0) {
+                    $(data.FNoiseByDate).each(function () {
                         time.push(this.fCollecttime.substring(11, 16));
-                        temp.push(this.fTemp);
-                        humi.push(this.fHumidity);
+                        noise.push(this.fNoise);
                     });
                 }
             }
             chartData = {
                 times: time,
-                temps: temp,
-                humis: humi
+                noises: noise,
             };
             setChart(chartData);
         });
@@ -193,7 +185,6 @@ $(function () {
                 name: name,
                 type: 'line',
                 data: value,
-                color: ["#2EC6C9"],
                 markPoint: {
                     symbol: 'circle',
                     symbolSize: 10,
@@ -236,12 +227,9 @@ $(function () {
     }
 
     function setChart(chartData) {
-        var option = initLineAnal(chartData.temps, chartData.times, Operation['ui_temp'], "°C");
-        var option2 = initLineAnal(chartData.humis, chartData.times, Operation['ui_humi'], "%");
-        var myChart = echarts.init($("#tempChart").get(0));
+        var option = initLineAnal(chartData.noises, chartData.times, Operation['ui_noise'], "dB");
+        var myChart = echarts.init($("#noiseChart").get(0));
         myChart.setOption(option);
-        var myChart2 = echarts.init($("#humiChart").get(0));
-        myChart2.setOption(option2);
     };
 
     $("#datePre").click(function () {

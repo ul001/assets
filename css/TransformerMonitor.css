@@ -81,7 +81,6 @@ body {
 
 .tran-statec {
     width: calc(50% - 0.8rem);
-    height: 8rem;
     background: #EEEEEF;
     float: left;
     margin-bottom: 0.5rem;
@@ -106,18 +105,28 @@ body {
 }
 
 #service,
-#voltage {
+#voltage,
+#noise{
     margin: 0 0 0.5rem 0.5rem;
 }
 
 #power,
 #service {
-    height: 11rem;
+    height: 10rem;
 }
 
-#temp {
-    width: calc(100% - 1rem);
+#current,#voltage{
+    height: 7rem;
 }
+#temp,#noise{
+    max-height: 10rem;
+    min-height:7rem;
+    box-sizing: content-box;
+}
+
+/*#temp {
+    width: calc(100% - 1rem);
+}*/
 
 .MDTime {
     padding-left: 0.5rem;

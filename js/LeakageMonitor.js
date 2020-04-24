@@ -84,6 +84,7 @@ $(function () {
                 var tempA = "--";
                 var tempB = "--";
                 var tempC = "--";
+                var tempN = "--";
                 var IVal = "--";
                 var updateTime = "--";
                 var timeVal = val.fUpdatetime;
@@ -104,6 +105,9 @@ $(function () {
                     if (val.fTempc != undefined) {
                         tempC = val.fTempc;
                     }
+                    if (val.fTempn != undefined) {
+                        tempN = val.fTempn;
+                    }
                     updateTime = timeVal;
                 }
                 string = '<section>' +
@@ -119,6 +123,7 @@ $(function () {
                     '<p>A:<span>' + tempA + '</span>℃</p>' +
                     '<p>B:<span>' + tempB + '</span>℃</p>' +
                     '<p>C:<span>' + tempC + '</span>℃</p>' +
+                    '<p>N:<span>' + tempN + '</span>℃</p>' +
                     '</div>' +
                     '<div class="timeClass"><p>' + updateTime + '</p></div>' +
                     '<button class="search tempBtn" type="button" name="' + val.fMeterName + '" value="' + val.fMetercode + '"> ' +

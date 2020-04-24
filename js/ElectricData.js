@@ -462,6 +462,7 @@ $(function () {
         $("#chartContain").removeAttr('_echarts_instance_');
         var line = echarts.init(document.getElementById('chartContain'));
         var option = {
+            color: ['#2EC7C9','#B6A2DE','#3CA4E4','#FFB980'],
             tooltip: {
                 trigger: 'axis'
             },

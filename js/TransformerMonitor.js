@@ -1,6 +1,6 @@
 $(function () {
     var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODgyMjkwNTksInVzZXJuYW1lIjoiaGFoYWhhIn0.0rPtex1A_IXCvgvGqb6XNLBrZJaVJCl-lYPxbRJsxq0";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -120,7 +120,7 @@ $(function () {
         var params = {
             fSubid: subidFromAPP,
             fTransid: selectTrans,
-            selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp"
+            selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise"
         };
         getData(url, params, function (data) {
             generateTransStatus(data);
@@ -154,6 +154,7 @@ $(function () {
 
     //显示温度数据
     function showTemperature(temp) {
+        var noiseVal = "--";
         if (temp == null) {
             $(".AphaseTemp").html("--");
             $(".BphaseTemp").html("--");
@@ -174,7 +175,13 @@ $(function () {
                 $(".CphaseTemp").html(temp.TEMPC);
             else
                 $(".CphaseTemp").html("--");
+
+            if (temp.NOISE != null)
+                $(".noise").html(temp.NOISE);
+            else
+                $(".noise").html("--");
         }
+        $("#noise").height($("#temp").height()+"px");
     }
 
     //显示电压数据
@@ -787,7 +794,7 @@ $(function () {
                             text: title,
                             x: 'center'
                         },*/
-            color: ['#B6A2DE', '#2EC7C9', '#3CA4E4'],
+            color: ['#2EC7C9','#B6A2DE','#3CA4E4','#FFB980'],
             tooltip: {
                 trigger: 'axis'
             },
