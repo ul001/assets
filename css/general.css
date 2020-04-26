@@ -15,3 +15,7 @@ input {
   -ms-user-select: auto;
   user-select: auto;
 }
+
+::-webkit-scrollbar {/*隐藏滚轮*/
+    display: none;
+}

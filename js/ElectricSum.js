@@ -438,8 +438,8 @@ $(function () {
             var sum = 0;
             var max = data[0].fIa;
             var min = data[0].fIa;
-            var maxTime;
-            var minTime;
+            var maxTime = data[0].fTime.substring(0, 16);
+            var minTime = data[0].fTime.substring(0, 16);
             var datatime;
             var circuitname = data[0].fCircuitname;
             name.push(circuitname);
@@ -463,11 +463,11 @@ $(function () {
                 value.push(el.fValue);
                 if (el.fValue > max) {
                     max = el.fValue;
-                    maxTime = el.fTime.substring(0, 16)
+                    maxTime = el.fTime.substring(0, 16);
                 }
                 if (el.fValue < min) {
                     min = el.fValue;
-                    minTime = el.fTime.substring(0, 16)
+                    minTime = el.fTime.substring(0, 16);
                 }
                 sum += el.fValue;
                 var dic = {

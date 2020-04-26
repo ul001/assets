@@ -291,8 +291,8 @@ $(function () {
             var sum = 0;
             var max = data[0].fMdvalue;
             var min = data[0].fMdvalue;
-            var maxTime;
-            var minTime;
+            var maxTime = data[0].fCollecttime.substring(0, 16);
+            var minTime = data[0].fCollecttime.substring(0, 16);
             var datatime;
             var circuitname = data[0].fCircuitname;
             name.push(circuitname);
@@ -348,12 +348,12 @@ $(function () {
             tooltip: {
                 trigger: 'axis'
             },
-            /*            legend: {
-                            data: name,
-                        },*/
+            legend: {
+                show:false
+            },
             grid: { // 控制图的大小，调整下面这些值就可以，
                 top: '20%',
-                left: '12%',
+                left: '40px',
                 right: '38px',
                 bottom: '28%',
             },
@@ -379,11 +379,11 @@ $(function () {
                 }
             },
             dataZoom: [{
-                startValue: time[0]
-            }, {
                 type: 'inside'
+            },
+            {
+                type:'slider'
             }],
-            calculable: true,
             series: [{
                 name: name,
                 data: value,
