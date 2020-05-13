@@ -568,7 +568,7 @@ $(function () {
                 }
             ],
             series: [{
-                    name: name+Operation['ui_elecval'],
+                    name: Operation['ui_elecval'],
                     type: 'bar',
                     symbolSize: 8,
                     hoverAnimation: false,
@@ -580,7 +580,7 @@ $(function () {
                     }
                 },
                 {
-                    name: name+Operation['ui_elecpriceval'],
+                    name: Operation['ui_elecpriceval'],
                     type: 'bar',
                     xAxisIndex: 1,
                     yAxisIndex: 1,
