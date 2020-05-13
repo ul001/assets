@@ -1,6 +1,6 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODk5NTI2NDQsInVzZXJuYW1lIjoiaGFoYWhhIn0.FPsqH49njyIyE4HVbeZHNP63gTfc-H5s1TJhQ-zHCs0";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -236,7 +236,7 @@ $(function () {
         }
         var fCircuitid = currentSelectVode.merterId;
 
-        var url = baseUrlFromAPP + "/powerAnalysis/EnergyReport";
+        var url = baseUrlFromAPP + "/ElectricityFees";
         var params = {
             fSubid: subidFromAPP,
             fCircuitids: fCircuitid,
@@ -432,10 +432,12 @@ $(function () {
     function showCharts(data) {
         var time = [];
         var value = [];
+        var priceValue = [];
         var name = [];
         var tableData = [];
         if (data.length > 0) {
             var sum = 0;
+            var priceSum = 0;
             var max = data[0].fIa;
             var min = data[0].fIa;
             var maxTime = data[0].fTime.substring(0, 16);
@@ -461,6 +463,7 @@ $(function () {
                     time.push(el.fTime.substring(2, 7));
                 }
                 value.push(el.fValue);
+                priceValue.push(el.fPriceValue);
                 if (el.fValue > max) {
                     max = el.fValue;
                     maxTime = el.fTime.substring(0, 16);
@@ -470,15 +473,18 @@ $(function () {
                     minTime = el.fTime.substring(0, 16);
                 }
                 sum += el.fValue;
+                priceSum += el.fPriceValue;
                 var dic = {
                     "value": el.fValue,
-                    "time": datatime
+                    "priceVal":el.fPriceValue,
+                    "time": datatime,
                 };
                 tableData.push(dic);
             });
             var avg = (sum / data.length).toFixed(2);
             tableData.push({
                 "value": sum.toFixed(2),
+                "priceVal":priceSum.toFixed(2),
                 "time": Operation['ui_summary']
             });
         }
@@ -486,54 +492,108 @@ $(function () {
         var line = echarts.init(document.getElementById('chartContain'));
         var option = {
             tooltip: {
-                trigger: 'axis'
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
             },
-            /*            legend: {
-                            data: name,
-                        },*/
-            grid: { // 控制图的大小，调整下面这些值就可以，
-                top: '18%',
-                left: '15%',
-                right: '6%',
-                bottom: '28%',
-            },
-            xAxis: {
-                type: 'category',
-                data: time,
-            },
-            yAxis: {
-                name: 'kW·h',
-                type: 'value',
-                scale: true, //y轴自适应
+            legend: {
+                data: [Operation['ui_elecval'], Operation['ui_elecpriceval']],
+
             },
             toolbox: {
-                left: 'right',
                 feature: {
                     dataZoom: {
                         yAxisIndex: 'none'
                     },
-                    dataView: {
-                        readOnly: true
-                    },
-                    restore: {}
+                    dataView: {},
+                    restore: {},
                 }
             },
-            dataZoom: [{
-                startValue: time[0]
+            axisPointer: {
+                link: {xAxisIndex: 'all'}
+            },
+            dataZoom: [
+                {
+                    show: true,
+                    realtime: true,
+                    start: 0,
+                    end: 100,
+                    xAxisIndex: [0, 1]
+                },
+                {
+                    type: 'inside',
+                    realtime: true,
+                    start: 0,
+                    end: 100,
+                    xAxisIndex: [0, 1]
+                }
+            ],
+            grid: [{
+                left: 52,
+                right: 20,
+                top:40,
+                height: '30%'
             }, {
-                type: 'inside'
+                left: 52,
+                right: 20,
+                top: '52%',
+                height: '30%'
+
             }],
-            calculable: true,
+            xAxis: [
+                {
+                    type: 'category',
+                    data: time
+                },
+                {
+                    gridIndex: 1,
+                    type: 'category',
+                    data: time,
+                    position: 'top'
+                }
+            ],
+            yAxis: [
+                {
+                    name: Operation['ui_elecval']+'(kW·h)',
+                    type: 'value',
+                    scale:true,
+                },
+                {
+                    gridIndex: 1,
+                    name: Operation['ui_elecpriceval']+'(元)',
+                    type: 'value',
+                    inverse: true,
+                    scale:true,
+                }
+            ],
             series: [{
-                name: name,
-                data: value,
-                type: 'bar',
-                itemStyle: {
-                    normal: {
-                        color: '#64BC78',
+                    name: name+Operation['ui_elecval'],
+                    type: 'bar',
+                    symbolSize: 8,
+                    hoverAnimation: false,
+                    data: value,
+                    itemStyle: {
+                        normal: {
+                            color: '#64BC78',
+                        }
+                    }
+                },
+                {
+                    name: name+Operation['ui_elecpriceval'],
+                    type: 'bar',
+                    xAxisIndex: 1,
+                    yAxisIndex: 1,
+                    symbolSize: 8,
+                    hoverAnimation: false,
+                    data: priceValue,
+                    itemStyle: {
+                        normal: {
+                            color: '#F36757',
+                        }
                     }
                 }
-            }]
+            ]
         };
         line.setOption(option, true);
         // $(window).bind("resize",function(event) {
@@ -559,6 +619,11 @@ $(function () {
             {
                 field: "value",
                 title: Operation['ui_elecval']+"("+Operation['ui_unit']+"：kW·h)",
+                align: "center"
+            },
+            {
+                field: "priceVal",
+                title: Operation['ui_elecpriceval']+"("+Operation['ui_unit']+"：元)",
                 align: "center"
             }
         ]

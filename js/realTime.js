@@ -333,7 +333,7 @@ $(function () {
             }
             tableData.push({
                 name: "需量(kW)",
-                sum: sum,
+                sum: sum.toFixed(2),
                 avg: avg,
                 max: max,
                 maxTime: maxTime,
