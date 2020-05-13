@@ -317,118 +317,6 @@ $(function () {
         })
     }
 
-    /*$(document).on("click", ".category li", function () {
-        var type = $(this).children('label').attr("value");
-        var text = $(this).children('label').text();
-        generateType(type);
-        $("#EnergyKind").attr("value", type);
-        $("#param").html(text);
-        $("#myModal").modal("hide");
-    })
-
-    function generateType(type) {
-        var List = [{
-                "id": "P",
-                "name": "有功功率",
-                "phase": [{
-                    "id": "fPa",
-                    "name": "A相"
-                }, {
-                    "id": "fPb",
-                    "name": "B相"
-                }, {
-                    "id": "fPc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "I",
-                "name": "电流",
-                "phase": [{
-                    "id": "fIa",
-                    "name": "A相"
-                }, {
-                    "id": "fIb",
-                    "name": "B相"
-                }, {
-                    "id": "fIc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "U",
-                "name": "相电压",
-                "phase": [{
-                    "id": "fUa",
-                    "name": "A相"
-                }, {
-                    "id": "fUb",
-                    "name": "B相"
-                }, {
-                    "id": "fUc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "UL",
-                "name": "线电压",
-                "phase": [{
-                    "id": "fUab",
-                    "name": "Uab"
-                }, {
-                    "id": "fUbc",
-                    "name": "Ubc"
-                }, {
-                    "id": "fUca",
-                    "name": "Uca"
-                }]
-            },
-            {
-                "id": "fFr",
-                "name": "频率",
-            },
-            {
-                "id": "Q",
-                "name": "无功功率",
-                "phase": [{
-                    "id": "fQa",
-                    "name": "A相"
-                }, {
-                    "id": "fQb",
-                    "name": "B相"
-                }, {
-                    "id": "fQc",
-                    "name": "C相"
-                }]
-            },
-            {
-                "id": "S",
-                "name": "视在功率",
-                "phase": [{
-                    "id": "fSa",
-                    "name": "A相"
-                }, {
-                    "id": "fSb",
-                    "name": "B相"
-                }, {
-                    "id": "fSc",
-                    "name": "C相"
-                }]
-            },
-        ]
-        var arr = $.grep(List, function (obj) {
-            return obj.id == type;
-        })
-        $("#EnergyContain").html("");
-        if (arr[0].hasOwnProperty('phase')) {
-            $.each(arr[0].phase, function (index, val) {
-                var string = '<button type="button" class="btn" value="' + val.id + '">' + val.name + '</button>';
-                $("#EnergyContain").append(string);
-            })
-            $("#EnergyContain button:first").addClass('select');
-        }
-    }*/
-
     function showCharts(data) {
         var time = [];
         var value = [];
@@ -494,12 +382,11 @@ $(function () {
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
-                    animation: false
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
                 }
-            },
-            legend: {
-                data: [Operation['ui_elecval'], Operation['ui_elecpriceval']],
-
             },
             toolbox: {
                 feature: {
@@ -510,68 +397,66 @@ $(function () {
                     restore: {},
                 }
             },
-            axisPointer: {
-                link: {xAxisIndex: 'all'}
+            legend: {
+                data: [Operation['ui_elecval'], Operation['ui_elecpriceval']],
+                left:50,
             },
-            dataZoom: [
-                {
-                    show: true,
-                    realtime: true,
-                    start: 0,
-                    end: 100,
-                    xAxisIndex: [0, 1]
-                },
-                {
-                    type: 'inside',
-                    realtime: true,
-                    start: 0,
-                    end: 100,
-                    xAxisIndex: [0, 1]
-                }
-            ],
             grid: [{
-                left: 52,
-                right: 20,
-                top:40,
-                height: '30%'
+                left: 48,
+                right: 48,
+            }],
+            dataZoom: [{
+                startValue: time[0]
             }, {
-                left: 52,
-                right: 20,
-                top: '52%',
-                height: '30%'
-
+                type: 'inside'
             }],
             xAxis: [
                 {
                     type: 'category',
-                    data: time
-                },
-                {
-                    gridIndex: 1,
-                    type: 'category',
                     data: time,
-                    position: 'top'
+                    axisPointer: {
+                        type: 'shadow'
+                    }
                 }
             ],
             yAxis: [
                 {
-                    name: Operation['ui_elecval']+'(kW·h)',
                     type: 'value',
+                    name: Operation['ui_elecval']+'(kW·h)',
                     scale:true,
+                    axisLabel:{
+                        formatter:function(val,index){
+                            if(val >= 10000 && val<10000000){
+                                return val/10000+"万";
+                            }else if(val >= 10000000){
+                                return val/10000000+"千万";
+                            }else{
+                                return val;
+                            }
+                        },
+                    },
                 },
                 {
-                    gridIndex: 1,
-                    name: Operation['ui_elecpriceval']+'(元)',
                     type: 'value',
-                    inverse: true,
+                    name: Operation['ui_elecpriceval']+'(元)',
                     scale:true,
+                    axisLabel:{
+                        formatter:function(val,index){
+                            if(val >= 10000 && val<10000000){
+                                return val/10000+"万";
+                            }else if(val >= 10000000){
+                                return val/10000000+"千万";
+                            }else{
+                                return val;
+                            }
+                        },
+                    },
                 }
             ],
-            series: [{
+            series: [
+                {
                     name: Operation['ui_elecval'],
                     type: 'bar',
-                    symbolSize: 8,
-                    hoverAnimation: false,
                     data: value,
                     itemStyle: {
                         normal: {
@@ -582,14 +467,11 @@ $(function () {
                 {
                     name: Operation['ui_elecpriceval'],
                     type: 'bar',
-                    xAxisIndex: 1,
                     yAxisIndex: 1,
-                    symbolSize: 8,
-                    hoverAnimation: false,
                     data: priceValue,
                     itemStyle: {
                         normal: {
-                            color: '#F36757',
+                            color: '#2EC3D9',
                         }
                     }
                 }
