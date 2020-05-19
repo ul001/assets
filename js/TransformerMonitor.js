@@ -1,7 +1,7 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODgyMjkwNTksInVzZXJuYW1lIjoiaGFoYWhhIn0.0rPtex1A_IXCvgvGqb6XNLBrZJaVJCl-lYPxbRJsxq0";
-    var subidFromAPP=10100001;
+    var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
+    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODgyMjkwNTksInVzZXJuYW1lIjoiaGFoYWhhIn0.0rPtex1A_IXCvgvGqb6XNLBrZJaVJCl-lYPxbRJsxq0";
+    var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -50,7 +50,7 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    var ipAddress = strArr[0]+"//"+strArr[2];
+                    var ipAddress = strArr[0] + "//" + strArr[2];
 
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
@@ -65,7 +65,7 @@ $(function () {
                     });
                 }
                 toast.hide();
-                if(result.code != "200"){
+                if (result.code != "200") {
                     toast.show({
                         text: Substation.showCodeTips(result.code),
                         duration: 2000
@@ -120,7 +120,8 @@ $(function () {
         var params = {
             fSubid: subidFromAPP,
             fTransid: selectTrans,
-            selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise"
+            selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,"
+            // selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,PartialDischarge"
         };
         getData(url, params, function (data) {
             generateTransStatus(data);
@@ -180,8 +181,14 @@ $(function () {
                 $(".noise").html(temp.NOISE);
             else
                 $(".noise").html("--");
+
+            if (temp.PartialDischarge != null) {
+                $(".noise").html(temp.PartialDischarge);
+            } else {
+
+            }
         }
-        $("#noise").height($("#temp").height()+"px");
+        $("#noise").height($("#temp").height() + "px");
     }
 
     //显示电压数据
@@ -330,37 +337,37 @@ $(function () {
 
         for (var j = 0; j < dataObject.yesterdayPowerValue.length; j++) {
             for (var i = 0; i < times.length; i++) {
-//            var index = 0;
+                //            var index = 0;
                 if (dataObject.yesterdayPowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
                     yesterDayfP.push(dataObject.yesterdayPowerValue[j].fP);
                     yesterDayfQ.push(dataObject.yesterdayPowerValue[j].fQ);
                     yesterDayfS.push(dataObject.yesterdayPowerValue[j].fS);
-//                    index = 1;
+                    //                    index = 1;
                 }
             }
-//            if (index == 0) {
-//                yesterDayfP.push(null);
-//                yesterDayfQ.push(null);
-//                yesterDayfS.push(null);
-//            }
+            //            if (index == 0) {
+            //                yesterDayfP.push(null);
+            //                yesterDayfQ.push(null);
+            //                yesterDayfS.push(null);
+            //            }
         }
 
         if (dataObject.PowerValue != null) {
-//                var index = 0;
+            //                var index = 0;
             for (var j = 0; j < dataObject.PowerValue.length; j++) {
                 for (var i = 0; i < times.length; i++) {
                     if (dataObject.PowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
                         todayfP.push(dataObject.PowerValue[j].fP);
                         todayfQ.push(dataObject.PowerValue[j].fQ);
                         todayfS.push(dataObject.PowerValue[j].fS);
-//                        index = 1;
+                        //                        index = 1;
                     }
                 }
-//                if (index == 0) {
-//                    todayfP.push(null);
-//                    todayfQ.push(null);
-//                    todayfS.push(null);
-//                }
+                //                if (index == 0) {
+                //                    todayfP.push(null);
+                //                    todayfQ.push(null);
+                //                    todayfS.push(null);
+                //                }
             }
         }
 
@@ -653,7 +660,7 @@ $(function () {
             var titleTem = transformerName + "  " + Operation['ui_tempLine'];
             // var titleTem = $("#daycalendarBox").val() + "  " + transformerName + "  " + "绕阻温度";
             var seriesTem = [{
-                    name: Operation['ui_temp']+'A',
+                    name: Operation['ui_temp'] + 'A',
                     type: 'line',
                     data: seriesA,
                     markPoint: {
@@ -694,7 +701,7 @@ $(function () {
                     }
                 },
                 {
-                    name: Operation['ui_temp']+'B',
+                    name: Operation['ui_temp'] + 'B',
                     type: 'line',
                     data: seriesB,
                     markPoint: {
@@ -735,7 +742,7 @@ $(function () {
                     }
                 },
                 {
-                    name: Operation['ui_temp']+'C',
+                    name: Operation['ui_temp'] + 'C',
                     type: 'line',
                     data: seriesC,
                     markPoint: {
@@ -777,7 +784,7 @@ $(function () {
                 }
             ];
             var legendTem = {
-                data: [Operation['ui_temp']+'A', Operation['ui_temp']+'B', Operation['ui_temp']+'C'],
+                data: [Operation['ui_temp'] + 'A', Operation['ui_temp'] + 'B', Operation['ui_temp'] + 'C'],
                 bottom: '2%'
             };
             var unitTem = '℃';
@@ -794,7 +801,7 @@ $(function () {
                             text: title,
                             x: 'center'
                         },*/
-            color: ['#2EC7C9','#B6A2DE','#3CA4E4','#FFB980'],
+            color: ['#2EC7C9', '#B6A2DE', '#3CA4E4', '#FFB980'],
             tooltip: {
                 trigger: 'axis'
             },
