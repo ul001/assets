@@ -161,21 +161,49 @@ $(function () {
             $(".BphaseTemp").html("--");
             $(".CphaseTemp").html("--");
         } else {
+            if (temp.FOILTEMP != undefined && temp.FOILTEMP != null) {
+                $("#OILTemp").css("display", "block").siblings('li').css("display", "none");
+                $(".OILTemp").html(temp.FOILTEMP);
+            } else {
+                if (!(temp.TEMPA && temp.TEMPB && temp.TEMPC)) {
+                    $("#OILTemp").css("display", "block").siblings('li').css("display", "none");
+                    if (temp.TEMPA != undefined && temp.TEMPA != null) {
+                        $(".OILTemp").html(temp.TEMPA);
+                    }
+                    if (temp.TEMPB != undefined && temp.TEMPB != null) {
+                        $(".OILTemp").html(temp.TEMPB);
+                    }
+                    if (temp.TEMPC != undefined && temp.TEMPC != null) {
+                        $(".OILTemp").html(temp.TEMPC);
+                    }
+                    if ($(".OILTemp").text() == undefined || $(".OILTemp").text() == "") {
+                        $(".OILTemp").html("--");
+                    }
+                } else {
+                    $("#OILTemp").css("display", "none").siblings('li').css("display", "block");
+                    $(".AphaseTemp").html(temp.TEMPA);
+                    $(".BphaseTemp").html(temp.TEMPB);
+                    $(".CphaseTemp").html(temp.TEMPC);
+                }
+            }
 
-            if (temp.TEMPA != null)
-                $(".AphaseTemp").html(temp.TEMPA);
-            else
-                $(".AphaseTemp").html("--");
 
-            if (temp.TEMPB != null)
-                $(".BphaseTemp").html(temp.TEMPB);
-            else
-                $(".BphaseTemp").html("--");
+            // if (temp.TEMPA != null)
+            //     $(".AphaseTemp").html(temp.TEMPA);
+            // else
+            //     $(".AphaseTemp").html("--");
 
-            if (temp.TEMPC != null)
-                $(".CphaseTemp").html(temp.TEMPC);
-            else
-                $(".CphaseTemp").html("--");
+            // if (temp.TEMPB != null)
+            //     $(".BphaseTemp").html(temp.TEMPB);
+            // else
+            //     $(".BphaseTemp").html("--");
+
+            // if (temp.TEMPC != null)
+            //     $(".CphaseTemp").html(temp.TEMPC);
+            // else
+            //     $(".CphaseTemp").html("--");
+
+
 
             if (temp.NOISE != null)
                 $(".noise").html(temp.NOISE);
