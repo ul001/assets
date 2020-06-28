@@ -272,7 +272,6 @@ input {
 .selectcontain input,
 .selectcontain select {
 	height: 2rem;
-	width: inherit;
 	border: none;
 }
 
@@ -358,7 +357,7 @@ input {
 #alermType,
 #meterName,
 #paramName {
-	width: calc(100% - 6.5rem);
+	width: calc(100% - 6rem);
 }
 
 #alermType {
@@ -370,7 +369,7 @@ input {
 }
 
 .function-group .input-group {
-	width: 5.89rem;
+	width: calc(100% - 6rem);
 	float: left;
 	padding-left: 0;
 	padding-right: 0;

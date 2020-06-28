@@ -158,11 +158,13 @@ body {
 }
 
 #date {
-	height: 2.5rem;
+    width:calc(100% - 75px);
+    background: transparent;
+	height: 5rem;
 	border-radius: 5px;
 	padding-left: 0.5rem;
 	border: none;
-	line-height: 2.5rem;
+	line-height: 5rem;
 }
 
 #search img {

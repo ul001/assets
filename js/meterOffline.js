@@ -1,6 +1,6 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -89,6 +89,14 @@ $(function () {
     $(document).on('click', '.search', function () {
         startDate = $("#dateStart").val();
         endDate = $("#dateEnd").val();
+        //开始时间不能大于截止时间
+        if (startDate > endDate) {
+            toast.show({
+                text: Operation['ui_dateselecttip']+"！",
+                duration: 2000
+            });
+            return;
+        }
         $(".selectcontain").hide();
         mescroll.resetUpScroll();
     });
@@ -249,48 +257,67 @@ $(function () {
     }
 
     //初始化时间插件
-
-    var startRoll = new Rolldate({
-        el: '#dateStart',
-        format: 'YYYY-MM-DD',
-        beginYear: 2000,
-        endYear: 2100,
-        value: startDate,
-        confirm: function (date) {
-            var d = new Date(),
-                d1 = new Date(date.replace(/\-/g, "\/")),
-                d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-            d3 = new Date($("#dateEnd").val().replace(/\-/g, "\/"));
-            if (d1 > d2 || d3 < d1) {
-                return false;
-            };
-            $(".btn").removeClass("select");
-        }
+    var calendar1 = new LCalendar();
+    calendar1.init({
+        'trigger': '#dateStart',//标签id
+        'type': 'date',//date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        'minDate':'2000-1-1',//最小日期 注意：该值会覆盖标签内定义的日期范围
+        'maxDate':'2050-1-1'//最大日期 注意：该值会覆盖标签内定义的日期范围
     });
 
-    var endRoll = new Rolldate({
-        el: '#dateEnd',
-        format: 'YYYY-MM-DD',
-        beginYear: 2000,
-        endYear: 2100,
-        value: endDate,
-        confirm: function (date) {
-            var d = new Date(),
-                d1 = new Date(date.replace(/\-/g, "\/")),
-                d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
-            d3 = new Date($("#dateStart").val().replace(/\-/g, "\/"));
-            if (d1 > d2 || d1 < d3) {
-                return false;
-            };
-            $(".btn").removeClass("select");
-        }
+    var calendar2 = new LCalendar();
+    calendar2.init({
+        'trigger': '#dateEnd',//标签id
+        'type': 'date',//date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        'minDate':'2000-1-1',//最小日期 注意：该值会覆盖标签内定义的日期范围
+        'maxDate':'2050-1-1'//最大日期 注意：该值会覆盖标签内定义的日期范围
     });
 
-    $("#startDiv").click(function () {
-        startRoll.show();
+    $("#dateStart,#dateEnd").click(function () {
+        $(".btn").removeClass("select");
     });
 
-    $("#endDiv").click(function () {
-        endRoll.show();
-    });
+//    var startRoll = new Rolldate({
+//        el: '#dateStart',
+//        format: 'YYYY-MM-DD',
+//        beginYear: 2000,
+//        endYear: 2100,
+//        value: startDate,
+//        confirm: function (date) {
+//            var d = new Date(),
+//                d1 = new Date(date.replace(/\-/g, "\/")),
+//                d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+//            d3 = new Date($("#dateEnd").val().replace(/\-/g, "\/"));
+//            if (d1 > d2 || d3 < d1) {
+//                return false;
+//            };
+//            $(".btn").removeClass("select");
+//        }
+//    });
+//
+//    var endRoll = new Rolldate({
+//        el: '#dateEnd',
+//        format: 'YYYY-MM-DD',
+//        beginYear: 2000,
+//        endYear: 2100,
+//        value: endDate,
+//        confirm: function (date) {
+//            var d = new Date(),
+//                d1 = new Date(date.replace(/\-/g, "\/")),
+//                d2 = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()); //如果非'YYYY-MM-DD'格式，需要另做调整
+//            d3 = new Date($("#dateStart").val().replace(/\-/g, "\/"));
+//            if (d1 > d2 || d1 < d3) {
+//                return false;
+//            };
+//            $(".btn").removeClass("select");
+//        }
+//    });
+//
+//    $("#startDiv").click(function () {
+//        startRoll.show();
+//    });
+//
+//    $("#endDiv").click(function () {
+//        endRoll.show();
+//    });
 });

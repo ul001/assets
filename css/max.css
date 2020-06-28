@@ -84,6 +84,7 @@ body {
 	border: none;
 	background: transparent;
 	line-height: 2.5rem;
+	width:calc(100% - 120px);
 }
 
 .clear {
@@ -196,6 +197,11 @@ body {
 
 #timeClick {
 	border: none;
+}
+
+.container .public{
+    list-style:none;
+    padding:0;
 }
 
 .public li img {

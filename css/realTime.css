@@ -15,7 +15,6 @@
 
 .form_date_end input {
 	border-radius: 5px;
-	padding-left: 0.5rem;
 }
 
 #sideClick p .jiancedian,
@@ -398,9 +397,8 @@ body {
 #date {
 	height: 4rem;
 	border-radius: 5px;
-	padding-left: 0.5rem;
 	border: none;
-	width: calc(100% - 11rem);
+	width: calc(100% - 100px);
 	background: transparent;
 	color: #fff;
 	text-align: center;
