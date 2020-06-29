@@ -3,24 +3,24 @@ $(function () {
     var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
-//    var u = navigator.userAgent,
-//        app = navigator.appVersion;
-//    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-//    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-//    //判断数组中是否包含某字符串
-//    if (isIOS) { //ios系统的处理
-//        window.webkit.messageHandlers.iOS.postMessage(null);
-//        var storage = localStorage.getItem("accessToken");
-//        // storage = storage ? JSON.parse(storage):[];
-//        storage = JSON.parse(storage);
-//        baseUrlFromAPP = storage.baseurl;
-//        tokenFromAPP = storage.token;
-//        subidFromAPP = storage.fsubID;
-//    } else {
-//        baseUrlFromAPP = android.getBaseUrl();
-//        tokenFromAPP = android.getToken();
-//        subidFromAPP = android.getfSubid();
-//    }
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
 
     let toast = new ToastClass(); //实例化toast对象
 

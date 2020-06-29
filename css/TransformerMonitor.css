@@ -310,4 +310,11 @@ body {
 
 .tran-statec ul {
     font-size: 0.85rem;
+    list-style:none;
+    padding:0;
+}
+
+.tran-stateb ul{
+    list-style:none;
+    padding:0;
 }

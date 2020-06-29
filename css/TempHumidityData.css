@@ -99,9 +99,8 @@ body {
     height: 3rem;
     line-height: 3rem;
     border-radius: 5px;
-    padding-left: 0.5rem;
     border: none;
-    width: calc(100% - 11rem);
+    width: calc(100% - 10rem);
     background: transparent;
     color: #fff;
     text-align: center;

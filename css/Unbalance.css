@@ -273,7 +273,7 @@ body {
 
 #date {
 	width: 12rem;
-	height: 2.5rem;
+	height: 5rem;
 	border-radius: 5px;
 	padding-right: 2rem;
 	text-align: center;
@@ -281,7 +281,7 @@ body {
 	border: none;
 	background: url(../image/time.png) no-repeat left center;
 	background-size: 1.3rem;
-	line-height: 2.5rem;
+	line-height: 5rem;
 }
 
 #tableContain {

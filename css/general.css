@@ -19,3 +19,8 @@ input {
 ::-webkit-scrollbar {/*隐藏滚轮*/
     display: none;
 }
+
+ul.public{
+    list-style:none;
+    padding:0;
+}

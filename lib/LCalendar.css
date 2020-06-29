@@ -42,6 +42,7 @@
     }
 }
 
+.y_roll,
 .ym_roll,
 .date_roll,
 .datetime_roll,
@@ -55,6 +56,7 @@
     -webkit-mask: -webkit-linear-gradient(top, #debb47 50%, rgba(36, 142, 36, 0))
 }
 
+.y_roll>div,
 .ym_roll>div,
 .date_roll>div,
 .datetime_roll>div,
@@ -68,6 +70,7 @@
     flex: 4
 }
 
+.y_roll>div .gear,
 .ym_roll>div .gear,
 .date_roll>div .gear,
 .datetime_roll>div .gear,
@@ -153,6 +156,15 @@
     right: 5em
 }
 
+/*.y_roll>div:nth-child(1) .date_grid>div {
+    right: .1em
+}*/
+
+.y_roll>div .date_grid>div,
+.time_roll>div .date_grid>div {
+    right: 5em
+}
+
 .date_btn {
     color: #0575f2;
     font-size: 1.6em;
@@ -225,6 +237,18 @@
 }
 
 .ym_roll>div:nth-child(1) .gear,
+.time_roll>div:nth-child(1) .gear {
+    width: 100%;
+    text-indent: 10%
+}
+
+.y_roll>div .gear,
+.time_roll>div .gear {
+    width: 100%;
+    text-indent: -70%
+}
+
+.y_roll>div:nth-child(1) .gear,
 .time_roll>div:nth-child(1) .gear {
     width: 100%;
     text-indent: 10%

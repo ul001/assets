@@ -219,7 +219,8 @@ button {
 
 #date {
 	width: 12rem;
-	height: 2.5rem;
+	height: 5rem;
+	line-height:5rem;
 	border-radius: 5px;
 	padding-right: 1rem;
 	text-align: center;

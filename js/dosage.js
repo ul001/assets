@@ -1,6 +1,6 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -59,6 +59,8 @@ $(function () {
         // $(".endDate").val(endDate);
         //开始时间不能大于截止时间
         // $("body").showLoading();
+        startDate = $("#dateStart").val();
+        endDate = $("#dateEnd").val();
         var nowDate = tool.initDate("YMDhm", new Date());
         if (startDate > endDate) {
             toast.show({
@@ -76,8 +78,6 @@ $(function () {
             $("#startDate").html(startDate);
             $("#endDate").html(endDate);
         }
-        startDate = $("#dateStart").val();
-        endDate = $("#dateEnd").val();
 
         var url = baseUrlFromAPP + "/getMothJFPG";
         var params = {
@@ -421,43 +421,68 @@ $(function () {
     }
 
     //初始化时间插件
-
-    new Rolldate({
-        el: '#dateStart',
-        format: 'YYYY-MM-DD',
-        beginYear: 2000,
-        endYear: 2100,
-        value: startDate,
-        confirm: function (date) {
-            var showMon = tool.initDate("YM", new Date());
-            $("#showTime").html(showMon);
-            $(".startDate").val(date);
-            // var select = $("#selectType").get(0);
-            // var type = select.options[select.selectedIndex].value; //获取被选中option的value
-            var selectParam = $(".btn.select").val();
-
-            networkData(selectParam);
-
-
-        }
+    var calendar1 = new LCalendar();
+    calendar1.init({
+        'trigger': '#dateStart',//标签id
+        'type': 'date',//date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        'minDate':'2000-1-1',//最小日期 注意：该值会覆盖标签内定义的日期范围
+        'maxDate':'2050-1-1'//最大日期 注意：该值会覆盖标签内定义的日期范围
     });
 
-    new Rolldate({
-        el: '#dateEnd',
-        format: 'YYYY-MM-DD',
-        beginYear: 2000,
-        endYear: 2100,
-        value: endDate,
-        confirm: function (date) {
-            var showMon = tool.initDate("YM", new Date());
-            $("#showTime").html(showMon);
-            $(".endDate").val(date);
-            // var select = $("#selectType").get(0);
-            // var type = select.options[select.selectedIndex].value; //获取被选中option的value
-            var selectParam = $(".btn.select").val();
-
-            networkData(selectParam);
-
-        }
+    $("#dateStart").on("input",function(){
+        var selectParam = $(".btn.select").val();
+        networkData(selectParam);
     });
+
+    var calendar2 = new LCalendar();
+    calendar2.init({
+        'trigger': '#dateEnd',//标签id
+        'type': 'date',//date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        'minDate':'2000-1-1',//最小日期 注意：该值会覆盖标签内定义的日期范围
+        'maxDate':'2050-1-1'//最大日期 注意：该值会覆盖标签内定义的日期范围
+    });
+
+    $("#dateEnd").on("input",function(){
+        var selectParam = $(".btn.select").val();
+        networkData(selectParam);
+    });
+
+//    new Rolldate({
+//        el: '#dateStart',
+//        format: 'YYYY-MM-DD',
+//        beginYear: 2000,
+//        endYear: 2100,
+//        value: startDate,
+//        confirm: function (date) {
+//            var showMon = tool.initDate("YM", new Date());
+//            $("#showTime").html(showMon);
+//            $(".startDate").val(date);
+//            // var select = $("#selectType").get(0);
+//            // var type = select.options[select.selectedIndex].value; //获取被选中option的value
+//            var selectParam = $(".btn.select").val();
+//
+//            networkData(selectParam);
+//
+//
+//        }
+//    });
+//
+//    new Rolldate({
+//        el: '#dateEnd',
+//        format: 'YYYY-MM-DD',
+//        beginYear: 2000,
+//        endYear: 2100,
+//        value: endDate,
+//        confirm: function (date) {
+//            var showMon = tool.initDate("YM", new Date());
+//            $("#showTime").html(showMon);
+//            $(".endDate").val(date);
+//            // var select = $("#selectType").get(0);
+//            // var type = select.options[select.selectedIndex].value; //获取被选中option的value
+//            var selectParam = $(".btn.select").val();
+//
+//            networkData(selectParam);
+//
+//        }
+//    });
 });
