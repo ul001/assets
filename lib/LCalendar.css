@@ -242,18 +242,6 @@
     text-indent: 10%
 }
 
-.y_roll>div .gear,
-.time_roll>div .gear {
-    width: 100%;
-    text-indent: -70%
-}
-
-.y_roll>div:nth-child(1) .gear,
-.time_roll>div:nth-child(1) .gear {
-    width: 100%;
-    text-indent: 10%
-}
-
 .tooth {
     height: 2em;
     line-height: 2em;
