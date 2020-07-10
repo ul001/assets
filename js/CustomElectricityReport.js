@@ -1,6 +1,6 @@
 $(function () {
     var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTQ2OTM1NjcsInVzZXJuYW1lIjoiaGFoYWhhIn0.HFDpK8V5AlNZap6ymgI-1lBsLId1uVDL9MFlP408xf4";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTQ4NjAzNjgsInVzZXJuYW1lIjoiaGFoYWhhIn0.iMVkIYSprWvO_t_jt7eFVNzcIc9dvMu5_7oTK1nXYzc";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -22,20 +22,42 @@ $(function () {
         subidFromAPP = android.getfSubid();
     }
 
+    var mainBaseUrl = baseUrlFromAPP.split("SubstationWEBV2")[0]+"SubstationWEBV2";
+
+    var optionData = [];
+    var treeData = [];
+    function getSelectOption(){
+        getData(mainBaseUrl+"/calc/getCalcmeterDetailDayListTree",{fSubid:subidFromAPP},function(data){
+            optionData = data.calcbyuserList;
+            treeData = data.tree;
+            $("#customType").empty();
+            $(optionData).each(function(i,val){
+                $("#customType").append(`<option value="${val.fCalcid}">${val.fCalcname}</option>`);
+            });
+            $("#customType option:first").prop("selected","selected");
+            $("#customType").change(function(){
+                initFirstNode();
+            });
+            setListData(treeData);
+            searchGetData();
+        });
+    }
+
     var currentSelectVode = {}; //选中节点
 
     let toast = new ToastClass();
-    initFirstNode(); //初始化第一个回路
+    getSelectOption();
     var isClick = 0;
 
     function initFirstNode() {
-        var url = baseUrlFromAPP + "/getfCircuitidsList";
+        var url = mainBaseUrl+"/calc/getCalcmeterDetailDayListTree";
         var params = {
             fSubid: subidFromAPP,
+            fCalcid: $("#customType").val(),
         }
         // $("body").showLoading();
         getData(url, params, function (data) {
-            setListData(data);
+            setListData(data.tree);
             searchGetData();
             // $("#search").click();
         });
@@ -43,13 +65,14 @@ $(function () {
 
     $("#CircuitidsList").click(function () {
         var search = $("#CircuitidsInput").val();
-        var url = baseUrlFromAPP + "/getfCircuitidsList";
+        var url = mainBaseUrl+"/calc/getCalcmeterDetailDayListTree";
         var params = {
             fSubid: subidFromAPP,
+            fCalcid: $("#customType").val(),
             search: search,
         }
         getData(url, params, function (data) {
-            setListData(data);
+            setListData(data.tree);
         });
         isClick = 1;
     });
@@ -57,12 +80,13 @@ $(function () {
     $(document).on('click', '.clear', function () {
         $("#CircuitidsInput").val("");
         if (isClick == 1) {
-            var url = baseUrlFromAPP + "/getfCircuitidsList";
+            var url = mainBaseUrl+"/calc/getCalcmeterDetailDayListTree";
             var params = {
                 fSubid: subidFromAPP,
+                fCalcid: $("#customType").val(),
             }
             getData(url, params, function (data) {
-                setListData(data);
+                setListData(data.tree);
             });
             isClick = 0;
         }
@@ -215,38 +239,41 @@ $(function () {
     //     });
     // })
     function searchGetData() {
-        // $("body").showLoading();
-        var EnergyKind = $("#EnergyKind").attr('value');
         var selectParam = $(".btn.select").attr('value');
-        if (EnergyKind == "fFr") {
-            selectParam = ""
-        }
-        var time;
+        var startTime;
+        var endTime;
         var typeDA;
         if (selectParam == "today") {
-            time = $("#date").val();
+            startTime = $("#date").val()+" 00:00:00";
+            endTime = $("#date").val()+" 23:59:59";
             typeDA = "D";
         } else if (selectParam == "month") {
-            time = $("#date").val().substring(0, 7);
+            startTime = $("#date").val().substring(0, 7)+"-01";
+            endTime = $("#date").val().substring(0, 7)+"-31";
             typeDA = "M";
         } else if (selectParam == "year") {
-            time = $("#date").val().substring(0, 4);
+            startTime = $("#date").val().substring(0, 4)+"-01-01";
+            endTime = $("#date").val().substring(0, 4)+"-12-31";
             typeDA = "Y";
         }
         var fCircuitid = currentSelectVode.merterId;
 
-        var url = baseUrlFromAPP + "/ElectricityFees";
+        var url = mainBaseUrl + "/calc/getCalcmeterDetailDayList";
         var params = {
             fSubid: subidFromAPP,
-            fCircuitids: fCircuitid,
-            time: time,
-            DA: typeDA
+            itemIds: fCircuitid,
+            startTime: startTime,
+            endTime: endTime,
+            type: typeDA,
+            fCalcid: $("#customType").val(),
             // fPhase: selectParam,
             // EnergyKind: EnergyKind,
-        }
+        };
         getData(url, params, function (data) {
             // $("body").hideLoading();
-            showCharts(data.EnergyReport);
+            $("#chartContain").empty();
+            $("#tableContain").empty();
+            showCharts(data.calcmeterDetailList);
         });
     };
 
@@ -299,36 +326,151 @@ $(function () {
     }
 
     function setListData(data) {
-        $('#treeview').treeview({
-            data: data,
-            showIcon: true,
-            showBorder: true,
-            expandIcon: "glyphicon glyphicon-plus",
-            collapseIcon: "glyphicon glyphicon-minus",
-        });
-        $('#treeview').treeview('selectNode', 0);
-        currentSelectVode.merterId = $('#treeview').treeview('getSelected')[0].id;
-        currentSelectVode.merterName = $('#treeview').treeview('getSelected')[0].text;
-        $("#meter").html(currentSelectVode.merterName);
-        $('#treeview').on('nodeSelected', function (event, node) {
-            currentSelectVode.merterId = node.id;
-            currentSelectVode.merterName = node.text;
-        })
+        try{
+            $("#meter").empty();
+            $('#treeview').treeview({
+                data: data,
+                showIcon: true,
+                showBorder: true,
+                expandIcon: "glyphicon glyphicon-plus",
+                collapseIcon: "glyphicon glyphicon-minus",
+            });
+            $('#treeview').treeview('selectNode', 0);
+            currentSelectVode.merterId = $('#treeview').treeview('getSelected')[0].id;
+            currentSelectVode.merterName = $('#treeview').treeview('getSelected')[0].text;
+            $("#meter").html(currentSelectVode.merterName);
+            $('#treeview').on('nodeSelected', function (event, node) {
+                currentSelectVode.merterId = node.id;
+                currentSelectVode.merterName = node.text;
+            });
+        }catch(e){
+            currentSelectVode.merterId = "";
+        };
     }
+
+    /*$(document).on("click", ".category li", function () {
+        var type = $(this).children('label').attr("value");
+        var text = $(this).children('label').text();
+        generateType(type);
+        $("#EnergyKind").attr("value", type);
+        $("#param").html(text);
+        $("#myModal").modal("hide");
+    })
+
+    function generateType(type) {
+        var List = [{
+                "id": "P",
+                "name": "有功功率",
+                "phase": [{
+                    "id": "fPa",
+                    "name": "A相"
+                }, {
+                    "id": "fPb",
+                    "name": "B相"
+                }, {
+                    "id": "fPc",
+                    "name": "C相"
+                }]
+            },
+            {
+                "id": "I",
+                "name": "电流",
+                "phase": [{
+                    "id": "fIa",
+                    "name": "A相"
+                }, {
+                    "id": "fIb",
+                    "name": "B相"
+                }, {
+                    "id": "fIc",
+                    "name": "C相"
+                }]
+            },
+            {
+                "id": "U",
+                "name": "相电压",
+                "phase": [{
+                    "id": "fUa",
+                    "name": "A相"
+                }, {
+                    "id": "fUb",
+                    "name": "B相"
+                }, {
+                    "id": "fUc",
+                    "name": "C相"
+                }]
+            },
+            {
+                "id": "UL",
+                "name": "线电压",
+                "phase": [{
+                    "id": "fUab",
+                    "name": "Uab"
+                }, {
+                    "id": "fUbc",
+                    "name": "Ubc"
+                }, {
+                    "id": "fUca",
+                    "name": "Uca"
+                }]
+            },
+            {
+                "id": "fFr",
+                "name": "频率",
+            },
+            {
+                "id": "Q",
+                "name": "无功功率",
+                "phase": [{
+                    "id": "fQa",
+                    "name": "A相"
+                }, {
+                    "id": "fQb",
+                    "name": "B相"
+                }, {
+                    "id": "fQc",
+                    "name": "C相"
+                }]
+            },
+            {
+                "id": "S",
+                "name": "视在功率",
+                "phase": [{
+                    "id": "fSa",
+                    "name": "A相"
+                }, {
+                    "id": "fSb",
+                    "name": "B相"
+                }, {
+                    "id": "fSc",
+                    "name": "C相"
+                }]
+            },
+        ]
+        var arr = $.grep(List, function (obj) {
+            return obj.id == type;
+        })
+        $("#EnergyContain").html("");
+        if (arr[0].hasOwnProperty('phase')) {
+            $.each(arr[0].phase, function (index, val) {
+                var string = '<button type="button" class="btn" value="' + val.id + '">' + val.name + '</button>';
+                $("#EnergyContain").append(string);
+            })
+            $("#EnergyContain button:first").addClass('select');
+        }
+    }*/
 
     function showCharts(data) {
         var time = [];
         var value = [];
-        var priceValue = [];
         var name = [];
         var tableData = [];
-        if (data.length > 0) {
+        if (data!=undefined && data.length > 0) {
             var sum = 0;
-            var priceSum = 0;
-            var max = data[0].fIa;
-            var min = data[0].fIa;
-            var maxTime = data[0].fTime.substring(0, 16);
-            var minTime = data[0].fTime.substring(0, 16);
+            var max = data[0].fStarthour;
+            var min = data[0].fStarthour;
+            var maxTime = data[0].fStarthour.substring(0, 16);
+            var minTime = data[0].fStarthour.substring(0, 16);
             var datatime;
             var circuitname = data[0].fCircuitname;
             name.push(circuitname);
@@ -336,158 +478,96 @@ $(function () {
             var selectParam = $(".btn.select").attr('value');
             var tableData;
             $.each(data, function (index, el) {
-                if (el.fTime == "undefined" || el.fTime == null || el.fTime == "") {
+                if (el.fStarthour == "undefined" || el.fStarthour == null || el.fStarthour == "") {
                     return true;
                 }
                 if (selectParam == "today") {
-                    datatime = el.fTime.substring(11, 16);
-                    time.push(el.fTime.substring(11, 16));
+                    datatime = el.fStarthour.substring(11, 16);
+                    time.push(el.fStarthour.substring(11, 16));
                 } else if (selectParam == "month") {
-                    datatime = el.fTime.substring(5, 10);
-                    time.push(el.fTime.substring(5, 10));
+                    datatime = el.fStarthour.substring(5, 10);
+                    time.push(el.fStarthour.substring(5, 10));
                 } else if (selectParam == "year") {
-                    datatime = el.fTime.substring(2, 7);
-                    time.push(el.fTime.substring(2, 7));
+                    datatime = el.fStarthour.substring(2, 7);
+                    time.push(el.fStarthour.substring(2, 7));
                 }
-                if(el.fValue==undefined){
-                    value.push("-");
-                }else{
-                    value.push(el.fValue);
+                value.push(el.fHourvalue);
+                if (el.fHourvalue > max) {
+                    max = el.fHourvalue;
+                    maxTime = el.fStarthour.substring(0, 16);
                 }
-                if(el.fPriceValue==undefined){
-                    priceValue.push("-");
-                }else{
-                    priceValue.push(el.fPriceValue);
+                if (el.fHourvalue < min) {
+                    min = el.fHourvalue;
+                    minTime = el.fStarthour.substring(0, 16);
                 }
-                if (el.fValue > max) {
-                    max = el.fValue;
-                    maxTime = el.fTime.substring(0, 16);
-                }
-                if (el.fValue < min) {
-                    min = el.fValue;
-                    minTime = el.fTime.substring(0, 16);
-                }
-                if(el.fValue!=undefined){
-                    sum += el.fValue;
-                }
-                if(el.fPriceValue!=undefined){
-                    priceSum += el.fPriceValue;
-                }
+                sum += el.fHourvalue;
                 var dic = {
-                    "value": el.fValue,
-                    "priceVal":el.fPriceValue,
-                    "time": datatime,
+                    "value": el.fHourvalue,
+                    "time": datatime
                 };
                 tableData.push(dic);
             });
             var avg = (sum / data.length).toFixed(2);
             tableData.push({
                 "value": sum.toFixed(2),
-                "priceVal":priceSum.toFixed(2),
                 "time": Operation['ui_summary']
             });
         }
         showTable(tableData);
-        var line = echarts.init(document.getElementById('chartContain'));
+        $('#chartContain').removeAttr("_echarts_instance_");
+        var line = echarts.init($('#chartContain').get(0));
         var option = {
             tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    crossStyle: {
-                        color: '#999'
-                    }
-                }
+                trigger: 'axis'
+            },
+            /*            legend: {
+                            data: name,
+                        },*/
+            grid: { // 控制图的大小，调整下面这些值就可以，
+                top: '18%',
+                left: '15%',
+                right: '6%',
+                bottom: '28%',
+            },
+            xAxis: {
+                type: 'category',
+                data: time,
+            },
+            yAxis: {
+                name: 'kW·h',
+                type: 'value',
+                scale: true, //y轴自适应
             },
             toolbox: {
+                left: 'right',
                 feature: {
                     dataZoom: {
                         yAxisIndex: 'none'
                     },
-                    dataView: {},
-                    restore: {},
+                    dataView: {
+                        readOnly: true
+                    },
+                    restore: {}
                 }
             },
-            legend: {
-                data: [Operation['ui_elecval'], Operation['ui_elecpriceval']],
-                left:50,
-            },
-            grid: [{
-                left: 48,
-                right: 48,
-            }],
             dataZoom: [{
                 startValue: time[0]
             }, {
                 type: 'inside'
             }],
-            xAxis: [
-                {
-                    type: 'category',
-                    data: time,
-                    axisPointer: {
-                        type: 'shadow'
+            calculable: true,
+            series: [{
+                name: name,
+                data: value,
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: '#64BC78',
                     }
                 }
-            ],
-            yAxis: [
-                {
-                    type: 'value',
-                    name: Operation['ui_elecval']+'(kW·h)',
-                    scale:true,
-                    axisLabel:{
-                        formatter:function(val,index){
-                            if(val >= 10000 && val<10000000){
-                                return val/10000+"万";
-                            }else if(val >= 10000000){
-                                return val/10000000+"千万";
-                            }else{
-                                return val;
-                            }
-                        },
-                    },
-                },
-                {
-                    type: 'value',
-                    name: Operation['ui_elecpriceval']+'(元)',
-                    scale:true,
-                    axisLabel:{
-                        formatter:function(val,index){
-                            if(val >= 10000 && val<10000000){
-                                return val/10000+"万";
-                            }else if(val >= 10000000){
-                                return val/10000000+"千万";
-                            }else{
-                                return val;
-                            }
-                        },
-                    },
-                }
-            ],
-            series: [
-                {
-                    name: Operation['ui_elecval'],
-                    type: 'bar',
-                    data: value,
-                    itemStyle: {
-                        normal: {
-                            color: '#64BC78',
-                        }
-                    }
-                },
-                {
-                    name: Operation['ui_elecpriceval'],
-                    type: 'bar',
-                    yAxisIndex: 1,
-                    data: priceValue,
-                    itemStyle: {
-                        normal: {
-                            color: '#2EC3D9',
-                        }
-                    }
-                }
-            ]
+            }]
         };
+        line.clear();
         line.setOption(option, true);
         // $(window).bind("resize",function(event) {
         //   line.resize();
@@ -512,11 +592,6 @@ $(function () {
             {
                 field: "value",
                 title: Operation['ui_elecval']+"("+Operation['ui_unit']+"：kW·h)",
-                align: "center"
-            },
-            {
-                field: "priceVal",
-                title: Operation['ui_elecpriceval']+"("+Operation['ui_unit']+"：元)",
                 align: "center"
             }
         ]

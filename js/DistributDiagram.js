@@ -1,29 +1,30 @@
-$(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODQ0MTgyMDgsInVzZXJuYW1lIjoieG1weiJ9.x8Y5dw89SBzvlPtEKg5RXU4WzMw0EfkD_LgoRKwpqW8";
-    var subidFromAPP=10100001;
+let toast;
+var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
+var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTQ4NjAzNjgsInVzZXJuYW1lIjoiaGFoYWhhIn0.iMVkIYSprWvO_t_jt7eFVNzcIc9dvMu5_7oTK1nXYzc";
+var subidFromAPP=10100001;
     //iOS安卓基础传参
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    //判断数组中是否包含某字符串
-    if (isIOS) {
-        //ios系统的处理
-        window.webkit.messageHandlers.iOS.postMessage(null);
-        var storage = localStorage.getItem("accessToken");
-        // storage = storage ? JSON.parse(storage):[];
-        storage = JSON.parse(storage);
-        baseUrlFromAPP = storage.baseurl;
-        tokenFromAPP = storage.token;
-        subidFromAPP = storage.fsubID;
-    } else {
-        baseUrlFromAPP = android.getBaseUrl();
-        tokenFromAPP = android.getToken();
-        subidFromAPP = android.getfSubid();
-    }
-
-    let toast = new ToastClass();
+var u = navigator.userAgent,
+    app = navigator.appVersion;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+//判断数组中是否包含某字符串
+if (isIOS) {
+    //ios系统的处理
+    window.webkit.messageHandlers.iOS.postMessage(null);
+    var storage = localStorage.getItem("accessToken");
+    // storage = storage ? JSON.parse(storage):[];
+    storage = JSON.parse(storage);
+    baseUrlFromAPP = storage.baseurl;
+    tokenFromAPP = storage.token;
+    subidFromAPP = storage.fsubID;
+} else {
+    baseUrlFromAPP = android.getBaseUrl();
+    tokenFromAPP = android.getToken();
+    subidFromAPP = android.getfSubid();
+}
+var mainUrl = baseUrlFromAPP.split("SubstationWEBV2")[0]+"SubstationWEBV2/main/getCurrentValue";
+$(function () {
+    toast = new ToastClass();
     var url = baseUrlFromAPP + "/getAppSubimgInfo";
     var params = {
         fSubid: subidFromAPP
@@ -76,52 +77,6 @@ $(function () {
                 $("#subList").append(string);
             });
         }
-    }
-
-    function getDataByAjax(url, params, successCallback) {
-        toast.show({
-            text: Operation['ui_loading'],
-            loading: true
-        });
-        $.ajax({
-            type: "GET",
-            url: url,
-            data: params,
-            beforeSend: function (request) {
-                request.setRequestHeader("Authorization", tokenFromAPP);
-            },
-            success: function (result) {
-                if (result.code == "5000") {
-                    var strArr = baseUrlFromAPP.split("/");
-                    var ipAddress = strArr[0]+"//"+strArr[2];
-                    $.ajax({
-                        url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
-                        type: "POST",
-                        data: {
-                            ip: ipAddress,
-                            exceptionMessage: JSON.stringify(result.data.stackTrace)
-                        },
-                        success: function (data) {
-
-                        }
-                    });
-                }
-                toast.hide();
-                if(result.code != "200"){
-                    toast.show({
-                        text: Substation.showCodeTips(result.code),
-                        duration: 2000
-                    });
-                }
-                successCallback(result.data);
-            },
-            error: function () {
-                toast.show({
-                    text: Operation['code_fail'],
-                    duration: 2000
-                });
-            }
-        });
     }
 
     $("#subList").change(function (event) {
@@ -193,6 +148,10 @@ $(function () {
                         }
                     } catch (err) {}
                 });
+                group.unbind("click").on("click",function(){
+                    $("#modelShow").css("display","flex");
+                    detailData(val.fCircuitid,val.fCircuitname);
+                });
             });
         } else {
             $.each($("text"), function (index, element) {
@@ -208,3 +167,216 @@ $(function () {
         }
     }
 });
+
+var tableData = [];
+function detailData(cirid,cirname){
+    var cirData;
+    $("#fCircuitname").text(cirname);
+    getDataByAjax(mainUrl,{fCircuitid:cirid},function(data){
+        cirData = data;
+        $(".nav-tabs li").unbind("click").click(function(){
+            tableData = [];
+            $(this).addClass("active").siblings().removeClass("active");
+            var paramCode = $(this).attr("id");
+            $.each(cirData,function(i,val){
+                switch(paramCode){
+                    case "U":
+                        if(val.fParamCode.toUpperCase().substring(0,1)=="U"){
+                            var paramName = val.fParamCode+"(V)";
+                            pushData(val,paramName);
+                        }
+                        break;
+                    case "I":
+                        if(val.fParamCode.toUpperCase().substring(0,1)=="I"){
+                            var paramName = val.fParamCode+"(A)";
+                            pushData(val,paramName);
+                        }
+                        break;
+                    case "P":
+                        if(val.fParamCode.toUpperCase()=="P"||val.fParamCode.toUpperCase()=="Q"||val.fParamCode.toUpperCase()=="S"){
+                            var paramName = val.fParamCode+"(kW)";
+                            pushData(val,paramName);
+                        }
+                        if(val.fParamCode.toUpperCase()=="PF"){
+                            var paramName = val.fParamCode;
+                            pushData(val,paramName);
+                        }
+                        break;
+                    case "E":
+                        if(val.fParamCode.toUpperCase()=="EPI"){
+                            var paramName = val.fParamCode+"(kW·h)";
+                            pushData(val,paramName);
+                        }
+                        break;
+                    case "UB":
+                        if(val.fParamCode.toUpperCase()=="VUB"||val.fParamCode.toUpperCase()=="CUB"){
+                            var paramName = val.fParamCode+"(%)";
+                            pushData(val,paramName);
+                        }
+                        break;
+                    case "Max":
+                        if(val.fParamCode.toUpperCase()=="MD"){
+                            var paramName = val.fParamCode+"(kW)";
+                            pushData(val,paramName);
+                        }
+                        break;
+                }
+            });
+            showTable(tableData);
+        });
+
+        $(".nav-tabs li")[0].click();
+    });
+}
+
+function pushData(val,paramCode){
+    var row = {};
+    row.Paramname = paramCode;
+    if(val.fValue!=undefined && val.fValue!=null){
+        row.fValue = parseFloat(val.fValue).toFixed(2);
+    }
+    if(val.min!=undefined && val.min!=null){
+        row.min = parseFloat(val.min).toFixed(2);
+    }
+    if(val.max!=undefined && val.max!=null){
+        row.max = parseFloat(val.max).toFixed(2);
+    }
+    if(val.minTime!=undefined && val.minTime!=null){
+        row.minTime = val.minTime.substring(5,16);
+    }
+    if(val.maxTime!=undefined && val.maxTime!=null){
+        row.maxTime = val.maxTime.substring(5,16);
+    }
+    if(val.avg!=undefined && val.avg!=null){
+        row.avg = parseFloat(val.avg).toFixed(2);
+    }
+    tableData.push(row);
+}
+
+function closeModel(){
+    $("#modelShow").css("display","none");
+}
+
+function showTable(data) {
+    var columns = [
+        [{
+              field: "Paramname",
+              title: Operation['ui_paramname'],
+              align: "center",
+              valign: "middle",
+              align: "center",
+              colspan: 1,
+              rowspan: 2
+          },
+          {
+              field: "fValue",
+              title: Operation['ui_newValue'],
+              align: "center",
+              valign: "middle",
+              align: "center",
+              colspan: 1,
+              rowspan: 2
+          },
+          {
+              field: "maxVT",
+              title: Operation['ui_maxval'],
+              valign: "middle",
+              align: "center",
+              colspan: 2,
+              rowspan: 1
+          },
+          {
+              field: "minVT",
+              title: Operation['ui_minval'],
+              valign: "middle",
+              align: "center",
+              colspan: 2,
+              rowspan: 1
+          },
+          {
+              field: "avg",
+              title: Operation['ui_avgval'],
+              valign: "middle",
+              align: "center",
+              colspan: 1,
+              rowspan: 2
+          }
+        ],
+        [{
+                field: "max",
+                title: Operation['ui_val'],
+                valign: "middle",
+                align: "center"
+            },
+            {
+                field: "maxTime",
+                title: Operation['ui_time'],
+                valign: "middle",
+                align: "center"
+            },
+            {
+                field: "min",
+                title: Operation['ui_val'],
+                valign: "middle",
+                align: "center"
+            },
+            {
+                field: "minTime",
+                title: Operation['ui_time'],
+                align: "center"
+            }
+        ]
+    ];
+    $("#detailTable").empty();
+    $("#detailTable").html("<table id='table'></table>");
+    $("#table").bootstrapTable({
+        columns: columns,
+        data: data,
+    })
+};
+
+function getDataByAjax(url, params, successCallback) {
+        toast.show({
+            text: Operation['ui_loading'],
+            loading: true
+        });
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: params,
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", tokenFromAPP);
+            },
+            success: function (result) {
+                if (result.code == "5000") {
+                    var strArr = baseUrlFromAPP.split("/");
+                    var ipAddress = strArr[0]+"//"+strArr[2];
+                    $.ajax({
+                        url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
+                        type: "POST",
+                        data: {
+                            ip: ipAddress,
+                            exceptionMessage: JSON.stringify(result.data.stackTrace)
+                        },
+                        success: function (data) {
+
+                        }
+                    });
+                }
+                toast.hide();
+                if(result.code != "200"){
+                    toast.show({
+                        text: Substation.showCodeTips(result.code),
+                        duration: 2000
+                    });
+                }
+                successCallback(result.data);
+            },
+            error: function () {
+                toast.show({
+                    text: Operation['code_fail'],
+                    duration: 2000
+                });
+            }
+        });
+    }

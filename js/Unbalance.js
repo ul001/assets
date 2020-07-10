@@ -170,7 +170,7 @@ $(function () {
                 strArr = strArr.pop().pop();
 
                 $.ajax({
-                    url: "http://www.acrelcloud.cn/SubstationWEBV2/SubstationWEBV2/main/uploadExceptionLog",
+                    url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                     type: "POST",
                     data: {
                         ip: ipAddress,
