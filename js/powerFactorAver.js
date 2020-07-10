@@ -245,6 +245,7 @@ $(function () {
         }
         var fCircuitid = currentSelectVode.merterId;
         //临时web接口
+        var baseWebUrl = "";
         if (baseUrlFromAPP.search("v5") != -1) {
             baseWebUrl = baseUrlFromAPP.replace("v5", "main");
         } else if (baseUrlFromAPP.search("v4") != -1) {
@@ -253,13 +254,10 @@ $(function () {
         var url = baseWebUrl + "/AveragePowerReport";
         var params = {
             fSubid: subidFromAPP,
-            fCircuitids: fCircuitid,
+            fCircuitid: fCircuitid,
             timeStart: startTime,
             timeEnd: endTime,
             DA: typeDA
-            // time: time,
-            // fPhase: selectParam,
-            // EnergyKind: EnergyKind,
         }
         getData(url, params, function (data) {
             // $("body").hideLoading();

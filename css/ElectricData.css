@@ -5,7 +5,7 @@
 	overflow: auto;
 }
 
-*{
+* {
 	outline: 0 !important;
 }
 
@@ -158,8 +158,8 @@ body {
 }
 
 #date {
-    width:calc(100% - 75px);
-    background: transparent;
+	width: calc(100% - 75px);
+	background: transparent;
 	height: 5rem;
 	border-radius: 5px;
 	padding-left: 0.5rem;
@@ -233,7 +233,7 @@ body {
 	right: 0;
 	top: 0;
 	display: none;
-    z-index: 10;
+	z-index: 10;
 }
 
 .selectcontain-main {
@@ -269,7 +269,7 @@ body {
 	margin-bottom: 0;
 	position: absolute;
 	bottom: 0;
-	padding:0;
+	padding: 0;
 }
 
 .tree .cancel {
@@ -301,9 +301,9 @@ body {
 	border: 1px solid #02AC94;
 }
 
-.ban_body{
-    height:100%;
-	overflow:hidden;
+.ban_body {
+	height: 100%;
+	overflow: hidden;
 }
 
 @keyframes IDENT {
@@ -315,8 +315,9 @@ body {
 		right: 0;
 	}
 }
-#energySelect{
-    outline:0;
+
+#energySelect {
+	outline: 0;
 	width: calc(100% - 104px);
 	/*background: url('../image/right.png') no-repeat right center;*/
 }
