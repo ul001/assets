@@ -88,7 +88,7 @@ $(function () {
         var timeInterval = $("#energyTimeInterval").val();
         var fCircuitid = currentSelectVode.merterId;
         var time = $("#date").val();
-        // var selectVal = $(".elec-btn .select").attr("value");
+
         //临时web接口
         var baseWebUrl = "";
         if (baseUrlFromAPP.search("v5") != -1) {
@@ -97,9 +97,7 @@ $(function () {
             baseWebUrl = baseUrlFromAPP.replace("v4", "main");
         }
         var url = baseWebUrl + "/powerMonitoring/ElectricReport";
-        if (selectVal == "month") {
-            time = time + "-01";
-        }
+
         var params = {
             fSubid: subidFromAPP,
             fCircuitid: fCircuitid,
@@ -227,151 +225,175 @@ $(function () {
         });
     }
 
-    function setTableData(arr, list) {
-        var listVal = list[0];
-        var tableData = [];
-        var selectVal = $(".elec-btn .select").attr("value");
-        var changeUnit = -1;
-        if (list[0].fUaminvalue != undefined) {
-            changeUnit = 0;
-            if (list[0].fUaminvalue >= 1000) {
-                changeUnit = 1;
-            }
-        }
-        $.each(list, function (key, obj) {
-            $.each(arr, function (key1, obj1) {
-                if (selectVal == "day") {
-                    if (changeUnit == 1) {
-                        tableData.push({
-                            paramName: obj1.name + "(kV)",
-                            avg: (obj[obj1.id + "avg"] / 1000).toFixed(2),
-                            max: (obj[obj1.id + "maxvalue"] / 1000).toFixed(2),
-                            maxTime: obj[obj1.id + "maxtime"].substring(11, 16),
-                            min: (obj[obj1.id + "minvalue"] / 1000).toFixed(2),
-                            minTime: obj[obj1.id + "mintime"].substring(11, 16)
-                        });
-                    } else if (changeUnit == 0) {
-                        tableData.push({
-                            paramName: obj1.name + "(V)",
-                            avg: obj[obj1.id + "avg"],
-                            max: obj[obj1.id + "maxvalue"],
-                            maxTime: obj[obj1.id + "maxtime"].substring(11, 16),
-                            min: obj[obj1.id + "minvalue"],
-                            minTime: obj[obj1.id + "mintime"].substring(11, 16)
-                        });
-                    } else {
-                        tableData.push({
-                            paramName: obj1.name,
-                            avg: obj[obj1.id + "avg"],
-                            max: obj[obj1.id + "maxvalue"],
-                            maxTime: obj[obj1.id + "maxtime"].substring(11, 16),
-                            min: obj[obj1.id + "minvalue"],
-                            minTime: obj[obj1.id + "mintime"].substring(11, 16)
-                        });
-                    }
-                } else if (selectVal == "month") {
-                    if (changeUnit == 1) {
-                        tableData.push({
-                            paramName: obj1.name + "(kV)",
-                            avg: (obj[obj1.id + "avg"] / 1000).toFixed(2),
-                            max: (obj[obj1.id + "maxvalue"] / 1000).toFixed(2),
-                            maxTime: obj[obj1.id + "maxtimeS"].substring(8, 10) +
-                                "日" +
-                                obj[obj1.id + "maxtimeS"].substring(10, 16),
-                            min: (obj[obj1.id + "minvalue"] / 1000).toFixed(2),
-                            minTime: obj[obj1.id + "mintimeS"].substring(8, 10) +
-                                "日" +
-                                obj[obj1.id + "mintimeS"].substring(10, 16)
-                        });
-                    } else if (changeUnit == 0) {
-                        tableData.push({
-                            paramName: obj1.name + "(V)",
-                            avg: obj[obj1.id + "avg"],
-                            max: obj[obj1.id + "maxvalue"],
-                            maxTime: obj[obj1.id + "maxtimeS"].substring(8, 10) +
-                                "日" +
-                                obj[obj1.id + "maxtimeS"].substring(10, 16),
-                            min: obj[obj1.id + "minvalue"],
-                            minTime: obj[obj1.id + "mintimeS"].substring(8, 10) +
-                                "日" +
-                                obj[obj1.id + "mintimeS"].substring(10, 16)
-                        });
-                    } else {
-                        tableData.push({
-                            paramName: obj1.name,
-                            avg: obj[obj1.id + "avg"],
-                            max: obj[obj1.id + "maxvalue"],
-                            maxTime: obj[obj1.id + "maxtimeS"].substring(8, 10) +
-                                "日" +
-                                obj[obj1.id + "maxtimeS"].substring(10, 16),
-                            min: obj[obj1.id + "minvalue"],
-                            minTime: obj[obj1.id + "mintimeS"].substring(8, 10) +
-                                "日" +
-                                obj[obj1.id + "mintimeS"].substring(10, 16)
-                        });
-                    }
-                }
-            });
-        });
-        showTable(tableData);
-    }
-
-    // var dic = {
-    //     "fCircuitname": el.fCircuitname,
-    //     "fCollecttime": collecttime,
-    //     "fUa": el.fUa,
-    //     "fUb": el.fUb,
-    //     "fUc": el.fUc,
-    //     "fUab": el.fUab,
-    //     "fUbc": el.fUbc,
-    //     "fUca": el.fUca,
-    //     "fIa": el.fIa,
-    //     "fIb": el.fIb,
-    //     "fIc": el.fIc,
-    //     "fP": el.fP,
-    //     "fQ": el.fQ,
-    //     "fPf": el.fPf,
-    //     "fEpi": el.EPI
-    // };
     function showTable(data) {
         var columns = [];
         var energySelect = $("#energySelect").val();
         if (energySelect == 'Voltage') {
             columns = [{
                     field: "fCircuitname",
-                    title: Operation['ui_date'],
+                    title: Operation['ui_CircuitName'],
                     align: "center"
                 }, {
-                    field: "time",
-                    title: Operation['ui_date'],
+                    field: "fCollecttime",
+                    title: Operation['ui_time'],
+                    align: "center"
+                }, {
+                    field: "fEpi",
+                    title: 'Epi(kWh)',
                     align: "center"
                 },
                 {
-                    field: "epi",
-                    title: Operation['ui_eqi'],
+                    field: "fUa",
+                    title: 'Ua(V)',
                     align: "center"
                 }, {
-                    field: "epe",
-                    title: Operation['ui_epe'],
+                    field: "fUb",
+                    title: 'Ub(V)',
                     align: "center"
                 }, {
-                    field: "eql",
-                    title: Operation['ui_eql'],
+                    field: "fUc",
+                    title: 'Uc(V)',
                     align: "center"
                 }, {
-                    field: "eqc",
-                    title: Operation['ui_eqc'],
+                    field: "fIa",
+                    title: 'Ia(A)',
                     align: "center"
                 }, {
-                    field: "pf",
-                    title: Operation['ui_pf'],
+                    field: "fIb",
+                    title: 'Ib(A)',
+                    align: "center"
+                }, {
+                    field: "fIc",
+                    title: 'Ic(A)',
+                    align: "center"
+                }, {
+                    field: "fP",
+                    title: 'P(kW)',
+                    align: "center"
+                }, {
+                    field: "fQ",
+                    title: 'Q(kVar)',
+                    align: "center"
+                }, {
+                    field: "fPf",
+                    title: 'Pf',
                     align: "center"
                 }
             ];
         } else if (energySelect == 'Voltage2') {
-
+            columns = [{
+                field: "fCircuitname",
+                title: Operation['ui_CircuitName'],
+                align: "center"
+            }, {
+                field: "fCollecttime",
+                title: Operation['ui_time'],
+                align: "center"
+            }, {
+                field: "fEpi",
+                title: 'Epi(kWh)',
+                align: "center"
+            }, {
+                field: "fUab",
+                title: 'Uab(V)',
+                align: "center"
+            }, {
+                field: "fUbc",
+                title: 'Ubc(V)',
+                align: "center"
+            }, {
+                field: "fUca",
+                title: 'Uca(V)',
+                align: "center"
+            }, {
+                field: "fIa",
+                title: 'Ia(A)',
+                align: "center"
+            }, {
+                field: "fIb",
+                title: 'Ib(A)',
+                align: "center"
+            }, {
+                field: "fIc",
+                title: 'Ic(A)',
+                align: "center"
+            }, {
+                field: "fP",
+                title: 'P(kW)',
+                align: "center"
+            }, {
+                field: "fQ",
+                title: 'Q(kVar)',
+                align: "center"
+            }, {
+                field: "fPf",
+                title: 'Pf',
+                align: "center"
+            }];
         } else {
-
+            columns = [{
+                    field: "fCircuitname",
+                    title: Operation['ui_CircuitName'],
+                    align: "center"
+                }, {
+                    field: "fCollecttime",
+                    title: Operation['ui_time'],
+                    align: "center"
+                }, {
+                    field: "fEpi",
+                    title: 'Epi(kWh)',
+                    align: "center"
+                },
+                {
+                    field: "fUa",
+                    title: 'Ua(V)',
+                    align: "center"
+                }, {
+                    field: "fUb",
+                    title: 'Ub(V)',
+                    align: "center"
+                }, {
+                    field: "fUc",
+                    title: 'Uc(V)',
+                    align: "center"
+                }, {
+                    field: "fUab",
+                    title: 'Uab(V)',
+                    align: "center"
+                }, {
+                    field: "fUbc",
+                    title: 'Ubc(V)',
+                    align: "center"
+                }, {
+                    field: "fUca",
+                    title: 'Uca(V)',
+                    align: "center"
+                }, {
+                    field: "fIa",
+                    title: 'Ia(A)',
+                    align: "center"
+                }, {
+                    field: "fIb",
+                    title: 'Ib(A)',
+                    align: "center"
+                }, {
+                    field: "fIc",
+                    title: 'Ic(A)',
+                    align: "center"
+                }, {
+                    field: "fP",
+                    title: 'P(kW)',
+                    align: "center"
+                }, {
+                    field: "fQ",
+                    title: 'Q(kVar)',
+                    align: "center"
+                }, {
+                    field: "fPf",
+                    title: 'Pf',
+                    align: "center"
+                }
+            ];
         }
 
         $("#tableContain").html("");
@@ -382,29 +404,10 @@ $(function () {
         });
     }
 
+
+
     var showtimeForElectSum = tool.initDate("YMD", new Date());
-    $(document).on("click", ".elec-btn .btn", function () {
-        var obj = $(this);
-        $(this)
-            .addClass("select")
-            .siblings("button")
-            .removeClass("select");
-        var selectParam = $(this).attr("value");
-        // if (selectParam == "day") {
-        initDateInput("date");
-        showtimeForElectSum = tool.initDate("YMD", new Date());
-        $("#date").val(showtimeForElectSum);
-        $("#preVal").text(Operation['ui_perday']);
-        $("#nextVal").text(Operation['ui_nextday']);
-        // } else if (selectParam == "month") {
-        //     initDateInput("ym");
-        //     showtimeForElectSum = tool.initDate("YM", new Date());
-        //     $("#date").val(showtimeForElectSum);
-        //     $("#preVal").text(Operation['ui_lastmonth']);
-        //     $("#nextVal").text(Operation['ui_nextmonth']);
-        // }
-        initQuick(selectParam);
-    });
+
     $("#date").val(showtimeForElectSum);
     //初始化时间控件
     var calendar1 = new LCalendar();
@@ -427,8 +430,8 @@ $(function () {
         });
     }
 
-    var selectReport = $(".elec-btn .select").attr("value");
-    initQuick(selectReport);
+
+    initQuick("day");
 
     function initQuick(type) {
         $("#datePre").unbind("click");
