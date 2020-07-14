@@ -123,8 +123,15 @@ $(function () {
                 if (el.fCircuitname == "undefined" || el.fCircuitname == null || el.fCircuitname == "") {
                     return true;
                 }
-                var collecttime = el.fCollecttime ? el.fCollecttime : "-";
+                var collecttime = el.fCollecttime ? el.fCollecttime.substring(11, 17) : "-";
                 var EPI = el.fEpi ? el.fEpi : "-";
+                if (el.fCircuitname == '最大值') {
+                    collecttime = '最大值';
+                } else if (el.fCircuitname == '最小值') {
+                    collecttime = '最小值';
+                } else if (el.fCircuitname == '平均值') {
+                    collecttime = '平均值';
+                }
                 var dic = {
                     "fCircuitname": el.fCircuitname,
                     "fCollecttime": collecttime,
@@ -140,7 +147,7 @@ $(function () {
                     "fP": el.fP,
                     "fQ": el.fQ,
                     "fPf": el.fPf,
-                    "fEpi": el.EPI
+                    "fEpi": el.fEpi
                 };
                 tableData.push(dic);
             });
@@ -230,10 +237,6 @@ $(function () {
         var energySelect = $("#energySelect").val();
         if (energySelect == 'Voltage') {
             columns = [{
-                    field: "fCircuitname",
-                    title: Operation['ui_CircuitName'],
-                    align: "center"
-                }, {
                     field: "fCollecttime",
                     title: Operation['ui_time'],
                     align: "center"
@@ -282,10 +285,6 @@ $(function () {
             ];
         } else if (energySelect == 'Voltage2') {
             columns = [{
-                field: "fCircuitname",
-                title: Operation['ui_CircuitName'],
-                align: "center"
-            }, {
                 field: "fCollecttime",
                 title: Operation['ui_time'],
                 align: "center"
@@ -332,10 +331,6 @@ $(function () {
             }];
         } else {
             columns = [{
-                    field: "fCircuitname",
-                    title: Operation['ui_CircuitName'],
-                    align: "center"
-                }, {
                     field: "fCollecttime",
                     title: Operation['ui_time'],
                     align: "center"
