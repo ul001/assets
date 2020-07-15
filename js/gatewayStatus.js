@@ -187,7 +187,7 @@ function generateTable($table, columns, data, isPagenation, pageSize, cardView, 
                 $table.bootstrapTable({
                     columns: columns,
                     data: data,
-                    height:(document.body.clientHeight-70),
+                    height:(window.innerHeight-70),
                 });
             }
             window.onresize=function (ev) {

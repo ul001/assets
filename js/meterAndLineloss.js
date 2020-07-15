@@ -403,14 +403,14 @@ $(function () {
 
             } else {
                 $table.bootstrapTable({
-//                    height:height,
 //                    striped: true,
 //                    editable:true,//行内编辑
 //                    sidePagination: 'client',//分页
 //                    sortOrder:'desc',
 //                    classes: 'table table-striped',
                     columns: columns,
-                    data: data
+                    data: data,
+                    height:(window.innerHeight-80),
                 });
             }
             window.onresize=function (ev) {

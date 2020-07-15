@@ -822,6 +822,7 @@ $(function () {
 
     function initLine(series, legend, time, title, unit) {
         $(".chart").html('<div id="powerChart" class="showDIV"></div>');
+        $("#powerChart").removeAttr("_echarts_instance_");
         var line = echarts.init(document.getElementById('powerChart'));
         // var line = echarts.init($("#powerChart").get(0));
         var option = {
