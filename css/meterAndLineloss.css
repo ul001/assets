@@ -1,7 +1,5 @@
 .container {
 	background: #fff;
-	padding-right: 0;
-	padding-left: 0;
 	overflow: auto;
 }
 
@@ -411,6 +409,6 @@ body {
 	border-left: 1px solid #fff;
 }
 
-table tr>td{
-    border-left: 1px solid #ddd;
+table tbody tr:nth-child(even) {
+    background: rgb(236, 248, 243);
 }

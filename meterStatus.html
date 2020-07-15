@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<!--实时需量-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title></title>
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/gatewayStatus.css"/>
+    <link rel="stylesheet" href="css/general.css">
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" href="lib/LCalendar.css">
+    <script src="lib/LCalendar.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
+    <script src="lib/toast.js"></script>
+    <script src="js/meterStatus.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div style="padding:1rem;">
+        <img class="clear" src="image/clear.png">
+        <input type="search" id="search" placeholder="" data-placeholder="ui_meterholder" style="background:none;">
+        <span id="check">
+             	<input id="Disconnect" type="checkbox">
+             	<label id="Dislabel" for="Disconnect" data-i18n="ui_meter_showdis"></label>
+            <!-- 只显示断线状态 -->
+             </span>
+    </div>
+    <div id="tab-content" class="table">
+    </div>
+</div>
+</body>
+
+</html>

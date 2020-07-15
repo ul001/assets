@@ -1,0 +1,49 @@
+table tbody tr:nth-child(even) {
+    background: rgb(236, 248, 243);
+}
+
+table thead {
+	background: #42B685;
+	color: #fff;
+}
+
+table td img{
+    width: 2.5rem;
+}
+
+#search {
+    border-radius: 2rem;
+    border: 1px solid #ddd;
+    height: 3rem;
+    width: 50%;
+    padding-left: 1rem;
+    outline: 0;
+    position:relative;
+}
+
+#check{
+    float:right;
+    height: 3rem;
+    line-height:3rem;
+}
+
+#tab-content{
+    height:calc(100vh - 5rem - 20px);
+    overflow:auto;
+}
+
+.fixed-table-border{
+    display:none;
+}
+
+.bootstrap-table .fixed-table-container.fixed-height:not(.has-footer) {
+    border-bottom: 1px solid transparent;
+}
+
+.clear {
+    position: absolute;
+    right: 52%;
+    top: 1.65rem;
+    vertical-align: middle;
+    z-index: 9;
+}
