@@ -47,3 +47,8 @@ table td img{
     vertical-align: middle;
     z-index: 9;
 }
+
+#Disconnect{
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
