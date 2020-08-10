@@ -1,7 +1,7 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v4";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
-    var subidFromAPP=10100001;
+  var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
+  var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+  var subidFromAPP = 10100001;
   //iOS安卓基础传参
   var u = navigator.userAgent,
     app = navigator.appVersion;
@@ -42,7 +42,7 @@ $(function () {
       success: function (result) {
         if (result.code == "5000") {
           var strArr = baseUrlFromAPP.split("/");
-          var ipAddress = strArr[0]+"//"+strArr[2];
+          var ipAddress = strArr[0] + "//" + strArr[2];
 
           $.ajax({
             url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
@@ -57,11 +57,11 @@ $(function () {
           });
         }
         toast.hide();
-        if(result.code != "200"){
-            toast.show({
-                text: Substation.showCodeTips(result.code),
-                duration: 2000
-            });
+        if (result.code != "200") {
+          toast.show({
+            text: Substation.showCodeTips(result.code),
+            duration: 2000
+          });
         }
         if (result.data != null) {
           if (result.data.length > 0) {
@@ -85,4 +85,9 @@ $(function () {
     });
   }
   getData();
+
+  function refreshWaterData() {
+    getData();
+  }
+
 });

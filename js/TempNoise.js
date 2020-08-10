@@ -1,7 +1,7 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
-    var subidFromAPP=10100001;
+    var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
+    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
+    var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -40,7 +40,7 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    var ipAddress = strArr[0]+"//"+strArr[2];
+                    var ipAddress = strArr[0] + "//" + strArr[2];
 
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
@@ -55,7 +55,7 @@ $(function () {
                     });
                 }
                 toast.hide();
-                if(result.code != "200"){
+                if (result.code != "200") {
                     toast.show({
                         text: Substation.showCodeTips(result.code),
                         duration: 2000
@@ -93,12 +93,12 @@ $(function () {
                         $("#cardList").append('<section class="sectionCard" value="' + this.f_MeterCode + '">' +
                             '<p>' + this.f_MeterName + '</p>' +
                             '<img src="image/noisepic.png"/>' +
-                            '<p>'+Operation['ui_noise']+':' + noiseVal + this.noiseUnit + '</p></section>');
+                            '<p>' + Operation['ui_noise'] + ':' + noiseVal + this.noiseUnit + '</p></section>');
                     });
                     $("#cardList section:first").addClass("sectionSelect");
                     $(".sectionCard").on("click", function () {
                         $(this).addClass("sectionSelect").siblings().removeClass("sectionSelect");
-//                        $("#date").val(time);
+                        //                        $("#date").val(time);
                         getChartData();
                     });
                     getChartData();
@@ -137,7 +137,7 @@ $(function () {
 
     function initLineAnal(value, time, name, unit) {
         var option = {
-            color: ['#2EC7C9','#B6A2DE','#3CA4E4','#FFB980'],
+            color: ['#2EC7C9', '#B6A2DE', '#3CA4E4', '#FFB980'],
             tooltip: {
                 trigger: 'axis'
             },
@@ -179,7 +179,7 @@ $(function () {
                 axisLabel: {
                     formatter: '{value}'
                 },
-                name:unit,
+                name: unit,
             },
             series: [{
                 name: name,
@@ -255,12 +255,16 @@ $(function () {
     //初始化时间控件
     var calendar1 = new LCalendar();
     calendar1.init({
-        'trigger': '#date',//标签id
-        'type': 'date',//date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
-        'minDate':'2000-1-1',//最小日期 注意：该值会覆盖标签内定义的日期范围
-        'maxDate':'2050-1-1'//最大日期 注意：该值会覆盖标签内定义的日期范围
+        'trigger': '#date', //标签id
+        'type': 'date', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        'minDate': '2000-1-1', //最小日期 注意：该值会覆盖标签内定义的日期范围
+        'maxDate': '2050-1-1' //最大日期 注意：该值会覆盖标签内定义的日期范围
     });
-    $("#date").on("input",function(){
+    $("#date").on("input", function () {
         getChartData();
     });
+
+    function refreshNoiseData() {
+        getChartData();
+    }
 });
