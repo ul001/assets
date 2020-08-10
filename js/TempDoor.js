@@ -1,3 +1,4 @@
+var refreshdata;
 $(function () {
   var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
   var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
@@ -85,9 +86,10 @@ $(function () {
     });
   }
   getData();
-
-  function refreshDoorData() {
-    getData();
-  }
-
+  refreshdata = getData;
 });
+
+
+function refreshDoorData() {
+  refreshdata();
+}

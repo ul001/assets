@@ -1,3 +1,4 @@
+var refreshdata;
 $(function () {
     //烟雾
     var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
@@ -86,8 +87,9 @@ $(function () {
         });
     }
     getData();
-
-    function refreshSmogData() {
-        getData();
-    }
+    refreshdata = getData;
 });
+
+function refreshSmogData() {
+    refreshdata();
+}

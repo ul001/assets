@@ -1,3 +1,4 @@
+var refreshdata;
 $(function () {
     var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
     var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
@@ -263,8 +264,9 @@ $(function () {
     $("#date").on("input", function () {
         getChartData();
     });
-
-    function refreshNoiseData() {
-        getChartData();
-    }
+    refreshdata = getChartData;
 });
+
+function refreshNoiseData() {
+    refreshdata();
+}

@@ -1,6 +1,7 @@
+var refreshdata;
 $(function () {
-  var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-  var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+  var baseUrlFromAPP = "http://192.168.111.6:8080/SubstationWEBV2/v5";
+  var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTc2NDYzMDEsInVzZXJuYW1lIjoiYWRtaW4ifQ.7StzEtcOS6OL7imjOZ-WjYkcqQ_AcZLhhqFIHFE6M4A";
   var subidFromAPP = 10100001;
   //iOS安卓基础传参
   var u = navigator.userAgent,
@@ -8,19 +9,19 @@ $(function () {
   var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
   var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
   //判断数组中是否包含某字符串
-  if (isIOS) { //ios系统的处理
-    window.webkit.messageHandlers.iOS.postMessage(null);
-    var storage = localStorage.getItem("accessToken");
-    // storage = storage ? JSON.parse(storage):[];
-    storage = JSON.parse(storage);
-    baseUrlFromAPP = storage.baseurl;
-    tokenFromAPP = storage.token;
-    subidFromAPP = storage.fsubID;
-  } else {
-    baseUrlFromAPP = android.getBaseUrl();
-    tokenFromAPP = android.getToken();
-    subidFromAPP = android.getfSubid();
-  }
+  // if (isIOS) { //ios系统的处理
+  //   window.webkit.messageHandlers.iOS.postMessage(null);
+  //   var storage = localStorage.getItem("accessToken");
+  //   // storage = storage ? JSON.parse(storage):[];
+  //   storage = JSON.parse(storage);
+  //   baseUrlFromAPP = storage.baseurl;
+  //   tokenFromAPP = storage.token;
+  //   subidFromAPP = storage.fsubID;
+  // } else {
+  //   baseUrlFromAPP = android.getBaseUrl();
+  //   tokenFromAPP = android.getToken();
+  //   subidFromAPP = android.getfSubid();
+  // }
 
   let toast = new ToastClass(); //实例化toast对象
 
@@ -85,9 +86,9 @@ $(function () {
     });
   }
   getData();
-
-  function refreshWaterData() {
-    getData();
-  }
-
+  refreshdata = getData;
 });
+
+function refreshWaterData() {
+  refreshdata();
+}
