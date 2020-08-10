@@ -22,6 +22,7 @@ if (isIOS) {
     tokenFromAPP = android.getToken();
     subidFromAPP = android.getfSubid();
 }
+var refreshdata;
 var mainUrl = baseUrlFromAPP.split("SubstationWEBV2")[0] + "SubstationWEBV2/main/getCurrentValue";
 $(function () {
     toast = new ToastClass();
@@ -149,14 +150,14 @@ $(function () {
                                         group.children('g[name="off"]').show();
                                     }
                                 } else {
-                                    if(group.children('g[name="offline"]').length>0){
+                                    if (group.children('g[name="offline"]').length > 0) {
                                         group.children('g[name="offline"]').show();
                                         group.children('g[name="off"]').hide();
-                                    }else{
+                                    } else {
                                         group.children('g[name="off"]').show();
                                     }
-//                                    group.children('g[name="offline"]').show();
-//                                    group.children('g[name="off"]').hide();
+                                    //                                    group.children('g[name="offline"]').show();
+                                    //                                    group.children('g[name="off"]').hide();
                                     group.children('g[name="on"]').hide();
                                 }
                                 break;
@@ -172,14 +173,14 @@ $(function () {
                                         group.children('g[name="off"]').hide();
                                     }
                                 } else {
-                                    if(group.children('g[name="offline"]').length>0){
+                                    if (group.children('g[name="offline"]').length > 0) {
                                         group.children('g[name="offline"]').show();
                                         group.children('g[name="off"]').hide();
-                                    }else{
+                                    } else {
                                         group.children('g[name="off"]').show();
                                     }
-//                                    group.children('g[name="offline"]').show();
-//                                    group.children('g[name="off"]').hide();
+                                    //                                    group.children('g[name="offline"]').show();
+                                    //                                    group.children('g[name="off"]').hide();
                                     group.children('g[name="on"]').hide();
                                 }
                                 break;
@@ -252,6 +253,7 @@ $(function () {
             });
         }
     }
+    refreshdata = showDataOnSVG;
 });
 
 var tableData = [];
@@ -424,13 +426,13 @@ function showTable(data) {
     })
 };
 
-function refreshDiagramData(){
+function refreshDiagramData() {
     var url = baseUrlFromAPP + "/getAppSubimgInfo";
     var params = {
         fSubid: subidFromAPP
     };
     getDataByAjax(url, params, function (data) {
-        showDataOnSVG(data.SvgInfo);
+        refreshdata(data.SvgInfo);
     });
 }
 
