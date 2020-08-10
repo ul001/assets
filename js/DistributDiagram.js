@@ -1,6 +1,6 @@
 let toast;
-var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTQ4NjAzNjgsInVzZXJuYW1lIjoiaGFoYWhhIn0.iMVkIYSprWvO_t_jt7eFVNzcIc9dvMu5_7oTK1nXYzc";
+var baseUrlFromAPP = "http://www.acrelcloud.cn/SubstationWEBV2/v5";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTc2NTM4OTMsInVzZXJuYW1lIjoieG1weiJ9.l_M0rv6OsYFK5BlEJKESdPEAWxJVE8UwKJxCPIJB1uE";
 var subidFromAPP = 10100001;
 //iOS安卓基础传参
 var u = navigator.userAgent,
@@ -149,8 +149,14 @@ $(function () {
                                         group.children('g[name="off"]').show();
                                     }
                                 } else {
-                                    group.children('g[name="offline"]').show();
-                                    group.children('g[name="off"]').hide();
+                                    if(group.children('g[name="offline"]').length>0){
+                                        group.children('g[name="offline"]').show();
+                                        group.children('g[name="off"]').hide();
+                                    }else{
+                                        group.children('g[name="off"]').show();
+                                    }
+//                                    group.children('g[name="offline"]').show();
+//                                    group.children('g[name="off"]').hide();
                                     group.children('g[name="on"]').hide();
                                 }
                                 break;
@@ -166,8 +172,14 @@ $(function () {
                                         group.children('g[name="off"]').hide();
                                     }
                                 } else {
-                                    group.children('g[name="offline"]').show();
-                                    group.children('g[name="off"]').hide();
+                                    if(group.children('g[name="offline"]').length>0){
+                                        group.children('g[name="offline"]').show();
+                                        group.children('g[name="off"]').hide();
+                                    }else{
+                                        group.children('g[name="off"]').show();
+                                    }
+//                                    group.children('g[name="offline"]').show();
+//                                    group.children('g[name="off"]').hide();
                                     group.children('g[name="on"]').hide();
                                 }
                                 break;
@@ -411,6 +423,16 @@ function showTable(data) {
         data: data,
     })
 };
+
+function refreshDiagramData(){
+    var url = baseUrlFromAPP + "/getAppSubimgInfo";
+    var params = {
+        fSubid: subidFromAPP
+    };
+    getDataByAjax(url, params, function (data) {
+        showDataOnSVG(data.SvgInfo);
+    });
+}
 
 function getDataByAjax(url, params, successCallback) {
     toast.show({
