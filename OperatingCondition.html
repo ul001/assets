@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<!-- 电量统计 -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/operatingCondition.css" />
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="lib/LCalendar.css" />
+    <script src="lib/LCalendar.js"></script>
+    <script src="lib/bootstrap-treeview.js"></script>
+    <script src="lib/bootstrap-table.min.js"></script>
+    <script src="lib/echarts.min.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
+    <script src="lib/toast.js"></script>
+    <script src="js/operatingCondition.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="tree">
+            <div class="selectcontain-main">
+                <div class="treeSearch">
+                    <img class="clear" src="image/clear.png" />
+                    <input type="text" id="CircuitidsInput" />
+                    <button type="button" id="CircuitidsList" data-i18n="ui_search"></button>
+                </div>
+                <div id="treeview" class="col-sm-4"></div>
+                <button type="button" class="cancel" data-i18n="ui_cancel"></button>
+                <button type="button" class="search" id="confirm" data-i18n="ui_select"></button>
+            </div>
+        </div>
+        <!-- <div class="list type"> -->
+        <!-- <img class="jiancedian" src="image/fenxiang_h.png" />
+            <select id="customType"> </select> -->
+        <!-- </div> -->
+        <div class="list" id="sideClick">
+            <p>
+                <img class="jiancedian" src="image/jiancedian.png" />
+                <span><span data-i18n="ui_watchposition"></span>：</span>
+                <span id="meter">-</span>
+            </p>
+        </div>
+        <div class="list" id="electric">
+            <img class="type" src="image/type.png" />
+            <span value="P" id="EnergyKind" data-i18n="ui_eleckind"></span>：
+            <select id="energySelect">
+                <option value="P" data-i18n="ui_p"></option>
+                <option value="I" data-i18n="ui_i"></option>
+                <option value="U" data-i18n="ui_u"></option>
+                <option value="UL" data-i18n="ui_ul"></option>
+                <option value="fFr" data-i18n="ui_ffr"></option>
+                <option value="Q" data-i18n="ui_q"></option>
+                <option value="S" data-i18n="ui_s"></option>
+            </select>
+        </div>
+        <div class="elec-btn" id="EnergyContain">
+            <button type="button" class="btn select" id="today" value="today" data-i18n="ui_dayCurve"></button>
+            <button type="button" class="btn " id="month" value="month" data-i18n="ui_monthCurve"></button>
+            <button type="button" class="btn " id="year" value="year" data-i18n="ui_yearCurve"></button>
+        </div>
+        <div class="form-group form_date_end selectTime">
+            <div class="timeBtn">
+                <span id="datePre"><img src="image/left-w.png" /></span>
+                <input readonly type="text" id="date" />
+                <span id="dateNext"><img src="image/right-w.png" /></span>
+            </div>
+        </div>
+        <!-- <div class="form-group sumDate">
+        <div class="input-group date form_date_end " data-date="" data-link-field="dtp_input2">
+            <label class="col-md-2 control-label">日期：</label>
+            <input readonly type="text" id="date" class="form-control" size="16">
+        </div>
+    </div> -->
+        <!-- <div class="selectTime">
+    <p class="date">日期：<span>2019-06-13</span></p>
+    <div class="time">
+        <img src="image/left.png" /> 上一日&nbsp;&nbsp;下一日 <img src="image/right-green.png" />
+    </div>
+</div> -->
+        <!-- <button type="button" class="search" id="search">查询</button> -->
+        <div class="diagram center" id="chartContain"></div>
+        <div class="dataTable center" id="tableContain"></div>
+    </div>
+</body>
+
+</html>
