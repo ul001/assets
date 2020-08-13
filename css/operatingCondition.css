@@ -162,15 +162,15 @@ body {
 
 .container .diagram {
     width: 100%;
-    height: 40rem;
+    height: 35rem;
     margin-bottom: 0.5rem;
     background: #fff;
 }
 
 .dataTable {
     width: 95%;
+    height: 35rem;
     background: #fff;
-    margin-bottom: 1rem !important;
 }
 
 .dataTable thead {
@@ -249,7 +249,7 @@ body {
     background: transparent;
     border: none;
     -webkit-appearance: none;
-    width: calc(100% - 102px);
+    width: calc(100% - 68px);
     /* background: url('../image/right.png') no-repeat right 5px center; */
 }
 
@@ -356,4 +356,62 @@ select {
     background: transparent;
     border: none;
     -webkit-appearance: none;
+}
+
+.changeBtn{
+    width:80%;
+    margin:0 10% 1rem 10%;
+    height:3rem;
+}
+
+#showChart[class*="select"]{
+    background-image:url(../image/showChart-b.png);
+}
+#showTable[class*="select"]{
+    background-image:url(../image/showData-b.png);
+}
+#showChart {
+    background-image: url(../image/showChart-h.png);
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+
+.changeBtn button {
+    width: 50%;
+    float: left;
+    height: 3rem;
+    border: none;
+    padding-left: 1.5rem;
+    background-repeat: no-repeat;
+    background-size: 13%;
+    background-position: 2rem center;
+}
+
+.select {
+    background-color: #42B685;
+    color: #fff;
+}
+
+#showTable {
+    background-image: url(../image/showData-h.png);
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+.changeBtn button {
+    width: 50%;
+    float: left;
+    height: 3rem;
+    border: none;
+    padding-left: 1.5rem;
+    background-repeat: no-repeat;
+    background-size: 13%;
+    background-position: 2rem center;
+}
+
+.fixed-table-border{
+    display:none;
+}
+
+.bootstrap-table .fixed-table-container.fixed-height:not(.has-footer) {
+     border-bottom: none !important;
 }

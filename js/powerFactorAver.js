@@ -462,7 +462,7 @@ $(function () {
                 align: "center"
             }, {
                 field: "pf",
-                title: Operation['ui_pf'],
+                title: Operation['ui_avgpf'],
                 align: "center"
             }
         ]

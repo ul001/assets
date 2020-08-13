@@ -8,19 +8,19 @@ $(function () {
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    // if (isIOS) { //ios系统的处理
-    //     window.webkit.messageHandlers.iOS.postMessage(null);
-    //     var storage = localStorage.getItem("accessToken");
-    //     // storage = storage ? JSON.parse(storage):[];
-    //     storage = JSON.parse(storage);
-    //     baseUrlFromAPP = storage.baseurl;
-    //     tokenFromAPP = storage.token;
-    //     subidFromAPP = storage.fsubID;
-    // } else {
-    //     baseUrlFromAPP = android.getBaseUrl();
-    //     tokenFromAPP = android.getToken();
-    //     subidFromAPP = android.getfSubid();
-    // }
+     if (isIOS) { //ios系统的处理
+         window.webkit.messageHandlers.iOS.postMessage(null);
+         var storage = localStorage.getItem("accessToken");
+         // storage = storage ? JSON.parse(storage):[];
+         storage = JSON.parse(storage);
+         baseUrlFromAPP = storage.baseurl;
+         tokenFromAPP = storage.token;
+         subidFromAPP = storage.fsubID;
+     } else {
+         baseUrlFromAPP = android.getBaseUrl();
+         tokenFromAPP = android.getToken();
+         subidFromAPP = android.getfSubid();
+     }
 
     var mainBaseUrl = baseUrlFromAPP.split("SubstationWEBV2")[0] + "SubstationWEBV2";
 
@@ -50,7 +50,6 @@ $(function () {
 
     let toast = new ToastClass();
     // getSelectOption();
-    initFirstNode(); //初始化第一个回路
     var isClick = 0;
 
     function initFirstNode() {
@@ -242,6 +241,7 @@ $(function () {
     //         showCharts(data.EnergyReport);
     //     });
     // })
+    var pageData;
     function searchGetData() {
         var selectParam = $(".btn.select").attr('value');
         var startTime;
@@ -250,34 +250,33 @@ $(function () {
         if (selectParam == "today") {
             startTime = $("#date").val() + " 00:00:00";
             endTime = $("#date").val() + " 23:59:59";
-            typeDA = "D";
+            typeDA = "d";
         } else if (selectParam == "month") {
             startTime = $("#date").val().substring(0, 7) + "-01";
             endTime = $("#date").val().substring(0, 7) + "-31";
-            typeDA = "M";
+            typeDA = "m";
         } else if (selectParam == "year") {
             startTime = $("#date").val().substring(0, 4) + "-01-01";
             endTime = $("#date").val().substring(0, 4) + "-12-31";
-            typeDA = "Y";
+            typeDA = "y";
         }
         var fCircuitid = currentSelectVode.merterId;
 
-        var url = mainBaseUrl + "/calc/getCalcmeterDetailDayList";
+        var url = baseUrlFromAPP + "/getOperatingCondition";
         var params = {
             fSubid: subidFromAPP,
-            itemIds: fCircuitid,
-            startTime: startTime,
-            endTime: endTime,
-            type: typeDA,
-            fCalcid: $("#customType").val(),
-            // fPhase: selectParam,
-            // EnergyKind: EnergyKind,
+            fCircuitid: fCircuitid,
+            fStarttime: startTime,
+            fEndtime: endTime,
+            DA: typeDA,
+            powerParam: $("#energySelect").val(),
         };
         getData(url, params, function (data) {
-            // $("body").hideLoading();
             $("#chartContain").empty();
             $("#tableContain").empty();
-            showCharts(data.calcmeterDetailList);
+//            data = '{"code":200,"msg":"ok","data":{"result":[{"fCollecttime":"2020-08-13 00:00:00","fValue":"135.77"},{"fCollecttime":"2020-08-13 00:05:00","fValue":"200.77"}]}}';
+            showCharts(data.result);
+            pageData = data.result;
         });
     };
 
@@ -357,52 +356,87 @@ $(function () {
         var value = [];
         var name = [];
         var tableData = [];
+        var needParse = false;
         if (data != undefined && data.length > 0) {
             var sum = 0;
-            var max = data[0].fStarthour;
-            var min = data[0].fStarthour;
-            var maxTime = data[0].fStarthour.substring(0, 16);
-            var minTime = data[0].fStarthour.substring(0, 16);
+            var dataVal=parseFloat(data[0].fValue);
+            if(dataVal>1000){
+                needParse = true;
+            }
+            var max = parseFloat(data[0].fValue);
+            var min = parseFloat(data[0].fValue);
+            var maxTime = data[0].fCollecttime.substring(0, 16);
+            var minTime = data[0].fCollecttime.substring(0, 16);
             var datatime;
-            var circuitname = data[0].fCircuitname;
-            name.push(circuitname);
+//            var circuitname = data[0].fCircuitname;
+//            name.push(circuitname);
 
             var selectParam = $(".btn.select").attr('value');
             var tableData;
             $.each(data, function (index, el) {
-                if (el.fStarthour == "undefined" || el.fStarthour == null || el.fStarthour == "") {
+                if (el.fCollecttime == "undefined" || el.fCollecttime == null || el.fCollecttime == "") {
                     return true;
                 }
                 if (selectParam == "today") {
-                    datatime = el.fStarthour.substring(11, 16);
-                    time.push(el.fStarthour.substring(11, 16));
+                    datatime = el.fCollecttime.substring(11, 16);
+                    time.push(el.fCollecttime.substring(11, 16));
+                    if (parseFloat(el.fValue) > max) {
+                        max = parseFloat(el.fValue);
+                        maxTime = el.fCollecttime.substring(11, 16);
+                    }
+                    if (parseFloat(el.fValue) < min) {
+                        min = parseFloat(el.fValue);
+                        minTime = el.fCollecttime.substring(11, 16);
+                    }
                 } else if (selectParam == "month") {
-                    datatime = el.fStarthour.substring(5, 10);
-                    time.push(el.fStarthour.substring(5, 10));
+                    datatime = el.fCollecttime.substring(5, 10);
+                    time.push(el.fCollecttime.substring(5, 10));
+                    if (parseFloat(el.fValue) > max) {
+                        max = parseFloat(el.fValue);
+                        maxTime = el.fCollecttime.substring(5, 10);
+                    }
+                    if (parseFloat(el.fValue) < min) {
+                        min = parseFloat(el.fValue);
+                        minTime = el.fCollecttime.substring(5, 10);
+                    }
                 } else if (selectParam == "year") {
-                    datatime = el.fStarthour.substring(2, 7);
-                    time.push(el.fStarthour.substring(2, 7));
+                    datatime = el.fCollecttime.substring(2, 7);
+                    time.push(el.fCollecttime.substring(2, 7));
+                    if (parseFloat(el.fValue) > max) {
+                        max = parseFloat(el.fValue);
+                        maxTime = el.fCollecttime.substring(2, 7);
+                    }
+                    if (parseFloat(el.fValue) < min) {
+                        min = parseFloat(el.fValue);
+                        minTime = el.fCollecttime.substring(2, 7);
+                    }
                 }
-                value.push(el.fHourvalue);
-                if (el.fHourvalue > max) {
-                    max = el.fHourvalue;
-                    maxTime = el.fStarthour.substring(0, 16);
+                var parseVal = parseFloat(el.fValue);
+                if(needParse){
+                    parseVal = (parseVal/1000).toFixed(2);
+                }else{
+                    parseVal = parseVal.toFixed(2);
                 }
-                if (el.fHourvalue < min) {
-                    min = el.fHourvalue;
-                    minTime = el.fStarthour.substring(0, 16);
-                }
-                sum += el.fHourvalue;
+                value.push(parseVal);
+                sum += parseFloat(el.fValue);
                 var dic = {
-                    "value": el.fHourvalue,
+                    "value": parseVal,
                     "time": datatime
                 };
                 tableData.push(dic);
             });
             var avg = (sum / data.length).toFixed(2);
             tableData.push({
-                "value": sum.toFixed(2),
+                "value": needParse?(sum/1000).toFixed(2):sum.toFixed(2),
                 "time": Operation['ui_summary']
+            });
+            tableData.push({
+                "value": needParse?(max/1000).toFixed(2):max.toFixed(2)+" ["+Operation['ui_time']+"："+maxTime+"]",
+                "time": Operation['ui_maxval']
+            });
+            tableData.push({
+                "value": needParse?(min/1000).toFixed(2):min.toFixed(2)+" ["+Operation['ui_time']+"："+minTime+"]",
+                "time": Operation['ui_minval']
             });
         }
         showTable(tableData);
@@ -412,21 +446,20 @@ $(function () {
             tooltip: {
                 trigger: 'axis'
             },
-            legend: {
-                data: ["电量"],
-            },
+//            legend: {
+//                data: [Operation['ui_MathVal']],
+//            },
             grid: { // 控制图的大小，调整下面这些值就可以，
-                top: '18%',
-                left: '12%',
-                right: '5%',
-                bottom: '10%',
+                top: 60,
+                left: 45,
+                right: 20,
+                bottom: 60,
             },
             xAxis: {
                 type: 'category',
                 data: time,
             },
             yAxis: {
-                name: 'kW·h',
                 type: 'value',
                 scale: true, //y轴自适应
             },
@@ -449,7 +482,7 @@ $(function () {
             }],
             calculable: true,
             series: [{
-                name: "电量",
+                name: Operation['ui_MathVal'],
                 data: value,
                 type: 'line',
                 markPoint: {
@@ -464,36 +497,36 @@ $(function () {
                         }
                     ]
                 },
-                markLine: {
-                    data: [
-                        [{
-                            symbol: 'none',
-                            x: '93%',
-                            yAxis: 'max'
-                        }, {
-                            symbol: 'circle',
-                            label: {
-                                position: 'start',
-                                formatter: 'Max'
-                            },
-                            type: 'max',
-                            name: '最高点'
-                        }],
-                        [{
-                            symbol: 'none',
-                            x: '93%',
-                            yAxis: 'min'
-                        }, {
-                            symbol: 'circle',
-                            label: {
-                                position: 'start',
-                                formatter: 'Min'
-                            },
-                            type: 'min',
-                            name: '最低点'
-                        }]
-                    ]
-                },
+//                markLine: {
+//                    data: [
+//                        [{
+//                            symbol: 'none',
+//                            x: '93%',
+//                            yAxis: 'max'
+//                        }, {
+//                            symbol: 'circle',
+//                            label: {
+//                                position: 'start',
+//                                formatter: 'Max'
+//                            },
+//                            type: 'max',
+//                            name: '最高点'
+//                        }],
+//                        [{
+//                            symbol: 'none',
+//                            x: '93%',
+//                            yAxis: 'min'
+//                        }, {
+//                            symbol: 'circle',
+//                            label: {
+//                                position: 'start',
+//                                formatter: 'Min'
+//                            },
+//                            type: 'min',
+//                            name: '最低点'
+//                        }]
+//                    ]
+//                },
                 itemStyle: {
                     normal: {
                         color: '#64BC78',
@@ -512,20 +545,20 @@ $(function () {
         var selectParam = $(".btn.select").attr('value');
         var showName = "";
         if (selectParam == "today") {
-            showName = Operation['ui_dayCurve'];
+            showName = Operation['ui_day'];
         } else if (selectParam == "month") {
-            showName = Operation['ui_monthCurve'];
+            showName = Operation['ui_month'];
         } else if (selectParam == "year") {
-            showName = Operation['ui_yearCurve'];
+            showName = Operation['ui_year'];
         }
         var columns = [{
                 field: "time",
-                title: showName,
+                title: Operation['ui_time'],
                 align: "center"
             },
             {
                 field: "value",
-                title: Operation['ui_elecval'] + "(" + Operation['ui_unit'] + "：kW·h)",
+                title: Operation['ui_MathVal'],
                 align: "center"
             }
         ]
@@ -534,6 +567,7 @@ $(function () {
         $("#table").bootstrapTable({
             columns: columns,
             data: data,
+            height:350
         });
     }
 
@@ -564,5 +598,18 @@ $(function () {
             searchGetData();
         });
     }
+    initFirstNode(); //初始化第一个回路
 
+    $(".changeBtn #showChart").click(function(){
+        $(this).addClass("select").siblings().removeClass("select");
+        $("#chartContain").show();
+        $("#tableContain").hide();
+        showCharts(pageData);
+    });
+    $("#tableContain").hide();
+    $(".changeBtn #showTable").click(function(){
+        $(this).addClass("select").siblings().removeClass("select");
+        $("#chartContain").hide();
+        $("#tableContain").show();
+    });
 });
