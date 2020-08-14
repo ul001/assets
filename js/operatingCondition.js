@@ -359,10 +359,6 @@ $(function () {
         var needParse = false;
         if (data != undefined && data.length > 0) {
             var sum = 0;
-            var dataVal=parseFloat(data[0].fValue);
-            if(dataVal>1000){
-                needParse = true;
-            }
             var max = parseFloat(data[0].fValue);
             var min = parseFloat(data[0].fValue);
             var maxTime = data[0].fCollecttime.substring(0, 16);
@@ -411,31 +407,25 @@ $(function () {
                         minTime = el.fCollecttime.substring(2, 7);
                     }
                 }
-                var parseVal = parseFloat(el.fValue);
-                if(needParse){
-                    parseVal = (parseVal/1000).toFixed(2);
-                }else{
-                    parseVal = parseVal.toFixed(2);
-                }
-                value.push(parseVal);
+                value.push(parseFloat(el.fValue).toFixed(2));
                 sum += parseFloat(el.fValue);
                 var dic = {
-                    "value": parseVal,
+                    "value": parseFloat(el.fValue).toFixed(2),
                     "time": datatime
                 };
                 tableData.push(dic);
             });
             var avg = (sum / data.length).toFixed(2);
             tableData.push({
-                "value": needParse?(sum/1000).toFixed(2):sum.toFixed(2),
+                "value": sum.toFixed(2),
                 "time": Operation['ui_summary']
             });
             tableData.push({
-                "value": needParse?(max/1000).toFixed(2):max.toFixed(2)+" ["+Operation['ui_time']+"："+maxTime+"]",
+                "value": max.toFixed(2)+" ["+Operation['ui_time']+"："+maxTime+"]",
                 "time": Operation['ui_maxval']
             });
             tableData.push({
-                "value": needParse?(min/1000).toFixed(2):min.toFixed(2)+" ["+Operation['ui_time']+"："+minTime+"]",
+                "value": min.toFixed(2)+" ["+Operation['ui_time']+"："+minTime+"]",
                 "time": Operation['ui_minval']
             });
         }
@@ -462,6 +452,19 @@ $(function () {
             yAxis: {
                 type: 'value',
                 scale: true, //y轴自适应
+                axisLabel:{
+                    formatter:function(val,index){
+                        if(val >= 10000 && val<10000000){
+                            return (val/10000)+"万";
+                        }else if(val >= 10000000){
+                            return (val/10000000)+"千万";
+                        }
+                        if(!isNaN(val) && val.toString().indexOf(".")!=-1 && val.toString().split(".")[1].length>2){
+                            return val.toFixed(2);
+                        }
+                        return val;
+                    }
+                }
             },
             toolbox: {
                 left: 'right',
@@ -611,5 +614,9 @@ $(function () {
         $(this).addClass("select").siblings().removeClass("select");
         $("#chartContain").hide();
         $("#tableContain").show();
+    });
+
+    $("#energySelect").change(function(){
+        searchGetData();
     });
 });
