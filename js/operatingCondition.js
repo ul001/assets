@@ -373,6 +373,9 @@ $(function () {
                 if (el.fCollecttime == "undefined" || el.fCollecttime == null || el.fCollecttime == "") {
                     return true;
                 }
+                if(el.fValue == "undefined" || el.fValue == null || el.fValue == ""){
+                    return true;
+                }
                 if (selectParam == "today") {
                     datatime = el.fCollecttime.substring(11, 16);
                     time.push(el.fCollecttime.substring(11, 16));
@@ -415,19 +418,25 @@ $(function () {
                 };
                 tableData.push(dic);
             });
-            var avg = (sum / data.length).toFixed(2);
-            tableData.push({
-                "value": sum.toFixed(2),
-                "time": Operation['ui_summary']
-            });
-            tableData.push({
-                "value": max.toFixed(2)+" ["+Operation['ui_time']+"："+maxTime+"]",
-                "time": Operation['ui_maxval']
-            });
-            tableData.push({
-                "value": min.toFixed(2)+" ["+Operation['ui_time']+"："+minTime+"]",
-                "time": Operation['ui_minval']
-            });
+            if(!isNaN(sum)&&sum!=0){
+                var avg = (sum / data.length).toFixed(2);
+                tableData.push({
+                    "value": sum.toFixed(2),
+                    "time": Operation['ui_summary']
+                });
+            }
+            if(!isNaN(max)){
+                tableData.push({
+                    "value": max.toFixed(2)+" ["+Operation['ui_time']+"："+maxTime+"]",
+                    "time": Operation['ui_maxval']
+                });
+            }
+            if(!isNaN(min)){
+                tableData.push({
+                    "value": min.toFixed(2)+" ["+Operation['ui_time']+"："+minTime+"]",
+                    "time": Operation['ui_minval']
+                });
+            }
         }
         showTable(tableData);
         $('#chartContain').removeAttr("_echarts_instance_");
