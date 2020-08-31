@@ -128,7 +128,7 @@ $(function () {
                     //     default:
                     // }
                     var flag = val.meterParamValues[i].fValue == undefined ? -1 : val.meterParamValues[i].fValue;
-                    if (flag) {
+                    if (flag != -1) {
                         flag = parseInt(flag);
                         if (val.meterParamValues[i].fUnitGroup == "U") {
                             if (fvalue >= 1000) {
