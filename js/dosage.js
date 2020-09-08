@@ -503,6 +503,7 @@ $(function () {
                 }
             ]
         };
+        bar.clear();
         bar.setOption(option);
 
     }
