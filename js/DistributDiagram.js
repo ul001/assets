@@ -215,26 +215,39 @@ $(function () {
 
                 }
 
-                $.each(group.children("g text"), function (index, element) {
+                $.each(group.children('g text'), function (index, element) {
                     try {
                         var m = element.attributes.name.textContent;
-                        if (m == "" || m == undefined) {
-                            return ture;
-                        } else {
-                            if (map.has(m.toLowerCase())) {
-                                var v = map.get(m.toLowerCase());
-                                var childName = "text[name='" + m + "']";
-                                if (v == undefined) {
-                                    group.children(childName).text("-");
-                                } else {
-                                    group.children(childName).text(map.get(m.toLowerCase()));
-                                }
-                            } else {
-                                $(this).text("-");
-                            }
+                        if (map.has(m.toLowerCase())) {
+                            var v = map.get(m.toLowerCase());
+                            var childName = "text[name='" + m + "']";
+                            group.children(childName).text(map.get(m.toLowerCase()));
                         }
-                    } catch (err) {}
+                    } catch (err) {
+                        console.log(err);
+                    }
                 });
+
+                // $.each(group.children("g text"), function (index, element) {
+                //     try {
+                //         var m = element.attributes.name.textContent;
+                //         if (m == "" || m == undefined) {
+                //             return ture;
+                //         } else {
+                //             if (map.has(m.toLowerCase())) {
+                //                 var v = map.get(m.toLowerCase());
+                //                 var childName = "text[name='" + m + "']";
+                //                 if (v == undefined) {
+                //                     group.children(childName).text("-");
+                //                 } else {
+                //                     group.children(childName).text(map.get(m.toLowerCase()));
+                //                 }
+                //             } else {
+                //                 $(this).text("-");
+                //             }
+                //         }
+                //     } catch (err) {}
+                // });
                 group.unbind("click").on("click", function () {
                     $("#modelShow").css("display", "flex");
                     detailData(val.fCircuitid, val.fCircuitname);
