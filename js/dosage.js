@@ -1,6 +1,6 @@
 $(function () {
     var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDAwODgxMDYsInVzZXJuYW1lIjoiaGFoYWhhIn0.ITW5w6xOVnU2cRbw_JU-MkWfsn-MLHB1z25bVEuDWLg";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -24,13 +24,99 @@ $(function () {
 
     //页面初始化加载当日数据
     let toast = new ToastClass();
+
+    var currentSelectVode = {}; //选中节点
+
+    initFirstNode(); //初始化第一个回路
+    var isClick = 0;
+
+    function initFirstNode() {
+        var url = baseUrlFromAPP + "/getfCircuitidsList";
+        var params = {
+            fSubid: subidFromAPP,
+        }
+        getData(url, params, function (data) {
+            setListData(data);
+            initNetData(); //初始化
+        });
+    }
+
+    $("#CircuitidsList").click(function () {
+        var search = $("#CircuitidsInput").val();
+        var url = baseUrlFromAPP + "/getfCircuitidsList";
+        var params = {
+            fSubid: subidFromAPP,
+            search: search,
+        }
+        getData(url, params, function (data) {
+            setListData(data);
+        });
+        isClick = 1;
+    });
+
+    $(document).on('click', '.clear', function () {
+        $("#CircuitidsInput").val("");
+        if (isClick == 1) {
+            var url = baseUrlFromAPP + "/getfCircuitidsList";
+            var params = {
+                fSubid: subidFromAPP,
+            }
+            getData(url, params, function (data) {
+                setListData(data);
+            });
+            isClick = 0;
+        }
+    });
+
+    $(document).on('click', '.elec-btn .btn', function () {
+        if ($(this).hasClass('select')) {
+            $(this).removeClass('select');
+        } else {
+            $(this).addClass('select');
+        }
+    });
+
+    $("#sideClick").click(function () {
+        $(".tree").show();
+        $("html,body").addClass("ban_body");
+    });
+
+    $(".cancel").click(function () {
+        $(".tree").hide();
+        $("html,body").removeClass("ban_body");
+    });
+
+    $("#confirm").click(function () {
+        $(".tree").hide();
+        $("html,body").removeClass("ban_body");
+        $("#meter").html(currentSelectVode.merterName);
+        var selectParam = $(".btn.select").val();
+        networkData(selectParam);
+    });
+
+    function setListData(data) {
+        $('#treeview').treeview({
+            data: data,
+            showIcon: true,
+            showBorder: true,
+            expandIcon: "glyphicon glyphicon-plus",
+            collapseIcon: "glyphicon glyphicon-minus",
+        });
+        $('#treeview').treeview('selectNode', 0);
+        currentSelectVode.merterId = $('#treeview').treeview('getSelected')[0].id;
+        currentSelectVode.merterName = $('#treeview').treeview('getSelected')[0].text;
+        $("#meter").html(currentSelectVode.merterName);
+        $('#treeview').on('nodeSelected', function (event, node) {
+            currentSelectVode.merterId = node.id;
+            currentSelectVode.merterName = node.text;
+        })
+    }
+
     var startDate = tool.initDate("first", new Date());
     var endDate = tool.initDate("YMD", new Date());
 
     $(".startDate").val(startDate);
     $(".endDate").val(endDate);
-
-    initNetData(); //初始化
 
     function initNetData() {
         var showMon = tool.initDate("YM", new Date());
@@ -82,6 +168,7 @@ $(function () {
         var url = baseUrlFromAPP + "/getMothJFPG";
         var params = {
             fSubid: subidFromAPP,
+            fCircuitid: currentSelectVode.merterId,
             startTime: startDate,
             endTime: endDate
         }
