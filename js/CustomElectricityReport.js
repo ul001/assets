@@ -257,7 +257,9 @@ $(function () {
             typeDA = "Y";
         }
         var fCircuitid = currentSelectVode.merterId;
-
+        if(fCircuitid==undefined || fCircuitid==null || fCircuitid==""){
+            return;
+        }
         var url = mainBaseUrl + "/calc/getCalcmeterDetailDayList";
         var params = {
             fSubid: subidFromAPP,
