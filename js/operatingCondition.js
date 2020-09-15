@@ -8,19 +8,19 @@ $(function () {
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-     if (isIOS) { //ios系统的处理
-         window.webkit.messageHandlers.iOS.postMessage(null);
-         var storage = localStorage.getItem("accessToken");
-         // storage = storage ? JSON.parse(storage):[];
-         storage = JSON.parse(storage);
-         baseUrlFromAPP = storage.baseurl;
-         tokenFromAPP = storage.token;
-         subidFromAPP = storage.fsubID;
-     } else {
-         baseUrlFromAPP = android.getBaseUrl();
-         tokenFromAPP = android.getToken();
-         subidFromAPP = android.getfSubid();
-     }
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+        subidFromAPP = storage.fsubID;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
+    }
 
     var mainBaseUrl = baseUrlFromAPP.split("SubstationWEBV2")[0] + "SubstationWEBV2";
 
@@ -242,6 +242,7 @@ $(function () {
     //     });
     // })
     var pageData;
+
     function searchGetData() {
         var selectParam = $(".btn.select").attr('value');
         var startTime;
@@ -274,7 +275,7 @@ $(function () {
         getData(url, params, function (data) {
             $("#chartContain").empty();
             $("#tableContain").empty();
-//            data = '{"code":200,"msg":"ok","data":{"result":[{"fCollecttime":"2020-08-13 00:00:00","fValue":"135.77"},{"fCollecttime":"2020-08-13 00:05:00","fValue":"200.77"}]}}';
+            //            data = '{"code":200,"msg":"ok","data":{"result":[{"fCollecttime":"2020-08-13 00:00:00","fValue":"135.77"},{"fCollecttime":"2020-08-13 00:05:00","fValue":"200.77"}]}}';
             showCharts(data.result);
             pageData = data.result;
         });
@@ -364,8 +365,8 @@ $(function () {
             var maxTime = data[0].fCollecttime.substring(0, 16);
             var minTime = data[0].fCollecttime.substring(0, 16);
             var datatime;
-//            var circuitname = data[0].fCircuitname;
-//            name.push(circuitname);
+            //            var circuitname = data[0].fCircuitname;
+            //            name.push(circuitname);
 
             var selectParam = $(".btn.select").attr('value');
             var tableData;
@@ -373,7 +374,7 @@ $(function () {
                 if (el.fCollecttime == "undefined" || el.fCollecttime == null || el.fCollecttime == "") {
                     return true;
                 }
-                if(el.fValue == "undefined" || el.fValue == null || el.fValue == ""){
+                if (el.fValue == "undefined" || el.fValue == null || el.fValue == "") {
                     return true;
                 }
                 if (selectParam == "today") {
@@ -418,22 +419,22 @@ $(function () {
                 };
                 tableData.push(dic);
             });
-            if(!isNaN(sum)&&sum!=0){
+            if (!isNaN(sum) && sum != 0) {
                 var avg = (sum / data.length).toFixed(2);
                 tableData.push({
                     "value": sum.toFixed(2),
                     "time": Operation['ui_summary']
                 });
             }
-            if(!isNaN(max)){
+            if (!isNaN(max)) {
                 tableData.push({
-                    "value": max.toFixed(2)+" ["+Operation['ui_time']+"："+maxTime+"]",
+                    "value": max.toFixed(2) + " [" + Operation['ui_time'] + "：" + maxTime + "]",
                     "time": Operation['ui_maxval']
                 });
             }
-            if(!isNaN(min)){
+            if (!isNaN(min)) {
                 tableData.push({
-                    "value": min.toFixed(2)+" ["+Operation['ui_time']+"："+minTime+"]",
+                    "value": min.toFixed(2) + " [" + Operation['ui_time'] + "：" + minTime + "]",
                     "time": Operation['ui_minval']
                 });
             }
@@ -445,9 +446,9 @@ $(function () {
             tooltip: {
                 trigger: 'axis'
             },
-//            legend: {
-//                data: [Operation['ui_MathVal']],
-//            },
+            //            legend: {
+            //                data: [Operation['ui_MathVal']],
+            //            },
             grid: { // 控制图的大小，调整下面这些值就可以，
                 top: 60,
                 left: 45,
@@ -461,14 +462,14 @@ $(function () {
             yAxis: {
                 type: 'value',
                 scale: true, //y轴自适应
-                axisLabel:{
-                    formatter:function(val,index){
-                        if(val >= 10000 && val<10000000){
-                            return (val/10000)+"万";
-                        }else if(val >= 10000000){
-                            return (val/10000000)+"千万";
+                axisLabel: {
+                    formatter: function (val, index) {
+                        if (val >= 10000 && val < 10000000) {
+                            return (val / 10000) + "万";
+                        } else if (val >= 10000000) {
+                            return (val / 10000000) + "千万";
                         }
-                        if(!isNaN(val) && val.toString().indexOf(".")!=-1 && val.toString().split(".")[1].length>2){
+                        if (!isNaN(val) && val.toString().indexOf(".") != -1 && val.toString().split(".")[1].length > 2) {
                             return val.toFixed(2);
                         }
                         return val;
@@ -509,36 +510,36 @@ $(function () {
                         }
                     ]
                 },
-//                markLine: {
-//                    data: [
-//                        [{
-//                            symbol: 'none',
-//                            x: '93%',
-//                            yAxis: 'max'
-//                        }, {
-//                            symbol: 'circle',
-//                            label: {
-//                                position: 'start',
-//                                formatter: 'Max'
-//                            },
-//                            type: 'max',
-//                            name: '最高点'
-//                        }],
-//                        [{
-//                            symbol: 'none',
-//                            x: '93%',
-//                            yAxis: 'min'
-//                        }, {
-//                            symbol: 'circle',
-//                            label: {
-//                                position: 'start',
-//                                formatter: 'Min'
-//                            },
-//                            type: 'min',
-//                            name: '最低点'
-//                        }]
-//                    ]
-//                },
+                //                markLine: {
+                //                    data: [
+                //                        [{
+                //                            symbol: 'none',
+                //                            x: '93%',
+                //                            yAxis: 'max'
+                //                        }, {
+                //                            symbol: 'circle',
+                //                            label: {
+                //                                position: 'start',
+                //                                formatter: 'Max'
+                //                            },
+                //                            type: 'max',
+                //                            name: '最高点'
+                //                        }],
+                //                        [{
+                //                            symbol: 'none',
+                //                            x: '93%',
+                //                            yAxis: 'min'
+                //                        }, {
+                //                            symbol: 'circle',
+                //                            label: {
+                //                                position: 'start',
+                //                                formatter: 'Min'
+                //                            },
+                //                            type: 'min',
+                //                            name: '最低点'
+                //                        }]
+                //                    ]
+                //                },
                 itemStyle: {
                     normal: {
                         color: '#64BC78',
@@ -579,7 +580,7 @@ $(function () {
         $("#table").bootstrapTable({
             columns: columns,
             data: data,
-            height:350
+            height: 350
         });
     }
 
@@ -612,20 +613,20 @@ $(function () {
     }
     initFirstNode(); //初始化第一个回路
 
-    $(".changeBtn #showChart").click(function(){
+    $(".changeBtn #showChart").click(function () {
         $(this).addClass("select").siblings().removeClass("select");
         $("#chartContain").show();
         $("#tableContain").hide();
         showCharts(pageData);
     });
     $("#tableContain").hide();
-    $(".changeBtn #showTable").click(function(){
+    $(".changeBtn #showTable").click(function () {
         $(this).addClass("select").siblings().removeClass("select");
         $("#chartContain").hide();
         $("#tableContain").show();
     });
 
-    $("#energySelect").change(function(){
+    $("#energySelect").change(function () {
         searchGetData();
     });
 });

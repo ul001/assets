@@ -1,78 +1,78 @@
 .container {
-	background: #fff;
-	padding-right: 0;
-	padding-left: 0;
-	overflow: auto;
+  background: #fff;
+  padding-right: 0;
+  padding-left: 0;
+  overflow: auto;
 }
 
 * {
-	outline: 0 !important;
+  outline: 0 !important;
 }
 
 .form_date_end label {
-	font-weight: normal;
+  font-weight: normal;
 }
 
 .form_date_end input {
-	border-radius: 5px;
-	padding-left: 0.5rem;
+  border-radius: 5px;
+  padding-left: 0.5rem;
 }
 
 #sideClick p .jiancedian,
 .list .type {
-	float: left;
-	margin-top: 1.5rem;
+  float: left;
+  margin-top: 1.5rem;
 }
 
 .list .type,
 .selectTime img {
-	width: 1.8rem;
+  width: 1.8rem;
 }
 
 .selectTime img {
-	margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 body {
-	height: 100%;
-	font-size: 1.5rem;
-	background: #EDEDEC;
+  height: 100%;
+  font-size: 1.5rem;
+  background: #ededec;
 }
 
 #table {
-	font-size: 1rem;
+  font-size: 1rem;
 }
 
 .selectTime,
 .list,
 #EnergyContain,
 .sumDate {
-	border-bottom: 1px dashed #C8C9CA;
+  border-bottom: 1px dashed #c8c9ca;
 }
 
 #sideClick,
 #electric,
 #select,
 .selectTime {
-	height: 6rem;
-	line-height: 5rem;
-	padding-top: 0.5rem;
+  height: 6rem;
+  line-height: 5rem;
+  padding-top: 0.5rem;
 }
 
 .selectTime {
-	margin-bottom: 0;
-	padding-left: 0.5rem;
+  margin-bottom: 0;
+  padding-left: 0.5rem;
 }
 
 .list {
-	padding: 0 0.5rem 0 0.5rem;
-	height: 2.5rem;
-	line-height: 2.5rem;
+  padding: 0 0.5rem 0 0.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
 }
 
 .list p {
-	float: left;
-	margin-bottom: 0;
+  float: left;
+  margin-bottom: 0;
 }
 
 /*.list img {
@@ -82,242 +82,242 @@ body {
 }*/
 
 .container hr {
-	clear: both;
-	margin: 0;
-	border: 0.03rem dashed #C8C9CA;
+  clear: both;
+  margin: 0;
+  border: 0.03rem dashed #c8c9ca;
 }
 
 .public button {
-	height: 4rem;
-	line-height: 2rem;
-	width: 22%;
-	margin: 0 2px;
-	border-radius: 4rem;
-	background: #F4F2F1;
-	border: none;
+  height: 4rem;
+  line-height: 2rem;
+  width: 22%;
+  margin: 0 2px;
+  border-radius: 4rem;
+  background: #f4f2f1;
+  border: none;
 }
 
 #EnergyContain {
-	height: 6rem;
-	padding-left: 2rem;
+  height: 6rem;
+  padding-left: 2rem;
 }
 
 .public .select,
 .search {
-	background: #02AC94;
-	border: 1px solid #02AC94;
-	color: #fff;
+  background: #02ac94;
+  border: 1px solid #02ac94;
+  color: #fff;
 }
 
 .date {
-	margin: 0 0.2rem 0.6rem 0.2rem;
-	width: 100%;
+  margin: 0 0.2rem 0.6rem 0.2rem;
+  width: 100%;
 }
 
 .search {
-	width: 95%;
-	height: 4rem;
-	margin: 0 auto;
-	display: block;
-	border-radius: 4rem;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
+  width: 95%;
+  height: 4rem;
+  margin: 0 auto;
+  display: block;
+  border-radius: 4rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .container .diagram {
-	width: 100%;
-	height: 20rem;
-	margin-bottom: 0.5rem;
-	background: #fff;
+  width: 100%;
+  height: 20rem;
+  margin-bottom: 0.5rem;
+  background: #fff;
 }
 
 .dataTable {
-	width: 95%;
-	background: #fff;
-	margin-bottom: 1rem !important;
+  width: 95%;
+  background: #fff;
+  margin-bottom: 1rem !important;
 }
 
 .dataTable thead {
-	background: #42B685;
-	color: #fff;
+  background: #42b685;
+  color: #fff;
 }
 
 .dataTable tbody tr:nth-child(even) {
-	background: rgb(236, 248, 243);
-	border-top: 1px solid #C8C9CA;
-	border-bottom: 1px solid #C8C9CA;
+  background: rgb(236, 248, 243);
+  border-top: 1px solid #c8c9ca;
+  border-bottom: 1px solid #c8c9ca;
 }
 
 .center {
-	margin: 0 auto;
+  margin: 0 auto;
 }
 
 #chartContain {
-	width: 95%;
-	border: 1px solid #C8C9CA;
+  width: 95%;
+  border: 1px solid #c8c9ca;
 }
 
 #date {
-	width: calc(100% - 75px);
-	background: transparent;
-	height: 5rem;
-	border-radius: 5px;
-	padding-left: 0.5rem;
-	border: none;
-	line-height: 5rem;
+  width: calc(100% - 75px);
+  background: transparent;
+  height: 5rem;
+  border-radius: 5px;
+  padding-left: 0.5rem;
+  border: none;
+  line-height: 5rem;
 }
 
 #search img {
-	width: 1.5rem;
-	margin-right: 0.5rem;
+  width: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 .clear {
-	position: absolute;
-	right: 33%;
-	top: 2.3rem;
-	z-index: 9;
+  position: absolute;
+  right: 33%;
+  top: 2.3rem;
+  z-index: 9;
 }
 
 .list-group-item {
-	border: none;
+  border: none;
 }
 
 .modal-dialog {
-	margin-top: 20%;
+  margin-top: 20%;
 }
 
 #energySelect {
-	background: transparent;
-	border: none;
-	-webkit-appearance: none;
+  background: transparent;
+  border: none;
+  -webkit-appearance: none;
 }
 
 /*监测点*/
-#sideClick>p {
-	width: 100%;
+#sideClick > p {
+  width: 100%;
 }
 
 #sideClick span {
-	float: left;
+  float: left;
 }
 
 /*公共样式*/
 .public li {
-	padding-left: 1rem;
-	height: 6rem;
-	line-height: 6rem;
-	border-bottom: 1px dashed #C8C9CA;
+  padding-left: 1rem;
+  height: 6rem;
+  line-height: 6rem;
+  border-bottom: 1px dashed #c8c9ca;
 }
 
 .public .list {
-	background: url('../image/right.png') no-repeat right 1rem center;
+  background: url("../image/right.png") no-repeat right 1rem center;
 }
 
 .public li img {
-	width: 1.4rem;
-	vertical-align: -0.1rem;
-	margin-right: 0.5rem;
+  width: 1.4rem;
+  vertical-align: -0.1rem;
+  margin-right: 0.5rem;
 }
 
 .public .clearbg {
-	background: none;
+  background: none;
 }
 
 /*左侧弹窗增加透明灰底*/
 .tree {
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	position: absolute;
-	right: 0;
-	top: 0;
-	display: none;
-	z-index: 10;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+  z-index: 10;
 }
 
 .selectcontain-main {
-	width: 87%;
-	height: 100%;
-	background: #fff;
-	position: absolute;
-	right: 0;
-	top: 0;
-	overflow: hidden;
-	clear: both;
-	z-index: 999;
-	padding: 0;
-	animation: IDENT linear 0.3s;
+  width: 87%;
+  height: 100%;
+  background: #fff;
+  position: absolute;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+  clear: both;
+  z-index: 999;
+  padding: 0;
+  animation: IDENT linear 0.3s;
 }
 
 #treeview {
-	overflow: auto;
-	height: 80%
+  overflow: auto;
+  height: 80%;
 }
 
 .treeSearch {
-	padding: 1rem;
+  padding: 1rem;
 }
 
 .tree .search,
 .tree .cancel {
-	height: 6rem;
-	line-height: 5rem;
-	width: 50%;
-	border-radius: 0;
-	border: none;
-	margin-bottom: 0;
-	position: absolute;
-	bottom: 0;
-	padding: 0;
+  height: 6rem;
+  line-height: 5rem;
+  width: 50%;
+  border-radius: 0;
+  border: none;
+  margin-bottom: 0;
+  position: absolute;
+  bottom: 0;
+  padding: 0;
 }
 
 .tree .cancel {
-	background: #d4d4d0;
+  background: #d4d4d0;
 }
 
 .tree .search {
-	right: 0;
-	background: #02AC94;
-	color: #fff;
+  right: 0;
+  background: #02ac94;
+  color: #fff;
 }
 
 .treeSearch input {
-	border-radius: 4rem;
-	border: 1px solid #ddd;
-	height: 4rem;
-	width: 70%;
-	background: url(../image/searchsmall.png) no-repeat 4px 5px;
-	padding-left: 25px;
-	position: relative;
+  border-radius: 4rem;
+  border: 1px solid #ddd;
+  height: 4rem;
+  width: 70%;
+  background: url(../image/searchsmall.png) no-repeat 4px 5px;
+  padding-left: 25px;
+  position: relative;
 }
 
 .treeSearch button {
-	width: 25%;
-	height: 4rem;
-	background: #02AC94;
-	color: #fff;
-	border-radius: 4rem;
-	border: 1px solid #02AC94;
+  width: 25%;
+  height: 4rem;
+  background: #02ac94;
+  color: #fff;
+  border-radius: 4rem;
+  border: 1px solid #02ac94;
 }
 
 .ban_body {
-	height: 100%;
-	overflow: hidden;
+  height: 100%;
+  overflow: hidden;
 }
 
 @keyframes IDENT {
-	0% {
-		right: -100%;
-	}
+  0% {
+    right: -100%;
+  }
 
-	100% {
-		right: 0;
-	}
+  100% {
+    right: 0;
+  }
 }
 
 #energySelect {
-	outline: 0;
-	width: calc(100% - 104px);
-	/*background: url('../image/right.png') no-repeat right center;*/
+  outline: 0;
+  width: calc(100% - 104px);
+  /*background: url('../image/right.png') no-repeat right center;*/
 }
