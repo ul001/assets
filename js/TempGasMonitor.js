@@ -102,7 +102,7 @@ $(function() {
                 "<p>" +
                 this.F_MeterName +
                 "</p>" +
-                '<img src="image/Dust.png"/>' +
+                '<img src="image/qiti.png"/>' +
                 "<p>" +
                 Operation["ui_SF6"] +
                 ":" +
