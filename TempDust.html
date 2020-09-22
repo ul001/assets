@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title></title>
+    <title>粉尘</title>
     <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/TempNoise.css" />
+    <link rel="stylesheet" type="text/css" href="css/TempHumidityData.css" />
     <link rel="stylesheet" href="css/general.css">
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
@@ -17,7 +17,7 @@
     <script src="lib/toast.js"></script>
     <script src="lib/language.js"></script>
     <script src="lib/tools.js"></script>
-    <script src="js/TempNoise.js"></script>
+    <script src="js/TempDust.js"></script>
 </head>
 
 <body>
@@ -33,8 +33,12 @@
         </div>
         <div class="chart">
             <div class="mainBox">
-                <div id="noiseTitle" data-i18n="ui_noise"></div>
-                <div id="noiseChart"></div>
+                <div id="tempTitle" data-i18n="ui_PM2"></div>
+                <div id="tempChart"></div>
+            </div>
+            <div class="mainBox">
+                <div id="humiTitle" data-i18n="ui_PM10"></div>
+                <div id="humiChart"></div>
             </div>
         </div>
     </div>
