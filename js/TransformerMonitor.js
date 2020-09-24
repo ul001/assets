@@ -1,7 +1,7 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
-    var subidFromAPP=10100001;
+    var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
+    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
+    var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -120,7 +120,7 @@ $(function () {
         var params = {
             fSubid: subidFromAPP,
             fTransid: selectTrans,
-            selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,"
+            selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,H2,InPa,LJTemp1,LJTemp2,LJTemp3,LJTemp4,Olevel,OilTemp"
             // selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,PartialDischarge"
         };
         getData(url, params, function (data) {
@@ -161,10 +161,28 @@ $(function () {
             $(".BphaseTemp").html("--");
             $(".CphaseTemp").html("--");
         } else {
-            if (temp.FOILTEMP != undefined && temp.FOILTEMP != null) {
+            if (temp.OILTEMP != undefined && temp.OILTEMP != null) {
+                //油浸变压器
                 $("#OILTemp").css("display", "block").siblings('li').css("display", "none");
-                $(".OILTemp").html(temp.FOILTEMP);
+                $("#LJTemp1").css("display", "block");
+                $("#LJTemp2").css("display", "block");
+                $("#LJTemp3").css("display", "block");
+                $("#LJTemp4").css("display", "block");
+                $(".OILTemp").html(temp.OILTEMP);
+                if (temp.LJTEMP1 != undefined && temp.LJTEMP1 != null) {
+                    $(".LJTemp1").html(temp.LJTEMP1);
+                }
+                if (temp.LJTEMP2 != undefined && temp.LJTEMP2 != null) {
+                    $(".LJTemp2").html(temp.LJTEMP2);
+                }
+                if (temp.LJTEMP3 != undefined && temp.LJTEMP3 != null) {
+                    $(".LJTemp3").html(temp.LJTEMP3);
+                }
+                if (temp.LJTEMP4 != undefined && temp.LJTEMP4 != null) {
+                    $(".LJTemp4").html(temp.LJTEMP4);
+                }
             } else {
+                //10kv变压器
                 if (!(temp.TEMPA && temp.TEMPB && temp.TEMPC)) {
                     $("#OILTemp").css("display", "block").siblings('li').css("display", "none");
                     if (temp.TEMPA != undefined && temp.TEMPA != null) {
@@ -181,30 +199,32 @@ $(function () {
                     }
                 } else {
                     $("#OILTemp").css("display", "none").siblings('li').css("display", "block");
+                    $("#LJTemp1").css("display", "none");
+                    $("#LJTemp2").css("display", "none");
+                    $("#LJTemp3").css("display", "none");
+                    $("#LJTemp4").css("display", "none");
                     $(".AphaseTemp").html(temp.TEMPA);
                     $(".BphaseTemp").html(temp.TEMPB);
                     $(".CphaseTemp").html(temp.TEMPC);
                 }
             }
+            // 其他
+            if (temp.InPa != null)
+                $(".InPa").html(temp.InPa);
+            else
+                $(".InPa").html("--");
+            // 其他
+            if (temp.Olevel != null)
+                $(".Olevel").html(temp.Olevel);
+            else
+                $(".Olevel").html("--");
 
-
-            // if (temp.TEMPA != null)
-            //     $(".AphaseTemp").html(temp.TEMPA);
-            // else
-            //     $(".AphaseTemp").html("--");
-
-            // if (temp.TEMPB != null)
-            //     $(".BphaseTemp").html(temp.TEMPB);
-            // else
-            //     $(".BphaseTemp").html("--");
-
-            // if (temp.TEMPC != null)
-            //     $(".CphaseTemp").html(temp.TEMPC);
-            // else
-            //     $(".CphaseTemp").html("--");
-
-
-
+            if (temp.H2 != null) {
+                $(".Nitrogen").html(temp.Olevel);
+            } else {
+                $(".Nitrogen").html("--");
+            }
+            //噪声
             if (temp.NOISE != null)
                 $(".noise").html(temp.NOISE);
             else
@@ -929,12 +949,12 @@ $(function () {
     //初始化时间控件
     var calendar1 = new LCalendar();
     calendar1.init({
-        'trigger': '#date',//标签id
-        'type': 'date',//date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
-        'minDate':'2000-1-1',//最小日期 注意：该值会覆盖标签内定义的日期范围
-        'maxDate':'2050-1-1'//最大日期 注意：该值会覆盖标签内定义的日期范围
+        'trigger': '#date', //标签id
+        'type': 'date', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        'minDate': '2000-1-1', //最小日期 注意：该值会覆盖标签内定义的日期范围
+        'maxDate': '2050-1-1' //最大日期 注意：该值会覆盖标签内定义的日期范围
     });
-    $("#date").on("input",function(){
+    $("#date").on("input", function () {
         getDateCurveData();
     });
 

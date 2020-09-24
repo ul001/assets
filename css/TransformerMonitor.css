@@ -106,7 +106,7 @@ body {
 
 #service,
 #voltage,
-#noise{
+#noise {
     margin: 0 0 0.5rem 0.5rem;
 }
 
@@ -115,12 +115,15 @@ body {
     height: 10rem;
 }
 
-#current,#voltage{
+#current,
+#voltage {
     height: 7rem;
 }
-#temp,#noise{
-    max-height: 10rem;
-    min-height:7rem;
+
+#temp,
+#noise {
+    max-height: 11rem;
+    min-height: 8rem;
     box-sizing: content-box;
 }
 
@@ -134,7 +137,7 @@ body {
 }
 
 .selectTime {
-    margin:0 auto;
+    margin: 0 auto;
     width: 100%;
     clear: both;
     float: left;
@@ -310,11 +313,11 @@ body {
 
 .tran-statec ul {
     font-size: 0.85rem;
-    list-style:none;
-    padding:0;
+    list-style: none;
+    padding: 0;
 }
 
-.tran-stateb ul{
-    list-style:none;
-    padding:0;
+.tran-stateb ul {
+    list-style: none;
+    padding: 0;
 }
