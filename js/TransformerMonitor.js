@@ -120,7 +120,7 @@ $(function () {
         var params = {
             fSubid: subidFromAPP,
             fTransid: selectTrans,
-            selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,H2,InPa,LJTemp1,LJTemp2,LJTemp3,LJTemp4,Olevel,OilTemp"
+            selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,H2,InPa,LJTempA,LJTempB,LJTempC,LJTempN,Olevel,OilTemp"
             // selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,PartialDischarge"
         };
         getData(url, params, function (data) {
@@ -168,18 +168,37 @@ $(function () {
                 $("#LJTemp2").css("display", "block");
                 $("#LJTemp3").css("display", "block");
                 $("#LJTemp4").css("display", "block");
+                $("#Nitrogen").css("display", "block");
+                $("#Olevel").css("display", "block");
+                $("#InPa").css("display", "block");
                 $(".OILTemp").html(temp.OILTEMP);
-                if (temp.LJTEMP1 != undefined && temp.LJTEMP1 != null) {
-                    $(".LJTemp1").html(temp.LJTEMP1);
+                if (temp.LJTEMPA != undefined && temp.LJTEMPA != null) {
+                    $(".LJTemp1").html(temp.LJTEMPA);
                 }
-                if (temp.LJTEMP2 != undefined && temp.LJTEMP2 != null) {
-                    $(".LJTemp2").html(temp.LJTEMP2);
+                if (temp.LJTEMPB != undefined && temp.LJTEMPB != null) {
+                    $(".LJTemp2").html(temp.LJTEMPB);
                 }
-                if (temp.LJTEMP3 != undefined && temp.LJTEMP3 != null) {
-                    $(".LJTemp3").html(temp.LJTEMP3);
+                if (temp.LJTEMPC != undefined && temp.LJTEMPC != null) {
+                    $(".LJTemp3").html(temp.LJTEMPC);
                 }
-                if (temp.LJTEMP4 != undefined && temp.LJTEMP4 != null) {
-                    $(".LJTemp4").html(temp.LJTEMP4);
+                if (temp.LJTEMPN != undefined && temp.LJTEMPN != null) {
+                    $(".LJTemp4").html(temp.LJTEMPN);
+                }
+                // 其他
+                if (temp.INPA != null)
+                    $(".InPa").html(temp.INPA);
+                else
+                    $(".InPa").html("--");
+                // 其他
+                if (temp.OLEVEL != null)
+                    $(".Olevel").html(temp.OLEVEL);
+                else
+                    $(".Olevel").html("--");
+
+                if (temp.H2 != null) {
+                    $(".Nitrogen").html(temp.H2);
+                } else {
+                    $(".Nitrogen").html("--");
                 }
             } else {
                 //10kv变压器
@@ -203,27 +222,15 @@ $(function () {
                     $("#LJTemp2").css("display", "none");
                     $("#LJTemp3").css("display", "none");
                     $("#LJTemp4").css("display", "none");
+                    $("#Nitrogen").css("display", "none");
+                    $("#Olevel").css("display", "none");
+                    $("#InPa").css("display", "none");
                     $(".AphaseTemp").html(temp.TEMPA);
                     $(".BphaseTemp").html(temp.TEMPB);
                     $(".CphaseTemp").html(temp.TEMPC);
                 }
             }
-            // 其他
-            if (temp.InPa != null)
-                $(".InPa").html(temp.InPa);
-            else
-                $(".InPa").html("--");
-            // 其他
-            if (temp.Olevel != null)
-                $(".Olevel").html(temp.Olevel);
-            else
-                $(".Olevel").html("--");
 
-            if (temp.H2 != null) {
-                $(".Nitrogen").html(temp.Olevel);
-            } else {
-                $(".Nitrogen").html("--");
-            }
             //噪声
             if (temp.NOISE != null)
                 $(".noise").html(temp.NOISE);
