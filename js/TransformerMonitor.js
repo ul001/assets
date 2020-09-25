@@ -171,6 +171,8 @@ $(function () {
                 $("#Nitrogen").css("display", "block");
                 $("#Olevel").css("display", "block");
                 $("#InPa").css("display", "block");
+                $("#tempLine").css("display", "none");
+                $("#tempOilLine").css("display", "block");
                 $(".OILTemp").html(temp.OILTEMP);
                 if (temp.LJTEMPA != undefined && temp.LJTEMPA != null) {
                     $(".LJTemp1").html(temp.LJTEMPA);
@@ -225,6 +227,8 @@ $(function () {
                     $("#Nitrogen").css("display", "none");
                     $("#Olevel").css("display", "none");
                     $("#InPa").css("display", "none");
+                    $("#tempLine").css("display", "block");
+                    $("#tempOilLine").css("display", "none");
                     $(".AphaseTemp").html(temp.TEMPA);
                     $(".BphaseTemp").html(temp.TEMPB);
                     $(".CphaseTemp").html(temp.TEMPC);
@@ -378,6 +382,11 @@ $(function () {
             seriesB = [],
             seriesC = [];
 
+        var LJTempA = [],
+            LJTempB = [],
+            LJTempC = [],
+            LJTempN = [];
+
         if (dataObject.yesterdayPowerValue != null) {
             $.each(dataObject.yesterdayPowerValue, function (key, val) {
                 times.push(val.fCollecttime.substring(11, 16))
@@ -389,25 +398,25 @@ $(function () {
             });
         }
         var times = times.length > time.length ? times : time;
-
-        for (var j = 0; j < dataObject.yesterdayPowerValue.length; j++) {
-            for (var i = 0; i < times.length; i++) {
-                //            var index = 0;
-                if (dataObject.yesterdayPowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
-                    yesterDayfP.push(dataObject.yesterdayPowerValue[j].fP);
-                    yesterDayfQ.push(dataObject.yesterdayPowerValue[j].fQ);
-                    yesterDayfS.push(dataObject.yesterdayPowerValue[j].fS);
-                    //                    index = 1;
+        if (dataObject.hasOwnProperty('yesterdayPowerValue')) {
+            for (var j = 0; j < dataObject.yesterdayPowerValue.length; j++) {
+                for (var i = 0; i < times.length; i++) {
+                    //            var index = 0;
+                    if (dataObject.yesterdayPowerValue[j].fCollecttime.substring(11, 16) == times[i]) {
+                        yesterDayfP.push(dataObject.yesterdayPowerValue[j].fP);
+                        yesterDayfQ.push(dataObject.yesterdayPowerValue[j].fQ);
+                        yesterDayfS.push(dataObject.yesterdayPowerValue[j].fS);
+                        //                    index = 1;
+                    }
                 }
+                //            if (index == 0) {
+                //                yesterDayfP.push(null);
+                //                yesterDayfQ.push(null);
+                //                yesterDayfS.push(null);
+                //            }
             }
-            //            if (index == 0) {
-            //                yesterDayfP.push(null);
-            //                yesterDayfQ.push(null);
-            //                yesterDayfS.push(null);
-            //            }
         }
-
-        if (dataObject.PowerValue != null) {
+        if (dataObject.hasOwnProperty('PowerValue') && dataObject.PowerValue != null) {
             //                var index = 0;
             for (var j = 0; j < dataObject.PowerValue.length; j++) {
                 for (var i = 0; i < times.length; i++) {
@@ -426,8 +435,8 @@ $(function () {
             }
         }
 
-
-        if (!dataObject.hasOwnProperty('tempABC') || dataObject.tempABC != null) {
+        //绕组温度
+        if (dataObject.hasOwnProperty('tempABC') && dataObject.tempABC != null && dataObject.tempABC != undefined) {
             $.each(dataObject.tempABC, function (key, val) {
                 timeTemp.push(val.fCollecttime.substring(11, 16));
                 seriesA.push(val.fTempa);
@@ -435,6 +444,18 @@ $(function () {
                 seriesC.push(val.fTempc);
             });
         }
+
+        //油浸温度
+        if (dataObject.hasOwnProperty('LJTempABCN') && dataObject.LJTempABCN != null && dataObject.LJTempABCN != undefined) {
+            $.each(dataObject.LJTempABCN, function (key, val) {
+                timeTemp.push(val.fCollecttime.substring(11, 16));
+                LJTempA.push(val.fLJTempA);
+                LJTempB.push(val.fLJTempB);
+                LJTempC.push(val.fLJTempC);
+                LJTempN.push(val.fLJTempN);
+            });
+        }
+
         //TODO：waring
         var transformerName = Operation['ui_trans'];
         var type = $(".s-select")[0].id;
@@ -844,6 +865,180 @@ $(function () {
             };
             var unitTem = '℃';
             initLine(seriesTem, legendTem, timeTemp, titleTem, unitTem);
+        } else if (type == "tempOilLine") {
+            var titleTem = transformerName + "  " + Operation['ui_tempOilLine'];
+            // var titleTem = $("#daycalendarBox").val() + "  " + transformerName + "  " + "绕阻温度";
+            var seriesTem = [{
+                    name: Operation['ui_LJTemp1'],
+                    type: 'line',
+                    data: LJTempA,
+                    markPoint: {
+                        symbol: 'circle',
+                        symbolSize: 10,
+                        data: [{
+                                name: Operation['ui_maxval'],
+                                type: 'max',
+                                label: {
+                                    normal: {
+                                        formatter: 'Max:{c}'
+                                    }
+                                }
+                            },
+                            {
+                                name: Operation['ui_minval'],
+                                type: 'min',
+                                label: {
+                                    normal: {
+                                        formatter: 'Min:{c}'
+                                    }
+                                }
+                            }
+                        ],
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    position: 'top'
+                                }
+                            }
+                        }
+                    },
+                    markLine: {
+                        data: [{
+                            name: Operation['ui_avgval'],
+                            type: 'average'
+                        }]
+                    }
+                },
+                {
+                    name: Operation['ui_LJTemp2'],
+                    type: 'line',
+                    data: LJTempB,
+                    markPoint: {
+                        symbol: 'circle',
+                        symbolSize: 10,
+                        data: [{
+                                name: Operation['ui_maxval'],
+                                type: 'max',
+                                label: {
+                                    normal: {
+                                        formatter: 'Max:{c}'
+                                    }
+                                }
+                            },
+                            {
+                                name: Operation['ui_minval'],
+                                type: 'min',
+                                label: {
+                                    normal: {
+                                        formatter: 'Min:{c}'
+                                    }
+                                }
+                            }
+                        ],
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    position: 'top'
+                                }
+                            }
+                        }
+                    },
+                    markLine: {
+                        data: [{
+                            name: Operation['ui_avgval'],
+                            type: 'average'
+                        }]
+                    }
+                },
+                {
+                    name: Operation['ui_LJTemp3'],
+                    type: 'line',
+                    data: LJTempC,
+                    markPoint: {
+                        symbol: 'circle',
+                        symbolSize: 10,
+                        data: [{
+                                name: Operation['ui_maxval'],
+                                type: 'max',
+                                label: {
+                                    normal: {
+                                        formatter: 'Max:{c}'
+                                    }
+                                }
+                            },
+                            {
+                                name: Operation['ui_minval'],
+                                type: 'min',
+                                label: {
+                                    normal: {
+                                        formatter: 'Min:{c}'
+                                    }
+                                }
+                            }
+                        ],
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    position: 'top'
+                                }
+                            }
+                        }
+                    },
+                    markLine: {
+                        data: [{
+                            name: Operation['ui_avgval'],
+                            type: 'average'
+                        }]
+                    }
+                },
+                {
+                    name: Operation['ui_LJTemp4'],
+                    type: 'line',
+                    data: LJTempN,
+                    markPoint: {
+                        symbol: 'circle',
+                        symbolSize: 10,
+                        data: [{
+                                name: Operation['ui_maxval'],
+                                type: 'max',
+                                label: {
+                                    normal: {
+                                        formatter: 'Max:{c}'
+                                    }
+                                }
+                            },
+                            {
+                                name: Operation['ui_minval'],
+                                type: 'min',
+                                label: {
+                                    normal: {
+                                        formatter: 'Min:{c}'
+                                    }
+                                }
+                            }
+                        ],
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    position: 'top'
+                                }
+                            }
+                        }
+                    },
+                    markLine: {
+                        data: [{
+                            name: Operation['ui_avgval'],
+                            type: 'average'
+                        }]
+                    }
+                }
+            ];
+            var legendTem = {
+                data: [Operation['ui_LJTemp1'], Operation['ui_LJTemp2'], Operation['ui_LJTemp3'], Operation['ui_LJTemp4']],
+                bottom: '2%'
+            };
+            var unitTem = '℃';
+            initLine(seriesTem, legendTem, timeTemp, titleTem, unitTem);
         }
     }
 
@@ -931,6 +1126,10 @@ $(function () {
     });
     $("#tempLine").click(function () {
         $("#tempLine").addClass("s-select").siblings('span').removeClass("s-select");
+        getDateCurveData();
+    });
+    $("#tempOilLine").click(function () {
+        $("#tempOilLine").addClass("s-select").siblings('span').removeClass("s-select");
         getDateCurveData();
     });
     $("#datePre").click(function () {

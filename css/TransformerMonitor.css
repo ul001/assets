@@ -191,7 +191,8 @@ body {
 #tempLine,
 #NothingPower,
 #havePower,
-#NowPower {
+#NowPower,
+#tempOilLine {
     width: 22%;
     height: 2.5rem;
     line-height: 2.5rem;
@@ -227,6 +228,11 @@ body {
 }
 
 #NowPower[class*="select"] {
+    background-color: #02AC94 !important;
+    color: #fff !important;
+}
+
+#tempOilLine[class*="select"] {
     background-color: #02AC94 !important;
     color: #fff !important;
 }
