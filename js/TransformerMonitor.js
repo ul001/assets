@@ -100,7 +100,7 @@ $(function () {
         if (transList.length > 0) {
             $(".s-ctn").empty();
             $(transList).each(function () {
-                $(".s-ctn").append("<div class='trans' value='" + this.fTransid + "'><img/><p>" + this.fTransname + "</p></div>");
+                $(".s-ctn").append("<div class='trans' name='" + this.fType + "' value='" + this.fTransid + "'><img/><p>" + this.fTransname + "</p></div>");
             });
             $(".trans").click(function () {
                 $(this).addClass("select").siblings().removeClass("select");
@@ -156,6 +156,46 @@ $(function () {
     //显示温度数据
     function showTemperature(temp) {
         var noiseVal = "--";
+        var selectTrans = $(".trans.select").attr("name");
+        if (selectTrans == 1) {
+            $("#OILTemp").css("display", "none").siblings('li').css("display", "block");
+            $("#LJTemp1").css("display", "none");
+            $("#LJTemp2").css("display", "none");
+            $("#LJTemp3").css("display", "none");
+            $("#LJTemp4").css("display", "none");
+            $("#Nitrogen").css("display", "none");
+            $("#Olevel").css("display", "none");
+            $("#InPa").css("display", "none");
+            $("#tempLine").css("display", "block");
+            $("#tempOilLine").css("display", "none");
+        } else {
+            $("#OILTemp").css("display", "block").siblings('li').css("display", "none");
+            $("#LJTemp1").css("display", "block");
+            $("#LJTemp2").css("display", "block");
+            $("#LJTemp3").css("display", "block");
+            $("#LJTemp4").css("display", "block");
+            $("#Nitrogen").css("display", "block");
+            $("#Olevel").css("display", "block");
+            $("#InPa").css("display", "block");
+            $("#tempLine").css("display", "none");
+            $("#tempOilLine").css("display", "block");
+            // 其他
+            if (temp.INPA != null)
+                $(".InPa").html(temp.INPA);
+            else
+                $(".InPa").html("--");
+            // 其他
+            if (temp.OLEVEL != null)
+                $(".Olevel").html(temp.OLEVEL);
+            else
+                $(".Olevel").html("--");
+
+            if (temp.H2 != null) {
+                $(".Nitrogen").html(temp.H2);
+            } else {
+                $(".Nitrogen").html("--");
+            }
+        }
         if (temp == null) {
             $(".AphaseTemp").html("--");
             $(".BphaseTemp").html("--");
