@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
   var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
   var tokenFromAPP =
     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
@@ -49,20 +49,19 @@ $(function() {
         Accept: "application/json; charset=utf-8",
         Authorization: tokenFromAPP
       },
-      success: function(result) {
+      success: function (result) {
         if (result.code == "5000") {
           var strArr = baseUrlFromAPP.split("/");
           var ipAddress = strArr[0] + "//" + strArr[2];
 
           $.ajax({
-            url:
-              "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
+            url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
             type: "POST",
             data: {
               ip: ipAddress,
               exceptionMessage: JSON.stringify(result.data.stackTrace)
             },
-            success: function(data) {}
+            success: function (data) {}
           });
         }
         toast.hide();
@@ -74,7 +73,7 @@ $(function() {
         }
         successCallback(result.data);
       },
-      error: function() {
+      error: function () {
         toast.show({
           text: Operation["code_fail"],
           duration: 2000
@@ -90,7 +89,7 @@ $(function() {
     var params = {
       fSubid: subidFromAPP
     };
-    getData(url, params, function(data) {
+    getData(url, params, function (data) {
       if (data.hasOwnProperty("TransformerList")) {
         showTransNames(data.TransformerList);
       }
@@ -100,18 +99,18 @@ $(function() {
   function showTransNames(transList) {
     if (transList.length > 0) {
       $(".s-ctn").empty();
-      $(transList).each(function() {
+      $(transList).each(function () {
         $(".s-ctn").append(
           "<div class='trans' name='" +
-            this.fType +
-            "' value='" +
-            this.fTransid +
-            "'><img/><p>" +
-            this.fTransname +
-            "</p></div>"
+          this.fType +
+          "' value='" +
+          this.fTransid +
+          "'><img/><p>" +
+          this.fTransname +
+          "</p></div>"
         );
       });
-      $(".trans").click(function() {
+      $(".trans").click(function () {
         $(this)
           .addClass("select")
           .siblings()
@@ -132,11 +131,10 @@ $(function() {
     var params = {
       fSubid: subidFromAPP,
       fTransid: selectTrans,
-      selectParams:
-        "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,H2,InPa,LJTempA,LJTempB,LJTempC,LJTempN,Olevel,OilTemp"
+      selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,H2,InPa,LJTempA,LJTempB,LJTempC,LJTempN,Olevel,OilTemp"
       // selectParams: "Uab,Ubc,Uca,S,P,Q,Pf,Ia,Ib,Ic,TempA,TempB,TempC,MD,MDTimeStamp,noise,PartialDischarge"
     };
-    getData(url, params, function(data) {
+    getData(url, params, function (data) {
       generateTransStatus(data);
       getDateCurveData();
     });
@@ -149,7 +147,7 @@ $(function() {
       fTransid: selectTrans,
       fDate: $("#date").val()
     };
-    getData(url, params, function(data) {
+    getData(url, params, function (data) {
       info = data;
       generateChartLine(data);
     });
@@ -251,10 +249,10 @@ $(function() {
         if (temp.OLEVEL != null)
           if (temp.OLEVEL == 1) {
             //报警
-            $(".Olevel").html(Operation("ui_alarm"));
+            $(".Olevel").html(Operation["ui_alarm"]);
           } else {
             //正常
-            $(".Olevel").html(Operation("ui_normal"));
+            $(".Olevel").html(Operation["ui_normal"]);
           }
         else $(".Olevel").html("--");
 
@@ -308,8 +306,7 @@ $(function() {
 
       if (temp.PartialDischarge != null) {
         $(".noise").html(temp.PartialDischarge);
-      } else {
-      }
+      } else {}
     }
     $("#noise").height($("#temp").height() + "px");
   }
@@ -431,12 +428,12 @@ $(function() {
       LJTempN = [];
 
     if (dataObject.yesterdayPowerValue != null) {
-      $.each(dataObject.yesterdayPowerValue, function(key, val) {
+      $.each(dataObject.yesterdayPowerValue, function (key, val) {
         times.push(val.fCollecttime.substring(11, 16));
       });
     }
     if (dataObject.PowerValue != null) {
-      $.each(dataObject.PowerValue, function(key, val) {
+      $.each(dataObject.PowerValue, function (key, val) {
         time.push(val.fCollecttime.substring(11, 16));
       });
     }
@@ -492,7 +489,7 @@ $(function() {
       dataObject.tempABC != null &&
       dataObject.tempABC != undefined
     ) {
-      $.each(dataObject.tempABC, function(key, val) {
+      $.each(dataObject.tempABC, function (key, val) {
         timeTemp.push(val.fCollecttime.substring(11, 16));
         seriesA.push(val.fTempa);
         seriesB.push(val.fTempb);
@@ -506,7 +503,7 @@ $(function() {
       dataObject.LJTempABCN != null &&
       dataObject.LJTempABCN != undefined
     ) {
-      $.each(dataObject.LJTempABCN, function(key, val) {
+      $.each(dataObject.LJTempABCN, function (key, val) {
         timeTemp.push(val.fCollecttime.substring(11, 16));
         LJTempA.push(val.fLJTempA);
         LJTempB.push(val.fLJTempB);
@@ -520,16 +517,14 @@ $(function() {
     var type = $(".s-select")[0].id;
     if (type == "NowPower") {
       var titlefS = transformerName + "  " + Operation["ui_s"];
-      var seriesfS = [
-        {
+      var seriesfS = [{
           name: Operation["ui_today"],
           type: "line",
           data: todayfS,
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -557,12 +552,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         },
         {
@@ -572,8 +565,7 @@ $(function() {
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -601,12 +593,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         }
       ];
@@ -617,16 +607,14 @@ $(function() {
       var unitfS = "kVA";
       initLine(seriesfS, legendfS, times, titlefS, unitfS);
     } else if (type == "havePower") {
-      var seriesfP = [
-        {
+      var seriesfP = [{
           name: Operation["ui_today"],
           type: "line",
           data: todayfP,
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -654,12 +642,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         },
         {
@@ -669,8 +655,7 @@ $(function() {
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -698,12 +683,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         }
       ];
@@ -715,16 +698,14 @@ $(function() {
       var unitfP = "kW";
       initLine(seriesfP, legendfP, times, titlefP, unitfP);
     } else if (type == "NothingPower") {
-      var seriesfQ = [
-        {
+      var seriesfQ = [{
           name: Operation["ui_today"],
           type: "line",
           data: todayfQ,
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -752,12 +733,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         },
         {
@@ -767,8 +746,7 @@ $(function() {
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -796,12 +774,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         }
       ];
@@ -815,16 +791,14 @@ $(function() {
     } else if (type == "tempLine") {
       var titleTem = transformerName + "  " + Operation["ui_tempLine"];
       // var titleTem = $("#daycalendarBox").val() + "  " + transformerName + "  " + "绕阻温度";
-      var seriesTem = [
-        {
+      var seriesTem = [{
           name: Operation["ui_temp"] + "A",
           type: "line",
           data: seriesA,
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -852,12 +826,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         },
         {
@@ -867,8 +839,7 @@ $(function() {
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -896,12 +867,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         },
         {
@@ -911,8 +880,7 @@ $(function() {
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -940,12 +908,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         }
       ];
@@ -962,16 +928,14 @@ $(function() {
     } else if (type == "tempOilLine") {
       var titleTem = transformerName + "  " + Operation["ui_tempOilLine"];
       // var titleTem = $("#daycalendarBox").val() + "  " + transformerName + "  " + "绕阻温度";
-      var seriesTem = [
-        {
+      var seriesTem = [{
           name: Operation["ui_LJTemp1"],
           type: "line",
           data: LJTempA,
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -999,12 +963,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         },
         {
@@ -1014,8 +976,7 @@ $(function() {
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -1043,12 +1004,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         },
         {
@@ -1058,8 +1017,7 @@ $(function() {
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -1087,12 +1045,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         },
         {
@@ -1102,8 +1058,7 @@ $(function() {
           markPoint: {
             symbol: "circle",
             symbolSize: 10,
-            data: [
-              {
+            data: [{
                 name: Operation["ui_maxval"],
                 type: "max",
                 label: {
@@ -1131,12 +1086,10 @@ $(function() {
             }
           },
           markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
-              }
-            ]
+            data: [{
+              name: Operation["ui_avgval"],
+              type: "average"
+            }]
           }
         }
       ];
@@ -1197,112 +1150,110 @@ $(function() {
       yAxis: {
         name: unit,
         type: "value",
-        min: function(value) {
+        min: function (value) {
           if (value.min <= 0) {
             return (value.min + value.min * 0.2).toFixed(2);
           } else {
             return (value.min - value.min * 0.2).toFixed(2);
           }
         },
-        max: function(value) {
+        max: function (value) {
           return (value.max + value.max * 0.1).toFixed(2);
         },
         axisLabel: {
           formatter: "{value}"
         }
       },
-      dataZoom: [
-        {
-          // 这个dataZoom组件，默认控制x轴。
-          type: "slider", // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-          start: 0, // 左边在 10% 的位置。
-          end: 100, // 右边在 60% 的位置。
-          height: 25,
-          bottom: 38
-        }
-      ],
+      dataZoom: [{
+        // 这个dataZoom组件，默认控制x轴。
+        type: "slider", // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+        start: 0, // 左边在 10% 的位置。
+        end: 100, // 右边在 60% 的位置。
+        height: 25,
+        bottom: 38
+      }],
       series: series
     };
     line.setOption(option);
   }
 
   //点击有功、无功、视在的按钮
-  $("#havePower").click(function() {
+  $("#havePower").click(function () {
     $("#havePower")
       .addClass("s-select")
       .siblings("span")
       .removeClass("s-select");
     getDateCurveData();
   });
-  $("#NothingPower").click(function() {
+  $("#NothingPower").click(function () {
     $("#NothingPower")
       .addClass("s-select")
       .siblings("span")
       .removeClass("s-select");
     getDateCurveData();
   });
-  $("#NowPower").click(function() {
+  $("#NowPower").click(function () {
     $("#NowPower")
       .addClass("s-select")
       .siblings("span")
       .removeClass("s-select");
     getDateCurveData();
   });
-  $("#tempLine").click(function() {
+  $("#tempLine").click(function () {
     $("#tempLine")
       .addClass("s-select")
       .siblings("span")
       .removeClass("s-select");
     getDateCurveData();
   });
-  $("#tempOilLine").click(function() {
+  $("#tempOilLine").click(function () {
     $("#tempOilLine")
       .addClass("s-select")
       .siblings("span")
       .removeClass("s-select");
     getDateCurveData();
   });
-  $("#datePre").click(function() {
+  $("#datePre").click(function () {
     var selectDate = new Date(
       $("#date")
-        .val()
-        .replace(/\-/g, "/")
+      .val()
+      .replace(/\-/g, "/")
     );
     var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
     $("#date").val(
       preDate.getFullYear() +
-        "-" +
-        (preDate.getMonth() < 9
-          ? "0" + (preDate.getMonth() + 1)
-          : preDate.getMonth() + 1) +
-        "-" +
-        (preDate.getDate() < 10 ? "0" + preDate.getDate() : preDate.getDate())
+      "-" +
+      (preDate.getMonth() < 9 ?
+        "0" + (preDate.getMonth() + 1) :
+        preDate.getMonth() + 1) +
+      "-" +
+      (preDate.getDate() < 10 ? "0" + preDate.getDate() : preDate.getDate())
     );
     getDateCurveData();
   });
 
-  $("#dateNext").click(function() {
+  $("#dateNext").click(function () {
     var d = new Date();
     var nowDate = new Date(
       d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
     );
     var selectDate = new Date(
       $("#date")
-        .val()
-        .replace(/\-/g, "/")
+      .val()
+      .replace(/\-/g, "/")
     );
     if (selectDate < nowDate) {
       var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
       $("#date").val(
         nextDate.getFullYear() +
-          "-" +
-          (nextDate.getMonth() < 9
-            ? "0" + (nextDate.getMonth() + 1)
-            : nextDate.getMonth() + 1) +
-          "-" +
-          (nextDate.getDate() < 10
-            ? "0" + nextDate.getDate()
-            : nextDate.getDate())
+        "-" +
+        (nextDate.getMonth() < 9 ?
+          "0" + (nextDate.getMonth() + 1) :
+          nextDate.getMonth() + 1) +
+        "-" +
+        (nextDate.getDate() < 10 ?
+          "0" + nextDate.getDate() :
+          nextDate.getDate())
       );
       getDateCurveData();
     } else {
@@ -1318,7 +1269,7 @@ $(function() {
     minDate: "2000-1-1", //最小日期 注意：该值会覆盖标签内定义的日期范围
     maxDate: "2050-1-1" //最大日期 注意：该值会覆盖标签内定义的日期范围
   });
-  $("#date").on("input", function() {
+  $("#date").on("input", function () {
     getDateCurveData();
   });
 });
