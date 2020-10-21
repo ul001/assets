@@ -1,7 +1,7 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
-    var subidFromAPP=10100001;
+    var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
+    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
+    var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -83,11 +83,12 @@ $(function () {
             initDateInput('ym');
             showtimeForElectSum = tool.initDate("YM", new Date());
             $("#date").val(showtimeForElectSum);
-        }/* else if (selectParam == "year") {
-            showtimeForElectSum = tool.initDate("Y", new Date());
-            $("#date").val(showtimeForElectSum);
-            roll.config.format = "YYYY";
-        }*/
+        }
+        /* else if (selectParam == "year") {
+                    showtimeForElectSum = tool.initDate("Y", new Date());
+                    $("#date").val(showtimeForElectSum);
+                    roll.config.format = "YYYY";
+                }*/
         initQuick(selectParam);
         searchGetData();
         // $("#search").click();
@@ -137,26 +138,27 @@ $(function () {
                     return;
                 }
             });
-        }/* else if (type == "year") {
-            $("#datePre").click(function () {
-                var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
-                var preDate = new Date(selectDate.setFullYear(selectDate.getFullYear() - 1));
-                $("#date").val(preDate.getFullYear());
-                searchGetData();
-            });
-            $("#dateNext").click(function () {
-                var d = new Date();
-                var nowDate = new Date((d.getFullYear() + "-01-01").replace(/\-/g, "\/"));
-                var selectDate = new Date(($("#date").val() + "-01" + "-01").replace(/\-/g, "\/"));
-                if (selectDate < nowDate) {
-                    var nextDate = new Date(selectDate.setFullYear(selectDate.getFullYear() + 1));
-                    $("#date").val(nextDate.getFullYear());
-                    searchGetData();
-                } else {
-                    return;
-                }
-            });
-        }*/
+        }
+        /* else if (type == "year") {
+                    $("#datePre").click(function () {
+                        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+                        var preDate = new Date(selectDate.setFullYear(selectDate.getFullYear() - 1));
+                        $("#date").val(preDate.getFullYear());
+                        searchGetData();
+                    });
+                    $("#dateNext").click(function () {
+                        var d = new Date();
+                        var nowDate = new Date((d.getFullYear() + "-01-01").replace(/\-/g, "\/"));
+                        var selectDate = new Date(($("#date").val() + "-01" + "-01").replace(/\-/g, "\/"));
+                        if (selectDate < nowDate) {
+                            var nextDate = new Date(selectDate.setFullYear(selectDate.getFullYear() + 1));
+                            $("#date").val(nextDate.getFullYear());
+                            searchGetData();
+                        } else {
+                            return;
+                        }
+                    });
+                }*/
     }
 
     $("#sideClick").click(function () {
@@ -187,15 +189,15 @@ $(function () {
         var endTime;
         var typeDA;
         if (selectParam == "today") {
-            startTime = $("#date").val().substring(0,10)+" 00:00:00";
-            endTime = $("#date").val().substring(0,10)+" 23:59:59";
+            startTime = $("#date").val().substring(0, 10) + " 00:00:00";
+            endTime = $("#date").val().substring(0, 10) + " 23:59:59";
             typeDA = "";
         } else if (selectParam == "month") {
             var selectDate = new Date(($("#date").val() + "-01").replace(/\-/g, "\/"));
             var nextMonth = new Date(selectDate.setMonth(selectDate.getMonth() + 1));
-            var lastDate = new Date(nextMonth-(1000*60*60*24));
-            startTime = $("#date").val()+ "-01 00:00:00";
-            endTime = lastDate.getFullYear() + "-" + ((lastDate.getMonth()) < 9 ? ("0" + (lastDate.getMonth() + 1)) : (lastDate.getMonth() + 1)) + "-" + (lastDate.getDate() < 10 ? ("0" + lastDate.getDate()) : (lastDate.getDate()))+" 23:59:59";
+            var lastDate = new Date(nextMonth - (1000 * 60 * 60 * 24));
+            startTime = $("#date").val() + "-01 00:00:00";
+            endTime = lastDate.getFullYear() + "-" + ((lastDate.getMonth()) < 9 ? ("0" + (lastDate.getMonth() + 1)) : (lastDate.getMonth() + 1)) + "-" + (lastDate.getDate() < 10 ? ("0" + lastDate.getDate()) : (lastDate.getDate())) + " 23:59:59";
             typeDA = "M";
         }
         var fCircuitid = currentSelectVode.merterId;
@@ -204,10 +206,10 @@ $(function () {
         var params = {
             fSubId: subidFromAPP,
             fCircuitId: fCircuitid,
-            fStartTime:startTime,
-            fEndTime:endTime,
+            fStartTime: startTime,
+            fEndTime: endTime,
         };
-        if(typeDA!=""){
+        if (typeDA != "") {
             params['fPeriod'] = typeDA;
         }
         getData(url, params, function (data) {
@@ -231,7 +233,7 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    var ipAddress = strArr[0]+"//"+strArr[2];
+                    var ipAddress = strArr[0] + "//" + strArr[2];
 
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
@@ -246,7 +248,7 @@ $(function () {
                     });
                 }
                 toast.hide();
-                if(result.code != "200"){
+                if (result.code != "200") {
                     toast.show({
                         text: Substation.showCodeTips(result.code),
                         duration: 2000
@@ -283,7 +285,15 @@ $(function () {
 
     function showCharts(data) {
         var time = [];
+        //正向有功
         var value = [];
+        //反向有功
+        var epeValue = [];
+        //正向无功
+        var eqlValue = [];
+        //EQC  反向无功
+        var eqcValue = [];
+
         var name = [];
         var tableData = [];
         if (data.length > 0) {
@@ -295,6 +305,24 @@ $(function () {
             var datatime;
             var circuitname = data[0].fCircuitname;
             name.push(circuitname);
+            //反向有功
+            var epesum = 0;
+            var epemax = data[0].fEperd;
+            var epemin = data[0].fEperd;
+            var epemaxTime = data[0].fCollecttime.substring(0, 16);
+            var epeminTime = data[0].fCollecttime.substring(0, 16);
+            //正向无功
+            var eqlsum = 0;
+            var eqlmax = data[0].fEqlrd;
+            var eqlmin = data[0].fEqlrd;
+            var eqlmaxTime = data[0].fCollecttime.substring(0, 16);
+            var eqlminTime = data[0].fCollecttime.substring(0, 16);
+            //反向无功
+            var eqcsum = 0;
+            var eqcmax = data[0].fEqcrd;
+            var eqcmin = data[0].fEqcrd;
+            var eqcmaxTime = data[0].fCollecttime.substring(0, 16);
+            var eqcminTime = data[0].fCollecttime.substring(0, 16);
 
             var selectParam = $(".btn.select").attr('value');
             $.each(data, function (index, el) {
@@ -302,6 +330,10 @@ $(function () {
                     return true;
                 }
                 value.push(el.fMdvalue);
+                epeValue.push(el.fEperd);
+                eqlValue.push(el.fEqlrd);
+                eqcValue.push(el.fEqcrd);
+
                 if (el.fMdvalue > max) {
                     max = el.fMdvalue;
                     maxTime = el.fCollecttime.substring(0, 16);
@@ -310,48 +342,129 @@ $(function () {
                     min = el.fMdvalue;
                     minTime = el.fCollecttime.substring(0, 16);
                 }
+                if (el.fEperd > epemax) {
+                    epemax = el.fEperd;
+                    epemaxTime = el.fCollecttime.substring(0, 16);
+                }
+                if (el.fEperd < epemin) {
+                    epemin = el.fEperd;
+                    epeminTime = el.fCollecttime.substring(0, 16);
+                }
+                if (el.fEqlrd > eqlmax) {
+                    eqlmax = el.fEqlrd;
+                    eqlmaxTime = el.fCollecttime.substring(0, 16);
+                }
+                if (el.fEqlrd < eqlmin) {
+                    eqlmin = el.fEqlrd;
+                    eqlminTime = el.fCollecttime.substring(0, 16);
+                }
+                if (el.fEqcrd > eqcmax) {
+                    eqcmax = el.fEqcrd;
+                    eqcmaxTime = el.fCollecttime.substring(0, 16);
+                }
+                if (el.fEqcrd < eqcmin) {
+                    eqcmin = el.fEqcrd;
+                    eqcminTime = el.fCollecttime.substring(0, 16);
+                }
+
                 if (selectParam == "today") {
                     datatime = el.fCollecttime.substring(11, 16);
                     time.push(el.fCollecttime.substring(11, 16));
                 } else if (selectParam == "month") {
                     datatime = el.fCollecttime.substring(5, 10);
                     time.push(el.fCollecttime.substring(5, 10));
-                }/* else if (selectParam == "year") {
-                    datatime = el.fCollecttime.substring(2, 7);
-                    time.push(el.fCollecttime.substring(2, 7));
-                }*/
+                }
+                /* else if (selectParam == "year") {
+                                    datatime = el.fCollecttime.substring(2, 7);
+                                    time.push(el.fCollecttime.substring(2, 7));
+                                }*/
                 sum += el.fMdvalue;
+                epesum += el.fEperd;
+                eqlsum += el.fEqlrd;
+                eqcsum += el.fEqcrd;
             });
             var avg = (sum / data.length).toFixed(2);
             if (selectParam == "today") {
-                maxTime = maxTime.substring(11,16);
-                minTime = minTime.substring(11,16);
+                maxTime = maxTime.substring(11, 16);
+                minTime = minTime.substring(11, 16);
             } else if (selectParam == "month") {
-                maxTime = maxTime.substring(5,10);
-                minTime = minTime.substring(5,10);
+                maxTime = maxTime.substring(5, 10);
+                minTime = minTime.substring(5, 10);
             }
+            var epeavg = (epesum / data.length).toFixed(2);
+            if (selectParam == "today") {
+                epemaxTime = epemaxTime.substring(11, 16);
+                epeminTime = epeminTime.substring(11, 16);
+            } else if (selectParam == "month") {
+                epemaxTime = epemaxTime.substring(5, 10);
+                epeminTime = epeminTime.substring(5, 10);
+            }
+            var eqlavg = (eqlsum / data.length).toFixed(2);
+            if (selectParam == "today") {
+                eqlmaxTime = eqlmaxTime.substring(11, 16);
+                eqlminTime = eqlminTime.substring(11, 16);
+            } else if (selectParam == "month") {
+                eqlmaxTime = eqlmaxTime.substring(5, 10);
+                eqlminTime = eqlminTime.substring(5, 10);
+            }
+            var eqcavg = (eqcsum / data.length).toFixed(2);
+            if (selectParam == "today") {
+                eqcmaxTime = eqcmaxTime.substring(11, 16);
+                eqcminTime = eqcminTime.substring(11, 16);
+            } else if (selectParam == "month") {
+                eqcmaxTime = eqcmaxTime.substring(5, 10);
+                eqcminTime = eqcminTime.substring(5, 10);
+            }
+
             tableData.push({
-                name: "需量(kW)",
+                name: "正向有功实时需量(kW)",
                 sum: sum.toFixed(2),
                 avg: avg,
                 max: max,
                 maxTime: maxTime,
                 min: min,
                 minTime: minTime
+            }, {
+                name: "反向有功实时需量(kW)",
+                sum: epesum.toFixed(2),
+                avg: epeavg,
+                max: epemax,
+                maxTime: epemaxTime,
+                min: epemin,
+                minTime: epeminTime
+            }, {
+                name: "正向无功实时需量(kW)",
+                sum: eqlsum.toFixed(2),
+                avg: eqlavg,
+                max: eqlmax,
+                maxTime: eqlmaxTime,
+                min: eqlmin,
+                minTime: eqlminTime
+            }, {
+                name: "反向无功实时需量(kW)",
+                sum: eqcsum.toFixed(2),
+                avg: eqcavg,
+                max: eqcmax,
+                maxTime: eqcmaxTime,
+                min: eqcmin,
+                minTime: eqcminTime
             });
         }
         showTable(tableData);
         var line = echarts.init(document.getElementById('chartContain'));
         var option = {
-            color: ['#2EC7C9','#B6A2DE','#3CA4E4','#FFB980'],
+            color: ['#2EC7C9', '#B6A2DE', '#3CA4E4', '#FFB980'],
             tooltip: {
                 trigger: 'axis'
             },
             legend: {
-                show:false
+                data: ['正向有功实时需量', '反向有功实时需量', '正向无功实时需量', '反向无功实时需量'],
+                // y: 'bottom'
+
+                bottom: 48
             },
             grid: { // 控制图的大小，调整下面这些值就可以，
-                top: '20%',
+                top: '15%',
                 left: '40px',
                 right: '38px',
                 bottom: '28%',
@@ -378,14 +491,135 @@ $(function () {
                 }
             },
             dataZoom: [{
-                type: 'inside'
-            },
-            {
-                type:'slider'
-            }],
+                    type: 'inside'
+                },
+                {
+                    type: 'slider'
+                }
+            ],
             series: [{
-                name: name,
+                name: '正向有功实时需量',
                 data: value,
+                type: 'line',
+                markPoint: {
+                    symbol: 'circle',
+                    symbolSize: 10,
+                    data: [{
+                            name: Operation['ui_maxval'],
+                            type: 'max',
+                            label: {
+                                normal: {
+                                    formatter: 'Max:{c}'
+                                }
+                            }
+                        },
+                        {
+                            name: Operation['ui_minval'],
+                            type: 'min',
+                            label: {
+                                normal: {
+                                    formatter: 'Min:{c}'
+                                }
+                            }
+                        }
+                    ],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                position: 'top'
+                            }
+                        }
+                    }
+                },
+                markLine: {
+                    data: [{
+                        name: Operation['ui_avgval'],
+                        type: 'average'
+                    }]
+                }
+            }, {
+                name: '反向有功实时需量',
+                data: epeValue,
+                type: 'line',
+                markPoint: {
+                    symbol: 'circle',
+                    symbolSize: 10,
+                    data: [{
+                            name: Operation['ui_maxval'],
+                            type: 'max',
+                            label: {
+                                normal: {
+                                    formatter: 'Max:{c}'
+                                }
+                            }
+                        },
+                        {
+                            name: Operation['ui_minval'],
+                            type: 'min',
+                            label: {
+                                normal: {
+                                    formatter: 'Min:{c}'
+                                }
+                            }
+                        }
+                    ],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                position: 'top'
+                            }
+                        }
+                    }
+                },
+                markLine: {
+                    data: [{
+                        name: Operation['ui_avgval'],
+                        type: 'average'
+                    }]
+                }
+            }, {
+                name: '正向无功实时需量',
+                data: eqlValue,
+                type: 'line',
+                markPoint: {
+                    symbol: 'circle',
+                    symbolSize: 10,
+                    data: [{
+                            name: Operation['ui_maxval'],
+                            type: 'max',
+                            label: {
+                                normal: {
+                                    formatter: 'Max:{c}'
+                                }
+                            }
+                        },
+                        {
+                            name: Operation['ui_minval'],
+                            type: 'min',
+                            label: {
+                                normal: {
+                                    formatter: 'Min:{c}'
+                                }
+                            }
+                        }
+                    ],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                position: 'top'
+                            }
+                        }
+                    }
+                },
+                markLine: {
+                    data: [{
+                        name: Operation['ui_avgval'],
+                        type: 'average'
+                    }]
+                }
+            }, {
+                name: '反向无功实时需量',
+                data: eqcValue,
                 type: 'line',
                 markPoint: {
                     symbol: 'circle',
@@ -503,41 +737,41 @@ $(function () {
     //初始化时间控件
     var calendar1 = new LCalendar();
     calendar1.init({
-        'trigger': '#date',//标签id
-        'type': 'date',//date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
-        'minDate':'2000-1-1',//最小日期 注意：该值会覆盖标签内定义的日期范围
-        'maxDate':'2050-1-1'//最大日期 注意：该值会覆盖标签内定义的日期范围
+        'trigger': '#date', //标签id
+        'type': 'date', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        'minDate': '2000-1-1', //最小日期 注意：该值会覆盖标签内定义的日期范围
+        'maxDate': '2050-1-1' //最大日期 注意：该值会覆盖标签内定义的日期范围
     });
     $("#date").val(showtimeForElectSum);
-    $("#date").on("input",function(){
+    $("#date").on("input", function () {
         searchGetData();
     });
 
-    function initDateInput(type){
+    function initDateInput(type) {
         $("#date").remove();
         $("#datePre").after(`<input readonly type="text" id="date">`);
         calendar1 = new LCalendar();
         calendar1.init({
-            'trigger': '#date',//标签id
-            'type': type,//date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
-            'minDate':'2000-1-1',//最小日期 注意：该值会覆盖标签内定义的日期范围
-            'maxDate':'2050-1-1'//最大日期 注意：该值会覆盖标签内定义的日期范围
+            'trigger': '#date', //标签id
+            'type': type, //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+            'minDate': '2000-1-1', //最小日期 注意：该值会覆盖标签内定义的日期范围
+            'maxDate': '2050-1-1' //最大日期 注意：该值会覆盖标签内定义的日期范围
         });
-        $("#date").on("input",function(){
+        $("#date").on("input", function () {
             searchGetData();
         });
     }
 
-//    var roll = new Rolldate({
-//        el: '#date',
-//        format: showtimeForElectSum.format,
-//        beginYear: 2000,
-//        endYear: 2100,
-//        value: showtimeForElectSum,
-//        confirm: function (data) {
-//            $("#date").val(data);
-//            searchGetData();
-//        }
-//    });
+    //    var roll = new Rolldate({
+    //        el: '#date',
+    //        format: showtimeForElectSum.format,
+    //        beginYear: 2000,
+    //        endYear: 2100,
+    //        value: showtimeForElectSum,
+    //        confirm: function (data) {
+    //            $("#date").val(data);
+    //            searchGetData();
+    //        }
+    //    });
 
 });
