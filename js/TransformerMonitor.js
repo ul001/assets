@@ -280,7 +280,7 @@ $(function () {
           if ($(".OILTemp").text() == undefined || $(".OILTemp").text() == "") {
             $(".OILTemp").html("--");
           }
-        } else {
+        } else if (selectTrans == 1) {
           $("#OILTemp")
             .css("display", "none")
             .siblings("li")
