@@ -1,7 +1,7 @@
 $(function () {
-    var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDAwODgxMDYsInVzZXJuYW1lIjoiaGFoYWhhIn0.ITW5w6xOVnU2cRbw_JU-MkWfsn-MLHB1z25bVEuDWLg";
-    var subidFromAPP=10100001;
+    var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
+    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDAwODgxMDYsInVzZXJuYW1lIjoiaGFoYWhhIn0.ITW5w6xOVnU2cRbw_JU-MkWfsn-MLHB1z25bVEuDWLg";
+    var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -150,13 +150,13 @@ $(function () {
         var nowDate = tool.initDate("YMDhm", new Date());
         if (startDate > endDate) {
             toast.show({
-                text: Operation['ui_dateselecttip']+"！",
+                text: Operation['ui_dateselecttip'] + "！",
                 duration: 2000
             });
             return;
         } else if (endDate > nowDate) {
             toast.show({
-                text: Operation['ui_dateselecttip']+"！",
+                text: Operation['ui_dateselecttip'] + "！",
                 duration: 2000
             });
             return;
@@ -194,7 +194,7 @@ $(function () {
             success: function (result) {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
-                    var ipAddress = strArr[0]+"//"+strArr[2];
+                    var ipAddress = strArr[0] + "//" + strArr[2];
 
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
@@ -209,7 +209,7 @@ $(function () {
                     });
                 }
                 toast.hide();
-                if(result.code != "200"){
+                if (result.code != "200") {
                     toast.show({
                         text: Substation.showCodeTips(result.code),
                         duration: 2000
@@ -350,12 +350,12 @@ $(function () {
         });
 
         if (type == 'sum') {
-            var sum = (fBar + pBar + gBar).toFixed(0);
+            var sum = (fBar + pBar + gBar + jBar).toFixed(0);
             initBar($("#lineChart"), time, jian, feng, ping, gu, bar, sum, 'kW·h');
             // initPie($("#lineChart"), time, jian, feng, ping, gu, bar, sum, 'kW.h');
         }
         if (type == 'price') {
-            var sum = (fpBar + ppBar + gpBar).toFixed(0);
+            var sum = (fpBar + ppBar + gpBar + jpBar).toFixed(0);
             initBar($("#lineChart"), time, jPrice, fPrice, pPrice, gPrice, priceBar, sum, Operation['ui_yuan']);
             // initPie($("#lineChart"), time, jPrice, fPrice, pPrice, gPrice, priceBar, sum, '元');
         }
@@ -367,7 +367,7 @@ $(function () {
         var option = {
             title: [{
                 text: Operation['ui_donut'],
-                subtext: y=="￥"?(Operation['ui_totalsum']+'：' + y + sum):(Operation['ui_totalsum']+'：' + sum + y),
+                subtext: y == "￥" ? (Operation['ui_totalsum'] + '：' + y + sum) : (Operation['ui_totalsum'] + '：' + sum + y),
                 textStyle: {
                     fontWeight: 'small'
                 },
@@ -511,66 +511,66 @@ $(function () {
     //初始化时间插件
     var calendar1 = new LCalendar();
     calendar1.init({
-        'trigger': '#dateStart',//标签id
-        'type': 'date',//date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
-        'minDate':'2000-1-1',//最小日期 注意：该值会覆盖标签内定义的日期范围
-        'maxDate':'2050-1-1'//最大日期 注意：该值会覆盖标签内定义的日期范围
+        'trigger': '#dateStart', //标签id
+        'type': 'date', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        'minDate': '2000-1-1', //最小日期 注意：该值会覆盖标签内定义的日期范围
+        'maxDate': '2050-1-1' //最大日期 注意：该值会覆盖标签内定义的日期范围
     });
 
-    $("#dateStart").on("input",function(){
+    $("#dateStart").on("input", function () {
         var selectParam = $(".btn.select").val();
         networkData(selectParam);
     });
 
     var calendar2 = new LCalendar();
     calendar2.init({
-        'trigger': '#dateEnd',//标签id
-        'type': 'date',//date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
-        'minDate':'2000-1-1',//最小日期 注意：该值会覆盖标签内定义的日期范围
-        'maxDate':'2050-1-1'//最大日期 注意：该值会覆盖标签内定义的日期范围
+        'trigger': '#dateEnd', //标签id
+        'type': 'date', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        'minDate': '2000-1-1', //最小日期 注意：该值会覆盖标签内定义的日期范围
+        'maxDate': '2050-1-1' //最大日期 注意：该值会覆盖标签内定义的日期范围
     });
 
-    $("#dateEnd").on("input",function(){
+    $("#dateEnd").on("input", function () {
         var selectParam = $(".btn.select").val();
         networkData(selectParam);
     });
 
-//    new Rolldate({
-//        el: '#dateStart',
-//        format: 'YYYY-MM-DD',
-//        beginYear: 2000,
-//        endYear: 2100,
-//        value: startDate,
-//        confirm: function (date) {
-//            var showMon = tool.initDate("YM", new Date());
-//            $("#showTime").html(showMon);
-//            $(".startDate").val(date);
-//            // var select = $("#selectType").get(0);
-//            // var type = select.options[select.selectedIndex].value; //获取被选中option的value
-//            var selectParam = $(".btn.select").val();
-//
-//            networkData(selectParam);
-//
-//
-//        }
-//    });
-//
-//    new Rolldate({
-//        el: '#dateEnd',
-//        format: 'YYYY-MM-DD',
-//        beginYear: 2000,
-//        endYear: 2100,
-//        value: endDate,
-//        confirm: function (date) {
-//            var showMon = tool.initDate("YM", new Date());
-//            $("#showTime").html(showMon);
-//            $(".endDate").val(date);
-//            // var select = $("#selectType").get(0);
-//            // var type = select.options[select.selectedIndex].value; //获取被选中option的value
-//            var selectParam = $(".btn.select").val();
-//
-//            networkData(selectParam);
-//
-//        }
-//    });
+    //    new Rolldate({
+    //        el: '#dateStart',
+    //        format: 'YYYY-MM-DD',
+    //        beginYear: 2000,
+    //        endYear: 2100,
+    //        value: startDate,
+    //        confirm: function (date) {
+    //            var showMon = tool.initDate("YM", new Date());
+    //            $("#showTime").html(showMon);
+    //            $(".startDate").val(date);
+    //            // var select = $("#selectType").get(0);
+    //            // var type = select.options[select.selectedIndex].value; //获取被选中option的value
+    //            var selectParam = $(".btn.select").val();
+    //
+    //            networkData(selectParam);
+    //
+    //
+    //        }
+    //    });
+    //
+    //    new Rolldate({
+    //        el: '#dateEnd',
+    //        format: 'YYYY-MM-DD',
+    //        beginYear: 2000,
+    //        endYear: 2100,
+    //        value: endDate,
+    //        confirm: function (date) {
+    //            var showMon = tool.initDate("YM", new Date());
+    //            $("#showTime").html(showMon);
+    //            $(".endDate").val(date);
+    //            // var select = $("#selectType").get(0);
+    //            // var type = select.options[select.selectedIndex].value; //获取被选中option的value
+    //            var selectParam = $(".btn.select").val();
+    //
+    //            networkData(selectParam);
+    //
+    //        }
+    //    });
 });
