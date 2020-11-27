@@ -118,9 +118,9 @@ $(function () {
     var calendar1 = new LCalendar();
     calendar1.init({
         'trigger': '#date', //标签id
-        'type': 'date', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
-        'minDate': '2000-1-1', //最小日期 注意：该值会覆盖标签内定义的日期范围
-        'maxDate': '2050-1-1' //最大日期 注意：该值会覆盖标签内定义的日期范围
+        'type': 'ym', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        'minDate': '2000-1', //最小日期 注意：该值会覆盖标签内定义的日期范围
+        'maxDate': '2050-1' //最大日期 注意：该值会覆盖标签内定义的日期范围
     });
     $("#date").val(showtimeForElectSum);
     $("#date").on("input", function () {
@@ -437,7 +437,6 @@ $(function () {
                     pageList: pageList,
                     data: data
                 });
-
         } else {
             $table.bootstrapTable({
                 //                    striped: true,

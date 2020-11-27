@@ -187,15 +187,15 @@ $(function () {
         .css("display", "block")
         .siblings("li")
         .css("display", "none");
-      $("#LJTemp1").css("display", "block");
-      $("#LJTemp2").css("display", "block");
-      $("#LJTemp3").css("display", "block");
-      $("#LJTemp4").css("display", "block");
-      $("#Nitrogen").css("display", "block");
-      $("#Olevel").css("display", "block");
-      $("#InPa").css("display", "block");
+      // $("#LJTemp1").css("display", "block");
+      // $("#LJTemp2").css("display", "block");
+      // $("#LJTemp3").css("display", "block");
+      // $("#LJTemp4").css("display", "block");
+      // $("#Nitrogen").css("display", "block");
+      // $("#Olevel").css("display", "block");
+      // $("#InPa").css("display", "block");
       $("#tempLine").css("display", "none");
-      $("#tempOilLine").css("display", "block");
+      // $("#tempOilLine").css("display", "block");
       // 其他
       if (temp.INPA != null) $(".InPa").html(temp.INPA);
       else $(".InPa").html("--");
