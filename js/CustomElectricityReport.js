@@ -1,6 +1,6 @@
 $(function () {
     var baseUrlFromAPP="http://116.236.149.165:8090/SubstationWEBV2/v5";
-    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTQ4NjAzNjgsInVzZXJuYW1lIjoiaGFoYWhhIn0.iMVkIYSprWvO_t_jt7eFVNzcIc9dvMu5_7oTK1nXYzc";
+    var tokenFromAPP="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDc3NDk1ODIsInVzZXJuYW1lIjoiaGFoYWhhIn0.ej64biqUcCR3cJnmOpDl5HRebJCLHzMtSdA5hvCYbu0";
     var subidFromAPP=10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
@@ -238,6 +238,18 @@ $(function () {
     //         showCharts(data.EnergyReport);
     //     });
     // })
+
+     function getLastDay(year,month) {
+         var new_year = year;    //取当前的年份
+         var new_month = month++;//取下一个月的第一天，方便计算（最后一天不固定）
+         if(month>12) {
+          new_month -=12;        //月份减
+          new_year++;            //年份增
+         }
+         var new_date = new Date(new_year,new_month,1);                //取当年当月中的第一天
+         return (new Date(new_date.getTime()-1000*60*60*24)).getDate();//获取当月最后一天日期
+     }
+
     function searchGetData() {
         var selectParam = $(".btn.select").attr('value');
         var startTime;
@@ -249,7 +261,9 @@ $(function () {
             typeDA = "D";
         } else if (selectParam == "month") {
             startTime = $("#date").val().substring(0, 7)+"-01";
-            endTime = $("#date").val().substring(0, 7)+"-31";
+//            endTime = $("#date").val().substring(0, 7)+"-31";
+            var lastDay = getLastDay($("#date").val().substring(0, 4),$("#date").val().substring(5, 7));
+            endTime = $("#date").val().substring(0, 7)+"-"+lastDay;
             typeDA = "M";
         } else if (selectParam == "year") {
             startTime = $("#date").val().substring(0, 4)+"-01-01";
