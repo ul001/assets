@@ -1,0 +1,433 @@
+.container {
+    background: #fff;
+    overflow: hidden;
+}
+
+body {
+    font-size: 0.9rem;
+}
+
+.transform {
+    clear: both;
+}
+
+* {
+    outline: 0 !important;
+}
+
+.transform li {
+    display: block;
+    float: left;
+}
+
+.monitor {
+    width: 50%;
+    float: left;
+}
+
+.monitor ul li {
+    clear: both;
+}
+
+.btn li {
+    display: block;
+    float: left;
+    padding: 1rem;
+}
+
+/*变压器*/
+.side-left-tran {
+    padding: 0 2rem;
+}
+
+.side-left-tran,
+.transform,
+.tran-stateb {
+    overflow: hidden;
+    clear: both;
+}
+
+.transform li {
+    text-align: center;
+}
+
+.side-left-tran img {
+    width: 70%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+}
+
+/*变压器状态*/
+.tran-stateb {
+    border: 1px solid #C8C9CA;
+    border-radius: 0.5rem;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.title {
+    padding-left: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.title img {
+    vertical-align: -0.2rem;
+}
+
+.tran-stateb .titleImg {
+    width: 0.8rem;
+    height: 1rem;
+}
+
+.tran-statec {
+    width: calc(100% - 0.8rem);
+    background: #EEEEEF;
+    float: left;
+    margin-bottom: 0.5rem;
+}
+
+.tran-statec ul li {
+    padding-left: 0.5rem;
+}
+
+.tran-statec>.i18n {
+    background: #E57D22;
+    color: #fff;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+#power,
+#current,
+#temp {
+    margin: 0 0 0.5rem 0.5rem;
+}
+
+#service,
+#voltage,
+#noise {
+    margin: 0 0 0.5rem 0.5rem;
+}
+
+#power,
+#service {
+    height: 15.5rem;
+}
+
+#current,
+#voltage {
+    height: 7rem;
+}
+
+#temp,
+#noise {
+    max-height: 11rem;
+    min-height: 8rem;
+    box-sizing: content-box;
+}
+
+/*#temp {
+    width: calc(100% - 1rem);
+}*/
+
+.MDTime {
+    padding-left: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.selectTime {
+    margin: 0 auto;
+    width: 100%;
+    clear: both;
+    float: left;
+}
+
+.timeBtn {
+    width: 90%;
+    background: linear-gradient(#56C676, #04BA6B);
+    height: 3rem;
+    line-height: 3rem;
+    border-radius: 4rem;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+}
+
+/*时间选择*/
+#date {
+    height: 3rem;
+    border: none;
+    width: calc(59% - 0.02rem);
+    background: transparent;
+    color: #fff;
+    text-align: center;
+    float: left;
+    font-size: 0.85rem;
+    padding: 0;
+}
+
+#datePre,
+#dateNext {
+    display: block;
+    width: 20%;
+    height: 3rem;
+    line-height: 3.9rem;
+    text-align: center;
+    border-right: 0.01rem solid #fff;
+    float: left;
+}
+
+#dateNext {
+    float: right;
+    border-right: 0;
+    border-left: 0.01rem solid #fff;
+}
+
+.date {
+    margin-top: 1rem;
+}
+
+/*按钮*/
+.btn,
+#tempLine,
+#NothingPower,
+#havePower,
+#NowPower,
+#tempOilLine {
+    width: 25%;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    background-color: #F4F2F1;
+    color: #000;
+    border-radius: 4rem;
+    border: none;
+    float: left;
+    margin: 1rem 0 1rem 6%;
+    background-size: 1rem;
+    background-repeat: no-repeat;
+    background-position: 3rem 0.7rem;
+}
+
+/*.select{*/
+/*	background-color:#02AC94!important;*/
+/*	color:#fff!important;*/
+/*}*/
+#tempLine[class*="select"] {
+    background-color: #02AC94 !important;
+    color: #fff !important;
+}
+
+.btn[class*="select"] {
+    background-color: #02AC94 !important;
+    color: #fff !important;
+}
+
+#NothingPower[class*="select"] {
+    background-color: #02AC94 !important;
+    color: #fff !important;
+}
+
+#havePower[class*="select"] {
+    background-color: #02AC94 !important;
+    color: #fff !important;
+}
+
+#NowPower[class*="select"] {
+    background-color: #02AC94 !important;
+    color: #fff !important;
+}
+
+#tempOilLine[class*="select"] {
+    background-color: #02AC94 !important;
+    color: #fff !important;
+}
+
+/*曲线图*/
+.chart {
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    width: 100%;
+    height: 26rem;
+    border: 1px solid #C8C9CA;
+}
+
+#powerChart {
+    width: 100%;
+    height: 25rem;
+}
+
+.trans img {
+    content: url(../image/zhiliuping2.png);
+}
+
+.trans.select img {
+    content: url(../image/zhiliuping1.png);
+}
+
+.side-left {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.transform {
+    height: 5rem;
+    white-space: nowrap;
+
+}
+
+.transform li {
+    width: 100px;
+    height: 5rem;
+    display: inline-block;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/*滚动变压器*/
+.t-ctn {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.t-ctn .s-ctn {
+    height: 100px;
+    white-space: nowrap;
+    font-size: 0;
+}
+
+.t-ctn .s-ctn div {
+    font-size: 1rem;
+    box-sizing: border-box;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+    display: inline-block;
+    width: 30%;
+    height: 100%;
+    text-align: center;
+}
+
+.trans>p {
+    margin-top: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.trans img {
+    width: 45%;
+    height: 70%;
+    display: block;
+    margin: 0 auto;
+    max-width: 5rem;
+}
+
+.tran-statec ul {
+    font-size: 0.85rem;
+    list-style: none;
+    padding: 0;
+}
+
+.tran-stateb ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* select {
+    border: 0;
+    display: block;
+    position: relative;
+    min-height: 1.146667rem;
+    line-height: 1.146667rem;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    padding-right: .6rem;
+    background-color: #eee;
+    background: transparent;
+    appearance: none;
+    -moz-appearance: none;
+}
+
+*/
+#sideClick p .jiancedian,
+.list .type {
+    float: left;
+    margin-top: 1.3rem;
+}
+
+.list .type,
+.selectTime img {
+    width: 1.3rem;
+}
+
+#sideClick,
+#electric,
+#select,
+.selectTime {
+    height: 4rem;
+    /* line-height: 4.6rem; */
+    /* padding-top: 0.5rem; */
+}
+
+#energySelect {
+    background: transparent;
+    border: none;
+    -webkit-appearance: none;
+    /* width: calc(100% - 68px); */
+    display: inline;
+    /* position: fixed; */
+    line-height: 3.8rem;
+    font-size: 1rem;
+    /* background: url('../image/right.png') no-repeat right 5px center; */
+}
+
+.list {
+    /* height: 6rem;
+    line-height: 5rem;
+    padding-top: 0.5rem; */
+    border-bottom: 1px dashed #C8C9CA;
+    background: url(../image/right.png) no-repeat right 1rem center;
+}
+
+.list p {
+    float: left;
+    margin-bottom: 0;
+}
+
+/* 清除ie的默认选择框样式清除，隐藏下拉箭头
+select::-ms-expand {
+    display: none;
+} */
+
+
+/*公共样式*/
+.public li {
+    padding-left: 1rem;
+    height: 6rem;
+    line-height: 6rem;
+    background: url('../image/right.png') no-repeat right 1rem center;
+    /*	border-bottom: 1px dashed #C8C9CA;*/
+}
+
+.public li img {
+    width: 1.4rem;
+    vertical-align: -0.1rem;
+    margin-right: 0.5rem;
+}
+
+.public .clearbg {
+    background: none;
+}
+
+.public .elec-btn {
+    width: 100%;
+    height: 4.5rem;
+    background: url(../image/timeBg.png);
+    background-size: 100% 100%;
+    padding-left: 1.5rem;
+    box-shadow: 0 -15px 15px -10px #BFBFC0 inset;
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<!-- 变压器 -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/TransformerDCpanel.css" />
+    <link rel="stylesheet" href="css/general.css">
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/echarts.min.js"></script>
+    <link rel="stylesheet" href="lib/LCalendar.css">
+    <script src="lib/LCalendar.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
+    <script src="lib/toast.js"></script>
+    <script src="js/TransformerDCpanel.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="t-ctn">
+            <div class="s-ctn">
+                <!--            <div class="trans select">
+                <img src="image/transform-orange.png"/>
+                <p>10kV变压器</p>
+            </div>
+            <div class="trans">
+                <img src="image/transform-orange.png"/>
+                <p>10kV变压器</p>
+            </div>
+            <div class="trans">
+                <img src="image/transform-orange.png"/>
+                <p>10kV变压器</p>
+            </div>
+            <div class="trans">
+                <img src="image/transform-orange.png"/>
+                <p>10kV变压器</p>
+            </div>-->
+            </div>
+        </div>
+        <!--    <div class="side-left side-left-tran">-->
+        <!--        &lt;!&ndash; 变压器列表 &ndash;&gt;-->
+        <!--        <ul class="transform">-->
+        <!--            &lt;!&ndash;            <li class="trans select">-->
+        <!--                            <img src="image/transform-orange.png"/>-->
+        <!--                            <p>10kV变压器</p>-->
+        <!--                        </li>-->
+        <!--                        <li class="trans">-->
+        <!--                            <img src="image/transform-orange.png"/>-->
+        <!--                            <p>10kV变压器</p>-->
+        <!--                        </li>&ndash;&gt;-->
+        <!--        </ul>-->
+        <!--    </div>-->
+
+        <div class="tran-stateb">
+            <p class="title">
+                <!-- 变压器名称： -->
+                <img class="titleImg" src="image/zhiliuping1.png" />
+                <span class="i18n" data-i18n="ui_DCplanStatus"></span>
+            </p>
+            <ul>
+                <li id="power" class="tran-statec">
+                    <p class="i18n" name="Load" data-i18n="ui_yaoce"></p>
+                    <ul>
+                        <li>
+                            <!-- 交流1路A相电压 -->
+                            <span class="i18n" name="FDCSAC1UA" data-i18n="ui_Avoltage1"></span>:
+                            <span class="FDCSAC1UA"></span>
+
+                        </li>
+                        <li>
+                            <!-- 交流1路B相电压 -->
+                            <span class="i18n" name="FDCSAC1UB" data-i18n="ui_Bvoltage1"></span>:
+                            <span class="FDCSAC1UB"></span>
+                        </li>
+                        <li>
+                            <!-- 交流1路C相电压 -->
+                            <span class="i18n" name="FDCSAC1UC" data-i18n="ui_Cvoltage1"></span>:
+                            <span class="FDCSAC1UC"></span>
+                        </li>
+                        <li>
+                            <!-- 交流2路A相电压 -->
+                            <span class="i18n" name="FDCSAC2UA" data-i18n="ui_Avoltage2"></span>:
+                            <span class="FDCSAC2UA"></span>
+                        </li>
+                        <li>
+                            <!-- 交流2路B相电压 -->
+                            <span class="i18n" name="FDCSAC2UB" data-i18n="ui_Bvoltage2"></span>:
+                            <span class="FDCSAC2UB"></span>
+                        </li>
+                        <li>
+                            <!-- 交流2路C相电压 -->
+                            <span class="i18n" name="FDCSAC2UC" data-i18n="ui_Cvoltage2"></span>:
+                            <span class="FDCSAC2UC"></span>
+                        </li>
+                        <li>
+                            <!--  合母电压 -->
+                            <span class="i18n" name="FDCSPOWERONU" data-i18n="ui_DCSPowerOnU"></span>:
+                            <span class="FDCSPOWERONU"></span>
+                        </li>
+                        <li>
+                            <!--  控母电压 -->
+                            <span class="i18n" name="FDCSPOWEROFFU" data-i18n="ui_DCSPowerOffU"></span>:
+                            <span class="FDCSPOWEROFFU"></span>
+                        </li>
+                        <li>
+                            <!--  电池总电流 -->
+                            <span class="i18n" name="FDCSSUMBATTERYI" data-i18n="ui_DCSum"></span>:
+                            <span class="FDCSSUMBATTERYI"></span>
+                        </li>
+                        <li>
+                            <!--  控母电流 -->
+                            <span class="i18n" name="FDCSPOWEROFFI" data-i18n="ui_DCSPowerOffI"></span>:
+                            <span class="FDCSPOWEROFFI"></span>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="list" id="electric">
+            <img class="type" src="image/type.png" />
+            <span value="P" id="EnergyKind" data-i18n="ui_type" style="font-size:1rem;margin-left: 0.5rem;"> </span>：
+            <select id="energySelect">
+                <option value="fDcsac1" data-i18n="ui_selsectAvolt1"></option>
+
+                <option value="fDcsac2" data-i18n="ui_selsectAvolt2"></option>
+                <!-- 合母电压 -->
+                <option value="fDcspoweronu" data-i18n="ui_DCSPowerOnU"></option>
+                <!-- 控母电压 -->
+                <option value="fDcspoweroffu" data-i18n="ui_DCSPowerOffU"></option>
+                <!-- fDcssumbatteryi 电池总电流 -->
+                <option value="fDcssumbatteryi" data-i18n="ui_DCSum"></option>
+                <!-- fDcspoweroffi 控母电流 -->
+                <option value="fDcspoweroffi" data-i18n="ui_DCSPowerOffI"></option>
+            </select>
+        </div>
+        <div class="date">
+            <div class="form-group form_date_end selectTime">
+                <div class="timeBtn">
+                    <span id="datePre"><img src="image/left-w.png" /></span>
+                    <input readonly type="text" id="date">
+                    <span id="dateNext"><img src="image/right-w.png" /></span>
+                </div>
+            </div>
+        </div>
+        <div class="elec-btn i18n" id="EnergyContain">
+            <!-- <button type="button" class="btn select" value="fPf" data-i18n="ui_sum"></button> -->
+            <button type="button" class="btn s-select" value="fPfa" data-i18n="ui_a"></button>
+            <button type="button" class="btn" value="fPfb" data-i18n="ui_b"></button>
+            <button type="button" class="btn" value="fPfc" data-i18n="ui_c"></button>
+        </div>
+        <!-- <div>
+            <span id="NowPower" class="i18n s-select" name="Apparentpower" data-i18n="ui_a"></span>
+            <span id="havePower" class="i18n" name="AcPower" data-i18n="ui_b"></span>
+            <span id="NothingPower" class="i18n" name="RePower" data-i18n="ui_c"></span>
+
+        </div> -->
+    </div>
+    <div class="chart">
+        <!-- <div id="tempTitle">变压器</div> -->
+        <div id="powerChart" class="showDIV"></div>
+    </div>
+
+</body>
+
+</html>
