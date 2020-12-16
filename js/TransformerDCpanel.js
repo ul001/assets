@@ -143,6 +143,7 @@ $(function () {
   }
   //切换调接口
   $("#energySelect").change(function () {
+    var energySelect = $("#energySelect").val();
     if (energySelect == 'fDcsac1') {
       // .css("display", "block");
       $("#EnergyContain").css("display", "block");
