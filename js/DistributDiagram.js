@@ -22,6 +22,13 @@ if (isIOS) {
     tokenFromAPP = android.getToken();
     subidFromAPP = android.getfSubid();
 }
+//判断是否从配电房跳转进来
+var pushtype = Substation.GetQueryString("pushType");
+if (pushtype == 1) {
+    $("#backBtn").css("display", "block");
+} else {
+    $("#backBtn").css("display", "none");
+}
 var refreshdata;
 var mainUrl = baseUrlFromAPP.split("SubstationWEBV2")[0] + "SubstationWEBV2/main/getCurrentValue";
 $(function () {
@@ -42,6 +49,11 @@ $(function () {
         $('g[name="off"]').hide();
         //        $(".diagram").overscroll();
     }
+
+    //返回按钮
+    $("#backBtn").on("click", function () {
+        window.history.back(-1);
+    })
 
     //放大缩小
     $("#BigDom").on("click", function () {
@@ -103,30 +115,7 @@ $(function () {
                     var paramCode = val.meterParamValues[i].fParamcode;
                     var fvalue = val.meterParamValues[i].fValue;
                     var valjoinunit = val.meterParamValues[i].fValuejoinunit;
-                    // if (val.meterParamValues[i].fUnitGroup == "U") {
-                    //     if (fvalue >= 1000) {
-                    //         valjoinunit = (fvalue / 1000).toFixed(2) + "kV";
-                    //     }
-                    // }
-                    // map.set(paramCode.toLowerCase(), valjoinunit);
-                    // switch (paramCode.toUpperCase()) {
-                    //     case "SWITCH":
-                    //     case "SWITCHON":
-                    //         1 === fvalue ?
-                    //             (group.children('g[name="off"]').hide(),
-                    //                 group.children('g[name="on"]').show()) :
-                    //             (group.children('g[name="on"]').hide(),
-                    //                 group.children('g[name="off"]').show());
-                    //         break;
-                    //     case "SWITCHOFF":
-                    //         0 === fvalue ?
-                    //             (group.children('g[name="off"]').hide(),
-                    //                 group.children('g[name="on"]').show()) :
-                    //             (group.children('g[name="on"]').hide(),
-                    //                 group.children('g[name="off"]').show());
-                    //         break;
-                    //     default:
-                    // }
+
                     var flag = val.meterParamValues[i].fValue == undefined ? -1 : val.meterParamValues[i].fValue;
                     if (flag != -1) {
                         flag = parseInt(flag);

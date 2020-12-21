@@ -1,0 +1,177 @@
+.listView {
+    background: white;
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.3rem;
+    margin: 0.3rem 0 0.3rem 0;
+}
+
+* {
+    outline: 0 !important;
+}
+
+#subList {
+    background: url("../image/down-h.png") no-repeat right center;
+    border: none;
+    padding-right: 1.5rem;
+    color: #000;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.container {
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.container>img {
+    padding-top: 5px;
+}
+
+body {
+    height: 100%;
+    background: #fff;
+}
+
+.data {
+    line-height: 40px;
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.data img {
+    float: right;
+    vertical-align: -20px;
+    cursor: pointer;
+}
+
+.container {
+    height: 100%;
+    padding-top: 1rem;
+}
+
+.diagram {
+    background: #000;
+    width: inherit;
+    height: calc(100% - 4rem);
+    position: absolute;
+    top: 4rem;
+    left: 0;
+}
+
+.container select {
+    width: auto;
+    max-width: 48%;
+    border-radius: 1.2rem;
+    margin: 0 auto;
+    height: 2rem;
+    display: block;
+    margin-left: 1%;
+    margin-bottom: 0.5rem;
+    float: left;
+    padding: 0 0.5rem;
+}
+
+.container .SimDom {
+    margin-right: 1%;
+    vertical-align: -4px;
+    background-image: url("../image/suoxiao-h.png");
+    background-repeat: no-repeat;
+    background-position: 0.5rem 0.5rem;
+    background-size: 1rem;
+}
+
+.container .BigDom {
+    margin-right: 1%;
+    vertical-align: -4px;
+    background-image: url("../image/fangda-h.png");
+    background-repeat: no-repeat;
+    background-position: 0.4rem 0.4rem;
+    background-size: 1.3rem;
+}
+
+.SimDom,
+.BigDom {
+    padding-left: 1.6rem;
+}
+
+#BigDom[class*="select"] {
+    background-image: url("../image/fangda.png");
+    background-color: #02AC94;
+    color: #fff;
+}
+
+#SimDom[class*="select"] {
+    background-image: url("../image/suoxiao.png");
+    background-color: #02AC94;
+    color: #fff;
+}
+
+/*body .container .select{
+	background-color:#02AC94;
+	color:#fff;
+	background-repeat:no-repeat;
+	background-position:0.7rem 0.3rem;
+	background-size :1.5rem;
+}*/
+
+.container button {
+    width: 24%;
+    border-radius: 1.2rem;
+    height: 2rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    margin-right: 1%;
+    float: right;
+    background: rgb(244, 242, 241);
+    border: none;
+    color: #8a8a8a;
+}
+
+.diagram {
+    overflow: auto;
+}
+
+.nav.nav-tabs {
+    width: 100%;
+    overflow: auto;
+    background: #000;
+}
+
+#modelShow .nav-tabs>li.active>a,
+#modelShow .nav-tabs>li.active>a:focus,
+#modelShow .nav-tabs>li.active>a:hover {
+    background-color: #ffa73c;
+    color: #000;
+    border: 0;
+}
+
+.nav-tabs>li>a,
+.nav-tabs>li>a:hover {
+    border: 0;
+    color: #fff;
+}
+
+#detailTable {
+    height: 100%;
+    overflow-y: scroll;
+    background-color: #000;
+}
+
+#modelShow #detailTable table {
+    background-color: #000;
+    color: #fff;
+    max-height: 10rem;
+}
+
+#modelShow table thead {
+    background-color: #02A8A6;
+    color: #fff;
+}
+
+.table-hover>tbody>tr:hover {
+    background: #2e2e2e;
+    color: #FFF;
+}

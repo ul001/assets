@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<!-- 配电图 -->
+<!-- 配电室 -->
 
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,8 @@
     <title></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!--    <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css"/>-->
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/DistributDiagram.css" />
+    <link rel="stylesheet" type="text/css" href="css/DistributRoom.css" />
     <link rel="stylesheet" href="css/general.css">
 
 </head>
@@ -21,7 +20,6 @@
             <select id="subList">
                 <option></option>
             </select>
-            <button id="backBtn" style="cursor: pointer;background: red;color: white;display: none;">返回</button>
             <button id="BigDom" class="BigDom select" data-i18n="ui_larger"></button>
             <button id="SimDom" class="SimDom" data-i18n="ui_smaller"></button>
         </div>
@@ -36,12 +34,7 @@
                 </div>
                 <!--            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span id="close" aria-hidden="true" onclick="closeModel()">×</span></button>-->
                 <ul class="nav nav-tabs">
-                    <li id="U" role="presentation"><a href="#">电压</a></li>
-                    <li id="I" role="presentation"><a href="#">电流</a></li>
-                    <li id="P" role="presentation"><a href="#">功率</a></li>
-                    <li id="E" role="presentation"><a href="#">电能</a></li>
-                    <li id="UB" role="presentation"><a href="#">不平衡度</a></li>
-                    <li id="Max" role="presentation"><a href="#">当月最大需量</a></li>
+                    <li id="U" role="presentation"><a href="#">详情列表</a></li>
                 </ul>
                 <div class="tab-content" style="height:calc(100% - 110px)">
                     <div role="tabpanel" class="tab-pane active" id="voltage" style="height:100%;">
@@ -50,7 +43,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <script src="lib/jquery-1.12.4.js"></script>
@@ -61,7 +53,7 @@
     <script src="js/tools.js"></script>
     <script src="lib/language.js"></script>
     <script src="lib/tools.js"></script>
-    <script src="js/DistributDiagram.js"></script>
+    <script src="js/DistributRoom.js"></script>
     <script src="lib/toast.js"></script>
 </body>
 
