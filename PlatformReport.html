@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<!-- 电量统计 -->
+<!-- 平台用电报表 -->
 
 <head>
     <meta charset="UTF-8">
@@ -21,11 +21,23 @@
     <script src="lib/language.js"></script>
     <script src="lib/tools.js"></script>
     <script src="lib/toast.js"></script>
-    <script src="js/CustomElectricityReport.js"></script>
+    <script src="js/PlatformReport.js"></script>
 </head>
 
 <body>
     <div class="container">
+        <div class="PlatformTree">
+            <div class="selectcontain-main">
+                <div class="treeSearch">
+                    <img class="clear" src="image/clear.png" />
+                    <input type="text" id="PlatformCircuitidsInput" />
+                    <button type="button" id="PlatformCircuitidsList" data-i18n="ui_search"></button>
+                </div>
+                <div id="platformtreeview" class="col-sm-4"></div>
+                <button type="button" class="cancel" data-i18n="ui_cancel"></button>
+                <button type="button" class="search" id="Platformconfirm" data-i18n="ui_select"></button>
+            </div>
+        </div>
         <div class="tree">
             <div class="selectcontain-main">
                 <div class="treeSearch">
@@ -38,15 +50,24 @@
                 <button type="button" class="search" id="confirm" data-i18n="ui_select"></button>
             </div>
         </div>
+        <div class="list" id="PlatformsideClick">
+            <p>
+                <img class="jiancedian" src="image/jigou.png" />
+                <span><span style="margin-left: 0.7rem;" data-i18n="ui_organization"> </span>：</span>
+                <!--            <span><span data-i18n="ui_watchposition"></span>：</span>-->
+                <span id="Platformmeter"></span>
+            </p>
+        </div>
         <div class="list type">
             <img class="jiancedian" src="image/fenxiang_h.png" />
+            <span><span style="margin-left: 0.7rem;" data-i18n="ui_customreport"></span>：</span>
             <select id="customType">
             </select>
         </div>
         <div class="list" id="sideClick">
             <p>
                 <img class="jiancedian" src="image/jiancedian.png" />
-                <!--            <span><span data-i18n="ui_watchposition"></span>：</span>-->
+                <span><span style="margin-left: 0.7rem;" data-i18n="ui_watchposition"></span>：</span>
                 <span id="meter"></span>
             </p>
         </div>

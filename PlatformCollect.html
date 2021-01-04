@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<!-- 平台集抄 -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title></title>
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/collect.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="css/general.css">
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="lib/LCalendar.css">
+    <script src="lib/LCalendar.js"></script>
+    <script src="lib/bootstrap-treeview.js"></script>
+    <script src="lib/bootstrap-table.min.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="lib/toast.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
+    <script src="js/PlatformCollect.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="PlatformTree">
+            <div class="selectcontain-main">
+                <div class="treeSearch">
+                    <img class="clear" src="image/clear.png" />
+                    <input type="text" id="PlatformCircuitidsInput" />
+                    <button type="button" id="PlatformCircuitidsList" data-i18n="ui_search"></button>
+                </div>
+                <div id="platformtreeview" class="col-sm-4"></div>
+                <button type="button" class="cancel" data-i18n="ui_cancel"></button>
+                <button type="button" class="search" id="Platformconfirm" data-i18n="ui_select"></button>
+            </div>
+        </div>
+        <div class="tree">
+            <div class="selectcontain-main">
+                <div class="treeSearch">
+                    <img class="clear" src="image/clear.png" />
+                    <input type="text" id="CircuitidsInput" />
+                    <button type="button" id="CircuitidsList" data-i18n="ui_search"></button>
+                </div>
+                <div id="treeview" class="col-sm-4"></div>
+                <button type="button" class="cancel" data-i18n="ui_cancel"></button>
+                <button type="button" class="search" id="confirm" data-i18n="ui_select"></button>
+            </div>
+        </div>
+        <div class="list" id="PlatformsideClick">
+            <p>
+                <img class="jiancedian" src="image/jigou.png" />
+                <span><span data-i18n="ui_organization"> </span>：</span>
+                <span id="Platformmeter"></span>
+            </p>
+            <img src="image/right.png" />
+        </div>
+        <div class="list selectType">
+            <img class="jiancedian" src="image/fenxiang_h.png" />
+            <span><span style="margin-left: 0.7rem;" data-i18n="ui_customreport"></span>：</span>
+            <select id="customType">
+            </select>
+        </div>
+        <div class="list" id="sideClick">
+            <p>
+                <img class="jiancedian" src="image/jiancedian.png" />
+                <span><span data-i18n="ui_watchposition"></span>：</span>
+                <span id="meter"></span>
+            </p>
+            <img src="image/right.png" />
+        </div>
+        <div class="form-group function-group" id="startDate">
+            <!--            <div class="dosageSelect">-->
+            <img class="dateImg" src="image/date.png" />
+            <label class="col-md-2 control-label"><span data-i18n="ui_startdate"></span>：</label>
+            <input readonly type="text" id="dateStart" class="startDate">
+            <!--        <img class="listImg" src="image/right.png">-->
+            <!--            </div>-->
+        </div>
+        <div class="form-group function-group" id="endDate">
+            <img class="dateImg" src="image/date.png" />
+            <label class="col-md-2 control-label"><span data-i18n="ui_enddate"></span>：</label>
+            <input readonly type="text" id="dateEnd" class="endDate">
+            <!--        <img class="listImg" src="image/right.png">-->
+        </div>
+        <button type="button" class="search" id="search"><img src="image/search.png" /><span
+                data-i18n="ui_select"></span></button>
+        <ul class="list-unstyled" id="listUl"></ul>
+    </div>
+    <!--<div class="contain">
+<h1>主进线柜<span>2019-06-11</span></h1>
+<div class="type">
+    <img src="image/start.png"/>
+    <p class="list1">类型</p>
+    <p>报警恢复</p>
+</div>
+<div class="type">
+    <img src="image/stop.png"/>
+    <p class="list1">参数名称</p>
+    <p>B相电压</p>
+</div>
+<div class="type">
+    <img src="image/between.png"/>
+    <p class="list1">报警值</p>
+    <p>286.6</p>
+</div>
+</div>-->
+</body>
+
+</html>
