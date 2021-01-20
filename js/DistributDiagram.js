@@ -1,6 +1,6 @@
 let toast;
-var baseUrlFromAPP = "http://www.acrelcloud.cn/SubstationWEBV2/v5";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTc2NTM4OTMsInVzZXJuYW1lIjoieG1weiJ9.l_M0rv6OsYFK5BlEJKESdPEAWxJVE8UwKJxCPIJB1uE";
+var baseUrlFromAPP = "http://61.160.70.82:20001/SubstationWEBV2/v5";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTE3MTczMjYsInVzZXJuYW1lIjoiYWRtaW4ifQ.-jGbOap1nPFM24hiPVsF759ptNy3vB75tYLOXARuwu0";
 var subidFromAPP = 10100001;
 //iOS安卓基础传参
 var u = navigator.userAgent,
@@ -18,9 +18,9 @@ if (isIOS) {
     tokenFromAPP = storage.token;
     subidFromAPP = storage.fsubID;
 } else {
-    baseUrlFromAPP = android.getBaseUrl();
-    tokenFromAPP = android.getToken();
-    subidFromAPP = android.getfSubid();
+    // baseUrlFromAPP = android.getBaseUrl();
+    // tokenFromAPP = android.getToken();
+    // subidFromAPP = android.getfSubid();
 }
 //判断是否从配电房跳转进来
 var pushtype = Substation.GetQueryString("pushType");
@@ -117,7 +117,130 @@ $(function () {
                     var valjoinunit = val.meterParamValues[i].fValuejoinunit;
 
                     var flag = val.meterParamValues[i].fValue == undefined ? -1 : val.meterParamValues[i].fValue;
-                    if (flag != -1) {
+                    if (val.meterParamValues[i].fUnitGroup == "DI") {
+                        flag = parseInt(flag)
+                        switch (paramCode.toUpperCase()) {
+                            case "SWITCH":
+                            case "SWITCHON":
+                                if (flag !== -1) {
+                                    $(group).find("g[name='offline']").hide();
+                                    if (flag === 1) {
+                                        $(group).find('g[name="off"]').hide();
+                                        $(group).find('g[name="on"]').show()
+                                    }
+                                    if (flag === 0) {
+                                        $(group).find('g[name="on"]').hide();
+                                        $(group).find('g[name="off"]').show()
+                                    }
+                                } else {
+                                    if ($(group).find("g[name='offline']").length > 0) {
+                                        $(group).find("g[name='offline']").show();
+                                        $(group).find('g[name="off"]').hide()
+                                    } else {
+                                        $(group).find('g[name="off"]').show()
+                                    }
+                                    $(group).find('g[name="on"]').hide();
+                                }
+                                break;
+                            case "SWITCHOFF":
+                                if (flag !== -1) {
+                                    $(group).find("g[name='offline']").hide();
+                                    if (flag === 1) {
+                                        $(group).find('g[name="on"]').hide();
+                                        $(group).find('g[name="off"]').show()
+                                    }
+                                    if (flag === 0) {
+                                        $(group).find('g[name="off"]').hide();
+                                        $(group).find('g[name="on"]').show()
+                                    }
+                                } else {
+                                    if ($(group).find("g[name='offline']").length > 0) {
+                                        $(group).find("g[name='offline']").show();
+                                        $(group).find('g[name="on"]').hide()
+                                    } else {
+                                        $(group).find('g[name="on"]').show()
+                                    }
+                                    $(group).find('g[name="off"]').hide();
+                                }
+                                break;
+                            default:
+                                // 其他开关量
+                                var offlineStr = paramCode + "/offline";
+                                var onStr = paramCode + "/1";
+                                var offStr = paramCode + "/0";
+
+                                var lowerCase = paramCode.toLowerCase();
+                                var upperCase = paramCode.toUpperCase();
+
+
+                                var offlineStrLow = lowerCase + "/offline";
+                                var onStrLow = lowerCase + "/1";
+                                var offStrLow = lowerCase + "/0";
+
+
+                                var offlineStrUp = upperCase + "/offline";
+                                var onStrUp = upperCase + "/1";
+                                var offStrUp = upperCase + "/0";
+
+                                var on = undefined,
+                                    off = undefined,
+                                    offline = undefined;
+
+                                if ($(group).find("g[name='" + onStr + "']").length > 0) {
+                                    on = $(group).find("g[name='" + onStr + "']");
+                                }
+                                if ($(group).find("g[name='" + onStrLow + "']").length > 0) {
+                                    on = $(group).find("g[name='" + onStrLow + "']");
+                                }
+                                if ($(group).find("g[name='" + onStrUp + "']").length > 0) {
+                                    on = $(group).find("g[name='" + onStrUp + "']");
+                                }
+
+                                if ($(group).find("g[name='" + offStr + "']").length > 0) {
+                                    off = $(group).find("g[name='" + offStr + "']");
+                                }
+                                if ($(group).find("g[name='" + offStrLow + "']").length > 0) {
+                                    off = $(group).find("g[name='" + offStrLow + "']");
+                                }
+                                if ($(group).find("g[name='" + offStrUp + "']").length > 0) {
+                                    off = $(group).find("g[name='" + offStrUp + "']");
+                                }
+
+                                if ($(group).find("g[name='" + offlineStr + "']").length > 0) {
+                                    offline = $(group).find("g[name='" + offlineStr + "']");
+                                }
+                                if ($(group).find("g[name='" + offlineStrLow + "']").length > 0) {
+                                    offline = $(group).find("g[name='" + offlineStrLow + "']");
+                                }
+                                if ($(group).find("g[name='" + offlineStrUp + "']").length > 0) {
+                                    offline = $(group).find("g[name='" + offlineStrUp + "']");
+                                }
+
+                                if (flag !== -1) {
+                                    if (flag === 0) {
+                                        if (on) $(on).hide();
+                                        if (off) $(off).show();
+                                    }
+                                    if (flag === 1) {
+                                        if (on) $(on).show();
+                                        if (off) $(off).hide();
+                                    }
+
+                                    if (offline) {
+                                        $(offline).hide();
+                                    }
+                                } else {
+                                    if (off) {
+                                        $(offline).show();
+                                        if (on) $(on).hide();
+                                        if (off) $(off).hide();
+                                    } else {
+                                        if (on) $(on).hide();
+                                        if (off) $(off).show();
+                                    }
+                                }
+                        }
+                    } else if (flag != -1) {
                         flag = parseInt(flag);
                         if (val.meterParamValues[i].fUnitGroup == "U") {
                             if (fvalue >= 1000) {
