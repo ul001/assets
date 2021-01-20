@@ -1,5 +1,5 @@
 let toast;
-var baseUrlFromAPP = "http://61.160.70.82:20001/SubstationWEBV2/v5";
+var baseUrlFromAPP = "http://www.acrelcloud.cn/SubstationWEBV2/v5";
 var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTE3MTczMjYsInVzZXJuYW1lIjoiYWRtaW4ifQ.-jGbOap1nPFM24hiPVsF759ptNy3vB75tYLOXARuwu0";
 var subidFromAPP = 10100001;
 //iOS安卓基础传参
@@ -18,17 +18,17 @@ if (isIOS) {
     tokenFromAPP = storage.token;
     subidFromAPP = storage.fsubID;
 } else {
-    // baseUrlFromAPP = android.getBaseUrl();
-    // tokenFromAPP = android.getToken();
-    // subidFromAPP = android.getfSubid();
+    baseUrlFromAPP = android.getBaseUrl();
+    tokenFromAPP = android.getToken();
+    subidFromAPP = android.getfSubid();
 }
 //判断是否从配电房跳转进来
-var pushtype = Substation.GetQueryString("pushType");
-if (pushtype == 1) {
-    $("#backBtn").css("display", "block");
-} else {
-    $("#backBtn").css("display", "none");
-}
+// var pushtype = Substation.GetQueryString("pushType");
+// if (pushtype == 1) {
+//     $("#backBtn").css("display", "block");
+// } else {
+//     $("#backBtn").css("display", "none");
+// }
 var refreshdata;
 var mainUrl = baseUrlFromAPP.split("SubstationWEBV2")[0] + "SubstationWEBV2/main/getCurrentValue";
 $(function () {
@@ -51,9 +51,9 @@ $(function () {
     }
 
     //返回按钮
-    $("#backBtn").on("click", function () {
-        window.history.back(-1);
-    })
+    // $("#backBtn").on("click", function () {
+    //     window.history.back(-1);
+    // })
 
     //放大缩小
     $("#BigDom").on("click", function () {
