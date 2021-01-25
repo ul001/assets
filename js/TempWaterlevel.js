@@ -18,9 +18,9 @@ $(function () {
         tokenFromAPP = storage.token;
         subidFromAPP = storage.fsubID;
     } else {
-        baseUrlFromAPP = android.getBaseUrl();
-        tokenFromAPP = android.getToken();
-        subidFromAPP = android.getfSubid();
+        // baseUrlFromAPP = android.getBaseUrl();
+        // tokenFromAPP = android.getToken();
+        // subidFromAPP = android.getfSubid();
     }
 
     let toast = new ToastClass(); //实例化toast对象
@@ -78,23 +78,24 @@ $(function () {
     getListData();
 
     function getListData() {
-        var url = baseUrlFromAPP + "/getNoise";
+        var url = baseUrlFromAPP + "/getWaterLevel";
         var params = {
             fSubid: subidFromAPP
         };
         getData(url, params, function (data) {
-            if (data.noiseList != null) {
-                if (data.noiseList.length > 0) {
+            if (data.thisWaterLevelList != null) {
+                if (data.thisWaterLevelList.length > 0) {
                     $("#cardList").empty();
-                    $(data.noiseList).each(function () {
-                        var noiseVal = "--";
-                        if (this.noise != undefined && this.noise != null) {
-                            noiseVal = parseFloat(this.noise).toFixed(1);
+                    $(data.thisWaterLevelList).each(function () {
+                        var speedVal = "--";
+                        var meterName = this.F_MeterName ? this.F_MeterName : this.F_MeterCode;
+                        if (this.fWaterlevel != undefined && this.fWaterlevel != null) {
+                            speedVal = parseFloat(this.fWaterlevel).toFixed(1);
                         }
-                        $("#cardList").append('<section class="sectionCard" value="' + this.f_MeterCode + '">' +
-                            '<p>' + this.f_MeterName + '</p>' +
-                            '<img src="image/noisepic.png"/>' +
-                            '<p>' + Operation['ui_noise'] + ':' + noiseVal + this.noiseUnit + '</p></section>');
+                        $("#cardList").append('<section class="sectionCard" value="' + this.F_MeterCode + '">' +
+                            '<p>' + meterName + '</p>' +
+                            '<img src="image/waterLevel.png"/>' +
+                            '<p>' + Operation['ui_WaterLevel'] + ':' + speedVal + this.fWaterlevelUnit + '</p></section>');
                     });
                     $("#cardList section:first").addClass("sectionSelect");
                     $(".sectionCard").on("click", function () {
@@ -113,18 +114,18 @@ $(function () {
         var time = [];
         var noise = [];
         var selectCode = $(".sectionSelect").attr('value');
-        var url = baseUrlFromAPP + "/getNoise";
+        var url = baseUrlFromAPP + "/getWaterLevel";
         var params = {
             fSubid: subidFromAPP,
             fMetercode: selectCode,
             time: $("#date").val()
         };
         getData(url, params, function (data) {
-            if (data.FNoiseByDate != null) {
-                if (data.FNoiseByDate.length > 0) {
-                    $(data.FNoiseByDate).each(function () {
+            if (data.FWaterLevelListByDate != null) {
+                if (data.FWaterLevelListByDate.length > 0) {
+                    $(data.FWaterLevelListByDate).each(function () {
                         time.push(this.fCollecttime.substring(11, 16));
-                        noise.push(this.fNoise);
+                        noise.push(this.fWaterlevel);
                     });
                 }
             }
@@ -228,7 +229,7 @@ $(function () {
     }
 
     function setChart(chartData) {
-        var option = initLineAnal(chartData.noises, chartData.times, Operation['ui_noise'], "dB");
+        var option = initLineAnal(chartData.noises, chartData.times, Operation['ui_WaterLevelMonitor'], "dB");
         var myChart = echarts.init($("#noiseChart").get(0));
         myChart.setOption(option);
     };

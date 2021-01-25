@@ -23,12 +23,12 @@ if (isIOS) {
     subidFromAPP = android.getfSubid();
 }
 //判断是否从配电房跳转进来
-// var pushtype = Substation.GetQueryString("pushType");
-// if (pushtype == 1) {
-//     $("#backBtn").css("display", "block");
-// } else {
-//     $("#backBtn").css("display", "none");
-// }
+var pushtype = Substation.GetQueryString("pushType");
+if (pushtype == 1) {
+    $("#backBtn").css("display", "block");
+} else {
+    $("#backBtn").css("display", "none");
+}
 var refreshdata;
 var mainUrl = baseUrlFromAPP.split("SubstationWEBV2")[0] + "SubstationWEBV2/main/getCurrentValue";
 $(function () {
@@ -51,9 +51,9 @@ $(function () {
     }
 
     //返回按钮
-    // $("#backBtn").on("click", function () {
-    //     window.history.back(-1);
-    // })
+    $("#backBtn").on("click", function () {
+        window.history.back(-1);
+    })
 
     //放大缩小
     $("#BigDom").on("click", function () {
