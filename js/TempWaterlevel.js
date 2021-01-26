@@ -250,7 +250,7 @@ $(function () {
             chartData.noises,
             chartData.times,
             Operation["ui_WaterLevelMonitor"],
-            "dB"
+            "mm"
         );
         var myChart = echarts.init($("#noiseChart").get(0));
         myChart.setOption(option);
