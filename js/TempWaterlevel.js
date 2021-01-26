@@ -1,15 +1,17 @@
 var refreshdata;
 $(function () {
     var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
-    var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTIxNjQxMDgsInVzZXJuYW1lIjoiYWRtaW4ifQ.hO_SM7NwgAyrOHJqQB1L53hHfumLoS6OGuMcSOJAgv0";
+    var tokenFromAPP =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTIxNjQxMDgsInVzZXJuYW1lIjoiYWRtaW4ifQ.hO_SM7NwgAyrOHJqQB1L53hHfumLoS6OGuMcSOJAgv0";
     var subidFromAPP = 10100001;
     //iOS安卓基础传参
     var u = navigator.userAgent,
         app = navigator.appVersion;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
-    if (isIOS) { //ios系统的处理
+    if (isIOS) {
+        //ios系统的处理
         window.webkit.messageHandlers.iOS.postMessage(null);
         var storage = localStorage.getItem("accessToken");
         // storage = storage ? JSON.parse(storage):[];
@@ -18,20 +20,20 @@ $(function () {
         tokenFromAPP = storage.token;
         subidFromAPP = storage.fsubID;
     } else {
-        // baseUrlFromAPP = android.getBaseUrl();
-        // tokenFromAPP = android.getToken();
-        // subidFromAPP = android.getfSubid();
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+        subidFromAPP = android.getfSubid();
     }
 
     let toast = new ToastClass(); //实例化toast对象
 
     function getData(url, params, successCallback) {
         toast.show({
-            text: Operation['ui_loading'],
+            text: Operation["ui_loading"],
             loading: true
         });
         $.ajax({
-            type: 'GET',
+            type: "GET",
             url: url,
             data: params,
             headers: {
@@ -50,9 +52,7 @@ $(function () {
                             ip: ipAddress,
                             exceptionMessage: JSON.stringify(result.data.stackTrace)
                         },
-                        success: function (data) {
-
-                        }
+                        success: function (data) {}
                     });
                 }
                 toast.hide();
@@ -66,7 +66,7 @@ $(function () {
             },
             error: function () {
                 toast.show({
-                    text: Operation['code_fail'],
+                    text: Operation["code_fail"],
                     duration: 2000
                 });
             }
@@ -88,18 +88,34 @@ $(function () {
                     $("#cardList").empty();
                     $(data.thisWaterLevelList).each(function () {
                         var speedVal = "--";
-                        var meterName = this.F_MeterName ? this.F_MeterName : this.F_MeterCode;
+                        var meterName = this.F_MeterName ?
+                            this.F_MeterName :
+                            this.F_MeterCode;
                         if (this.fWaterlevel != undefined && this.fWaterlevel != null) {
                             speedVal = parseFloat(this.fWaterlevel).toFixed(1);
                         }
-                        $("#cardList").append('<section class="sectionCard" value="' + this.F_MeterCode + '">' +
-                            '<p>' + meterName + '</p>' +
+                        $("#cardList").append(
+                            '<section class="sectionCard" value="' +
+                            this.F_MeterCode +
+                            '">' +
+                            "<p>" +
+                            meterName +
+                            "</p>" +
                             '<img src="image/waterLevel.png"/>' +
-                            '<p>' + Operation['ui_WaterLevel'] + ':' + speedVal + this.fWaterlevelUnit + '</p></section>');
+                            "<p>" +
+                            Operation["ui_WaterLevel"] +
+                            ":" +
+                            speedVal +
+                            this.fWaterlevelUnit +
+                            "</p></section>"
+                        );
                     });
                     $("#cardList section:first").addClass("sectionSelect");
                     $(".sectionCard").on("click", function () {
-                        $(this).addClass("sectionSelect").siblings().removeClass("sectionSelect");
+                        $(this)
+                            .addClass("sectionSelect")
+                            .siblings()
+                            .removeClass("sectionSelect");
                         //                        $("#date").val(time);
                         getChartData();
                     });
@@ -113,7 +129,7 @@ $(function () {
         var chartData = {};
         var time = [];
         var noise = [];
-        var selectCode = $(".sectionSelect").attr('value');
+        var selectCode = $(".sectionSelect").attr("value");
         var url = baseUrlFromAPP + "/getWaterLevel";
         var params = {
             fSubid: subidFromAPP,
@@ -131,7 +147,7 @@ $(function () {
             }
             chartData = {
                 times: time,
-                noises: noise,
+                noises: noise
             };
             setChart(chartData);
         });
@@ -139,72 +155,73 @@ $(function () {
 
     function initLineAnal(value, time, name, unit) {
         var option = {
-            color: ['#2EC7C9', '#B6A2DE', '#3CA4E4', '#FFB980'],
+            color: ["#2EC7C9", "#B6A2DE", "#3CA4E4", "#FFB980"],
             tooltip: {
-                trigger: 'axis'
+                trigger: "axis"
             },
             toolbox: {
                 show: true,
-                orient: 'horizontal',
+                orient: "horizontal",
                 top: -6,
                 feature: {
                     dataView: {
                         readOnly: true
                     },
                     dataZoom: {
-                        yAxisIndex: 'none'
+                        yAxisIndex: "none"
                     },
                     restore: {}
                 }
             },
-            dataZoom: [{ // 这个dataZoom组件，默认控制x轴。
-                type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+            dataZoom: [{
+                // 这个dataZoom组件，默认控制x轴。
+                type: "slider", // 这个 dataZoom 组件是 slider 型 dataZoom 组件
                 start: 0, // 左边在 10% 的位置。
                 end: 100, // 右边在 60% 的位置。
                 height: 25,
                 bottom: 8
             }],
             grid: {
-                left: '12%',
-                right: '12%',
-                top: '20%',
-                bottom: '28%'
+                left: "12%",
+                right: "12%",
+                top: "20%",
+                bottom: "28%"
             },
             xAxis: {
-                type: 'category',
+                type: "category",
                 boundaryGap: false,
-                data: time,
+                data: time
             },
             yAxis: {
-                type: 'value',
+                type: "value",
                 scale: true,
                 axisLabel: {
-                    formatter: '{value}'
+                    formatter: "{value}"
                 },
-                name: unit,
+                name: unit
             },
             series: [{
                 name: name,
-                type: 'line',
+                type: "line",
                 data: value,
                 markPoint: {
-                    symbol: 'circle',
+                    symbol: "circle",
                     symbolSize: 10,
                     data: [{
-                            name: Operation['ui_maxval'],
-                            type: 'max',
+                            name: Operation["ui_maxval"],
+                            type: "max",
                             label: {
                                 normal: {
-                                    formatter: 'Max:{c}'
+                                    formatter: "Max:{c}"
                                 }
                             }
                         },
                         {
-                            name: Operation['ui_minval'],
-                            type: 'min',
+                            name: Operation["ui_minval"],
+                            type: "min",
                             label: {
                                 normal: {
-                                    formatter: 'Min:{c}'
+                                    formatter: "Min:{c}"
                                 }
                             }
                         }
@@ -212,15 +229,15 @@ $(function () {
                     itemStyle: {
                         normal: {
                             label: {
-                                position: 'top'
+                                position: "top"
                             }
                         }
                     }
                 },
                 markLine: {
                     data: [{
-                        name: Operation['ui_avgval'],
-                        type: 'average'
+                        name: Operation["ui_avgval"],
+                        type: "average"
                     }]
                 }
             }]
@@ -229,25 +246,58 @@ $(function () {
     }
 
     function setChart(chartData) {
-        var option = initLineAnal(chartData.noises, chartData.times, Operation['ui_WaterLevelMonitor'], "dB");
+        var option = initLineAnal(
+            chartData.noises,
+            chartData.times,
+            Operation["ui_WaterLevelMonitor"],
+            "dB"
+        );
         var myChart = echarts.init($("#noiseChart").get(0));
         myChart.setOption(option);
-    };
+    }
 
     $("#datePre").click(function () {
-        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+        var selectDate = new Date(
+            $("#date")
+            .val()
+            .replace(/\-/g, "/")
+        );
         var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
-        $("#date").val(preDate.getFullYear() + "-" + ((preDate.getMonth()) < 9 ? ("0" + (preDate.getMonth() + 1)) : (preDate.getMonth() + 1)) + "-" + (preDate.getDate() < 10 ? ("0" + preDate.getDate()) : (preDate.getDate())));
+        $("#date").val(
+            preDate.getFullYear() +
+            "-" +
+            (preDate.getMonth() < 9 ?
+                "0" + (preDate.getMonth() + 1) :
+                preDate.getMonth() + 1) +
+            "-" +
+            (preDate.getDate() < 10 ? "0" + preDate.getDate() : preDate.getDate())
+        );
         getChartData();
     });
 
     $("#dateNext").click(function () {
         var d = new Date();
-        var nowDate = new Date(d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate());
-        var selectDate = new Date($("#date").val().replace(/\-/g, "\/"));
+        var nowDate = new Date(
+            d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
+        );
+        var selectDate = new Date(
+            $("#date")
+            .val()
+            .replace(/\-/g, "/")
+        );
         if (selectDate < nowDate) {
             var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
-            $("#date").val(nextDate.getFullYear() + "-" + ((nextDate.getMonth()) < 9 ? ("0" + (nextDate.getMonth() + 1)) : (nextDate.getMonth() + 1)) + "-" + (nextDate.getDate() < 10 ? ("0" + nextDate.getDate()) : (nextDate.getDate())));
+            $("#date").val(
+                nextDate.getFullYear() +
+                "-" +
+                (nextDate.getMonth() < 9 ?
+                    "0" + (nextDate.getMonth() + 1) :
+                    nextDate.getMonth() + 1) +
+                "-" +
+                (nextDate.getDate() < 10 ?
+                    "0" + nextDate.getDate() :
+                    nextDate.getDate())
+            );
             getChartData();
         } else {
             return;
@@ -257,10 +307,10 @@ $(function () {
     //初始化时间控件
     var calendar1 = new LCalendar();
     calendar1.init({
-        'trigger': '#date', //标签id
-        'type': 'date', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
-        'minDate': '2000-1-1', //最小日期 注意：该值会覆盖标签内定义的日期范围
-        'maxDate': '2050-1-1' //最大日期 注意：该值会覆盖标签内定义的日期范围
+        trigger: "#date", //标签id
+        type: "date", //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择
+        minDate: "2000-1-1", //最小日期 注意：该值会覆盖标签内定义的日期范围
+        maxDate: "2050-1-1" //最大日期 注意：该值会覆盖标签内定义的日期范围
     });
     $("#date").on("input", function () {
         getChartData();
