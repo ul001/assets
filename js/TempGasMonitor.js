@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
   var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
   var tokenFromAPP =
     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTM5MTYxMTUsInVzZXJuYW1lIjoiaGFoYWhhIn0.lLzdJwieIO-xMhob6PW06MRyzK4oCZVCfcs9196Iec8";
@@ -39,20 +39,19 @@ $(function() {
         Accept: "application/json; charset=utf-8",
         Authorization: tokenFromAPP
       },
-      success: function(result) {
+      success: function (result) {
         if (result.code == "5000") {
           var strArr = baseUrlFromAPP.split("/");
           var ipAddress = strArr[0] + "//" + strArr[2];
 
           $.ajax({
-            url:
-              "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
+            url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
             type: "POST",
             data: {
               ip: ipAddress,
               exceptionMessage: JSON.stringify(result.data.stackTrace)
             },
-            success: function(data) {}
+            success: function (data) {}
           });
         }
         toast.hide();
@@ -64,7 +63,7 @@ $(function() {
         }
         successCallback(result.data);
       },
-      error: function() {
+      error: function () {
         toast.show({
           text: Operation["code_fail"],
           duration: 2000
@@ -74,6 +73,8 @@ $(function() {
   }
 
   var time = tool.initDate("YMD", new Date());
+  var allSF6Unit = "ppm";
+  var allO2Unit = "%";
   $("#date").val(time);
   getListData();
 
@@ -82,11 +83,11 @@ $(function() {
     var params = {
       fSubid: subidFromAPP
     };
-    getData(url, params, function(data) {
+    getData(url, params, function (data) {
       if (data.SF6AndO2ObList != null) {
         if (data.SF6AndO2ObList.length > 0) {
           $("#cardList").empty();
-          $(data.SF6AndO2ObList).each(function() {
+          $(data.SF6AndO2ObList).each(function () {
             var tempVal = "--";
             var humiVal = "--";
             if (this.fSF6 != undefined && this.fSF6 != null) {
@@ -95,30 +96,36 @@ $(function() {
             if (this.fO2 != undefined && this.fO2 != null) {
               humiVal = parseFloat(this.fO2).toFixed(1);
             }
+            if (this.fSF6Unit != undefined) {
+              allSF6Unit = this.fSF6Unit;
+            }
+            if (this.fO2Unit != undefined) {
+              allO2Unit = this.fO2Unit;
+            }
             $("#cardList").append(
               '<section class="sectionCard" value="' +
-                this.F_MeterCode +
-                '">' +
-                "<p>" +
-                this.F_MeterName +
-                "</p>" +
-                '<img src="image/qiti.png"/>' +
-                "<p>" +
-                Operation["ui_SF6"] +
-                ":" +
-                tempVal +
-                this.fSF6Unit +
-                "</p>" +
-                "<p>" +
-                Operation["ui_O2"] +
-                ":" +
-                humiVal +
-                this.fO2Unit +
-                "</p></section>"
+              this.F_MeterCode +
+              '">' +
+              "<p>" +
+              this.F_MeterName +
+              "</p>" +
+              '<img src="image/qiti.png"/>' +
+              "<p>" +
+              Operation["ui_SF6"] +
+              ":" +
+              tempVal +
+              this.fSF6Unit +
+              "</p>" +
+              "<p>" +
+              Operation["ui_O2"] +
+              ":" +
+              humiVal +
+              this.fO2Unit +
+              "</p></section>"
             );
           });
           $("#cardList section:first").addClass("sectionSelect");
-          $(".sectionCard").on("click", function() {
+          $(".sectionCard").on("click", function () {
             $(this)
               .addClass("sectionSelect")
               .siblings()
@@ -144,10 +151,10 @@ $(function() {
       fMetercode: selectCode,
       time: $("#date").val()
     };
-    getData(url, params, function(data) {
+    getData(url, params, function (data) {
       if (data.FSF6AndO2ByDate != null) {
         if (data.FSF6AndO2ByDate.length > 0) {
-          $(data.FSF6AndO2ByDate).each(function() {
+          $(data.FSF6AndO2ByDate).each(function () {
             time.push(this.fCollecttime.substring(11, 16));
             temp.push(this.fSF6);
             humi.push(this.fO2);
@@ -183,16 +190,14 @@ $(function() {
           restore: {}
         }
       },
-      dataZoom: [
-        {
-          // 这个dataZoom组件，默认控制x轴。
-          type: "slider", // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-          start: 0, // 左边在 10% 的位置。
-          end: 100, // 右边在 60% 的位置。
-          height: 25,
-          bottom: 8
-        }
-      ],
+      dataZoom: [{
+        // 这个dataZoom组件，默认控制x轴。
+        type: "slider", // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+        start: 0, // 左边在 10% 的位置。
+        end: 100, // 右边在 60% 的位置。
+        height: 25,
+        bottom: 8
+      }],
       grid: {
         left: "12%",
         right: "12%",
@@ -212,53 +217,48 @@ $(function() {
         },
         name: unit
       },
-      series: [
-        {
-          name: name,
-          type: "line",
-          data: value,
-          color: ["#2EC6C9"],
-          markPoint: {
-            symbol: "circle",
-            symbolSize: 10,
-            data: [
-              {
-                name: Operation["ui_maxval"],
-                type: "max",
-                label: {
-                  normal: {
-                    formatter: "Max:{c}"
-                  }
-                }
-              },
-              {
-                name: Operation["ui_minval"],
-                type: "min",
-                label: {
-                  normal: {
-                    formatter: "Min:{c}"
-                  }
+      series: [{
+        name: name,
+        type: "line",
+        data: value,
+        color: ["#2EC6C9"],
+        markPoint: {
+          symbol: "circle",
+          symbolSize: 10,
+          data: [{
+              name: Operation["ui_maxval"],
+              type: "max",
+              label: {
+                normal: {
+                  formatter: "Max:{c}"
                 }
               }
-            ],
-            itemStyle: {
-              normal: {
-                label: {
-                  position: "top"
+            },
+            {
+              name: Operation["ui_minval"],
+              type: "min",
+              label: {
+                normal: {
+                  formatter: "Min:{c}"
                 }
               }
             }
-          },
-          markLine: {
-            data: [
-              {
-                name: Operation["ui_avgval"],
-                type: "average"
+          ],
+          itemStyle: {
+            normal: {
+              label: {
+                position: "top"
               }
-            ]
+            }
           }
+        },
+        markLine: {
+          data: [{
+            name: Operation["ui_avgval"],
+            type: "average"
+          }]
         }
-      ]
+      }]
     };
     return option;
   }
@@ -268,13 +268,13 @@ $(function() {
       chartData.temps,
       chartData.times,
       Operation["ui_SF6"],
-      "°C"
+      allSF6Unit
     );
     var option2 = initLineAnal(
       chartData.humis,
       chartData.times,
       Operation["ui_O2"],
-      "%"
+      allO2Unit
     );
     var myChart = echarts.init($("#tempChart").get(0));
     myChart.setOption(option);
@@ -282,47 +282,47 @@ $(function() {
     myChart2.setOption(option2);
   }
 
-  $("#datePre").click(function() {
+  $("#datePre").click(function () {
     var selectDate = new Date(
       $("#date")
-        .val()
-        .replace(/\-/g, "/")
+      .val()
+      .replace(/\-/g, "/")
     );
     var preDate = new Date(selectDate.getTime() - 24 * 60 * 60 * 1000);
     $("#date").val(
       preDate.getFullYear() +
-        "-" +
-        (preDate.getMonth() < 9
-          ? "0" + (preDate.getMonth() + 1)
-          : preDate.getMonth() + 1) +
-        "-" +
-        (preDate.getDate() < 10 ? "0" + preDate.getDate() : preDate.getDate())
+      "-" +
+      (preDate.getMonth() < 9 ?
+        "0" + (preDate.getMonth() + 1) :
+        preDate.getMonth() + 1) +
+      "-" +
+      (preDate.getDate() < 10 ? "0" + preDate.getDate() : preDate.getDate())
     );
     getChartData();
   });
 
-  $("#dateNext").click(function() {
+  $("#dateNext").click(function () {
     var d = new Date();
     var nowDate = new Date(
       d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
     );
     var selectDate = new Date(
       $("#date")
-        .val()
-        .replace(/\-/g, "/")
+      .val()
+      .replace(/\-/g, "/")
     );
     if (selectDate < nowDate) {
       var nextDate = new Date(selectDate.getTime() + 24 * 60 * 60 * 1000);
       $("#date").val(
         nextDate.getFullYear() +
-          "-" +
-          (nextDate.getMonth() < 9
-            ? "0" + (nextDate.getMonth() + 1)
-            : nextDate.getMonth() + 1) +
-          "-" +
-          (nextDate.getDate() < 10
-            ? "0" + nextDate.getDate()
-            : nextDate.getDate())
+        "-" +
+        (nextDate.getMonth() < 9 ?
+          "0" + (nextDate.getMonth() + 1) :
+          nextDate.getMonth() + 1) +
+        "-" +
+        (nextDate.getDate() < 10 ?
+          "0" + nextDate.getDate() :
+          nextDate.getDate())
       );
       getChartData();
     } else {
@@ -338,7 +338,7 @@ $(function() {
     minDate: "2000-1-1", //最小日期 注意：该值会覆盖标签内定义的日期范围
     maxDate: "2050-1-1" //最大日期 注意：该值会覆盖标签内定义的日期范围
   });
-  $("#date").on("input", function() {
+  $("#date").on("input", function () {
     getChartData();
   });
 });

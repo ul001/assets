@@ -73,6 +73,8 @@ $(function () {
         });
     }
 
+    //全局默认单位
+    var allunit = "cm";
     var time = tool.initDate("YMD", new Date());
     $("#date").val(time);
     getListData();
@@ -87,6 +89,7 @@ $(function () {
                 if (data.thisWaterLevelList.length > 0) {
                     $("#cardList").empty();
                     $(data.thisWaterLevelList).each(function () {
+                        allunit = this.fWaterlevelUnit;
                         var speedVal = "--";
                         var meterName = this.F_MeterName ?
                             this.F_MeterName :
@@ -250,7 +253,7 @@ $(function () {
             chartData.noises,
             chartData.times,
             Operation["ui_WaterLevelMonitor"],
-            "mm"
+            allunit
         );
         var myChart = echarts.init($("#noiseChart").get(0));
         myChart.setOption(option);

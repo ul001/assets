@@ -73,6 +73,8 @@ $(function () {
         });
     }
 
+    //全局默认单位
+    var allunit = "dB";
     var time = tool.initDate("YMD", new Date());
     $("#date").val(time);
     getListData();
@@ -87,6 +89,7 @@ $(function () {
                 if (data.noiseList.length > 0) {
                     $("#cardList").empty();
                     $(data.noiseList).each(function () {
+                        allunit = this.noiseUnit;
                         var noiseVal = "--";
                         if (this.noise != undefined && this.noise != null) {
                             noiseVal = parseFloat(this.noise).toFixed(1);
@@ -228,7 +231,7 @@ $(function () {
     }
 
     function setChart(chartData) {
-        var option = initLineAnal(chartData.noises, chartData.times, Operation['ui_noise'], "dB");
+        var option = initLineAnal(chartData.noises, chartData.times, Operation['ui_noise'], allunit);
         var myChart = echarts.init($("#noiseChart").get(0));
         myChart.setOption(option);
     };

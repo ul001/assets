@@ -73,6 +73,8 @@ $(function () {
         });
     }
 
+    //全局默认单位
+    var allunit = "mm/s";
     var time = tool.initDate("YMD", new Date());
     $("#date").val(time);
     getListData();
@@ -87,6 +89,7 @@ $(function () {
                 if (data.VSpeedObList.length > 0) {
                     $("#cardList").empty();
                     $(data.VSpeedObList).each(function () {
+                        allunit = this.fVSpeedUnit;
                         var speedVal = "--";
                         var meterName = this.F_MeterName ? this.F_MeterName : this.F_MeterCode;
                         if (this.fVSpeed != undefined && this.fVSpeed != null) {
@@ -229,7 +232,7 @@ $(function () {
     }
 
     function setChart(chartData) {
-        var option = initLineAnal(chartData.noises, chartData.times, Operation['ui_Vibration'], "dB");
+        var option = initLineAnal(chartData.noises, chartData.times, Operation['ui_Vibration'], allunit);
         var myChart = echarts.init($("#noiseChart").get(0));
         myChart.setOption(option);
     };

@@ -73,6 +73,8 @@ $(function () {
     }
 
     var time = tool.initDate("YMD", new Date());
+    var allPM2Unit = "ug/m³";
+    var allPM10Unit = "ug/m³";
     $("#date").val(time);
     getListData();
 
@@ -93,6 +95,12 @@ $(function () {
                         }
                         if (this.fPM10 != undefined && this.fPM10 != null) {
                             humiVal = parseFloat(this.fPM10).toFixed(1);
+                        }
+                        if (this.fPM2Unit != undefined) {
+                            allPM2Unit = this.fPM2Unit;
+                        }
+                        if (this.fPM10Unit != undefined) {
+                            allPM10Unit = this.fPM10Unit;
                         }
                         $("#cardList").append('<section class="sectionCard" value="' + this.F_MeterCode + '">' +
                             '<p>' + this.F_MeterName + '</p>' +
@@ -236,8 +244,8 @@ $(function () {
     }
 
     function setChart(chartData) {
-        var option = initLineAnal(chartData.temps, chartData.times, Operation['ui_PM2'], "°C");
-        var option2 = initLineAnal(chartData.humis, chartData.times, Operation['ui_PM10'], "%");
+        var option = initLineAnal(chartData.temps, chartData.times, Operation['ui_PM2'], allPM2Unit);
+        var option2 = initLineAnal(chartData.humis, chartData.times, Operation['ui_PM10'], allPM10Unit);
         var myChart = echarts.init($("#tempChart").get(0));
         myChart.setOption(option);
         var myChart2 = echarts.init($("#humiChart").get(0));

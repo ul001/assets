@@ -73,6 +73,8 @@ $(function () {
     }
 
     var time = tool.initDate("YMD", new Date());
+    var allTempUnit = "°C";
+    var allHumiUnit = "%";
     $("#date").val(time);
     getListData();
 
@@ -88,6 +90,13 @@ $(function () {
                     $(data.TempHumiObList).each(function () {
                         var tempVal = "--";
                         var humiVal = "--";
+                        if (this.tempUnit != undefined) {
+                            allTempUnit = this.tempUnit;
+                        }
+                        if (this.humiUnit != undefined) {
+                            allHumiUnit = this.humiUnit;
+                        }
+
                         if (this.temp != undefined && this.temp != null) {
                             tempVal = parseFloat(this.temp).toFixed(1);
                         }
@@ -236,8 +245,8 @@ $(function () {
     }
 
     function setChart(chartData) {
-        var option = initLineAnal(chartData.temps, chartData.times, Operation['ui_temp'], "°C");
-        var option2 = initLineAnal(chartData.humis, chartData.times, Operation['ui_humi'], "%");
+        var option = initLineAnal(chartData.temps, chartData.times, Operation['ui_temp'], allTempUnit);
+        var option2 = initLineAnal(chartData.humis, chartData.times, Operation['ui_humi'], allHumiUnit);
         var myChart = echarts.init($("#tempChart").get(0));
         myChart.setOption(option);
         var myChart2 = echarts.init($("#humiChart").get(0));

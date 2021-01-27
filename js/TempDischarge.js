@@ -42,7 +42,6 @@ $(function () {
                 if (result.code == "5000") {
                     var strArr = baseUrlFromAPP.split("/");
                     var ipAddress = strArr[0] + "//" + strArr[2];
-
                     $.ajax({
                         url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
                         type: "POST",
@@ -72,6 +71,7 @@ $(function () {
     }
 
     var time = tool.initDate("YMD", new Date());
+    var dischargeUnit = "PC";
     $("#date").val(time);
     getListData();
 
@@ -93,6 +93,9 @@ $(function () {
                             partialDischargeVal = parseFloat(this.partialDischarge).toFixed(
                                 1
                             );
+                        }
+                        if (this.partialDischargeUnit) {
+                            dischargeUnit = this.partialDischargeUnit;
                         }
                         $("#cardList").append(
                             '<section class="sectionCard" value="' +
@@ -252,7 +255,7 @@ $(function () {
             chartData.discharges,
             chartData.times,
             Operation["ui_discharge"],
-            "PC"
+            dischargeUnit
         );
         var myChart = echarts.init($("#noiseChart").get(0));
         myChart.setOption(option);
