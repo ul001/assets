@@ -315,7 +315,6 @@ $(function () {
                     } else {
 
                     }
-
                 }
 
                 $.each(group.children('g text'), function (index, element) {
@@ -327,7 +326,7 @@ $(function () {
                             group.children(childName).text(map.get(m.toLowerCase()));
                         }
                     } catch (err) {
-                        console.log(err);
+                        // console.log(err);
                     }
                 });
 
@@ -685,9 +684,9 @@ function initMqtt() {
             mqttClient = MyMqttClient.getClient();
             mqttSubscribe();
             mqttClient.on('message', function (topic, message) {
-                console.log(new Date().getTime());
+                // console.log(new Date().getTime());
                 var info = JSON.parse(message.toString())
-                console.log(topic, info)
+                // console.log(topic, info)
                 if (topic == mqttTopic + "/" + subidFromAPP) {
                     var time = info.time
                     if (info.meter && info.meter.length > 0) {
@@ -708,7 +707,7 @@ function initMqtt() {
                             }
                         })
                     }
-                    console.log(new Date().getTime());
+                    // console.log(new Date().getTime());
                 }
 
                 function setPicData(meterValue, time, fCircuitid) {
@@ -854,42 +853,10 @@ function initMqtt() {
                                     }
                                 }
                             } catch (err) {
-                                console.log(err);
+                                // console.log(err);
                             }
                         });
-                        //全屏页
-                        if ($("#showDiv", window.parent.document).is(":visible")) {
-                            var parentGroup = $("#showDiv", window.parent.document).find("#" + fCircuitid);
-                            $.each(parentGroup.children('g text'), function (index, element) {
-                                try {
-                                    var name = element.attributes.name
-                                    if (name) {
-                                        var m = name.textContent;
-                                        if (map.has(m.toLowerCase())) {
-                                            var unitArr = []
 
-                                            var childName = "text[name='" + m + "']";
-
-                                            if (m.toLowerCase().substr(0, 1) !== 'u') {
-                                                unitArr = unitList.filter(function (u) {
-                                                    return u.fParamcode.toLowerCase() === m.toLowerCase()
-                                                })
-                                            }
-
-                                            var value = map.get(m.toLowerCase())
-
-                                            if (unitArr.length > 0) {
-                                                value += unitArr[0].fUnitcode
-                                            }
-
-                                            parentGroup.children(childName).text(value);
-                                        }
-                                    }
-                                } catch (err) {
-                                    console.log(err);
-                                }
-                            });
-                        }
                         // $.each(meterValue.values, function (paramCode, fValue) {
                         //     if (paramCode.substr(0, 1) === 'U') {
                         //         if (parseFloat(fValue) > 1000) {
@@ -960,11 +927,11 @@ function mqttSubscribe(lastSubid) {
     function onReceiveMessage() {
         // 取消订阅
         mqttClient.unsubscribe(mqttTopic + '/' + lastSubid, function (e) {
-            console.log('取消订阅')
+            // console.log('取消订阅')
         })
 
         mqttClient.subscribe(mqttTopic + "/" + subidFromAPP, function (e) {
-            console.log('订阅成功');
+            // console.log('订阅成功');
         })
     }
 };
