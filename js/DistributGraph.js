@@ -815,7 +815,7 @@ function initMqtt() {
                                             if (offline) $(offline).show();
                                         }
                                     }
-                                    if (paramCode.substr(0, 1) === 'U') {
+                                    if (paramCode === 'Ua' || paramCode === 'Ub' || paramCode === 'Uc' || paramCode === 'Uab' || paramCode === 'Ubc' || paramCode === 'Uca') {
                                         if (parseFloat(fValue) > 1000) {
                                             fValue = (parseFloat(fValue) / 1000).toFixed(2) + 'kV';
                                         } else {
