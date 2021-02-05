@@ -24,15 +24,40 @@ $(function () {
     toast = new ToastClass();
     initMqtt();
     getMeter();
-    var url = baseUrlFromAPP + "/getAppSubimgInfo";
-    var params = {
-        fSubid: subidFromAPP
-    };
-    getDataByAjax(url, params, function (data) {
-        showSVG(data.xmlContent);
-        showList(data.list);
-        showDataOnSVG(data.SvgInfo);
+
+    var url = baseUrlFromAPP + "/getSubstationListByUser";
+    // var params = {
+    //     fSubid: subidFromAPP
+    // };
+    getDataByAjax(url, '', function (data) {
+        $("#subChange").html("");
+        if (data.list.length > 0) {
+            subidFromAPP = data.list[0].fSubid;
+            $.each(data.list, function (index, el) {
+                var string = '<option data-id=' + el.fSubid + '>' + el.fSubname + '</option>';
+                $("#subChange").append(string);
+            });
+            showData();
+        }
     });
+
+    $("#subChange").change(function (event) {
+        subidFromAPP = $("#subChange").find("option:selected").attr("data-id");
+        showData();
+    });
+
+    function showData() {
+        var url = baseUrlFromAPP + "/getAppSubimgInfo";
+        var params = {
+            fSubid: subidFromAPP
+        };
+        getDataByAjax(url, params, function (data) {
+            showSVG(data.xmlContent);
+            showList(data.list);
+            showDataOnSVG(data.SvgInfo);
+        });
+
+    }
 
     function showSVG(path) {
         $(".diagram").html("");
