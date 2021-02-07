@@ -42,8 +42,10 @@ $(function () {
     });
 
     $("#subChange").change(function (event) {
+        var lastSubid = subidFromAPP;
         subidFromAPP = $("#subChange").find("option:selected").attr("data-id");
         showData();
+        mqttSubscribe(lastSubid);
     });
 
     function showData() {
