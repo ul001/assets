@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>A simple example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/WebVRPannellum.css" />
+    <style>
+        #panorama {
+            /* width: 100%;
+            height: 100%; */
+            /* width: 25rem; */
+            padding-right: 0;
+            padding-left: 0;
+            height: 35rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="panorama"></div>
+    <script>
+        // pannellum.viewer('panorama', {
+        //     "type": "equirectangular", //Pannellum支持四种处理全景图片的方式：equirectangular,partial,cubic,multi-resolution
+        //     "panorama": "https://pannellum.org/images/alma.jpg",
+        //     "autoLoad": true,
+        //     // "firstScene": this.nextPano.id, //首次加载那个图片
+        //     //  "sceneFadeDuration": 1000,//全景图场景切换时的持续时间
+        //     // "orientationOnByDefault": true, //是否开启重力感应查看全景图，默认false
+        //     // "autoRotate": -2, //是否自动旋转，在加载之后，全景图会水平旋转显示，负数为往右边旋转，整数为往左边旋转，值为数字类型；
+        //     // "autoRotateInactivityDelay": 5000, //在autoRotate设定的情况下，用户停止操作多长时间后继续自动旋转，单位为毫秒；
+        //     // "showControls": false, //是否显示控制按钮，默认true；
+        //     // "firstScene": "https://pannellum.org/images/alma.jpg",
+        //     // "minPitch": 0,
+        //     // "maxPitch": 0,
+        //     //  "hfov": 100,
+        //     //  "minHfov": 60,
+        //     //  "maxHfov": 120,
+        //     //场景，值为对象，其属性名代表着场景的id（sceneId），属性值为viewer的配置参数，其参数会覆盖默认（上述中的default对象）设置的参数；
+        //     "scenes": {
+        //         "firstScene": {
+        //             "title": "第一个场景",
+        //             "type": "cubemap",
+        //             "cubeMap": [
+        //                 "./example_front.jpg", "./example_right.jpg",
+        //                 "./example_behind.jpg", "./example_left.jpg",
+        //                 "./example_up.jpg", "./example_down.jpg"
+        //             ],
+        //             "hotSpots": [{ //热点，以全景为坐标系的固定点，可以设置链接跳转和点击事件，也可以跳转到不同的场景，该属性的值为对象
+        //                 "pitch": -12, //定位参数， 单位：角度
+        //                 "yaw": 170, //定位参数， 单位：角度 y轴，空间中的纵轴
+        //                 "type": "scene", //热点类型，scene 场景切换热点； info 信息展示；URL 以热点为链接，跳转到其他页面的`url
+        //                 "sceneId": "secondScene", //sceneId 需要切换的场景id，当 type 为 scene使用；
+        //                 "text": "点击前往第二个场景."
+        //             }]
+        //         },
+        //         "secondScene": {
+        //             "title": "第二个场景",
+        //             "panorama": "../image/zhiliuping2.png",
+        //             "hotSpots": [{
+        //                 "pitch": 0,
+        //                 "yaw": 100,
+        //                 "type": "scene",
+        //                 "text": "前往第一个场景",
+        //                 "sceneId": "firstScene",
+        //                 // "cssClass": "pnlm-hotspot pnlm-model pnlm-scene1 pnlm-type1", //自定义样式
+        //             }]
+        //         }
+        //     } //注 scenes 为对象
+        // });
+    </script>
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/toast.js"></script>
+    <script src="lib/language.js"></script>
+    <script src="lib/tools.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="js/WebVRPannellum.js"></script>
+</body>
+
+</html>

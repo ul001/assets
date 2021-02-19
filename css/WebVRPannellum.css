@@ -1,0 +1,23 @@
+ .pnlm-hotspot {}
+
+ .pnlm-hotspot:hover {}
+
+ /* .pnlm-sprite {
+     width: 2rem;
+     height: 2rem;
+     background: url('./static/pano/assets/gogogo.gif') no-repeat;
+     background-size: 100% 100%;
+ }
+
+ .pnlm-model {
+     width: 2rem;
+     height: 2rem;
+     background: url('./static/images/cover.png') no-repeat;
+     background-size: 100% 100%;
+ } */
+
+ .pnlm-hotspot.pnlm-info {}
+
+ .pnlm-hotspot.pnlm-scene {}
+
+ .pnlm-scene1 {}
