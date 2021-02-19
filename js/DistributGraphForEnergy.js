@@ -569,13 +569,14 @@ function showTable(data) {
 };
 
 function refreshDiagramData() {
-    var url = baseUrlFromAPP + "/getAppSubimgInfo";
-    var params = {
-        fSubid: subidFromAPP
-    };
-    getDataByAjax(url, params, function (data) {
-        refreshdata(data.SvgInfo);
-    });
+    //收到推送刷新
+    //     var url = baseUrlFromAPP + "/getAppSubimgInfo";
+    //     var params = {
+    //         fSubid: subidFromAPP
+    //     };
+    //     getDataByAjax(url, params, function (data) {
+    //         refreshdata(data.SvgInfo);
+    //     });
 }
 
 function getDataByAjax(url, params, successCallback, method) {
