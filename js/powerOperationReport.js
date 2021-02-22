@@ -123,7 +123,7 @@ $(function () {
                 if (el.fCircuitname == "undefined" || el.fCircuitname == null || el.fCircuitname == "") {
                     return true;
                 }
-                var collecttime = el.fCollecttime ? el.fCollecttime.substring(11, 17) : "-";
+                var collecttime = el.fCollecttime ? el.fCollecttime.substring(11, 16) : "-";
                 var EPI = el.fEpi ? el.fEpi : "-";
                 if (el.fCircuitname == '最大值') {
                     collecttime = '最大值';

@@ -128,7 +128,7 @@ $(function () {
                 if (epi > 0) {
                     totalEpi += epi;
                 }
-                var collecttime = el.fCollecttime ? el.fCollecttime.substring(11, 17) : "-";
+                var collecttime = el.fCollecttime ? el.fCollecttime.substring(11, 16) : "-";
                 var EPI = el.fEpi ? el.fEpi : "-";
 
                 var dic = {
